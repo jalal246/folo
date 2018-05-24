@@ -24,7 +24,8 @@ export class ValuesProvider extends React.Component {
 
     this.init = true;
     this.state = {
-      values: {}
+      values: {},
+      isGroupValuesUpdate: false
       // errors: {}
     };
   }
@@ -32,6 +33,10 @@ export class ValuesProvider extends React.Component {
   componentDidMount() {
     this.setState({ values: { ...this.datatObj } });
     this.init = false;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
   }
 
   onFormBtnClick = () => {
@@ -73,7 +78,6 @@ export class ValuesProvider extends React.Component {
       // to its group
       this.btnGroup[groupName].add(nameRef);
     }
-    // console.log('regester');
   };
 
   updateCellValue = (nameRef, newValue, cellType, groupName) => {
@@ -88,22 +92,28 @@ export class ValuesProvider extends React.Component {
     this.setState(ps => {
       const newValuesHolder = {};
       newValuesHolder[nameRef] = newValue;
+      let { isGroupValuesUpdate } = ps;
 
-      if (groupName && newValue !== false) {
-        // update group of values
+      if (groupName) {
+        isGroupValuesUpdate = !isGroupValuesUpdate;
 
-        // toggle group values
-        this.btnGroup[groupName].forEach(cellNameRef => {
-          // toggle all except the targeted key name which called nameRef
-          // since we already changed its value above
-          if (cellNameRef !== nameRef) {
-            newValuesHolder[cellNameRef] = !newValue;
-          }
-        });
+        if (newValue !== false) {
+          // update group of values
+
+          // toggle group values
+          this.btnGroup[groupName].forEach(cellNameRef => {
+            // toggle all except the targeted key name which called nameRef
+            // since we already changed its value above
+            if (cellNameRef !== nameRef) {
+              newValuesHolder[cellNameRef] = !newValue;
+            }
+          });
+        }
       }
 
       return {
-        values: { ...ps.values, ...newValuesHolder }
+        values: { ...ps.values, ...newValuesHolder },
+        isGroupValuesUpdate
       };
     });
   };

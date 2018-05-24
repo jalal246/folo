@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ValuesConsumer, withContext } from '../context';
+import Grid from './Grid';
 
 export function Container({ component: ContainerComponent, children, other }) {
   return <ContainerComponent {...other}>{children}</ContainerComponent>;
@@ -34,15 +35,35 @@ Label.defaultProps = {
 };
 Label.displayName = 'Label';
 
-export function Form({ component: FormComponent, children }) {
-  return <FormComponent>{children}</FormComponent>;
+const container = {
+  display: 'grid',
+  justifyItems: 'stretch',
+  alignItems: 'stretch'
+};
+
+export function Form({
+  component: FormComponent,
+  style,
+  className,
+  children,
+  ...other
+}) {
+  return (
+    <FormComponent style={style} className={className}>
+      <Grid {...other}>{children}</Grid>
+    </FormComponent>
+  );
 }
 
 Form.propTypes = {
-  component: PropTypes.node
+  component: PropTypes.node,
+  isAutoFit: PropTypes.bool,
+  colNumber: PropTypes.number
 };
 Form.defaultProps = {
-  component: 'form'
+  component: 'form',
+  isAutoFit: true,
+  colNumber: null
 };
 
 export function ButtonNative({ component: ButtonComponent, onClick, text }) {
