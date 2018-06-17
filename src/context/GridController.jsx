@@ -10,51 +10,6 @@ const propTypes = {};
 
 const defaultProps = {};
 
-const FR = '1fr';
-const AUTO_FIT = 'auto-fit';
-
-function minmax(min, max = FR) {
-  if (!min) return FR;
-  return `minmax(${min}, ${max}`;
-}
-function repeat(colOrRowNum, width) {
-  return `repeat(${colOrRowNum}, ${width})`;
-}
-function chooseNum(num, calculatedNum) {
-  return num || calculatedNum || AUTO_FIT;
-}
-
-function generateTemp(colOrRow, grandColOrRow, fixedMin, fixedMax) {
-  const choosenColNum = chooseNum(colOrRow, grandColOrRow);
-  const colGridWidth = minmax(fixedMin, fixedMax);
-  return repeat(choosenColNum, colGridWidth);
-}
-
-function genDynamicTemp(widthObj, biggest) {
-  /*
-  * object keys contain row/columns
-  * extract them, to find out the biggest number do we have
-  */
-  const rowColNum = Object.keys(widthObj);
-  const maxInTemplate = rowColNum.reduce((acc, elm) => Math.max(acc, elm));
-
-  /*
-  * now, maybe the biggest number is not in template
-  * only way to know, by comparing it with the biggest
-  * we got biggest through each cell
-  */
-  const max = Math.max(maxInTemplate, biggest);
-
-  // let's generate the template
-  let temp = '';
-  for (let rowCol = 0; rowCol < max; rowCol += 1) {
-    // fill the non-declared rows/columns with 1 fr
-    temp += `${widthObj[rowCol] || FR} `;
-  }
-
-  return temp;
-}
-
 export class GridProvider extends React.Component {
   constructor(props) {
     super(props);
