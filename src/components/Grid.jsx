@@ -104,7 +104,9 @@ class NativeGrid extends React.PureComponent {
     console.log('NativeGrid update');
     const { isAllGridComponentsMounted, children, ...otherProps } = this.props;
 
-    const style = isAllGridComponentsMounted ? setGridStyle(otherProps) : {};
+    const style = isAllGridComponentsMounted
+      ? setGridStyle(otherProps)
+      : container;
 
     return <div style={style}>{children}</div>;
   }

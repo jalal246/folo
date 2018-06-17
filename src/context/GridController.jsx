@@ -103,13 +103,24 @@ export class GridProvider extends React.Component {
       if we have row width and known column number
       beacuse we cannot guess colmn number
     */
-    if (colWidth && col) {
+    if (colWidth) {
       if (!this.isColWidthSet) {
         this.isColWidthSet = true;
       }
-
-      this.colCellsWidth[col] = colWidth;
+      if (!col && !this.colCellsWidth[0]) {
+        this.colCellsWidth[0] = colWidth;
+      } else {
+        this.colCellsWidth[col] = colWidth;
+      }
     }
+    //
+    // if (colWidth && col) {
+    //   if (!this.isColWidthSet) {
+    //     this.isColWidthSet = true;
+    //   }
+    //
+    //   this.colCellsWidth[col] = colWidth;
+    // }
   };
 
   render() {

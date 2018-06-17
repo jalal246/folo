@@ -34,7 +34,7 @@ export default function FormApp(props) {
                 row={0}
                 rowWidth="2rem"
                 col={0}
-                colWidth="2fr"
+                colWidth="0.2fr"
                 toCol={2}
               >
                 <Label>first type text</Label>
