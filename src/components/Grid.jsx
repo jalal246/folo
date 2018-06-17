@@ -13,21 +13,12 @@ const container = {
 const FR = '1fr';
 const AUTO_FIT = 'auto-fit';
 
-function minmax(min, max = FR) {
-  if (!min) return FR;
-  return `minmax(${min}, ${max}`;
-}
-function repeat(colOrRowNum, width) {
-  return `repeat(${colOrRowNum}, ${width})`;
-}
-function chooseNum(num, calculatedNum) {
-  return num || calculatedNum || AUTO_FIT;
-}
+function genFixedTemp(rowColNum, biggest, min, max) {
+  const rowCol = rowColNum || biggest || AUTO_FIT;
 
-function genFixedTemp(colOrRow, grandColOrRow, fixedMin, fixedMax) {
-  const choosenColNum = chooseNum(colOrRow, grandColOrRow);
-  const colGridWidth = minmax(fixedMin, fixedMax);
-  return repeat(choosenColNum, colGridWidth);
+  const width = min ? `minmax(${min}, ${max || FR}` : FR;
+
+  return `repeat(${rowCol}, ${width})`;
 }
 
 function genDynamicTemp(widthObj, biggest) {
