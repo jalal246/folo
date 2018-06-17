@@ -122,12 +122,10 @@ export class GridProvider extends React.Component {
     // if we have row width
     if (rowWidth) {
       // we check if this is the first time
-      console.log('111111111111', this.isRowWidthSet);
 
       if (!this.isRowWidthSet) {
         // if it is, then set row width flag
         this.isRowWidthSet = true;
-        console.log('222222222222', this.isRowWidthSet);
       }
       /*
         we accept row width without knowing the row number
