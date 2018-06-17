@@ -28,8 +28,15 @@ export default function FormApp(props) {
         <Panel />
         <GridProvider>
           <ValuesProvider onSubmit={onSubmit}>
-            <Form col={2}>
-              <CellContainer isHorizontal>
+            <Form col={2} colMaxWidth="3.5fr">
+              <CellContainer
+                isHorizontal
+                row={0}
+                rowWidth="2rem"
+                col={0}
+                colWidth="2fr"
+                toCol={2}
+              >
                 <Label>first type text</Label>
                 <Cell
                   nameRef="souldBeCobinationOfColAndRow"
@@ -38,7 +45,7 @@ export default function FormApp(props) {
                 />
                 <Label text="error msg" />
               </CellContainer>
-              <CellContainer isHorizontal row={10} toRow={14}>
+              <CellContainer isHorizontal rowWidth="5rem">
                 <Cell
                   nameRef="btn1"
                   type="checkbox"
@@ -47,7 +54,7 @@ export default function FormApp(props) {
                 />
                 <Label>try button</Label>
               </CellContainer>
-              <CellContainer isHorizontal /* col={3} row={3} */>
+              <CellContainer isHorizontal row={3} rowWidth="3rem">
                 <Cell nameRef="btn2" type="checkbox" groupName="alpha" />
                 <Label>try button</Label>
               </CellContainer>

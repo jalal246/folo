@@ -57,22 +57,22 @@ class CellContainer extends Component {
 
       row,
       toRow,
+      rowWidth,
 
       col,
       toCol,
+      colWidth,
 
       style,
 
-      setMaxColRow,
+      registerCellContainer,
 
       isHorizontal,
       children
     } = this.props;
+    console.log(rowWidth, rowWidth, 'rowWidth');
 
-    const uniqueCellKey = genKeyObj(row, col);
-
-    setMaxColRow(col, toCol, row, toRow);
-
+    registerCellContainer(row, toRow, rowWidth, col, toCol, colWidth);
     const area = {};
 
     if (col || toCol) {
@@ -94,6 +94,8 @@ class CellContainer extends Component {
       style
     );
 
+    const uniqueCellKey = genKeyObj(row, col);
+
     return (
       <CellComponent style={styles}>
         {cellEnhancer(children, uniqueCellKey)}
@@ -105,10 +107,13 @@ class CellContainer extends Component {
 const propTypes = {
   component: PropTypes.node,
 
-  col: PropTypes.number,
   row: PropTypes.number,
-  toCol: PropTypes.number,
   toRow: PropTypes.number,
+  rowWidth: PropTypes.string,
+
+  col: PropTypes.number,
+  toCol: PropTypes.number,
+  colWidth: PropTypes.string,
 
   isHorizontal: PropTypes.bool,
   style: PropTypes.object
@@ -120,6 +125,8 @@ const defaultProps = {
   row: null,
   toCol: null,
   toRow: null,
+  rowWidth: null,
+  colWidth: null,
 
   isHorizontal: true,
   style: {}

@@ -24,10 +24,35 @@ function chooseNum(num, calculatedNum) {
   return num || calculatedNum || AUTO_FIT;
 }
 
-function generateTemp(colOrRow, calculated, min, max) {
-  const choosenColNum = chooseNum(colOrRow, calculated);
-  const colGridWidth = minmax(min, max);
+function genFixedTemp(colOrRow, grandColOrRow, fixedMin, fixedMax) {
+  const choosenColNum = chooseNum(colOrRow, grandColOrRow);
+  const colGridWidth = minmax(fixedMin, fixedMax);
   return repeat(choosenColNum, colGridWidth);
+}
+
+function genDynamicTemp(widthObj, biggest) {
+  /*
+  * object keys contain row/columns
+  * extract them, to find out the biggest number do we have
+  */
+  const rowColNum = Object.keys(widthObj);
+  const maxInTemplate = rowColNum.reduce((acc, elm) => Math.max(acc, elm));
+
+  /*
+  * now, maybe the biggest number is not in template
+  * only way to know, by comparing it with the biggest
+  * we got biggest through each cell
+  */
+  const max = Math.max(maxInTemplate, biggest);
+
+  // let's generate the template
+  let temp = '';
+  for (let rowCol = 0; rowCol < max; rowCol += 1) {
+    // fill the non-declared rows/columns with 1 fr
+    temp += `${widthObj[rowCol] || FR} `;
+  }
+
+  return temp;
 }
 
 class NativeGrid extends React.Component {
@@ -36,42 +61,47 @@ class NativeGrid extends React.Component {
   }
   render() {
     const {
-      col,
-      colMinWidth,
-      colMaxWidth,
+      col: totalGridCol,
+      colMinWidth: fixedColMinWidth,
+      colMaxWidth: fixedColMaxWidth,
 
-      row,
-      rowMinWidth,
-      rowMaxWidth,
-
-      grandRow,
-      grandCol,
+      row: totalGridRow,
+      rowMinWidth: fixedRowMinWidth,
+      rowMaxWidth: fixedRowMaxWidth,
 
       gridRowWidth,
       autoFlow,
       gap,
 
+      isDynamicTempCol,
+      rowCellsWidth,
+      biggestCol,
+
+      isDynamicTempRow,
+      colCellsWidth,
+      biggestRow,
+
       children
     } = this.props;
     const template = {};
 
-    if (col || grandCol || colMinWidth || colMaxWidth) {
-      template.gridTemplateColumns = generateTemp(
-        col,
-        grandCol,
-        colMinWidth,
-        colMaxWidth
-      );
-    }
+    template.gridTemplateColumns = isDynamicTempCol
+      ? genDynamicTemp(colCellsWidth, biggestCol)
+      : genFixedTemp(
+          totalGridCol,
+          biggestCol,
+          fixedColMinWidth,
+          fixedColMaxWidth
+        );
 
-    if (row || grandRow || rowMinWidth || rowMaxWidth) {
-      template.gridTemplateRows = generateTemp(
-        row,
-        grandRow,
-        rowMinWidth,
-        rowMaxWidth
-      );
-    }
+    template.gridTemplateRows = isDynamicTempRow
+      ? genDynamicTemp(rowCellsWidth, biggestRow)
+      : genFixedTemp(
+          totalGridRow,
+          biggestRow,
+          fixedRowMinWidth,
+          fixedRowMaxWidth
+        );
 
     const style = Object.assign(
       {},
@@ -79,21 +109,21 @@ class NativeGrid extends React.Component {
       template,
       gridRowWidth && { gridAutoRows: gridRowWidth },
       autoFlow && { gridAutoFlow: autoFlow },
-      gap && { gridGap: gap }
+      { gridGap: gap }
     );
     return <div style={style}>{children}</div>;
   }
 }
 
 NativeGrid.propTypes = {
-  col: PropTypes.number,
+  totalGridCol: PropTypes.number,
   gridRowWidth: PropTypes.string,
   gap: PropTypes.string
 };
 NativeGrid.defaultProps = {
-  col: null,
+  totalGridCol: null,
   gridRowWidth: null,
-  gap: null
+  gap: '1em'
 };
 
 export default withContext(NativeGrid, GridConsumer);
