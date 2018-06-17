@@ -76,12 +76,7 @@ export class GridProvider extends React.Component {
 
   componentDidMount() {
     this.didMount = true;
-    /*
-      since this is the firt time
-      the user may set the width at advanced row
-      we have to make sure that the previous rows are all set
-      we use in this case the default row width: 1 fr
-    */
+
     this.setState({
       isDynamicTempCol: this.isColWidthSet,
       rowCellsWidth: this.rowCellsWidth,
