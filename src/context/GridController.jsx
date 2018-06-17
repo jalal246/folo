@@ -26,7 +26,17 @@ export class GridProvider extends React.Component {
     this.isRowWidthSet = false;
     this.isColWidthSet = false;
 
-    this.state = {};
+    this.state = {
+      isDynamicTempCol: false,
+      rowCellsWidth: {},
+      biggestCol: 0,
+
+      isDynamicTempRow: false,
+      colCellsWidth: {},
+      biggestRow: 0,
+
+      isAllGridComponentsMounted: false
+    };
   }
 
   componentDidMount() {
@@ -118,6 +128,7 @@ export class GridProvider extends React.Component {
     } = this.state;
 
     const { registerCellContainer } = this;
+
     return (
       <GridController.Provider
         value={{

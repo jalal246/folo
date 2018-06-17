@@ -36,20 +36,15 @@ function location(colOrRow, to) {
 }
 
 class CellContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  shouldComponentUpdate(nextProps) {
+    if (
+      !this.props.isAllGridComponentsMounted &&
+      nextProps.isAllGridComponentsMounted
+    ) {
+      return false;
+    }
+    return true;
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   const { grandCol, grandRow } = this.props;
-  //   const { isAllGridComponentsMounted, isAutoFit } = nextProps;
-  //
-  //   if (isAllGridComponentsMounted && !isAutoFit) {
-  //     return grandCol !== nextProps.grandCol || grandRow !== nextProps.grandRow;
-  //   }
-  //   return false;
-  // }
 
   render() {
     const {
@@ -70,7 +65,7 @@ class CellContainer extends Component {
       isHorizontal,
       children
     } = this.props;
-    console.log(rowWidth, rowWidth, 'rowWidth');
+    console.log('CellContainer updated');
 
     registerCellContainer(row, toRow, rowWidth, col, toCol, colWidth);
     const area = {};

@@ -55,62 +55,66 @@ function genDynamicTemp(widthObj, biggest) {
   return temp;
 }
 
-class NativeGrid extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps !== this.props;
-  }
+function setGridStyle({
+  col: totalGridCol,
+  colMinWidth: fixedColMinWidth,
+  colMaxWidth: fixedColMaxWidth,
+
+  row: totalGridRow,
+  rowMinWidth: fixedRowMinWidth,
+  rowMaxWidth: fixedRowMaxWidth,
+
+  gridRowWidth,
+  autoFlow,
+  gap,
+
+  isDynamicTempCol,
+  rowCellsWidth,
+  biggestCol,
+
+  isDynamicTempRow,
+  colCellsWidth,
+  biggestRow
+}) {
+  const template = {};
+
+  template.gridTemplateColumns = isDynamicTempCol
+    ? genDynamicTemp(colCellsWidth, biggestCol)
+    : genFixedTemp(
+        totalGridCol,
+        biggestCol,
+        fixedColMinWidth,
+        fixedColMaxWidth
+      );
+
+  template.gridTemplateRows = isDynamicTempRow
+    ? genDynamicTemp(rowCellsWidth, biggestRow)
+    : genFixedTemp(
+        totalGridRow,
+        biggestRow,
+        fixedRowMinWidth,
+        fixedRowMaxWidth
+      );
+
+  const style = Object.assign(
+    {},
+    container,
+    template,
+    gridRowWidth && { gridAutoRows: gridRowWidth },
+    autoFlow && { gridAutoFlow: autoFlow },
+    { gridGap: gap }
+  );
+
+  return style;
+}
+
+class NativeGrid extends React.PureComponent {
   render() {
-    const {
-      col: totalGridCol,
-      colMinWidth: fixedColMinWidth,
-      colMaxWidth: fixedColMaxWidth,
+    console.log('NativeGrid update');
+    const { isAllGridComponentsMounted, children, ...otherProps } = this.props;
 
-      row: totalGridRow,
-      rowMinWidth: fixedRowMinWidth,
-      rowMaxWidth: fixedRowMaxWidth,
+    const style = isAllGridComponentsMounted ? setGridStyle(otherProps) : {};
 
-      gridRowWidth,
-      autoFlow,
-      gap,
-
-      isDynamicTempCol,
-      rowCellsWidth,
-      biggestCol,
-
-      isDynamicTempRow,
-      colCellsWidth,
-      biggestRow,
-
-      children
-    } = this.props;
-    const template = {};
-
-    template.gridTemplateColumns = isDynamicTempCol
-      ? genDynamicTemp(colCellsWidth, biggestCol)
-      : genFixedTemp(
-          totalGridCol,
-          biggestCol,
-          fixedColMinWidth,
-          fixedColMaxWidth
-        );
-
-    template.gridTemplateRows = isDynamicTempRow
-      ? genDynamicTemp(rowCellsWidth, biggestRow)
-      : genFixedTemp(
-          totalGridRow,
-          biggestRow,
-          fixedRowMinWidth,
-          fixedRowMaxWidth
-        );
-
-    const style = Object.assign(
-      {},
-      container,
-      template,
-      gridRowWidth && { gridAutoRows: gridRowWidth },
-      autoFlow && { gridAutoFlow: autoFlow },
-      { gridGap: gap }
-    );
     return <div style={style}>{children}</div>;
   }
 }
