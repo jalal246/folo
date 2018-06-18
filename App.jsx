@@ -30,7 +30,7 @@ export default function FormApp(props) {
           <ValuesProvider onSubmit={onSubmit}>
             <Form col={2} colMaxWidth="3.5fr">
               <CellContainer
-                isHorizontal
+                isHorizontal={false}
                 row={0}
                 rowWidth="2rem"
                 col={0}
@@ -45,7 +45,7 @@ export default function FormApp(props) {
                 />
                 <Label text="error msg" />
               </CellContainer>
-              <CellContainer isHorizontal rowWidth="5rem">
+              <CellContainer rowWidth="5rem">
                 <Cell
                   nameRef="btn1"
                   type="checkbox"
@@ -54,15 +54,15 @@ export default function FormApp(props) {
                 />
                 <Label>try button</Label>
               </CellContainer>
-              <CellContainer isHorizontal row={3} rowWidth="3rem">
+              <CellContainer row={3} rowWidth="3rem">
                 <Cell nameRef="btn2" type="checkbox" groupName="alpha" />
                 <Label>try button</Label>
               </CellContainer>
-              <CellContainer isHorizontal /* col={3} */>
+              <CellContainer toRow={3}>
                 <Cell type="checkbox" groupName="alpha2" />
-                <Label>try button</Label>
+                <Label>try button2</Label>
               </CellContainer>
-              <CellContainer isHorizontal /* row={5} */>
+              <CellContainer /* row={5} */>
                 <Label>try button</Label>
                 <Cell
                   nameRef="select4"

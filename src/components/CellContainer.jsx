@@ -78,12 +78,23 @@ class CellContainer extends Component {
       area.gridRow = location(row, toRow);
     }
 
+    let flexDirection;
+    let alignItems;
+    if (isHorizontal) {
+      flexDirection = 'row';
+      alignItems = 'center';
+    } else {
+      flexDirection = 'column';
+      alignItems = 'flexStart';
+    }
+    //
     const styles = Object.assign(
       {},
       {
-        backgroundColor: 'red',
-        display: 'block',
-        width: '100%'
+        display: 'flex',
+        flexDirection,
+        alignItems,
+        backgroundColor: 'red'
       },
       area,
       style
