@@ -62,7 +62,7 @@ export default function FormApp(props) {
                 <Cell type="checkbox" groupName="alpha2" />
                 <Label>try button2</Label>
               </CellContainer>
-              <CellContainer /* row={5} */>
+              <CellContainer toCol={2}>
                 <Label>try button</Label>
                 <Cell
                   nameRef="select4"

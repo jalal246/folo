@@ -31,10 +31,8 @@ function cellEnhancer(children, row, col) {
 function location(colOrRow, to) {
   if (colOrRow && to) {
     return `${colOrRow} / ${to}`;
-  } else if (colOrRow) {
-    return `${colOrRow}`;
   }
-  return `span ${to}`;
+  return `${colOrRow}`;
 }
 
 class CellContainer extends Component {
@@ -90,13 +88,11 @@ class CellContainer extends Component {
     if (isCenter) {
       container.justifyContent = 'center';
       container.gridColumn = location(1, -1);
-    } else if (toCol) {
+    } else {
       container.gridColumn = location(choosenCol, toCol);
     }
 
-    if (toRow) {
-      container.gridRow = location(choosenRow, toRow);
-    }
+    container.gridRow = location(choosenRow, toRow);
 
     if (isHorizontal) {
       container.flexDirection = 'row';
