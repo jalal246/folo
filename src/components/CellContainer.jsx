@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { genKeyObj } from '../utils';
 import { GridConsumer, withContext } from '../context';
 
-function cellEnhancer(children, uniqueCellKey) {
+function cellEnhancer(children, row, col) {
+  const uniqueCellKey = genKeyObj(row, col);
+
   return React.Children.map(children, child => {
     const name = child.type.displayName;
 
@@ -68,21 +70,32 @@ class CellContainer extends Component {
     } = this.props;
     console.log('CellContainer updated');
 
-    registerCellContainer(row, toRow, rowWidth, col, toCol, colWidth);
+    const cellCounter = registerCellContainer(
+      row,
+      toRow,
+      rowWidth,
+      col,
+      toCol,
+      colWidth
+    );
+
     const container = {
       display: 'flex',
       backgroundColor: 'red'
     };
 
+    const choosenRow = row || cellCounter;
+    const choosenCol = col || 0;
+
     if (isCenter) {
       container.justifyContent = 'center';
       container.gridColumn = location(1, -1);
-    } else if (col || toCol) {
-      container.gridColumn = location(col, toCol);
+    } else if (toCol) {
+      container.gridColumn = location(choosenCol, toCol);
     }
 
-    if (row || toRow) {
-      container.gridRow = location(row, toRow);
+    if (toRow) {
+      container.gridRow = location(choosenRow, toRow);
     }
 
     if (isHorizontal) {
@@ -93,11 +106,9 @@ class CellContainer extends Component {
     //
     const styles = Object.assign({}, container, style);
 
-    const uniqueCellKey = genKeyObj(row, col);
-
     return (
       <CellComponent style={styles}>
-        {cellEnhancer(children, uniqueCellKey)}
+        {cellEnhancer(children, choosenRow, choosenCol)}
       </CellComponent>
     );
   }

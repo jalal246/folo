@@ -2,7 +2,6 @@
 
 import { CHECKBOX, RADIO, TEXT, SELECT, BTN, INPUT } from './constants';
 
-const prefix = 'folio';
 let lastId = 0;
 
 /**
@@ -10,7 +9,7 @@ let lastId = 0;
  * @param {String} prefix the prefix for the id
  * @return {String} the unique ID
  */
-export function keyGenerator() {
+export function keyGenerator(prefix = 'folio') {
   lastId += 1;
   return prefix + lastId;
 }

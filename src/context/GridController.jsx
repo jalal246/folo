@@ -115,6 +115,8 @@ export class GridProvider extends React.Component {
         this.colCellsWidth[col] = colWidth;
       }
     }
+
+    return this.cellCounter;
   };
 
   render() {
@@ -144,6 +146,8 @@ export class GridProvider extends React.Component {
           isDynamicTempRow,
           colCellsWidth,
           biggestRow,
+
+          cellCounter: this.cellCounter,
 
           isAllGridComponentsMounted,
 
