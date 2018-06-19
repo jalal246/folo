@@ -57,6 +57,7 @@ class CellContainer extends Component {
       col,
       toCol,
       colWidth,
+      isCenter,
 
       style,
 
@@ -68,37 +69,29 @@ class CellContainer extends Component {
     console.log('CellContainer updated');
 
     registerCellContainer(row, toRow, rowWidth, col, toCol, colWidth);
-    const area = {};
+    const container = {
+      display: 'flex',
+      backgroundColor: 'red'
+    };
 
-    if (col || toCol) {
-      area.gridColumn = location(col, toCol);
+    if (isCenter) {
+      container.justifyContent = 'center';
+      container.gridColumn = location(1, -1);
+    } else if (col || toCol) {
+      container.gridColumn = location(col, toCol);
     }
 
     if (row || toRow) {
-      area.gridRow = location(row, toRow);
+      container.gridRow = location(row, toRow);
     }
 
-    let flexDirection;
-    let alignItems;
     if (isHorizontal) {
-      flexDirection = 'row';
-      alignItems = 'center';
+      container.flexDirection = 'row';
     } else {
-      flexDirection = 'column';
-      alignItems = 'flexStart';
+      container.flexDirection = 'column';
     }
     //
-    const styles = Object.assign(
-      {},
-      {
-        display: 'flex',
-        flexDirection,
-        alignItems,
-        backgroundColor: 'red'
-      },
-      area,
-      style
-    );
+    const styles = Object.assign({}, container, style);
 
     const uniqueCellKey = genKeyObj(row, col);
 

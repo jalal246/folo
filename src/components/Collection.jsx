@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ValuesConsumer, withContext } from '../context';
+import { ValuesConsumer, GridConsumer, withContext } from '../context';
 import Grid from './Grid';
 
 export function Container({ component: ContainerComponent, children, other }) {
@@ -66,7 +66,13 @@ Form.defaultProps = {
   colNumber: null
 };
 
-export function ButtonNative({ component: ButtonComponent, onClick, text }) {
+export function ButtonNative({
+  component: ButtonComponent,
+  onClick,
+  text,
+  biggestCol
+}) {
+  console.log(biggestCol);
   return (
     <ButtonComponent type="button" onClick={onClick}>
       {text}

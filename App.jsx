@@ -75,7 +75,9 @@ export default function FormApp(props) {
                   <CellItem>!</CellItem>
                 </Cell>
               </CellContainer>
-              {/* <Button /> */}
+              <CellContainer isCenter>
+                <Button />
+              </CellContainer>
             </Form>
           </ValuesProvider>
         </GridProvider>
