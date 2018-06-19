@@ -30,6 +30,9 @@ export default function FormApp(props) {
           <ValuesProvider onSubmit={onSubmit}>
             <Form col={2} colMaxWidth="3.5fr">
               <CellContainer
+                style={{
+                  backgroundColor: 'blue'
+                }}
                 isHorizontal={false}
                 row={0}
                 rowWidth="2rem"

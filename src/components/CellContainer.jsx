@@ -82,16 +82,14 @@ class CellContainer extends Component {
       backgroundColor: 'red'
     };
 
-    const choosenRow = row || cellCounter;
-    const choosenCol = col || 0;
-
     if (isCenter) {
       container.justifyContent = 'center';
       container.gridColumn = location(1, -1);
     } else {
-      container.gridColumn = location(choosenCol, toCol);
+      container.gridColumn = location(col, toCol);
     }
 
+    const choosenRow = row || cellCounter;
     container.gridRow = location(choosenRow, toRow);
 
     if (isHorizontal) {
@@ -104,7 +102,7 @@ class CellContainer extends Component {
 
     return (
       <CellComponent style={styles}>
-        {cellEnhancer(children, choosenRow, choosenCol)}
+        {cellEnhancer(children, choosenRow, col)}
       </CellComponent>
     );
   }
@@ -120,22 +118,31 @@ const propTypes = {
   col: PropTypes.number,
   toCol: PropTypes.number,
   colWidth: PropTypes.string,
+  isCenter: PropTypes.bool,
+
+  style: PropTypes.objectOf(PropTypes.string),
+
+  registerCellContainer: PropTypes.func.isRequired,
+  isAllGridComponentsMounted: PropTypes.bool.isRequired,
 
   isHorizontal: PropTypes.bool,
-  style: PropTypes.object
+  children: PropTypes.node.isRequired
 };
 const defaultProps = {
   component: 'div',
 
-  col: null,
   row: null,
-  toCol: null,
   toRow: null,
   rowWidth: null,
-  colWidth: null,
 
-  isHorizontal: true,
-  style: {}
+  col: 0,
+  toCol: null,
+  colWidth: null,
+  isCenter: false,
+
+  style: {},
+
+  isHorizontal: true
 };
 
 CellContainer.propTypes = propTypes;
