@@ -3,27 +3,6 @@ import PropTypes from 'prop-types';
 
 import { SELECT } from '../../constants';
 
-export function CellItem({
-  component: CellComponent,
-  value,
-  key,
-  children,
-  ...other
-}) {
-  return (
-    <CellComponent value={value} key={key} {...other}>
-      {children}
-    </CellComponent>
-  );
-}
-
-CellItem.propTypes = {
-  component: PropTypes.node
-};
-CellItem.defaultProps = {
-  component: 'option'
-};
-
 const propTypes = {
   nameRef: PropTypes.string.isRequired,
   attr: PropTypes.objectOf(
