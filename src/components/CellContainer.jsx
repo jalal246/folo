@@ -35,6 +35,11 @@ function location(colOrRow, to) {
   return `${colOrRow}`;
 }
 
+const container = {
+  display: 'flex',
+  backgroundColor: 'red'
+};
+
 class CellContainer extends Component {
   shouldComponentUpdate(nextProps) {
     if (
@@ -76,11 +81,6 @@ class CellContainer extends Component {
       toCol,
       colWidth
     );
-
-    const container = {
-      display: 'flex',
-      backgroundColor: 'red'
-    };
 
     if (isCenter) {
       container.justifyContent = 'center';
