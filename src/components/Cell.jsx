@@ -3,11 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import InputField from './base/InputField';
-// import InputButton from './base/InputButton';
-
-import SelectItems from './base/SelectItems';
-import { InputField, InputButton } from './base';
+import { InputField, InputButton, Select } from './base';
 import { ValuesConsumer } from '../context';
 
 import { CHECKBOX, RADIO, SELECT, LIST } from '../constants';
@@ -17,7 +13,7 @@ function recognizeCellType(type) {
   let isBtn = false;
 
   if (type === SELECT || type === LIST) {
-    CallComponent = SelectItems;
+    CallComponent = Select;
   } else if (type === CHECKBOX || type === RADIO) {
     CallComponent = InputButton;
     isBtn = true;
