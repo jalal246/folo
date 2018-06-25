@@ -1,5 +1,5 @@
 export { default as Cell } from './Cell';
-export { CellItem } from './base';
+export { default as CellItem } from './CellItem';
 
 export { default as CellContainer } from './CellContainer';
 
