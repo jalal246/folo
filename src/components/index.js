@@ -1,5 +1,5 @@
 export { default as Cell } from './Cell';
-export { CellItem } from './baseComponents/CellSelect';
+export { CellItem } from './base';
 
 export { default as CellContainer } from './CellContainer';
 
