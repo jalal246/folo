@@ -40,7 +40,7 @@ const container = {
   backgroundColor: 'red'
 };
 
-class CellContainer extends Component {
+class GridItem extends Component {
   shouldComponentUpdate(nextProps) {
     if (
       !this.props.isAllGridComponentsMounted &&
@@ -71,7 +71,7 @@ class CellContainer extends Component {
       isHorizontal,
       children
     } = this.props;
-    console.log('CellContainer updated');
+    console.log('GridItem updated');
 
     const cellCounter = registerCellContainer(
       row,
@@ -145,7 +145,7 @@ const defaultProps = {
   isHorizontal: true
 };
 
-CellContainer.propTypes = propTypes;
-CellContainer.defaultProps = defaultProps;
+GridItem.propTypes = propTypes;
+GridItem.defaultProps = defaultProps;
 
-export default withContext(CellContainer, GridConsumer);
+export default withContext(GridItem, GridConsumer);
