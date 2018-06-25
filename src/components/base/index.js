@@ -1,3 +1,3 @@
-export { default as CellButton } from './CellButton';
-export { default as CellInput } from './CellInput';
-export { default as CellSelect, CellItem } from './CellSelect';
+export { default as InputButton } from './InputButton';
+export { default as InputField } from './InputField';
+export { default as CellSelect, CellItem } from './SelectItems';

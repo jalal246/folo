@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ValuesConsumer, GridConsumer, withContext } from '../context';
+import { ValuesConsumer, withContext } from '../context';
 import Grid from './Grid';
 
 export function Container({ component: ContainerComponent, children, other }) {

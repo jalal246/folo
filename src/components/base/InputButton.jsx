@@ -24,7 +24,7 @@ const defaultProps = {
   groupName: null
 };
 
-class Button extends Component {
+class InputButton extends Component {
   constructor(props) {
     super(props);
 
@@ -67,7 +67,7 @@ class Button extends Component {
   }
 }
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
+InputButton.propTypes = propTypes;
+InputButton.defaultProps = defaultProps;
 
-export default Button;
+export default InputButton;

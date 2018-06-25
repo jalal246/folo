@@ -24,7 +24,7 @@ const defaultProps = {
   attr: null
 };
 
-class Input extends Component {
+class InputField extends Component {
   constructor(props) {
     super(props);
     this.state = { tempValue: props.initValue };
@@ -64,7 +64,7 @@ class Input extends Component {
   }
 }
 
-Input.propTypes = propTypes;
-Input.defaultProps = defaultProps;
+InputField.propTypes = propTypes;
+InputField.defaultProps = defaultProps;
 
-export default Input;
+export default InputField;
