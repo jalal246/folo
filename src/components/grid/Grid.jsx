@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { GridConsumer, withContext } from '../../context';
+import { GridConsumer, withContext } from './context';
 
 const container = {
   backgroundColor: 'grey',

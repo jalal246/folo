@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { genKeyObj } from '../../utils';
-import { GridConsumer, withContext } from '../../context';
+import { GridConsumer, withContext } from './context';
 
 function cellEnhancer(children, row, col) {
   const uniqueCellKey = genKeyObj(row, col);
@@ -128,6 +128,7 @@ const propTypes = {
   isHorizontal: PropTypes.bool,
   children: PropTypes.node.isRequired
 };
+
 const defaultProps = {
   component: 'div',
 
