@@ -8,15 +8,14 @@ import {
   Button,
   Cell,
   CellItem,
-  CellContainer
+  GridItem
 } from './src/components';
 
-import {
-  ValuesProvider,
-  GridProvider,
-  // GlobalStaticSettingsProvider,
-  ShapeProvider
-} from './src/context';
+// import { ValuesProvider } from './src/context';
+
+import { ValuesProvider } from './src/components/cell/context';
+import { GridProvider } from './src/components/grid/context';
+import { ShapeProvider } from './src/components/panel/context';
 
 export default function FormApp(props) {
   const { isIntractive, isDesignMode, onSubmit } = props;
@@ -29,7 +28,7 @@ export default function FormApp(props) {
         <GridProvider>
           <ValuesProvider onSubmit={onSubmit}>
             <Form col={2} colMaxWidth="3.5fr">
-              <CellContainer
+              <GridItem
                 style={{
                   backgroundColor: 'blue'
                 }}
@@ -47,8 +46,8 @@ export default function FormApp(props) {
                   value="username"
                 />
                 <Label text="error msg" />
-              </CellContainer>
-              <CellContainer rowWidth="5rem">
+              </GridItem>
+              <GridItem rowWidth="5rem">
                 <Cell
                   nameRef="btn1"
                   type="checkbox"
@@ -56,16 +55,16 @@ export default function FormApp(props) {
                   groupName="alpha"
                 />
                 <Label>try button</Label>
-              </CellContainer>
-              <CellContainer row={3} rowWidth="3rem">
+              </GridItem>
+              <GridItem row={3} rowWidth="3rem">
                 <Cell nameRef="btn2" type="checkbox" groupName="alpha" />
                 <Label>try button</Label>
-              </CellContainer>
-              <CellContainer toRow={3}>
+              </GridItem>
+              <GridItem toRow={3}>
                 <Cell type="checkbox" groupName="alpha2" />
                 <Label>try button2</Label>
-              </CellContainer>
-              <CellContainer toCol={2}>
+              </GridItem>
+              <GridItem toCol={2}>
                 <Label>try button</Label>
                 <Cell
                   nameRef="select4"
@@ -77,10 +76,10 @@ export default function FormApp(props) {
                   <CellItem>world</CellItem>
                   <CellItem>!</CellItem>
                 </Cell>
-              </CellContainer>
-              <CellContainer isCenter>
+              </GridItem>
+              <GridItem isCenter>
                 <Button />
-              </CellContainer>
+              </GridItem>
             </Form>
           </ValuesProvider>
         </GridProvider>
