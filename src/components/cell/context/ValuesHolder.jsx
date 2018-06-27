@@ -2,12 +2,7 @@ import React, { createContext } from 'react';
 // import PropTypes from 'prop-types';
 import { INPUT } from '../../../constants';
 
-const ValuesHolder = createContext({
-  values: {},
-  errors: {},
-  updateCellValue: () => {},
-  updateErrors: () => {}
-});
+const ValuesHolder = createContext();
 
 export const { Consumer: ValuesConsumer } = ValuesHolder;
 
@@ -20,9 +15,11 @@ export class ValuesProvider extends React.Component {
     super(props);
 
     this.btnGroup = new Set();
+
     this.datatObj = {};
 
-    this.init = true;
+    this.didMount = false;
+
     this.state = {
       values: {},
       isGroupValuesUpdate: false
@@ -31,8 +28,9 @@ export class ValuesProvider extends React.Component {
   }
 
   componentDidMount() {
+    this.didMount = true;
+
     this.setState({ values: { ...this.datatObj } });
-    this.init = false;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -43,8 +41,8 @@ export class ValuesProvider extends React.Component {
     this.props.onSubmit(this.state.values);
   };
 
-  registerCell = (nameRef, cellInitValue, groupName) => {
-    if (!this.init) return;
+  registerCellInfo = (nameRef, cellInitValue, groupName) => {
+    if (this.didMount) return;
 
     // push cell name ref to data holder
     this.datatObj[nameRef] = cellInitValue;
@@ -126,7 +124,7 @@ export class ValuesProvider extends React.Component {
     const { values, errors } = this.state;
 
     const {
-      registerCell,
+      registerCellInfo,
       updateCellValue,
       onFormBtnClick,
       updateErrors
@@ -139,7 +137,7 @@ export class ValuesProvider extends React.Component {
           errors,
           updateCellValue,
           updateErrors,
-          registerCell,
+          registerCellInfo,
           onClick: onFormBtnClick
         }}
       >

@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { InputField, InputButton, Select } from '../base';
+
 import { ValuesConsumer } from './context';
 
 import { CHECKBOX, RADIO, SELECT, LIST } from '../../constants';
@@ -48,8 +49,8 @@ function Cell({
 
   return (
     <ValuesConsumer>
-      {({ registerCell, updateCellValue, values }) => {
-        registerCell(nameRef, initValue, groupName);
+      {({ registerCellInfo, updateCellValue, values }) => {
+        registerCellInfo(nameRef, initValue, groupName);
 
         const valProps = {
           initValue,
