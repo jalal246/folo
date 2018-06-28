@@ -1,29 +1,43 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { SELECT, LIST, CHECKBOX, RADIO, INPUT, BTN } from '../../constants';
+import {
+  TEXT,
+  SELECT,
+  LIST,
+  CHECKBOX,
+  RADIO,
+  INPUT,
+  BTN
+} from '../../constants';
 
 import { ValuesConsumer, withContext } from '../cell/context';
 
 const propTypes = {
-  updateCellValue: PropTypes.func.isRequired,
-  initValue: PropTypes.bool,
-  component: PropTypes.node,
+  /** Description of prop "baz". */
+  type: PropTypes.string,
   nameRef: PropTypes.string.isRequired,
-  attr: PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.objectOf(PropTypes.string)
-    ])
-  ).isRequired,
+  groupName: PropTypes.string,
 
-  groupName: PropTypes.string
+  value: PropTypes.string,
+  checked: PropTypes.bool,
+
+  // context props
+  registerCellInfo: PropTypes.func.isRequired,
+  updateCellValue: PropTypes.func.isRequired,
+  values: PropTypes.objectOf(PropTypes.string).isRequired,
+
+  children: PropTypes.oneOf([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
 };
 
 const defaultProps = {
-  component: 'input',
-  initValue: false,
-  groupName: null
+  type: TEXT,
+  groupName: null,
+
+  value: '',
+  checked: false,
+
+  children: PropTypes.node
 };
 
 /**
@@ -104,7 +118,8 @@ class InputButton extends Component {
       registerCellInfo,
       values,
       nameRef,
-      attr
+      attr,
+      children
     } = this.props;
 
     let checked;
@@ -119,6 +134,16 @@ class InputButton extends Component {
       this.isSelect = isSelect;
       this.isInput = !isBtn && !isSelect;
       //
+      if (!CellComponent) {
+        if (this.isSelect) {
+          this.CellComponent = SELECT;
+        } else {
+          this.CellComponent = INPUT;
+        }
+      } else {
+        this.CellComponent = CellComponent;
+      }
+
       checked = initValue;
     } else if (groupName) {
       checked = values[nameRef];
@@ -134,7 +159,7 @@ class InputButton extends Component {
       ...attr
     };
 
-    return <CellComponent {...props} />;
+    return <this.CellComponent {...props} />;
   }
 }
 
