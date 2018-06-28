@@ -159,7 +159,11 @@ class InputButton extends Component {
       ...attr
     };
 
-    return <this.CellComponent {...props} />;
+    return this.isSelect ? (
+      <this.CellComponent {...props}>{children}</this.CellComponent>
+    ) : (
+      <this.CellComponent {...props} />
+    );
   }
 }
 
