@@ -42,11 +42,10 @@ const defaultProps = {
 
 /**
  * Gets the cell type
- * assign component type depending on cell
- * if the type is not define, consider it InputField as default
+ * returns booleans type flage.
  *
  * @param {string} cell_type
- * @return {Object} contains three boolean values,
+ * @return {Object} - isBtn, isSelect, isInput
  */
 function recognizeCellType(type) {
   let isBtn = false;
@@ -58,7 +57,11 @@ function recognizeCellType(type) {
     isBtn = true;
   }
 
-  return { isSelect, isBtn };
+  return {
+    isSelect,
+    isBtn,
+    isInput: !isBtn && !isSelect
+  };
 }
 
 class Cell extends Component {
@@ -130,10 +133,10 @@ class Cell extends Component {
       registerCellInfo(nameRef, this.initValue, groupName);
 
       //
-      const { isBtn, isSelect } = recognizeCellType(type);
+      const { isBtn, isSelect, isInput } = recognizeCellType(type);
       this.isBtn = isBtn;
       this.isSelect = isSelect;
-      this.isInput = !isBtn && !isSelect;
+      this.isInput = isInput;
       //
       if (!CellComponent) {
         if (this.isSelect) {
