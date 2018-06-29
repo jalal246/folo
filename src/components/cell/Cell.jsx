@@ -1,93 +1,176 @@
-/* eslint no-underscore-dangle: ["error", { "allow": ["_nameRef", "_id"] }] */
-
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { InputField, InputButton, Select } from '../base';
+import {
+  TEXT,
+  SELECT,
+  LIST,
+  CHECKBOX,
+  RADIO,
+  INPUT,
+  BTN
+} from '../../constants';
 
-import { ValuesConsumer } from './context';
+import { ValuesConsumer, withContext } from '../cell/context';
 
-import { CHECKBOX, RADIO, SELECT, LIST } from '../../constants';
+const propTypes = {
+  /** Description of prop "baz". */
+  type: PropTypes.string,
+  nameRef: PropTypes.string.isRequired,
+  groupName: PropTypes.string,
 
+  value: PropTypes.string,
+  checked: PropTypes.bool,
+
+  // context props
+  registerCellInfo: PropTypes.func.isRequired,
+  updateCellValue: PropTypes.func.isRequired,
+  values: PropTypes.objectOf(PropTypes.string).isRequired,
+
+  children: PropTypes.oneOf([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
+};
+
+const defaultProps = {
+  type: TEXT,
+  groupName: null,
+
+  value: '',
+  checked: false,
+
+  children: PropTypes.node
+};
+
+/**
+ * Gets the cell type
+ * assign component type depending on cell
+ * if the type is not define, consider it InputField as default
+ *
+ * @param {string} cell_type
+ * @return {Object} contains three boolean values,
+ */
 function recognizeCellType(type) {
-  let CallComponent;
   let isBtn = false;
+  let isSelect = false;
 
   if (type === SELECT || type === LIST) {
-    CallComponent = Select;
+    isSelect = true;
   } else if (type === CHECKBOX || type === RADIO) {
-    CallComponent = InputButton;
     isBtn = true;
-  } else {
-    CallComponent = InputField;
-  }
-  return { CallComponent, isBtn };
-}
-
-function Cell({
-  component,
-
-  type,
-  nameRef,
-  groupName,
-
-  // is there better solution for this
-  value,
-  checked,
-
-  children,
-
-  ...attr
-}) {
-  console.log('cell render');
-  const { CallComponent, isBtn } = recognizeCellType(type);
-
-  let initValue = value || checked;
-  if (initValue === undefined) {
-    initValue = isBtn ? false : '';
   }
 
-  return (
-    <ValuesConsumer>
-      {({ registerCellInfo, updateCellValue, values }) => {
-        registerCellInfo(nameRef, initValue, groupName);
-
-        const valProps = {
-          initValue,
-          ...(isBtn && { bindingValue: values[nameRef] })
-        };
-
-        return (
-          <CallComponent
-            component={component}
-            type={type}
-            {...valProps}
-            nameRef={nameRef}
-            groupName={groupName}
-            attr={attr}
-            updateCellValue={updateCellValue}
-          >
-            {children}
-          </CallComponent>
-        );
-      }}
-    </ValuesConsumer>
-  );
+  return { isSelect, isBtn };
 }
 
-Cell.propTypes = {
-  // col: PropTypes.number,
-  // row: PropTypes.number,
+class Cell extends Component {
+  constructor(props) {
+    super(props);
 
-  component: PropTypes.node
-};
-Cell.defaultProps = {
-  // col: 0,
-  // row: 0,
+    const { initValue, groupName } = props;
 
-  component: undefined
-};
+    this.state = { tempValue: groupName ? initValue : null };
 
-Cell.displayName = 'Cell';
+    this.didMount = false;
+    this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+  }
 
-export default Cell;
+  componentDidMount() {
+    this.didMount = true;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { values, nameRef, groupName } = this.props;
+    if (groupName) {
+      return nextProps.values[nameRef] !== values[nameRef];
+    }
+
+    const { tempValue } = this.state;
+    return tempValue !== nextState.tempValue;
+  }
+
+  handleChange({ target: { checked, value } }) {
+    const { nameRef, groupName, updateCellValue } = this.props;
+
+    if (!groupName) {
+      this.setState({
+        tempValue: this.isBtn ? checked : value
+      });
+    }
+
+    if (!this.isInput) {
+      updateCellValue(nameRef, checked, this.isBtn ? BTN : SELECT, groupName);
+    }
+  }
+
+  handleBlur({ target: { value } }) {
+    const { nameRef, updateCellValue } = this.props;
+
+    updateCellValue(nameRef, value, INPUT);
+  }
+
+  render() {
+    console.log('button update');
+
+    const {
+      component: CellComponent,
+      type,
+      groupName,
+      initValue,
+      registerCellInfo,
+      values,
+      nameRef,
+      attr,
+      children
+    } = this.props;
+
+    let checked;
+
+    if (!this.didMount) {
+      // register cell info in context state
+      registerCellInfo(nameRef, this.initValue, groupName);
+
+      //
+      const { isBtn, isSelect } = recognizeCellType(type);
+      this.isBtn = isBtn;
+      this.isSelect = isSelect;
+      this.isInput = !isBtn && !isSelect;
+      //
+      if (!CellComponent) {
+        if (this.isSelect) {
+          this.CellComponent = SELECT;
+        } else {
+          this.CellComponent = INPUT;
+        }
+      } else {
+        this.CellComponent = CellComponent;
+      }
+
+      checked = initValue;
+    } else if (groupName) {
+      checked = values[nameRef];
+    } else {
+      checked = this.state.tempValue;
+    }
+
+    const props = {
+      type,
+      [this.isBtn ? 'checked' : 'value']: checked,
+      onChange: this.handleChange,
+      ...(this.isInput && { onBlur: this.handleBlur }),
+      ...attr
+    };
+
+    return this.isSelect ? (
+      <this.CellComponent {...props}>{children}</this.CellComponent>
+    ) : (
+      <this.CellComponent {...props} />
+    );
+  }
+}
+
+Cell.propTypes = propTypes;
+Cell.defaultProps = defaultProps;
+
+// export default Cell;
+
+export default withContext(Cell, ValuesConsumer);

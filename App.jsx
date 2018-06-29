@@ -57,21 +57,16 @@ export default function FormApp(props) {
                 <Label>try button</Label>
               </GridItem>
               <GridItem row={3} rowWidth="3rem">
-                <Cell nameRef="btn2" type="checkbox" groupName="alpha" />
-                <Label>try button</Label>
+                <Cell nameRef="btn2" type="checkbox" />
+                <Label>try not groupde button</Label>
               </GridItem>
               <GridItem toRow={3}>
-                <Cell type="checkbox" groupName="alpha2" />
+                <Cell type="checkbox" groupName="alpha" />
                 <Label>try button2</Label>
               </GridItem>
               <GridItem toCol={2}>
                 <Label>try button</Label>
-                <Cell
-                  nameRef="select4"
-                  type="list"
-                  value="world"
-                  groupName="alpha2"
-                >
+                <Cell nameRef="select4" type="list" value="world">
                   <CellItem>hello</CellItem>
                   <CellItem>world</CellItem>
                   <CellItem>!</CellItem>
