@@ -68,7 +68,14 @@ class Cell extends Component {
   constructor(props) {
     super(props);
 
-    const { CellComponent, initValue, groupName, type } = props;
+    const {
+      component: CellComponent,
+      nameRef,
+      initValue,
+      registerCellInfo,
+      groupName,
+      type
+    } = props;
 
     const { isBtn, isSelect, isInput } = recognizeCellType(type);
 
@@ -91,6 +98,9 @@ class Cell extends Component {
       this.CellComponent = CellComponent;
     }
 
+    // register cell info in context state
+    registerCellInfo(nameRef, this.initValue, groupName);
+
     this.state = { tempValue: groupName ? initValue : null };
 
     this.didMount = false;
@@ -112,10 +122,7 @@ class Cell extends Component {
     return tempValue !== nextState.tempValue;
   }
 
-  init = ({ registerCellInfo, nameRef, groupName, CellComponent }) => {
-    // register cell info in context state
-    registerCellInfo(nameRef, this.initValue, groupName);
-  };
+  init = ({ registerCellInfo, nameRef, groupName, CellComponent }) => {};
 
   handleChange({ target: { checked, value } }) {
     const { nameRef, groupName, updateCellValue } = this.props;
@@ -141,7 +148,6 @@ class Cell extends Component {
     console.log('button update');
 
     const {
-      component: CellComponent,
       type,
       groupName,
       initValue,
@@ -155,7 +161,7 @@ class Cell extends Component {
     let checked;
 
     if (!this.didMount) {
-      this.init({ registerCellInfo, nameRef, groupName, type, CellComponent });
+      this.init({ registerCellInfo, nameRef, groupName });
 
       checked = initValue;
     } else if (groupName) {
