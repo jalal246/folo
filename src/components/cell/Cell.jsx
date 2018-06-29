@@ -68,13 +68,28 @@ class Cell extends Component {
   constructor(props) {
     super(props);
 
-    const { initValue, groupName, type } = props;
+    const { CellComponent, initValue, groupName, type } = props;
 
     const { isBtn, isSelect, isInput } = recognizeCellType(type);
 
     this.isBtn = isBtn;
     this.isSelect = isSelect;
     this.isInput = isInput;
+
+    /**
+     * assign render component
+     * input is default
+     */
+    if (!CellComponent) {
+      if (this.isSelect) {
+        this.CellComponent = SELECT;
+      } else {
+        this.CellComponent = INPUT;
+      }
+    } else {
+      // user choise
+      this.CellComponent = CellComponent;
+    }
 
     this.state = { tempValue: groupName ? initValue : null };
 
@@ -100,21 +115,6 @@ class Cell extends Component {
   init = ({ registerCellInfo, nameRef, groupName, CellComponent }) => {
     // register cell info in context state
     registerCellInfo(nameRef, this.initValue, groupName);
-
-    /**
-     * assign render component
-     * input is default
-     */
-    if (!CellComponent) {
-      if (this.isSelect) {
-        this.CellComponent = SELECT;
-      } else {
-        this.CellComponent = INPUT;
-      }
-    } else {
-      // user choise
-      this.CellComponent = CellComponent;
-    }
   };
 
   handleChange({ target: { checked, value } }) {
