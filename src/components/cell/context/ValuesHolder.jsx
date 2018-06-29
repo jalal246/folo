@@ -79,7 +79,6 @@ export class ValuesProvider extends React.Component {
   };
 
   updateCellValue = (nameRef, newValue, cellType, groupName) => {
-    // console.log(nameRef, newValue, cellType, groupName);
     const { values: { [nameRef]: oldValue } } = this.state;
 
     // dont update if it is the same value

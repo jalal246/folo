@@ -71,7 +71,8 @@ class Cell extends Component {
     const {
       component: CellComponent,
       nameRef,
-      initValue,
+      value,
+      checked,
       registerCellInfo,
       groupName,
       type
@@ -101,9 +102,11 @@ class Cell extends Component {
     // register cell info in context state
     registerCellInfo(nameRef, this.initValue, groupName);
 
-    this.state = { tempValue: groupName ? initValue : null };
+    //
+    this.state = { localValue: isBtn ? checked : value };
 
     this.didMount = false;
+
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
   }
@@ -113,25 +116,26 @@ class Cell extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { values, nameRef, groupName } = this.props;
-    if (groupName) {
-      return nextProps.values[nameRef] !== values[nameRef];
+    const { nameRef, groupName } = this.props;
+    const { values: { [nameRef]: contextValue } } = nextProps;
+
+    const { localValue } = this.state;
+
+    if (groupName && contextValue !== localValue) {
+      this.setState({
+        localValue: nextProps.values[nameRef]
+      });
     }
 
-    const { tempValue } = this.state;
-    return tempValue !== nextState.tempValue;
+    return localValue !== nextState.localValue;
   }
-
-  init = ({ registerCellInfo, nameRef, groupName, CellComponent }) => {};
 
   handleChange({ target: { checked, value } }) {
     const { nameRef, groupName, updateCellValue } = this.props;
 
-    if (!groupName) {
-      this.setState({
-        tempValue: this.isBtn ? checked : value
-      });
-    }
+    this.setState({
+      localValue: this.isBtn ? checked : value
+    });
 
     if (!this.isInput) {
       updateCellValue(nameRef, checked, this.isBtn ? BTN : SELECT, groupName);
@@ -147,32 +151,13 @@ class Cell extends Component {
   render() {
     console.log('button update');
 
-    const {
-      type,
-      groupName,
-      initValue,
-      registerCellInfo,
-      values,
-      nameRef,
-      attr,
-      children
-    } = this.props;
+    const { type, attr, children } = this.props;
 
-    let checked;
-
-    if (!this.didMount) {
-      this.init({ registerCellInfo, nameRef, groupName });
-
-      checked = initValue;
-    } else if (groupName) {
-      checked = values[nameRef];
-    } else {
-      checked = this.state.tempValue;
-    }
+    const { localValue } = this.state;
 
     const props = {
       type,
-      [this.isBtn ? 'checked' : 'value']: checked,
+      [this.isBtn ? 'checked' : 'value']: localValue,
       onChange: this.handleChange,
       ...(this.isInput && { onBlur: this.handleBlur }),
       ...attr
@@ -188,7 +173,5 @@ class Cell extends Component {
 
 Cell.propTypes = propTypes;
 Cell.defaultProps = defaultProps;
-
-// export default Cell;
 
 export default withContext(Cell, ValuesConsumer);
