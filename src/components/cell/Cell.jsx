@@ -123,6 +123,7 @@ class Cell extends Component {
 
     // register cell info in context state
     registerCellInfo(artificialNameRe, localValue, groupName);
+    this.nameRef = artificialNameRe;
 
     this.state = { localValue };
 
@@ -131,14 +132,14 @@ class Cell extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { nameRef, groupName } = this.props;
-    const { values: { [nameRef]: contextValue } } = nextProps;
+    const { groupName } = this.props;
+    const { values: { [this.nameRef]: contextValue } } = nextProps;
 
     const { localValue } = this.state;
 
     if (groupName && contextValue !== localValue) {
       this.setState({
-        localValue: nextProps.values[nameRef]
+        localValue: nextProps.values[this.nameRef]
       });
     }
 
@@ -146,21 +147,26 @@ class Cell extends Component {
   }
 
   handleChange({ target: { checked, value } }) {
-    const { nameRef, groupName, updateCellValue } = this.props;
+    const { groupName, updateCellValue } = this.props;
 
     this.setState({
       localValue: this.isBtn ? checked : value
     });
 
     if (!this.isInput) {
-      updateCellValue(nameRef, checked, this.isBtn ? BTN : SELECT, groupName);
+      updateCellValue(
+        this.nameRef,
+        checked,
+        this.isBtn ? BTN : SELECT,
+        groupName
+      );
     }
   }
 
   handleBlur({ target: { value } }) {
-    const { nameRef, updateCellValue } = this.props;
+    const { updateCellValue } = this.props;
 
-    updateCellValue(nameRef, value, INPUT);
+    updateCellValue(this.nameRef, value, INPUT);
   }
 
   render() {
