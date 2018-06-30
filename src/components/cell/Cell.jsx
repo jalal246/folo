@@ -99,22 +99,14 @@ class Cell extends Component {
       this.CellComponent = CellComponent;
     }
 
+    // choose the init value that will be saved in context and local state.
     const localValue = isBtn ? checked : value;
 
     // register cell info in context state
     registerCellInfo(nameRef, localValue, groupName);
 
-    //
-    this.state = { localValue };
-
-    this.didMount = false;
-
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-  }
-
-  componentDidMount() {
-    this.didMount = true;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
