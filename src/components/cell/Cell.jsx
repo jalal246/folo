@@ -99,11 +99,13 @@ class Cell extends Component {
       this.CellComponent = CellComponent;
     }
 
+    const localValue = isBtn ? checked : value;
+
     // register cell info in context state
-    registerCellInfo(nameRef, this.initValue, groupName);
+    registerCellInfo(nameRef, localValue, groupName);
 
     //
-    this.state = { localValue: isBtn ? checked : value };
+    this.state = { localValue };
 
     this.didMount = false;
 
@@ -151,22 +153,21 @@ class Cell extends Component {
   render() {
     console.log('button update');
 
-    const { type, attr, children } = this.props;
+    const { type, children } = this.props;
 
     const { localValue } = this.state;
 
-    const props = {
+    const cellProps = {
       type,
       [this.isBtn ? 'checked' : 'value']: localValue,
       onChange: this.handleChange,
-      ...(this.isInput && { onBlur: this.handleBlur }),
-      ...attr
+      ...(this.isInput && { onBlur: this.handleBlur })
     };
 
     return this.isSelect ? (
-      <this.CellComponent {...props}>{children}</this.CellComponent>
+      <this.CellComponent {...cellProps}>{children}</this.CellComponent>
     ) : (
-      <this.CellComponent {...props} />
+      <this.CellComponent {...cellProps} />
     );
   }
 }
