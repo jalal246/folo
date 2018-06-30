@@ -25,6 +25,7 @@ const propTypes = {
 
   value: PropTypes.string,
   checked: PropTypes.bool,
+  id: PropTypes.string,
 
   // context props
   registerCellInfo: PropTypes.func.isRequired,
@@ -42,6 +43,7 @@ const defaultProps = {
 
   value: '',
   checked: false,
+  id: keyGenerator('autoID'),
 
   children: PropTypes.node
 };
@@ -116,9 +118,7 @@ class Cell extends Component {
       * if there's id so be it
       * otherwise, generate new one
       * */
-      artificialNameRe = `${type}_${id || keyGenerator('autoID')}${
-        groupName ? `_${groupName}` : ''
-      }`;
+      artificialNameRe = `${type}_${id}${groupName ? `_${groupName}` : ''}`;
     }
 
     // register cell info in context state
