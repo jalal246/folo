@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { keyGenerator } from '../../utils';
+
 import {
   TEXT,
   SELECT,
@@ -14,6 +16,8 @@ import {
 import { ValuesConsumer, withContext } from '../cell/context';
 
 const propTypes = {
+  component: PropTypes.node,
+
   /** Description of prop "baz". */
   type: PropTypes.string,
   nameRef: PropTypes.string.isRequired,
@@ -31,6 +35,8 @@ const propTypes = {
 };
 
 const defaultProps = {
+  component: null,
+
   type: TEXT,
   groupName: null,
 
@@ -73,6 +79,7 @@ class Cell extends Component {
       nameRef,
       value,
       checked,
+      id,
       registerCellInfo,
       groupName,
       type
@@ -99,11 +106,25 @@ class Cell extends Component {
       this.CellComponent = CellComponent;
     }
 
-    // choose the init value that will be saved in context and local state.
+    // choose the init value that will be saved in context and local state
     const localValue = isBtn ? checked : value;
 
+    // get unique reference name if nameRef is not provided
+    let artificialNameRe = nameRef;
+    if (!artificialNameRe) {
+      /*
+      * if there's id so be it
+      * otherwise, generate new one
+      * */
+      artificialNameRe = `${type}_${id || keyGenerator('autoID')}${
+        groupName ? `_${groupName}` : ''
+      }`;
+    }
+
     // register cell info in context state
-    registerCellInfo(nameRef, localValue, groupName);
+    registerCellInfo(artificialNameRe, localValue, groupName);
+
+    this.state = { localValue };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
