@@ -18,7 +18,6 @@ import { ValuesConsumer, withContext } from '../cell/context';
 const propTypes = {
   component: PropTypes.node,
 
-  /** Description of prop "baz". */
   type: PropTypes.string,
   nameRef: PropTypes.string.isRequired,
   groupName: PropTypes.string,
@@ -27,7 +26,7 @@ const propTypes = {
   checked: PropTypes.bool,
   id: PropTypes.string,
 
-  // context props
+  /** context props */
   registerCellInfo: PropTypes.func.isRequired,
   updateCellValue: PropTypes.func.isRequired,
   values: PropTypes.objectOf(PropTypes.string).isRequired,
@@ -124,6 +123,7 @@ class Cell extends Component {
     // register cell info in context state
     registerCellInfo(artificialNameRe, localValue, groupName);
     this.nameRef = artificialNameRe;
+    this.valueRef = this.isBtn ? 'checked' : 'value';
 
     this.state = { localValue };
 
@@ -178,7 +178,7 @@ class Cell extends Component {
 
     const cellProps = {
       type,
-      [this.isBtn ? 'checked' : 'value']: localValue,
+      [this.valueRef]: localValue,
       onChange: this.handleChange,
       ...(this.isInput && { onBlur: this.handleBlur })
     };
