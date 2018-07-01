@@ -3,11 +3,13 @@ export { GridItem, Grid } from './grid';
 export {
   Cell,
   CellItem,
-  Container,
   Text,
   Label,
-  Form,
-  Button
+  SubmitBtn,
+  ValuesProvider
 } from './cell/index';
+
+export { default as Form } from './Form';
+export { default as Container } from './Container';
 
 export { Panel, PanelMode, PanelDesignController } from './panel/index';

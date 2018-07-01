@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { genKeyObj } from '../../utils';
+// import { genKeyObj } from '../../utils';
 import { GridConsumer, withContext } from './context';
 
-function cellEnhancer(children, row, col) {
-  const uniqueCellKey = genKeyObj(row, col);
-
-  return React.Children.map(children, child => {
-    const name = child.type.displayName;
-
-    const { props: { nameRef, id, htmlFor } } = child;
-    if (name === 'Cell') {
-      if (nameRef && id) {
-        return child;
-      }
-      return React.cloneElement(child, {
-        ...(!id && { id: uniqueCellKey }),
-        ...(!nameRef && { nameRef: uniqueCellKey })
-      });
-    } else if (name === 'Label' && !htmlFor) {
-      return React.cloneElement(child, {
-        htmlFor: uniqueCellKey
-      });
-    }
-    return child;
-  });
-}
+// function cellStamp(children, row, col) {
+//   const uniqueCellKey = genKeyObj(row, col);
+//
+//   return React.Children.map(children, child => {
+//     const name = child.type.displayName;
+//
+//     if (name === 'Cell') {
+//       return React.cloneElement(child, {
+//         uniqueCellKey
+//       });
+//     } else if (name === 'Label') {
+//       return React.cloneElement(child, {
+//         uniqueCellKey
+//       });
+//     }
+//     return child;
+//   });
+// }
 
 function location(colOrRow, to) {
   if (colOrRow && to) {
@@ -100,11 +95,7 @@ class GridItem extends Component {
     //
     const styles = Object.assign({}, container, style);
 
-    return (
-      <CellComponent style={styles}>
-        {cellEnhancer(children, choosenRow, col)}
-      </CellComponent>
-    );
+    return <CellComponent style={styles}>{children}</CellComponent>;
   }
 }
 
