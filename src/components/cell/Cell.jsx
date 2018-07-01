@@ -15,6 +15,28 @@ import {
 
 import { ValuesConsumer, withContext } from '../cell/context';
 
+// const basicProps = [
+//   'component',
+//
+//   'type',
+//   'nameRef',
+//   'groupName',
+//
+//   'value',
+//   'checked',
+//   'id',
+//
+//   /** context props */
+//   'registerCellInfo',
+//   'updateCellValue',
+//   'values',
+//
+//   'onChange',
+//   'onBlur',
+//
+//   'children'
+// ];
+
 const propTypes = {
   component: PropTypes.node,
 
@@ -31,6 +53,9 @@ const propTypes = {
   updateCellValue: PropTypes.func.isRequired,
   values: PropTypes.objectOf(PropTypes.string).isRequired,
 
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+
   children: PropTypes.oneOf([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
 };
 
@@ -43,6 +68,9 @@ const defaultProps = {
   value: '',
   checked: false,
   id: keyGenerator('autoID'),
+
+  onChange: null,
+  onBlur: null,
 
   children: PropTypes.node
 };
@@ -146,8 +174,9 @@ class Cell extends Component {
     return localValue !== nextState.localValue;
   }
 
-  handleChange({ target: { checked, value } }) {
-    const { groupName, updateCellValue } = this.props;
+  handleChange(e) {
+    const { target: { checked, value } } = e;
+    const { groupName, updateCellValue, onChange } = this.props;
 
     this.setState({
       localValue: this.isBtn ? checked : value
@@ -161,28 +190,59 @@ class Cell extends Component {
         groupName
       );
     }
+    if (onChange) {
+      onChange(e);
+    }
   }
 
-  handleBlur({ target: { value } }) {
-    const { updateCellValue } = this.props;
+  handleBlur(e) {
+    const { target: { value } } = e;
+    const { updateCellValue, onBlur } = this.props;
 
     updateCellValue(this.nameRef, value, INPUT);
+
+    if (onBlur) {
+      onBlur(e);
+    }
   }
 
   render() {
     console.log('button update');
 
-    const { type, children } = this.props;
+    const {
+      component,
+
+      type,
+      nameRef,
+      groupName,
+
+      value,
+      checked,
+      id,
+
+      /** context props */
+      registerCellInfo,
+      updateCellValue,
+      values,
+
+      onChange,
+      onBlur,
+
+      children,
+      ...other
+    } = this.props;
 
     const { localValue } = this.state;
+
+    const onBlurFunc = this.isInput ? this.handleBlur : onBlur;
 
     const cellProps = {
       type,
       [this.valueRef]: localValue,
       onChange: this.handleChange,
-      ...(this.isInput && { onBlur: this.handleBlur })
+      onBlur: onBlurFunc,
+      ...other
     };
-
     return this.isSelect ? (
       <this.CellComponent {...cellProps}>{children}</this.CellComponent>
     ) : (
