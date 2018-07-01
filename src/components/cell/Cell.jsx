@@ -13,7 +13,8 @@ import {
   BTN
 } from '../../constants';
 
-import { ValuesConsumer, withContext } from '../cell/context';
+import { ValuesConsumer } from './context';
+import withContext from '../withContext';
 
 // const basicProps = [
 //   'component',
@@ -72,7 +73,7 @@ const defaultProps = {
   onChange: null,
   onBlur: null,
 
-  children: PropTypes.node
+  children: null
 };
 
 /**
@@ -150,6 +151,7 @@ class Cell extends Component {
 
     // register cell info in context state
     registerCellInfo(artificialNameRe, localValue, groupName);
+
     this.nameRef = artificialNameRe;
     this.valueRef = this.isBtn ? 'checked' : 'value';
 

@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-// import PropTypes from 'prop-types';
+
 import { INPUT } from '../../../constants';
 
 const ValuesHolder = createContext();
@@ -30,6 +30,12 @@ export class ValuesProvider extends React.Component {
   componentDidMount() {
     this.didMount = true;
 
+    /*
+    * This wont update the component
+    * just set collected data obj as state
+    * */
+
+    // eslint-disable-next-line
     this.setState({ values: { ...this.datatObj } });
   }
 
@@ -37,8 +43,10 @@ export class ValuesProvider extends React.Component {
     return this.state.isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
   }
 
-  onFormBtnClick = () => {
-    this.props.onSubmit(this.state.values);
+  onSubmitBtnClick = (e, onSubmit) => {
+    if (onSubmit) {
+      onSubmit(e, { ...this.state.values });
+    }
   };
 
   registerCellInfo = (nameRef, cellInitValue, groupName) => {
@@ -120,27 +128,27 @@ export class ValuesProvider extends React.Component {
   render() {
     console.log('ValuesHolder update');
 
-    const { values, errors } = this.state;
+    const { values /* errors */ } = this.state;
+
+    const { children } = this.props;
 
     const {
       registerCellInfo,
       updateCellValue,
-      onFormBtnClick,
-      updateErrors
+      onSubmitBtnClick
+      // updateErrors
     } = this;
 
     return (
       <ValuesHolder.Provider
         value={{
           values,
-          errors,
           updateCellValue,
-          updateErrors,
           registerCellInfo,
-          onClick: onFormBtnClick
+          onSubmitBtnClick
         }}
       >
-        {this.props.children}
+        {children}
       </ValuesHolder.Provider>
     );
   }
