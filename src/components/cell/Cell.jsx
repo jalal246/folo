@@ -50,14 +50,16 @@ const propTypes = {
   id: PropTypes.string,
 
   /** context props */
-  registerCellInfo: PropTypes.func.isRequired,
-  updateCellValue: PropTypes.func.isRequired,
-  values: PropTypes.objectOf(PropTypes.string).isRequired,
+  cn: PropTypes.shape({
+    registerCellInfo: PropTypes.func.isRequired,
+    updateCellValue: PropTypes.func.isRequired,
+    values: PropTypes.objectOf(PropTypes.string).isRequired
+  }).isRequired,
 
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
 
-  children: PropTypes.oneOf([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
+  children: PropTypes.node
 };
 
 const defaultProps = {
@@ -110,7 +112,7 @@ class Cell extends Component {
       value,
       checked,
       id,
-      registerCellInfo,
+      cn: { registerCellInfo },
       groupName,
       type
     } = props;
@@ -163,7 +165,7 @@ class Cell extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     const { groupName } = this.props;
-    const { values: { [this.nameRef]: contextValue } } = nextProps;
+    const { cn: { values: { [this.nameRef]: contextValue } } } = nextProps;
 
     const { localValue } = this.state;
 
@@ -178,7 +180,7 @@ class Cell extends Component {
 
   handleChange(e) {
     const { target: { checked, value } } = e;
-    const { groupName, updateCellValue, onChange } = this.props;
+    const { groupName, cn: { updateCellValue }, onChange } = this.props;
 
     this.setState({
       localValue: this.isBtn ? checked : value
@@ -199,7 +201,7 @@ class Cell extends Component {
 
   handleBlur(e) {
     const { target: { value } } = e;
-    const { updateCellValue, onBlur } = this.props;
+    const { cn: { updateCellValue }, onBlur } = this.props;
 
     updateCellValue(this.nameRef, value, INPUT);
 
@@ -223,9 +225,7 @@ class Cell extends Component {
       id,
 
       /** context props */
-      registerCellInfo,
-      updateCellValue,
-      values,
+      cn,
 
       onChange,
       onBlur,

@@ -142,10 +142,12 @@ export class ValuesProvider extends React.Component {
     return (
       <ValuesHolder.Provider
         value={{
-          values,
-          updateCellValue,
-          registerCellInfo,
-          onSubmitBtnClick
+          cn: {
+            values,
+            updateCellValue,
+            registerCellInfo,
+            onSubmitBtnClick
+          }
         }}
       >
         {children}
