@@ -171,7 +171,7 @@ class Cell extends Component {
 
     if (groupName && contextValue !== localValue) {
       this.setState({
-        localValue: nextProps.values[this.nameRef]
+        localValue: contextValue
       });
     }
 

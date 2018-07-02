@@ -6,9 +6,8 @@ const ValuesHolder = createContext();
 
 export const { Consumer: ValuesConsumer } = ValuesHolder;
 
-const propTypes = {};
-
-const defaultProps = {};
+// const propTypes = {};
+// const defaultProps = {};
 
 export class ValuesProvider extends React.Component {
   constructor(props) {
@@ -156,5 +155,5 @@ export class ValuesProvider extends React.Component {
   }
 }
 
-ValuesProvider.propTypes = propTypes;
-ValuesProvider.defaultProps = defaultProps;
+// ValuesProvider.propTypes = propTypes;
+// ValuesProvider.defaultProps = defaultProps;
