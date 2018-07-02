@@ -181,15 +181,16 @@ class Cell extends Component {
   handleChange(e) {
     const { target: { checked, value } } = e;
     const { groupName, cn: { updateCellValue }, onChange } = this.props;
+    const newValue = this.isBtn ? checked : value;
 
     this.setState({
-      localValue: this.isBtn ? checked : value
+      localValue: newValue
     });
 
     if (!this.isInput) {
       updateCellValue(
         this.nameRef,
-        checked,
+        newValue,
         this.isBtn ? BTN : SELECT,
         groupName
       );
@@ -211,7 +212,7 @@ class Cell extends Component {
   }
 
   render() {
-    console.log('button update');
+    console.log('cell update');
 
     const {
       component,

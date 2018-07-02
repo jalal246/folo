@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { keyGenerator } from '../../utils';
+
 export default function CellItem({
   component: CellComponent,
   value,
@@ -18,9 +20,10 @@ export default function CellItem({
 CellItem.propTypes = {
   component: PropTypes.node,
   value: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired,
-  key: PropTypes.string.isRequired,
+  key: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 CellItem.defaultProps = {
-  component: 'option'
+  component: 'option',
+  key: keyGenerator('autoKey')
 };
