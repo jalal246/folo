@@ -16,7 +16,10 @@ export default function CellItem({
 }
 
 CellItem.propTypes = {
-  component: PropTypes.node
+  component: PropTypes.node,
+  value: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired,
+  key: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired
 };
 CellItem.defaultProps = {
   component: 'option'

@@ -1,6 +1,6 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 
-import { CHECKBOX, RADIO, TEXT, SELECT, BTN, INPUT } from './constants';
+import { CHECKBOX, RADIO, SELECT, BTN, INPUT } from './constants';
 
 let lastId = 0;
 

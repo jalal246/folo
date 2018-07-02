@@ -2,18 +2,14 @@ import React from 'react';
 
 import {
   Container,
-  Label,
   Panel,
   Form,
-  Button,
   Cell,
   CellItem,
-  GridItem
+  GridItem,
+  ValuesProvider
 } from './src/components';
 
-// import { ValuesProvider } from './src/context';
-
-import { ValuesProvider } from './src/components/cell/context';
 import { GridProvider } from './src/components/grid/context';
 import { ShapeProvider } from './src/components/panel/context';
 
@@ -23,11 +19,18 @@ export default function FormApp(props) {
   return (
     <ShapeProvider isDesignMode={isDesignMode} isIntractive={isIntractive}>
       <Container>
-        <Label>dynamic form</Label>
+        <label>dynamic form</label>
         <Panel />
         <GridProvider>
-          <ValuesProvider onSubmit={onSubmit}>
-            <Form col={2} colMaxWidth="3.5fr">
+          <ValuesProvider>
+            <Form
+              onSubmit={(e, d) => {
+                e.preventDefault();
+                onSubmit(d);
+              }}
+              col={2}
+              colMaxWidth="3.5fr"
+            >
               <GridItem
                 style={{
                   backgroundColor: 'blue'
@@ -39,46 +42,44 @@ export default function FormApp(props) {
                 colWidth="0.2fr"
                 toCol={2}
               >
-                <Label>first type text</Label>
+                <label>first type text</label>
                 <Cell
                   nameRef="souldBeCobinationOfColAndRow"
                   type="input"
                   value="username"
+                  style={{
+                    fontSize: '17px'
+                  }}
                 />
-                <Label text="error msg" />
+                <label text="error msg" />
               </GridItem>
               <GridItem rowWidth="5rem">
                 <Cell
-                  nameRef="btn1"
+                  nameRef="try_button"
                   type="checkbox"
                   checked
                   groupName="alpha"
                 />
-                <Label>try button</Label>
+                <label>try button</label>
               </GridItem>
               <GridItem row={3} rowWidth="3rem">
-                <Cell nameRef="btn2" type="checkbox" groupName="alpha" />
-                <Label>try button</Label>
+                <Cell nameRef="try_not_groupde_button" type="checkbox" />
+                <label>try not groupde button</label>
               </GridItem>
               <GridItem toRow={3}>
-                <Cell type="checkbox" groupName="alpha2" />
-                <Label>try button2</Label>
+                <Cell id="try_button2<" type="checkbox" groupName="alpha" />
+                <label>try button2</label>
               </GridItem>
               <GridItem toCol={2}>
-                <Label>try button</Label>
-                <Cell
-                  nameRef="select4"
-                  type="list"
-                  value="world"
-                  groupName="alpha2"
-                >
+                <label>try button</label>
+                <Cell nameRef="select4" type="list" value="world">
                   <CellItem>hello</CellItem>
                   <CellItem>world</CellItem>
                   <CellItem>!</CellItem>
                 </Cell>
               </GridItem>
               <GridItem isCenter>
-                <Button />
+                <button>submit</button>
               </GridItem>
             </Form>
           </ValuesProvider>
