@@ -19,11 +19,12 @@ export default function CellItem({
 
 CellItem.propTypes = {
   component: PropTypes.node,
-  value: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired,
+  value: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
   key: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 CellItem.defaultProps = {
   component: 'option',
+  value: null,
   key: keyGenerator('autoKey')
 };

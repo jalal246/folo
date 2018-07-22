@@ -22,7 +22,6 @@ export class ValuesProvider extends React.Component {
     this.state = {
       values: {},
       isGroupValuesUpdate: false
-      // errors: {}
     };
   }
 
@@ -87,7 +86,6 @@ export class ValuesProvider extends React.Component {
 
   updateCellValue = (nameRef, newValue, cellType, groupName) => {
     const { values: { [nameRef]: oldValue } } = this.state;
-    console.log(nameRef, newValue, cellType, groupName);
     // dont update if it is the same value
     if (cellType === INPUT && oldValue === newValue) {
       return;
@@ -125,7 +123,7 @@ export class ValuesProvider extends React.Component {
   updateErrors = () => {};
 
   render() {
-    console.log('ValuesHolder update');
+    // console.log('ValuesHolder update');
 
     const { values /* errors */ } = this.state;
 
