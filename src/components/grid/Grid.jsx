@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { GridConsumer, withContext } from './context';
+import { GridConsumer } from './context';
+
+import withContext from '../withContext';
 
 const container = {
   backgroundColor: 'grey',
@@ -100,6 +102,9 @@ function setGridStyle({
 }
 
 class NativeGrid extends React.PureComponent {
+  static getDerivedStateFromProps(props, state) {
+    console.log(props, state);
+  }
   render() {
     console.log('NativeGrid update');
     const { isAllGridComponentsMounted, children, ...otherProps } = this.props;
@@ -111,7 +116,7 @@ class NativeGrid extends React.PureComponent {
     return <div style={style}>{children}</div>;
   }
 }
-
+//
 NativeGrid.propTypes = {
   totalGridCol: PropTypes.number,
   gridRowWidth: PropTypes.string,

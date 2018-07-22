@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // import { genKeyObj } from '../../utils';
-import { GridConsumer, withContext } from './context';
+import { GridConsumer } from './context';
+
+import withContext from '../withContext';
 
 // function cellStamp(children, row, col) {
 //   const uniqueCellKey = genKeyObj(row, col);
