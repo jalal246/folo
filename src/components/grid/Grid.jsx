@@ -100,10 +100,10 @@ function setGridStyle({
 
   return style;
 }
-
+//
 class NativeGrid extends React.PureComponent {
   static getDerivedStateFromProps(props, state) {
-    console.log(props, state);
+    // console.log(props, state);
   }
   render() {
     console.log('NativeGrid update');

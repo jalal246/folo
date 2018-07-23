@@ -55,6 +55,8 @@ export class GridProvider extends React.Component {
     });
   }
 
+  getCellCounter = () => this.cellCounter;
+
   registerCellContainer = (row, toRow, rowWidth, col, toCol, colWidth) => {
     if (this.didMount) return;
 
@@ -115,8 +117,6 @@ export class GridProvider extends React.Component {
         this.colCellsWidth[col] = colWidth;
       }
     }
-
-    return this.cellCounter;
   };
 
   render() {
@@ -134,7 +134,9 @@ export class GridProvider extends React.Component {
       isAllGridComponentsMounted
     } = this.state;
 
-    const { registerCellContainer } = this;
+    const { children } = this.props;
+
+    const { registerCellContainer, getCellCounter } = this;
 
     return (
       <GridController.Provider
@@ -147,14 +149,13 @@ export class GridProvider extends React.Component {
           colCellsWidth,
           biggestRow,
 
-          cellCounter: this.cellCounter,
-
           isAllGridComponentsMounted,
 
-          registerCellContainer
+          registerCellContainer,
+          getCellCounter
         }}
       >
-        {this.props.children}
+        {children}
       </GridController.Provider>
     );
   }

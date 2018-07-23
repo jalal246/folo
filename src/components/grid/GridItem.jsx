@@ -6,25 +6,6 @@ import { GridConsumer } from './context';
 
 import withContext from '../withContext';
 
-// function cellStamp(children, row, col) {
-//   const uniqueCellKey = genKeyObj(row, col);
-//
-//   return React.Children.map(children, child => {
-//     const name = child.type.displayName;
-//
-//     if (name === 'Cell') {
-//       return React.cloneElement(child, {
-//         uniqueCellKey
-//       });
-//     } else if (name === 'Label') {
-//       return React.cloneElement(child, {
-//         uniqueCellKey
-//       });
-//     }
-//     return child;
-//   });
-// }
-
 function location(colOrRow, to) {
   if (colOrRow && to) {
     return `${colOrRow} / ${to}`;
@@ -64,20 +45,16 @@ class GridItem extends Component {
       style,
 
       registerCellContainer,
+      getCellCounter,
 
       isHorizontal,
       children
     } = this.props;
     console.log('GridItem updated');
 
-    const cellCounter = registerCellContainer(
-      row,
-      toRow,
-      rowWidth,
-      col,
-      toCol,
-      colWidth
-    );
+    registerCellContainer(row, toRow, rowWidth, col, toCol, colWidth);
+
+    const cellCounter = getCellCounter();
 
     if (isCenter) {
       container.justifyContent = 'center';
