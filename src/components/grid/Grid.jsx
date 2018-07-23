@@ -69,15 +69,13 @@ class Grid extends React.PureComponent {
 
       //  context props calculated from grid item
       cnValues: {
-        isDynamicTempCol,
         rowCellsWidth,
         biggestCol,
 
-        isDynamicTempRow,
         colCellsWidth,
         biggestRow,
 
-        isAllGridComponentsMounted
+        isDynamic
       },
 
       cnFuncs: { registerFixedColRow },
@@ -93,24 +91,26 @@ class Grid extends React.PureComponent {
 
     const template = {};
 
-    if (isAllGridComponentsMounted) {
-      template.gridTemplateColumns = isDynamicTempCol
-        ? genDynamicTemp(colCellsWidth, biggestCol)
-        : genFixedTemp(
-            totalGridCol,
-            biggestCol,
-            fixedColMinWidth,
-            fixedColMaxWidth
-          );
-
-      template.gridTemplateRows = isDynamicTempRow
-        ? genDynamicTemp(rowCellsWidth, biggestRow)
-        : genFixedTemp(
-            totalGridRow,
-            biggestRow,
-            fixedRowMinWidth,
-            fixedRowMaxWidth
-          );
+    if (isDynamic) {
+      template.gridTemplateColumns = genDynamicTemp(colCellsWidth, biggestCol);
+      template.gridTemplateRows = genDynamicTemp(rowCellsWidth, biggestRow);
+    } else {
+      if (totalGridCol) {
+        template.gridTemplateColumns = genFixedTemp(
+          totalGridCol,
+          biggestCol,
+          fixedColMinWidth,
+          fixedColMaxWidth
+        );
+      }
+      if (totalGridRow) {
+        template.gridTemplateRows = genFixedTemp(
+          totalGridRow,
+          biggestRow,
+          fixedRowMinWidth,
+          fixedRowMaxWidth
+        );
+      }
     }
 
     const style = Object.assign(

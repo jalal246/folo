@@ -20,10 +20,7 @@ const container = {
 
 class GridItem extends Component {
   shouldComponentUpdate(nextProps) {
-    if (
-      !this.props.cnValues.isAllGridComponentsMounted &&
-      nextProps.cnValues.isAllGridComponentsMounted
-    ) {
+    if (!this.props.cnValues.isDynamic && nextProps.cnValues.isDynamic) {
       return false;
     }
     return true;

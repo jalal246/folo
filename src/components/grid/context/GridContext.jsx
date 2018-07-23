@@ -28,8 +28,8 @@ export class GridProvider extends React.Component {
     this.colCellsWidth = {};
 
     this.didMount = false;
-    this.isRowWidthSet = false;
-    this.isColWidthSet = false;
+    this.isDynamicTempRow = false;
+    this.isDynamicTempCol = false;
 
     this.state = {
       isDynamicTempCol: false,
@@ -40,12 +40,18 @@ export class GridProvider extends React.Component {
       colCellsWidth: {},
       biggestRow: 0,
 
-      isAllGridComponentsMounted: false
+      isDynamic: false
     };
   }
 
   componentDidMount() {
     this.didMount = true;
+
+    if (!this.isDynamicTempCol && !this.isDynamicTempRow) {
+      // we've got nothing from gid items
+      // dont update the state
+      return;
+    }
 
     let biggestRow = this.fixedRow;
 
@@ -62,15 +68,15 @@ export class GridProvider extends React.Component {
       this.biggestColItem > this.fixedCol ? this.biggestColItem : this.fixedCol;
 
     this.setState({
-      isDynamicTempCol: this.isColWidthSet,
+      isDynamicTempCol: this.isDynamicTempCol,
       rowCellsWidth: this.rowCellsWidth,
       biggestCol,
 
-      isDynamicTempRow: this.isRowWidthSet,
+      isDynamicTempRow: this.isDynamicTempRow,
       colCellsWidth: this.colCellsWidth,
       biggestRow,
 
-      isAllGridComponentsMounted: true
+      isDynamic: true
     });
   }
 
@@ -109,9 +115,9 @@ export class GridProvider extends React.Component {
     if (rowWidth) {
       // we check if this is the first time
 
-      if (!this.isRowWidthSet) {
+      if (!this.isDynamicTempRow) {
         // if it is, then set row width flag
-        this.isRowWidthSet = true;
+        this.isDynamicTempRow = true;
       }
       /*
         we accept row width without knowing the row number
@@ -124,8 +130,8 @@ export class GridProvider extends React.Component {
       support default column, as zero index
     */
     if (colWidth) {
-      if (!this.isColWidthSet) {
-        this.isColWidthSet = true;
+      if (!this.isDynamicTempCol) {
+        this.isDynamicTempCol = true;
       }
       if (!col) {
         // if no column and column 0 is not set
@@ -157,7 +163,7 @@ export class GridProvider extends React.Component {
       colCellsWidth,
       biggestRow,
 
-      isAllGridComponentsMounted
+      isDynamic
     } = this.state;
 
     const { children } = this.props;
@@ -176,7 +182,7 @@ export class GridProvider extends React.Component {
             colCellsWidth,
             biggestRow,
 
-            isAllGridComponentsMounted
+            isDynamic
           },
 
           cnFuncs: {
