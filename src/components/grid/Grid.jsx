@@ -95,7 +95,7 @@ class Grid extends React.PureComponent {
       template.gridTemplateColumns = genDynamicTemp(colCellsWidth, biggestCol);
       template.gridTemplateRows = genDynamicTemp(rowCellsWidth, biggestRow);
     } else {
-      if (totalGridCol) {
+      if (totalGridCol > 0) {
         template.gridTemplateColumns = genFixedTemp(
           totalGridCol,
           biggestCol,
@@ -103,7 +103,7 @@ class Grid extends React.PureComponent {
           fixedColMaxWidth
         );
       }
-      if (totalGridRow) {
+      if (totalGridRow > 0) {
         template.gridTemplateRows = genFixedTemp(
           totalGridRow,
           biggestRow,
@@ -129,15 +129,50 @@ class Grid extends React.PureComponent {
     );
   }
 }
-//
+
 Grid.propTypes = {
-  totalGridCol: PropTypes.number,
+  // direct props used only for fixed temp
+  col: PropTypes.number,
+  colMinWidth: PropTypes.string,
+  colMaxWidth: PropTypes.string,
+
+  row: PropTypes.number,
+  rowMinWidth: PropTypes.string,
+  rowMaxWidth: PropTypes.string,
+
+  // grid dimensions
   gridRowWidth: PropTypes.string,
-  gap: PropTypes.string
+  autoFlow: PropTypes.string,
+  gap: PropTypes.string,
+
+  cnValues: PropTypes.shape({
+    rowCellsWidth: PropTypes.objectOf(PropTypes.string).isRequired,
+    biggestCol: PropTypes.number.isRequired,
+
+    colCellsWidth: PropTypes.objectOf(PropTypes.string).isRequired,
+    biggestRow: PropTypes.number.isRequired,
+
+    isDynamic: PropTypes.bool.isRequired
+  }).isRequired,
+
+  cnFuncs: PropTypes.shape({
+    registerFixedColRow: PropTypes.func.isRequired
+  }).isRequired,
+
+  //
+  children: PropTypes.node.isRequired
 };
 Grid.defaultProps = {
-  totalGridCol: null,
+  col: 0,
+  colMinWidth: null,
+  colMaxWidth: null,
+
+  row: 0,
+  rowMinWidth: null,
+  rowMaxWidth: null,
+
   gridRowWidth: null,
+  autoFlow: null,
   gap: '1em'
 };
 
