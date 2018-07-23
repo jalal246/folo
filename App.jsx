@@ -29,6 +29,9 @@ export default function FormApp(props) {
                 e.preventDefault();
                 onSubmit(d);
               }}
+              style={{
+                backgroundColor: 'grey'
+              }}
             >
               <Grid col={2} colMaxWidth="3.5fr">
                 <GridItem

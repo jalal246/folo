@@ -1,14 +1,8 @@
 import React, { createContext } from 'react';
-// import PropTypes from 'prop-types';
-// import { INPUT } from '../constants';
 
 const GridController = createContext();
 
 export const { Consumer: GridConsumer } = GridController;
-
-const propTypes = {};
-
-const defaultProps = {};
 
 export class GridProvider extends React.Component {
   constructor(props) {
@@ -144,7 +138,7 @@ export class GridProvider extends React.Component {
     }
   };
 
-  registerFixedColRow = (row = 0, col = 0) => {
+  registerFixedColRow = (row, col) => {
     if (this.didMount) return;
 
     this.fixedRow = row;
@@ -197,6 +191,3 @@ export class GridProvider extends React.Component {
     );
   }
 }
-
-GridProvider.propTypes = propTypes;
-GridProvider.defaultProps = defaultProps;
