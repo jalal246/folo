@@ -6,7 +6,6 @@ import { GridConsumer } from './context';
 import withContext from '../withContext';
 
 const container = {
-  backgroundColor: 'grey',
   display: 'grid',
   justifyItems: 'stretch',
   alignItems: 'stretch'
@@ -69,9 +68,11 @@ class Grid extends React.PureComponent {
 
       //  context props calculated from grid item
       cnValues: {
+        isDynamicTempRow,
         rowCellsWidth,
         biggestCol,
 
+        isDynamicTempCol,
         colCellsWidth,
         biggestRow,
 
@@ -91,10 +92,7 @@ class Grid extends React.PureComponent {
 
     const template = {};
 
-    if (isDynamic) {
-      template.gridTemplateColumns = genDynamicTemp(colCellsWidth, biggestCol);
-      template.gridTemplateRows = genDynamicTemp(rowCellsWidth, biggestRow);
-    } else {
+    if (!isDynamic) {
       if (totalGridCol > 0) {
         template.gridTemplateColumns = genFixedTemp(
           totalGridCol,
@@ -110,6 +108,16 @@ class Grid extends React.PureComponent {
           fixedRowMinWidth,
           fixedRowMaxWidth
         );
+      }
+    } else {
+      if (isDynamicTempCol) {
+        template.gridTemplateColumns = genDynamicTemp(
+          colCellsWidth,
+          biggestCol
+        );
+      }
+      if (isDynamicTempRow) {
+        template.gridTemplateRows = genDynamicTemp(rowCellsWidth, biggestRow);
       }
     }
 
@@ -146,9 +154,11 @@ Grid.propTypes = {
   gap: PropTypes.string,
 
   cnValues: PropTypes.shape({
+    isDynamicTempRow: PropTypes.bool.isRequired,
     rowCellsWidth: PropTypes.objectOf(PropTypes.string).isRequired,
     biggestCol: PropTypes.number.isRequired,
 
+    isDynamicTempCol: PropTypes.bool.isRequired,
     colCellsWidth: PropTypes.objectOf(PropTypes.string).isRequired,
     biggestRow: PropTypes.number.isRequired,
 
