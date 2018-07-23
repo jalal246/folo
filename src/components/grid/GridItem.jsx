@@ -21,8 +21,8 @@ const container = {
 class GridItem extends Component {
   shouldComponentUpdate(nextProps) {
     if (
-      !this.props.isAllGridComponentsMounted &&
-      nextProps.isAllGridComponentsMounted
+      !this.props.cnValues.isAllGridComponentsMounted &&
+      nextProps.cnValues.isAllGridComponentsMounted
     ) {
       return false;
     }
@@ -44,8 +44,7 @@ class GridItem extends Component {
 
       style,
 
-      registerCellContainer,
-      getCellCounter,
+      cnFuncs: { registerCellContainer, getCellCounter },
 
       isHorizontal,
       children

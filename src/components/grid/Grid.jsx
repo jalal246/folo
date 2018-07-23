@@ -48,84 +48,97 @@ function genDynamicTemp(widthObj, biggest) {
   return temp;
 }
 
-function setGridStyle({
-  col: totalGridCol,
-  colMinWidth: fixedColMinWidth,
-  colMaxWidth: fixedColMaxWidth,
-
-  row: totalGridRow,
-  rowMinWidth: fixedRowMinWidth,
-  rowMaxWidth: fixedRowMaxWidth,
-
-  gridRowWidth,
-  autoFlow,
-  gap,
-
-  isDynamicTempCol,
-  rowCellsWidth,
-  biggestCol,
-
-  isDynamicTempRow,
-  colCellsWidth,
-  biggestRow
-}) {
-  const template = {};
-
-  template.gridTemplateColumns = isDynamicTempCol
-    ? genDynamicTemp(colCellsWidth, biggestCol)
-    : genFixedTemp(
-        totalGridCol,
-        biggestCol,
-        fixedColMinWidth,
-        fixedColMaxWidth
-      );
-
-  template.gridTemplateRows = isDynamicTempRow
-    ? genDynamicTemp(rowCellsWidth, biggestRow)
-    : genFixedTemp(
-        totalGridRow,
-        biggestRow,
-        fixedRowMinWidth,
-        fixedRowMaxWidth
-      );
-
-  const style = Object.assign(
-    {},
-    container,
-    template,
-    gridRowWidth && { gridAutoRows: gridRowWidth },
-    autoFlow && { gridAutoFlow: autoFlow },
-    { gridGap: gap }
-  );
-
-  return style;
-}
 //
-class NativeGrid extends React.PureComponent {
-  static getDerivedStateFromProps(props, state) {
-    // console.log(props, state);
-  }
+class Grid extends React.PureComponent {
   render() {
-    console.log('NativeGrid update');
-    const { isAllGridComponentsMounted, children, ...otherProps } = this.props;
+    console.log('Grid update');
+    const {
+      // direct props used only for fixed temp
+      col: totalGridCol,
+      colMinWidth: fixedColMinWidth,
+      colMaxWidth: fixedColMaxWidth,
 
-    const style = isAllGridComponentsMounted
-      ? setGridStyle(otherProps)
-      : container;
+      row: totalGridRow,
+      rowMinWidth: fixedRowMinWidth,
+      rowMaxWidth: fixedRowMaxWidth,
 
-    return <div style={style}>{children}</div>;
+      // grid dimensions
+      gridRowWidth,
+      autoFlow,
+      gap,
+
+      //  context props calculated from grid item
+      cnValues: {
+        isDynamicTempCol,
+        rowCellsWidth,
+        biggestCol,
+
+        isDynamicTempRow,
+        colCellsWidth,
+        biggestRow,
+
+        isAllGridComponentsMounted
+      },
+
+      cnFuncs: { registerFixedColRow },
+
+      //
+      children,
+
+      //
+      ...otherProps
+    } = this.props;
+
+    registerFixedColRow(totalGridCol, totalGridRow);
+
+    const template = {};
+
+    if (isAllGridComponentsMounted) {
+      template.gridTemplateColumns = isDynamicTempCol
+        ? genDynamicTemp(colCellsWidth, biggestCol)
+        : genFixedTemp(
+            totalGridCol,
+            biggestCol,
+            fixedColMinWidth,
+            fixedColMaxWidth
+          );
+
+      template.gridTemplateRows = isDynamicTempRow
+        ? genDynamicTemp(rowCellsWidth, biggestRow)
+        : genFixedTemp(
+            totalGridRow,
+            biggestRow,
+            fixedRowMinWidth,
+            fixedRowMaxWidth
+          );
+    }
+
+    const style = Object.assign(
+      {},
+      container,
+      template,
+      gridRowWidth && { gridAutoRows: gridRowWidth },
+      autoFlow && { gridAutoFlow: autoFlow },
+      { gridGap: gap }
+    );
+
+    return (
+      <div style={style} {...otherProps}>
+        {children}
+      </div>
+    );
   }
 }
 //
-NativeGrid.propTypes = {
+Grid.propTypes = {
   totalGridCol: PropTypes.number,
   gridRowWidth: PropTypes.string,
   gap: PropTypes.string
 };
-NativeGrid.defaultProps = {
+Grid.defaultProps = {
   totalGridCol: null,
   gridRowWidth: null,
   gap: '1em'
 };
 
-export default withContext(NativeGrid, GridConsumer);
+export default withContext(Grid, GridConsumer);

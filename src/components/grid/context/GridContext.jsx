@@ -16,8 +16,13 @@ export class GridProvider extends React.Component {
 
     this.cellCounter = 0;
 
-    this.biggestCol = 0;
-    this.biggestRow = 0;
+    // comes from user by GridItem
+    this.biggestColItem = 0;
+    this.biggestRowItem = 0;
+
+    // comes from user by Grid
+    this.fixedCol = 0;
+    this.fixedRow = 0;
 
     this.rowCellsWidth = {};
     this.colCellsWidth = {};
@@ -42,14 +47,28 @@ export class GridProvider extends React.Component {
   componentDidMount() {
     this.didMount = true;
 
+    let biggestRow = this.fixedRow;
+
+    if (
+      this.biggestRowItem > this.cellCounter &&
+      this.biggestRowItem > this.fixedRow
+    ) {
+      biggestRow = this.biggestRowItem;
+    } else if (this.cellCounter > this.fixedRow) {
+      biggestRow = this.cellCounter;
+    }
+
+    const biggestCol =
+      this.biggestColItem > this.fixedCol ? this.biggestColItem : this.fixedCol;
+
     this.setState({
       isDynamicTempCol: this.isColWidthSet,
       rowCellsWidth: this.rowCellsWidth,
-      biggestCol: this.biggestCol,
+      biggestCol,
 
       isDynamicTempRow: this.isRowWidthSet,
       colCellsWidth: this.colCellsWidth,
-      biggestRow: this.biggestRow,
+      biggestRow,
 
       isAllGridComponentsMounted: true
     });
@@ -65,25 +84,25 @@ export class GridProvider extends React.Component {
 
     // find out the biggest column number
     // this hepls to know how many columns do we have
-    if (col > toCol && col > this.biggestCol) {
-      this.biggestCol = col;
-    } else if (toCol > this.biggestCol) {
-      this.biggestCol = toCol;
+    if (col > toCol && col > this.biggestColItem) {
+      this.biggestColItem = col;
+    } else if (toCol > this.biggestColItem) {
+      this.biggestColItem = toCol;
     }
 
     // find out the biggest row number
     // this hepls to know how many rows do we have
-    if (row > toRow && row > this.biggestRow) {
-      this.biggestRow = row;
-    } else if (toRow > this.biggestRow) {
-      this.biggestRow = toRow;
+    if (row > toRow && row > this.biggestRowItem) {
+      this.biggestRowItem = row;
+    } else if (toRow > this.biggestRowItem) {
+      this.biggestRowItem = toRow;
     } else {
       /*
       * we can count rows automatically
       * increasing one for each call
       * relying on column zero 0
       */
-      this.biggestRow += 1;
+      this.biggestRowItem += 1;
     }
 
     // if we have row width
@@ -119,6 +138,13 @@ export class GridProvider extends React.Component {
     }
   };
 
+  registerFixedColRow = (row = 0, col = 0) => {
+    if (this.didMount) return;
+
+    this.fixedRow = row;
+    this.fixedCol = col;
+  };
+
   render() {
     console.log('GridProvider update');
 
@@ -136,23 +162,28 @@ export class GridProvider extends React.Component {
 
     const { children } = this.props;
 
-    const { registerCellContainer, getCellCounter } = this;
+    const { registerCellContainer, registerFixedColRow, getCellCounter } = this;
 
     return (
       <GridController.Provider
         value={{
-          isDynamicTempCol,
-          rowCellsWidth,
-          biggestCol,
+          cnValues: {
+            isDynamicTempCol,
+            rowCellsWidth,
+            biggestCol,
 
-          isDynamicTempRow,
-          colCellsWidth,
-          biggestRow,
+            isDynamicTempRow,
+            colCellsWidth,
+            biggestRow,
 
-          isAllGridComponentsMounted,
+            isAllGridComponentsMounted
+          },
 
-          registerCellContainer,
-          getCellCounter
+          cnFuncs: {
+            registerCellContainer,
+            registerFixedColRow,
+            getCellCounter
+          }
         }}
       >
         {children}
