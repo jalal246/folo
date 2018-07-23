@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import { genKeyObj } from '../../utils';
 import { GridConsumer } from './context';
 
 import withContext from '../withContext';
@@ -20,6 +19,10 @@ const container = {
 
 class GridItem extends Component {
   shouldComponentUpdate(nextProps) {
+    /*
+    * Dont update when refreshing the grid denpends on grid items
+    * you already know your value item!
+    */
     if (!this.props.cnValues.isDynamic && nextProps.cnValues.isDynamic) {
       return false;
     }
@@ -88,8 +91,13 @@ const propTypes = {
 
   style: PropTypes.objectOf(PropTypes.string),
 
-  registerCellContainer: PropTypes.func.isRequired,
-  isAllGridComponentsMounted: PropTypes.bool.isRequired,
+  cnFuncs: PropTypes.shape({
+    registerCellContainer: PropTypes.func.isRequired
+  }).isRequired,
+
+  cnValues: PropTypes.shape({
+    isDynamic: PropTypes.bool.isRequired
+  }).isRequired,
 
   isHorizontal: PropTypes.bool,
   children: PropTypes.node.isRequired
