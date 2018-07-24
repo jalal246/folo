@@ -14,6 +14,10 @@ const container = {
 const FR = '1fr';
 const AUTO_FIT = 'auto-fit';
 
+function bigger(x, y) {
+  return x > y ? x : y;
+}
+
 function genFixedTemp(rowColNum, min, max) {
   const rowCol = rowColNum || AUTO_FIT;
 
@@ -111,13 +115,13 @@ class Grid extends React.PureComponent {
       if (isDynamicTempCol) {
         template.gridTemplateColumns = genDynamicTemp(
           colCellsWidth,
-          biggestColItem > totalGridCol ? biggestColItem : totalGridCol
+          bigger(biggestColItem, totalGridCol)
         );
       }
       if (isDynamicTempRow) {
         template.gridTemplateRows = genDynamicTemp(
           rowCellsWidth,
-          biggestRowItem > totalGridRow ? biggestRowItem : totalGridRow
+          bigger(biggestRowItem, totalGridRow)
         );
       }
     }
