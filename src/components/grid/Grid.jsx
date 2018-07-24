@@ -161,11 +161,11 @@ Grid.propTypes = {
   cnValues: PropTypes.shape({
     isDynamicTempRow: PropTypes.bool.isRequired,
     rowCellsWidth: PropTypes.objectOf(PropTypes.string).isRequired,
-    biggestCol: PropTypes.number.isRequired,
+    biggestColItem: PropTypes.number.isRequired,
 
     isDynamicTempCol: PropTypes.bool.isRequired,
     colCellsWidth: PropTypes.objectOf(PropTypes.string).isRequired,
-    biggestRow: PropTypes.number.isRequired,
+    biggestRowItem: PropTypes.number.isRequired,
 
     isDynamic: PropTypes.bool.isRequired
   }).isRequired,
