@@ -70,11 +70,11 @@ class Grid extends React.PureComponent {
       cnValues: {
         isDynamicTempRow,
         rowCellsWidth,
-        biggestCol,
+        biggestColItem,
 
         isDynamicTempCol,
         colCellsWidth,
-        biggestRow,
+        biggestRowItem,
 
         isDynamic
       },
@@ -111,13 +111,13 @@ class Grid extends React.PureComponent {
       if (isDynamicTempCol) {
         template.gridTemplateColumns = genDynamicTemp(
           colCellsWidth,
-          biggestCol > totalGridCol ? biggestCol : totalGridCol
+          biggestColItem > totalGridCol ? biggestColItem : totalGridCol
         );
       }
       if (isDynamicTempRow) {
         template.gridTemplateRows = genDynamicTemp(
           rowCellsWidth,
-          biggestRow > totalGridRow ? biggestRow : totalGridRow
+          biggestRowItem > totalGridRow ? biggestRowItem : totalGridRow
         );
       }
     }
