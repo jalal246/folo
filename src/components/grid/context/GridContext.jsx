@@ -46,6 +46,13 @@ export class GridProvider extends React.Component {
       // dont update the state
       return;
     }
+    this.updateState();
+  }
+
+  getCellCounter = () => this.cellCounter;
+
+  updateState = () => {
+    console.log('updateState');
 
     let biggestRow = this.fixedRow;
 
@@ -72,13 +79,11 @@ export class GridProvider extends React.Component {
 
       isDynamic: true
     });
-  }
-
-  getCellCounter = () => this.cellCounter;
+  };
 
   registerCellContainer = (row, toRow, rowWidth, col, toCol, colWidth) => {
-    if (this.didMount) return;
-
+    // if (this.didMount) return;
+    console.log('registerCellContainer');
     // count cells
     this.cellCounter += 1;
 
@@ -138,11 +143,31 @@ export class GridProvider extends React.Component {
     }
   };
 
-  registerFixedColRow = (row, col) => {
-    if (this.didMount) return;
+  updateRowColNumber = (row, col) => {
+    /*
+    * This function will be called everytime Grid render
+    * updating values without checking if the values new
+    * will cause unnecessary render
+    */
+    if (this.fixedRow === row && this.fixedCol === col) {
+      return;
+    }
 
+    // assign new values
     this.fixedRow = row;
     this.fixedCol = col;
+
+    /*
+    * if this function called when initiation
+    * then dont trigger update
+    * beacuse it will be handled by componentDidMount
+    *
+    * otherwise it comes from change happened in Grid
+    * this must trigger update the state
+    */
+    if (this.didMount) {
+      this.updateState();
+    }
   };
 
   render() {
@@ -162,7 +187,7 @@ export class GridProvider extends React.Component {
 
     const { children } = this.props;
 
-    const { registerCellContainer, registerFixedColRow, getCellCounter } = this;
+    const { registerCellContainer, updateRowColNumber, getCellCounter } = this;
 
     return (
       <GridController.Provider
@@ -181,7 +206,7 @@ export class GridProvider extends React.Component {
 
           cnFuncs: {
             registerCellContainer,
-            registerFixedColRow,
+            updateRowColNumber,
             getCellCounter
           }
         }}
