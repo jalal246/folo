@@ -14,8 +14,8 @@ const container = {
 const FR = '1fr';
 const AUTO_FIT = 'auto-fit';
 
-function genFixedTemp(rowColNum, biggest, min, max) {
-  const rowCol = rowColNum || biggest || AUTO_FIT;
+function genFixedTemp(rowColNum, min, max) {
+  const rowCol = rowColNum || AUTO_FIT;
 
   const width = min ? `minmax(${min}, ${max || FR}` : FR;
 
@@ -79,7 +79,7 @@ class Grid extends React.PureComponent {
         isDynamic
       },
 
-      cnFuncs: { registerFixedColRow },
+      cnFuncs: { updateRowColNumber },
 
       //
       children,
@@ -88,7 +88,7 @@ class Grid extends React.PureComponent {
       ...otherProps
     } = this.props;
 
-    registerFixedColRow(totalGridCol, totalGridRow);
+    updateRowColNumber(totalGridRow, totalGridCol);
 
     const template = {};
 
@@ -96,7 +96,6 @@ class Grid extends React.PureComponent {
       if (totalGridCol > 0) {
         template.gridTemplateColumns = genFixedTemp(
           totalGridCol,
-          biggestCol,
           fixedColMinWidth,
           fixedColMaxWidth
         );
@@ -104,7 +103,6 @@ class Grid extends React.PureComponent {
       if (totalGridRow > 0) {
         template.gridTemplateRows = genFixedTemp(
           totalGridRow,
-          biggestRow,
           fixedRowMinWidth,
           fixedRowMaxWidth
         );
@@ -113,11 +111,14 @@ class Grid extends React.PureComponent {
       if (isDynamicTempCol) {
         template.gridTemplateColumns = genDynamicTemp(
           colCellsWidth,
-          biggestCol
+          biggestCol > totalGridCol ? biggestCol : totalGridCol
         );
       }
       if (isDynamicTempRow) {
-        template.gridTemplateRows = genDynamicTemp(rowCellsWidth, biggestRow);
+        template.gridTemplateRows = genDynamicTemp(
+          rowCellsWidth,
+          biggestRow > totalGridRow ? biggestRow : totalGridRow
+        );
       }
     }
 
@@ -166,7 +167,7 @@ Grid.propTypes = {
   }).isRequired,
 
   cnFuncs: PropTypes.shape({
-    registerFixedColRow: PropTypes.func.isRequired
+    updateRowColNumber: PropTypes.func.isRequired
   }).isRequired,
 
   //
