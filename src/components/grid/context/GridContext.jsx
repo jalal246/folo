@@ -1,5 +1,7 @@
 import React, { createContext } from 'react';
 
+import { isObjEmpty, bigger } from '../../../utils';
+
 const GridController = createContext();
 
 export const { Consumer: GridConsumer } = GridController;
@@ -9,6 +11,9 @@ export class GridProvider extends React.Component {
     super(props);
 
     this.cellCounter = 0;
+
+    // store cells number accourding to its name
+    this.cellCounterStore = {};
 
     // comes from user by GridItem
     this.biggestColItem = 0;
@@ -26,20 +31,19 @@ export class GridProvider extends React.Component {
     this.isDynamicTempCol = false;
 
     this.state = {
-      isDynamicTempCol: false,
-      rowCellsWidth: {},
-      biggestCol: 0,
-
       isDynamicTempRow: false,
-      colCellsWidth: {},
-      biggestRow: 0,
+      rowCellsWidth: {},
+      biggestRowItem: 0,
 
-      isDynamic: false
+      isDynamicTempCol: false,
+      colCellsWidth: {},
+      biggestColItem: 0
     };
   }
 
   componentDidMount() {
     this.didMount = true;
+    this.cellCounter = 0;
 
     if (!this.isDynamicTempCol && !this.isDynamicTempRow) {
       // we've got nothing from gid items
@@ -49,43 +53,32 @@ export class GridProvider extends React.Component {
     this.updateState();
   }
 
-  getCellCounter = () => this.cellCounter;
+  getCellCounter = key => this.cellCounterStore[key];
 
   updateState = () => {
     console.log('updateState');
 
-    let biggestRow = this.fixedRow;
-
-    if (
-      this.biggestRowItem > this.cellCounter &&
-      this.biggestRowItem > this.fixedRow
-    ) {
-      biggestRow = this.biggestRowItem;
-    } else if (this.cellCounter > this.fixedRow) {
-      biggestRow = this.cellCounter;
-    }
-
-    const biggestCol =
-      this.biggestColItem > this.fixedCol ? this.biggestColItem : this.fixedCol;
-
     this.setState({
-      isDynamicTempCol: this.isDynamicTempCol,
-      rowCellsWidth: this.rowCellsWidth,
-      biggestCol,
-
       isDynamicTempRow: this.isDynamicTempRow,
-      colCellsWidth: this.colCellsWidth,
-      biggestRow,
+      rowCellsWidth: this.rowCellsWidth,
+      biggestRowItem: bigger(this.biggestRowItem, this.cellCounter),
 
-      isDynamic: true
+      isDynamicTempCol: this.isDynamicTempCol,
+      colCellsWidth: this.colCellsWidth,
+      biggestColItem: this.biggestColItem
     });
   };
 
-  registerCellContainer = (row, toRow, rowWidth, col, toCol, colWidth) => {
-    // if (this.didMount) return;
+  registerCellContainer = ({
+    key,
+    row,
+    toRow,
+    rowWidth,
+    col,
+    toCol,
+    colWidth
+  }) => {
     console.log('registerCellContainer');
-    // count cells
-    this.cellCounter += 1;
 
     // find out the biggest column number
     // this hepls to know how many columns do we have
@@ -108,6 +101,20 @@ export class GridProvider extends React.Component {
       * relying on column zero 0
       */
       this.biggestRowItem += 1;
+    }
+
+    if (!this.didMount) {
+      this.cellCounter += 1;
+
+      let position = 0;
+      if (row) {
+        position = row;
+      } else if (this.cellCounter === 1) {
+        position = 1;
+      } else {
+        position = this.biggestRowItem;
+      }
+      this.cellCounterStore[key] = position;
     }
 
     // if we have row width
@@ -143,51 +150,22 @@ export class GridProvider extends React.Component {
     }
   };
 
-  updateRowColNumber = (row, col) => {
-    /*
-    * This function will be called everytime Grid render
-    * updating values without checking if the values new
-    * will cause unnecessary render
-    */
-    if (this.fixedRow === row && this.fixedCol === col) {
-      return;
-    }
-
-    // assign new values
-    this.fixedRow = row;
-    this.fixedCol = col;
-
-    /*
-    * if this function called when initiation
-    * then dont trigger update
-    * beacuse it will be handled by componentDidMount
-    *
-    * otherwise it comes from change happened in Grid
-    * this must trigger update the state
-    */
-    if (this.didMount) {
-      this.updateState();
-    }
-  };
-
   render() {
     console.log('GridProvider update');
 
     const {
       isDynamicTempCol,
       rowCellsWidth,
-      biggestCol,
+      biggestColItem,
 
       isDynamicTempRow,
       colCellsWidth,
-      biggestRow,
-
-      isDynamic
+      biggestRowItem
     } = this.state;
 
     const { children } = this.props;
 
-    const { registerCellContainer, updateRowColNumber, getCellCounter } = this;
+    const { registerCellContainer, getCellCounter } = this;
 
     return (
       <GridController.Provider
@@ -195,18 +173,15 @@ export class GridProvider extends React.Component {
           cnValues: {
             isDynamicTempCol,
             rowCellsWidth,
-            biggestCol,
+            biggestColItem,
 
             isDynamicTempRow,
             colCellsWidth,
-            biggestRow,
-
-            isDynamic
+            biggestRowItem
           },
 
           cnFuncs: {
             registerCellContainer,
-            updateRowColNumber,
             getCellCounter
           }
         }}
