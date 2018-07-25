@@ -27,6 +27,7 @@ class GridItem extends Component {
   state = {
     key: keyGenerator('gridItem')
   };
+
   shouldComponentUpdate() {
     return false;
   }
@@ -52,10 +53,13 @@ class GridItem extends Component {
       isHorizontal,
       children
     } = this.props;
+
+    const { key } = this.state;
+
     console.log('GridItem updated');
 
     registerCellContainer({
-      key: this.state.key,
+      key,
       row,
       toRow,
       rowWidth,
@@ -64,7 +68,7 @@ class GridItem extends Component {
       colWidth
     });
 
-    const cellCounter = getCellCounter(this.key);
+    const cellCounter = getCellCounter(key);
 
     if (isCenter) {
       container.justifyContent = CENTER;
