@@ -5,6 +5,8 @@ import { GridConsumer } from './context';
 
 import withContext from '../withContext';
 
+import { keyGenerator } from '../../utils';
+
 function location(colOrRow, to) {
   if (colOrRow && to) {
     return `${colOrRow} / ${to}`;
@@ -12,21 +14,21 @@ function location(colOrRow, to) {
   return `${colOrRow}`;
 }
 
+const CENTER = 'center';
+const ROW = 'row';
+const COLUMN = 'column';
+
 const container = {
   display: 'flex',
   backgroundColor: 'red'
 };
 
 class GridItem extends Component {
-  shouldComponentUpdate(nextProps) {
-    /*
-    * Dont update when refreshing the grid denpends on grid items
-    * you already know your value item!
-    */
-    if (!this.props.cnValues.isDynamic && nextProps.cnValues.isDynamic) {
-      return false;
-    }
-    return true;
+  state = {
+    key: keyGenerator('gridItem')
+  };
+  shouldComponentUpdate() {
+    return false;
   }
 
   render() {
@@ -40,6 +42,7 @@ class GridItem extends Component {
       col,
       toCol,
       colWidth,
+
       isCenter,
 
       style,
@@ -51,24 +54,33 @@ class GridItem extends Component {
     } = this.props;
     console.log('GridItem updated');
 
-    registerCellContainer(row, toRow, rowWidth, col, toCol, colWidth);
+    registerCellContainer({
+      key: this.state.key,
+      row,
+      toRow,
+      rowWidth,
+      col,
+      toCol,
+      colWidth
+    });
 
-    const cellCounter = getCellCounter();
+    const cellCounter = getCellCounter(this.key);
 
     if (isCenter) {
-      container.justifyContent = 'center';
+      container.justifyContent = CENTER;
       container.gridColumn = location(1, -1);
     } else {
       container.gridColumn = location(col, toCol);
     }
 
     const choosenRow = row || cellCounter;
+
     container.gridRow = location(choosenRow, toRow);
 
     if (isHorizontal) {
-      container.flexDirection = 'row';
+      container.flexDirection = ROW;
     } else {
-      container.flexDirection = 'column';
+      container.flexDirection = COLUMN;
     }
     //
     const styles = Object.assign({}, container, style);
@@ -93,10 +105,6 @@ const propTypes = {
 
   cnFuncs: PropTypes.shape({
     registerCellContainer: PropTypes.func.isRequired
-  }).isRequired,
-
-  cnValues: PropTypes.shape({
-    isDynamic: PropTypes.bool.isRequired
   }).isRequired,
 
   isHorizontal: PropTypes.bool,
