@@ -32,23 +32,25 @@ class GridItem extends Component {
     return false;
   }
 
+  componentWillUnmount() {
+    this.props.cnFuncs.remCellPosition(this.state.key);
+  }
+
   render() {
     const {
       component: CellComponent,
 
       row,
       toRow,
-      rowWidth,
 
       col,
       toCol,
-      colWidth,
 
       isCenter,
 
       style,
 
-      cnFuncs: { registerCellContainer, getCellCounter },
+      cnFuncs: { cellAutoPosition },
 
       isHorizontal,
       children
@@ -58,34 +60,25 @@ class GridItem extends Component {
 
     console.log('GridItem updated');
 
-    registerCellContainer({
-      key,
-      row,
-      toRow,
-      rowWidth,
-      col,
-      toCol,
-      colWidth
-    });
-
-    const cellCounter = getCellCounter(key);
+    const autoPosition = cellAutoPosition(key, row, toRow);
 
     if (isCenter) {
       container.justifyContent = CENTER;
       container.gridColumn = location(1, -1);
-    } else {
+    } else if (col) {
       container.gridColumn = location(col, toCol);
     }
 
-    const choosenRow = row || cellCounter;
-
-    container.gridRow = location(choosenRow, toRow);
+    // const choosenRow = row || autoPosition;
+    console.log('autoPosition', autoPosition);
+    container.gridRow = location(autoPosition, toRow);
 
     if (isHorizontal) {
       container.flexDirection = ROW;
     } else {
       container.flexDirection = COLUMN;
     }
+
     //
     const styles = Object.assign({}, container, style);
 
@@ -98,17 +91,16 @@ const propTypes = {
 
   row: PropTypes.number,
   toRow: PropTypes.number,
-  rowWidth: PropTypes.string,
 
   col: PropTypes.number,
   toCol: PropTypes.number,
-  colWidth: PropTypes.string,
   isCenter: PropTypes.bool,
 
   style: PropTypes.objectOf(PropTypes.string),
 
   cnFuncs: PropTypes.shape({
-    registerCellContainer: PropTypes.func.isRequired
+    cellAutoPosition: PropTypes.func.isRequired,
+    remCellPosition: PropTypes.func.isRequired
   }).isRequired,
 
   isHorizontal: PropTypes.bool,
@@ -120,11 +112,9 @@ const defaultProps = {
 
   row: null,
   toRow: null,
-  rowWidth: null,
 
-  col: 0,
+  col: null,
   toCol: null,
-  colWidth: null,
   isCenter: false,
 
   style: {},

@@ -16,6 +16,7 @@ import { ShapeProvider } from './src/components/panel/context';
 
 export default function FormApp(props) {
   const { isIntractive, isDesignMode, onSubmit } = props;
+  const rowTest = 1;
 
   return (
     <ShapeProvider isDesignMode={isDesignMode} isIntractive={isIntractive}>
@@ -39,7 +40,7 @@ export default function FormApp(props) {
                     backgroundColor: 'blue'
                   }}
                   isHorizontal={false}
-                  row={0}
+                  row={8}
                   rowWidth="2rem"
                   col={0}
                   colWidth="0.2fr"
@@ -54,7 +55,7 @@ export default function FormApp(props) {
                       fontSize: '17px'
                     }}
                   />
-                  <label text="error msg" />
+                  <label text="error msg22" />
                 </GridItem>
                 <GridItem rowWidth="5rem">
                   <Cell
@@ -65,7 +66,7 @@ export default function FormApp(props) {
                   />
                   <label>try button</label>
                 </GridItem>
-                <GridItem row={3} rowWidth="3rem">
+                {/* <GridItem row={3} rowWidth="3rem">
                   <Cell nameRef="try_not_groupde_button" type="checkbox" />
                   <label>try not groupde button</label>
                 </GridItem>
@@ -83,7 +84,7 @@ export default function FormApp(props) {
                 </GridItem>
                 <GridItem isCenter>
                   <button>submit</button>
-                </GridItem>
+                </GridItem> */}
               </Grid>
             </Form>
           </ValuesProvider>

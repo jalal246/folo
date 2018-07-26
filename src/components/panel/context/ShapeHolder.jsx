@@ -32,7 +32,7 @@ export class ShapeProvider extends React.Component {
   };
 
   render() {
-    console.log('ShapeProvider update');
+    // console.log('ShapeProvider update');
 
     const { shape, isIntractive, isDesignMode } = this.state;
 

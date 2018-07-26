@@ -232,3 +232,7 @@ export function functionName(
     isToggle
   };
 }
+
+export function bigger(x, y) {
+  return x > y ? x : y;
+}
