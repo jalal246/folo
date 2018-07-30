@@ -12,7 +12,7 @@ import {
 import { GridProvider } from './src/components/grid/context';
 
 export default function FormApp(props) {
-  const { isIntractive, isDesignMode, onSubmit } = props;
+  const { onSubmit } = props;
 
   return (
     <GridProvider>
@@ -83,5 +83,3 @@ export default function FormApp(props) {
     </GridProvider>
   );
 }
-
-// export { Form, Cell, CellWrapper };

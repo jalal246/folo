@@ -10,4 +10,3 @@ export {
 } from './cell/index';
 
 export { default as Form } from './Form';
-export { default as Container } from './Container';
