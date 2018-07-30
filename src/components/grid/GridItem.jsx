@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { GridConsumer } from './context';
@@ -23,14 +23,10 @@ const container = {
   backgroundColor: 'red'
 };
 
-class GridItem extends Component {
+class GridItem extends PureComponent {
   state = {
     key: keyGenerator('gridItem')
   };
-
-  shouldComponentUpdate() {
-    return false;
-  }
 
   componentWillUnmount() {
     this.props.cnFuncs.remCellPosition(this.state.key);
@@ -62,15 +58,14 @@ class GridItem extends Component {
 
     const autoPosition = cellAutoPosition(key, row, toRow);
 
+    console.log(col);
     if (isCenter) {
       container.justifyContent = CENTER;
       container.gridColumn = location(1, -1);
-    } else if (col) {
+    } else if (col || toCol) {
       container.gridColumn = location(col, toCol);
     }
 
-    // const choosenRow = row || autoPosition;
-    console.log('autoPosition', autoPosition);
     container.gridRow = location(autoPosition, toRow);
 
     if (isHorizontal) {

@@ -66,15 +66,15 @@ export default function FormApp(props) {
                   />
                   <label>try button</label>
                 </GridItem>
-                {/* <GridItem row={3} rowWidth="3rem">
+                <GridItem row={3} rowWidth="3rem">
                   <Cell nameRef="try_not_groupde_button" type="checkbox" />
                   <label>try not groupde button</label>
                 </GridItem>
-                <GridItem toRow={3}>
+                <GridItem row={4}>
                   <Cell id="try_button2<" type="checkbox" groupName="alpha" />
                   <label>try button2</label>
                 </GridItem>
-                <GridItem toCol={2}>
+                <GridItem>
                   <label>try button</label>
                   <Cell nameRef="select4" type="list" value="world">
                     <CellItem>hello</CellItem>
@@ -84,7 +84,7 @@ export default function FormApp(props) {
                 </GridItem>
                 <GridItem isCenter>
                   <button>submit</button>
-                </GridItem> */}
+                </GridItem>
               </Grid>
             </Form>
           </ValuesProvider>

@@ -23,14 +23,13 @@ class Grid extends React.PureComponent {
   render() {
     console.log('Grid update');
     const {
-      // direct props used only for fixed temp
-      col: totalGridCol,
-      colMinWidth: fixedColMinWidth,
-      colMaxWidth: fixedColMaxWidth,
+      col,
+      colMinWidth,
+      colMaxWidth,
 
-      row: totalGridRow,
-      rowMinWidth: fixedRowMinWidth,
-      rowMaxWidth: fixedRowMaxWidth,
+      row,
+      rowMinWidth,
+      rowMaxWidth,
 
       // grid dimensions
       gridRowWidth,
@@ -45,17 +44,9 @@ class Grid extends React.PureComponent {
 
     const template = {};
 
-    template.gridTemplateRows = genFixedTemp(
-      totalGridRow,
-      fixedRowMinWidth,
-      fixedRowMaxWidth
-    );
+    template.gridTemplateColumns = genFixedTemp(col, colMinWidth, colMaxWidth);
 
-    template.gridTemplateColumns = genFixedTemp(
-      totalGridCol,
-      fixedColMinWidth,
-      fixedColMaxWidth
-    );
+    template.gridTemplateRows = genFixedTemp(row, rowMinWidth, rowMaxWidth);
 
     const style = Object.assign(
       {},
