@@ -16,7 +16,6 @@ import { ShapeProvider } from './src/components/panel/context';
 
 export default function FormApp(props) {
   const { isIntractive, isDesignMode, onSubmit } = props;
-  const rowTest = 1;
 
   return (
     <ShapeProvider isDesignMode={isDesignMode} isIntractive={isIntractive}>
