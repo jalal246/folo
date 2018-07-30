@@ -59,24 +59,17 @@ class GridItem extends PureComponent {
 
     const autoPosition = cellAutoPosition(key, row, toRow);
 
+    container.flexDirection = isHorizontal ? ROW : COLUMN;
+    container.gridRow = location(autoPosition, toRow);
+
     if (isCenter) {
       container.justifyContent = CENTER;
       container.gridColumn = location(1, -1);
     } else if (col || toCol) {
       container.justifyContent = START;
-
       container.gridColumn = location(col || 0, toCol);
     }
 
-    container.gridRow = location(autoPosition, toRow);
-
-    if (isHorizontal) {
-      container.flexDirection = ROW;
-    } else {
-      container.flexDirection = COLUMN;
-    }
-
-    //
     const styles = Object.assign({}, container, style);
 
     return <CellComponent style={styles}>{children}</CellComponent>;

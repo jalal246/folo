@@ -74,7 +74,7 @@ export default function FormApp(props) {
                   <Cell id="try_button2<" type="checkbox" groupName="alpha" />
                   <label>try button2</label>
                 </GridItem>
-                <GridItem>
+                <GridItem isHorizontal={false}>
                   <label>try button</label>
                   <Cell nameRef="select4" type="list" value="world">
                     <CellItem>hello</CellItem>
