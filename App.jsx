@@ -34,7 +34,7 @@ export default function FormApp(props) {
                 backgroundColor: 'grey'
               }}
             >
-              <Grid col={2} colMaxWidth="3.5fr">
+              <Grid col={3} colMaxWidth="3.5fr">
                 <GridItem
                   style={{
                     backgroundColor: 'blue'
