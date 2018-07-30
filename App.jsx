@@ -4,6 +4,7 @@ import {
   Container,
   Panel,
   Form,
+  Grid,
   Cell,
   CellItem,
   GridItem,
@@ -28,59 +29,62 @@ export default function FormApp(props) {
                 e.preventDefault();
                 onSubmit(d);
               }}
-              col={2}
-              colMaxWidth="3.5fr"
+              style={{
+                backgroundColor: 'grey'
+              }}
             >
-              <GridItem
-                style={{
-                  backgroundColor: 'blue'
-                }}
-                isHorizontal={false}
-                row={0}
-                rowWidth="2rem"
-                col={0}
-                colWidth="0.2fr"
-                toCol={2}
-              >
-                <label>first type text</label>
-                <Cell
-                  nameRef="souldBeCobinationOfColAndRow"
-                  type="input"
-                  value="username"
+              <Grid col={3} colMaxWidth="3.5fr">
+                <GridItem
                   style={{
-                    fontSize: '17px'
+                    backgroundColor: 'blue'
                   }}
-                />
-                <label text="error msg" />
-              </GridItem>
-              <GridItem rowWidth="5rem">
-                <Cell
-                  nameRef="try_button"
-                  type="checkbox"
-                  checked
-                  groupName="alpha"
-                />
-                <label>try button</label>
-              </GridItem>
-              <GridItem row={3} rowWidth="3rem">
-                <Cell nameRef="try_not_groupde_button" type="checkbox" />
-                <label>try not groupde button</label>
-              </GridItem>
-              <GridItem toRow={3}>
-                <Cell id="try_button2<" type="checkbox" groupName="alpha" />
-                <label>try button2</label>
-              </GridItem>
-              <GridItem toCol={2}>
-                <label>try button</label>
-                <Cell nameRef="select4" type="list" value="world">
-                  <CellItem>hello</CellItem>
-                  <CellItem>world</CellItem>
-                  <CellItem>!</CellItem>
-                </Cell>
-              </GridItem>
-              <GridItem isCenter>
-                <button>submit</button>
-              </GridItem>
+                  isHorizontal={false}
+                  row={8}
+                  rowWidth="2rem"
+                  col={0}
+                  colWidth="0.2fr"
+                  toCol={2}
+                >
+                  <label>first type text</label>
+                  <Cell
+                    nameRef="souldBeCobinationOfColAndRow"
+                    type="input"
+                    value="username"
+                    style={{
+                      fontSize: '17px'
+                    }}
+                  />
+                  <label text="error msg22" />
+                </GridItem>
+                <GridItem rowWidth="5rem">
+                  <Cell
+                    nameRef="try_button"
+                    type="checkbox"
+                    checked
+                    groupName="alpha"
+                  />
+                  <label>try button</label>
+                </GridItem>
+                <GridItem row={3} rowWidth="3rem">
+                  <Cell nameRef="try_not_groupde_button" type="checkbox" />
+                  <label>try not groupde button</label>
+                </GridItem>
+                <GridItem row={4}>
+                  <Cell id="try_button2<" type="checkbox" groupName="alpha" />
+                  <label>try button2</label>
+                </GridItem>
+                <GridItem isHorizontal={false}>
+                  <label>try button</label>
+                  <Cell nameRef="select4" type="list" value="world">
+                    <CellItem>hello</CellItem>
+                    <CellItem>world</CellItem>
+                    <CellItem>!</CellItem>
+                  </Cell>
+                </GridItem>
+                <GridItem isCenter>
+                  <button>submit</button>
+                </GridItem>
+              </Grid>
             </Form>
           </ValuesProvider>
         </GridProvider>

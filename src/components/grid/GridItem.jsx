@@ -1,27 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-// import { genKeyObj } from '../../utils';
-import { GridConsumer, withContext } from './context';
+import { GridConsumer } from './context';
 
-// function cellStamp(children, row, col) {
-//   const uniqueCellKey = genKeyObj(row, col);
-//
-//   return React.Children.map(children, child => {
-//     const name = child.type.displayName;
-//
-//     if (name === 'Cell') {
-//       return React.cloneElement(child, {
-//         uniqueCellKey
-//       });
-//     } else if (name === 'Label') {
-//       return React.cloneElement(child, {
-//         uniqueCellKey
-//       });
-//     }
-//     return child;
-//   });
-// }
+import withContext from '../withContext';
+
+import { keyGenerator } from '../../utils';
 
 function location(colOrRow, to) {
   if (colOrRow && to) {
@@ -30,21 +14,24 @@ function location(colOrRow, to) {
   return `${colOrRow}`;
 }
 
+const CENTER = 'center';
+const START = 'flex-start ';
+const ROW = 'row';
+const COLUMN = 'column';
+
 const container = {
   display: 'flex',
   backgroundColor: 'red'
 };
 
-class GridItem extends Component {
-  shouldComponentUpdate(nextProps) {
-    if (
-      !this.props.isAllGridComponentsMounted &&
-      nextProps.isAllGridComponentsMounted
-    ) {
-      return false;
-    }
-    return true;
-  }
+class GridItem extends PureComponent {
+  state = {
+    key: keyGenerator('gridItem')
+  };
+
+  // componentWillUnmount() {
+  //   this.props.cnFuncs.remCellPosition(this.state.key);
+  // }
 
   render() {
     const {
@@ -52,47 +39,37 @@ class GridItem extends Component {
 
       row,
       toRow,
-      rowWidth,
 
       col,
       toCol,
-      colWidth,
+
       isCenter,
 
       style,
 
-      registerCellContainer,
+      cnFuncs: { cellAutoPosition },
 
       isHorizontal,
       children
     } = this.props;
+
+    const { key } = this.state;
+
     console.log('GridItem updated');
 
-    const cellCounter = registerCellContainer(
-      row,
-      toRow,
-      rowWidth,
-      col,
-      toCol,
-      colWidth
-    );
+    const autoPosition = cellAutoPosition(key, row, toRow);
+
+    container.flexDirection = isHorizontal ? ROW : COLUMN;
+    container.gridRow = location(autoPosition, toRow);
 
     if (isCenter) {
-      container.justifyContent = 'center';
+      container.justifyContent = CENTER;
       container.gridColumn = location(1, -1);
-    } else {
-      container.gridColumn = location(col, toCol);
+    } else if (col || toCol) {
+      container.justifyContent = START;
+      container.gridColumn = location(col || 0, toCol);
     }
 
-    const choosenRow = row || cellCounter;
-    container.gridRow = location(choosenRow, toRow);
-
-    if (isHorizontal) {
-      container.flexDirection = 'row';
-    } else {
-      container.flexDirection = 'column';
-    }
-    //
     const styles = Object.assign({}, container, style);
 
     return <CellComponent style={styles}>{children}</CellComponent>;
@@ -104,17 +81,17 @@ const propTypes = {
 
   row: PropTypes.number,
   toRow: PropTypes.number,
-  rowWidth: PropTypes.string,
 
   col: PropTypes.number,
   toCol: PropTypes.number,
-  colWidth: PropTypes.string,
   isCenter: PropTypes.bool,
 
   style: PropTypes.objectOf(PropTypes.string),
 
-  registerCellContainer: PropTypes.func.isRequired,
-  isAllGridComponentsMounted: PropTypes.bool.isRequired,
+  cnFuncs: PropTypes.shape({
+    cellAutoPosition: PropTypes.func.isRequired
+    // remCellPosition: PropTypes.func.isRequired
+  }).isRequired,
 
   isHorizontal: PropTypes.bool,
   children: PropTypes.node.isRequired
@@ -125,11 +102,9 @@ const defaultProps = {
 
   row: null,
   toRow: null,
-  rowWidth: null,
 
-  col: 0,
+  col: null,
   toCol: null,
-  colWidth: null,
   isCenter: false,
 
   style: {},

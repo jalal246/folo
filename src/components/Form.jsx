@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ValuesConsumer } from './cell/context';
-import { Grid } from './grid';
 
 const propTypes = {
   component: PropTypes.node,
@@ -30,7 +29,7 @@ class Form extends React.PureComponent {
             onSubmit={e => (onSubmit ? onSubmitBtnClick(e, onSubmit) : null)}
             {...other}
           >
-            <Grid>{children}</Grid>
+            {children}
           </FormComponent>
         )}
       </ValuesConsumer>

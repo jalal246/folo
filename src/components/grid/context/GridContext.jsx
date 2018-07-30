@@ -1,164 +1,111 @@
 import React, { createContext } from 'react';
-// import PropTypes from 'prop-types';
-// import { INPUT } from '../constants';
 
 const GridController = createContext();
 
 export const { Consumer: GridConsumer } = GridController;
 
-const propTypes = {};
-
-const defaultProps = {};
-
-export class GridProvider extends React.Component {
+export class GridProvider extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.cellCounter = 0;
+    // store cells number accourding to its name
+    this.cellPositions = {};
+    this.cellDefaultRow = {};
 
-    this.biggestCol = 0;
-    this.biggestRow = 0;
-
-    this.rowCellsWidth = {};
-    this.colCellsWidth = {};
-
-    this.didMount = false;
-    this.isRowWidthSet = false;
-    this.isColWidthSet = false;
-
-    this.state = {
-      isDynamicTempCol: false,
-      rowCellsWidth: {},
-      biggestCol: 0,
-
-      isDynamicTempRow: false,
-      colCellsWidth: {},
-      biggestRow: 0,
-
-      isAllGridComponentsMounted: false
-    };
+    this.biggestRowItem = 0;
   }
 
-  componentDidMount() {
-    this.didMount = true;
+  /**
+   * Auto set the row number
+   * If we dont have row then take the higher value
+   * depending on biggestRowItem which updated with each grid item
+   * Otherwise set the row do you have and update biggestRowItem
+   *
+   * This helps to assign position value according to highest value
+   * If we start from 10, the next will be 11 and so on.
+   *
+   * @param {String} key unique key for GridItem
+   * @param {Number} row row number
+   * @param {Number} toRow extends to row number
+   * @return {Number} position
+   */
+  cellAutoPosition = (key, row, toRow) => {
+    this.cellDefaultRow[key] = { row, toRow };
 
-    this.setState({
-      isDynamicTempCol: this.isColWidthSet,
-      rowCellsWidth: this.rowCellsWidth,
-      biggestCol: this.biggestCol,
+    let isRowUpdated = false;
+    let isBiggestRowUpdated = false;
 
-      isDynamicTempRow: this.isRowWidthSet,
-      colCellsWidth: this.colCellsWidth,
-      biggestRow: this.biggestRow,
-
-      isAllGridComponentsMounted: true
-    });
-  }
-
-  registerCellContainer = (row, toRow, rowWidth, col, toCol, colWidth) => {
-    if (this.didMount) return;
-
-    // count cells
-    this.cellCounter += 1;
-
-    // find out the biggest column number
-    // this hepls to know how many columns do we have
-    if (col > toCol && col > this.biggestCol) {
-      this.biggestCol = col;
-    } else if (toCol > this.biggestCol) {
-      this.biggestCol = toCol;
-    }
-
-    // find out the biggest row number
-    // this hepls to know how many rows do we have
-    if (row > toRow && row > this.biggestRow) {
-      this.biggestRow = row;
-    } else if (toRow > this.biggestRow) {
-      this.biggestRow = toRow;
-    } else {
-      /*
-      * we can count rows automatically
-      * increasing one for each call
-      * relying on column zero 0
-      */
-      this.biggestRow += 1;
-    }
-
-    // if we have row width
-    if (rowWidth) {
-      // we check if this is the first time
-
-      if (!this.isRowWidthSet) {
-        // if it is, then set row width flag
-        this.isRowWidthSet = true;
-      }
-      /*
-        we accept row width without knowing the row number
-        this should be easy guess, since we count each cell counter
-      */
-      this.rowCellsWidth[row || this.cellCounter] = rowWidth;
-    }
-
-    /*
-      support default column, as zero index
-    */
-    if (colWidth) {
-      if (!this.isColWidthSet) {
-        this.isColWidthSet = true;
-      }
-      if (!col) {
-        // if no column and column 0 is not set
-        if (!this.colCellsWidth[0]) {
-          this.colCellsWidth[0] = colWidth;
-        }
+    // if we have row
+    // set position & calculate the biggest
+    if (row) {
+      if (this.cellPositions[key] !== row) {
+        // if we have new Value
+        // update it and inform the flag
+        this.cellPositions[key] = row;
+        isRowUpdated = true;
       } else {
-        this.colCellsWidth[col] = colWidth;
+        // do nothing, dont waste our time
+        return this.cellPositions[key];
+      }
+
+      if (row > this.biggestRowItem) {
+        this.biggestRowItem = row;
+        isBiggestRowUpdated = true;
       }
     }
 
-    return this.cellCounter;
+    if (toRow && toRow > this.biggestRowItem) {
+      this.biggestRowItem = toRow;
+      isBiggestRowUpdated = true;
+    }
+
+    // if we dont have row and toRow
+    // then auto increment
+    if (!isBiggestRowUpdated) {
+      this.biggestRowItem += 1;
+    }
+
+    // if not updated
+    // take the higher row value: biggestRowItem
+    if (!isRowUpdated) {
+      this.cellPositions[key] = this.biggestRowItem;
+    }
+
+    return this.cellPositions[key];
   };
+
+  // remCellPosition = key => {
+  //   delete this.cellPositions[key];
+  //
+  //   //
+  //   const rows = Object.keys(this.cellPositions);
+  //   let tempBiggest = 0;
+  //   rows.forEach(ky => {
+  //     if (this.cellPositions[ky] > tempBiggest) {
+  //       tempBiggest = this.cellPositions[ky];
+  //     }
+  //   });
+  //   this.biggestRowItem = tempBiggest;
+  // };
 
   render() {
     console.log('GridProvider update');
 
-    const {
-      isDynamicTempCol,
-      rowCellsWidth,
-      biggestCol,
+    const { children } = this.props;
 
-      isDynamicTempRow,
-      colCellsWidth,
-      biggestRow,
-
-      isAllGridComponentsMounted
-    } = this.state;
-
-    const { registerCellContainer } = this;
+    const { /* remCellPosition, */ cellAutoPosition } = this;
 
     return (
       <GridController.Provider
         value={{
-          isDynamicTempCol,
-          rowCellsWidth,
-          biggestCol,
-
-          isDynamicTempRow,
-          colCellsWidth,
-          biggestRow,
-
-          cellCounter: this.cellCounter,
-
-          isAllGridComponentsMounted,
-
-          registerCellContainer
+          cnFuncs: {
+            // remCellPosition,
+            cellAutoPosition
+          }
         }}
       >
-        {this.props.children}
+        {children}
       </GridController.Provider>
     );
   }
 }
-
-GridProvider.propTypes = propTypes;
-GridProvider.defaultProps = defaultProps;

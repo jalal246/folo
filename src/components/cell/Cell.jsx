@@ -16,33 +16,11 @@ import {
 import { ValuesConsumer } from './context';
 import withContext from '../withContext';
 
-// const basicProps = [
-//   'component',
-//
-//   'type',
-//   'nameRef',
-//   'groupName',
-//
-//   'value',
-//   'checked',
-//   'id',
-//
-//   /** context props */
-//   'registerCellInfo',
-//   'updateCellValue',
-//   'values',
-//
-//   'onChange',
-//   'onBlur',
-//
-//   'children'
-// ];
-
 const propTypes = {
   component: PropTypes.node,
 
   type: PropTypes.string,
-  nameRef: PropTypes.string.isRequired,
+  nameRef: PropTypes.string,
   groupName: PropTypes.string,
 
   value: PropTypes.string,
@@ -66,6 +44,7 @@ const defaultProps = {
   component: null,
 
   type: TEXT,
+  nameRef: null,
   groupName: null,
 
   value: '',
@@ -212,7 +191,7 @@ class Cell extends Component {
   }
 
   render() {
-    console.log('cell update');
+    // console.log('cell update');
 
     const {
       component,
