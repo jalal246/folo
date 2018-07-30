@@ -1,13 +1,10 @@
 import React, { createContext } from 'react';
 
-import { INPUT } from '../../../constants';
+import { INPUT } from '../constants';
 
 const ValuesHolder = createContext();
 
 export const { Consumer: ValuesConsumer } = ValuesHolder;
-
-// const propTypes = {};
-// const defaultProps = {};
 
 export class ValuesProvider extends React.Component {
   constructor(props) {
@@ -152,6 +149,3 @@ export class ValuesProvider extends React.Component {
     );
   }
 }
-
-// ValuesProvider.propTypes = propTypes;
-// ValuesProvider.defaultProps = defaultProps;

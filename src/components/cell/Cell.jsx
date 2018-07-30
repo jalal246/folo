@@ -3,15 +3,7 @@ import PropTypes from 'prop-types';
 
 import { keyGenerator } from '../../utils';
 
-import {
-  TEXT,
-  SELECT,
-  LIST,
-  CHECKBOX,
-  RADIO,
-  INPUT,
-  BTN
-} from '../../constants';
+import { TEXT, SELECT, LIST, CHECKBOX, RADIO, INPUT, BTN } from './constants';
 
 import { ValuesConsumer } from './context';
 import withContext from '../withContext';
