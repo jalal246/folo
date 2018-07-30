@@ -74,32 +74,32 @@ export class GridProvider extends React.PureComponent {
     return this.cellPositions[key];
   };
 
-  remCellPosition = key => {
-    delete this.cellPositions[key];
-
-    //
-    const rows = Object.keys(this.cellPositions);
-    let tempBiggest = 0;
-    rows.forEach(ky => {
-      if (this.cellPositions[ky] > tempBiggest) {
-        tempBiggest = this.cellPositions[ky];
-      }
-    });
-    this.biggestRowItem = tempBiggest;
-  };
+  // remCellPosition = key => {
+  //   delete this.cellPositions[key];
+  //
+  //   //
+  //   const rows = Object.keys(this.cellPositions);
+  //   let tempBiggest = 0;
+  //   rows.forEach(ky => {
+  //     if (this.cellPositions[ky] > tempBiggest) {
+  //       tempBiggest = this.cellPositions[ky];
+  //     }
+  //   });
+  //   this.biggestRowItem = tempBiggest;
+  // };
 
   render() {
     console.log('GridProvider update');
 
     const { children } = this.props;
 
-    const { remCellPosition, cellAutoPosition } = this;
+    const { /* remCellPosition, */ cellAutoPosition } = this;
 
     return (
       <GridController.Provider
         value={{
           cnFuncs: {
-            remCellPosition,
+            // remCellPosition,
             cellAutoPosition
           }
         }}

@@ -29,9 +29,9 @@ class GridItem extends PureComponent {
     key: keyGenerator('gridItem')
   };
 
-  componentWillUnmount() {
-    this.props.cnFuncs.remCellPosition(this.state.key);
-  }
+  // componentWillUnmount() {
+  //   this.props.cnFuncs.remCellPosition(this.state.key);
+  // }
 
   render() {
     const {
@@ -89,8 +89,8 @@ const propTypes = {
   style: PropTypes.objectOf(PropTypes.string),
 
   cnFuncs: PropTypes.shape({
-    cellAutoPosition: PropTypes.func.isRequired,
-    remCellPosition: PropTypes.func.isRequired
+    cellAutoPosition: PropTypes.func.isRequired
+    // remCellPosition: PropTypes.func.isRequired
   }).isRequired,
 
   isHorizontal: PropTypes.bool,
