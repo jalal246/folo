@@ -1,12 +1,5 @@
-export { GridItem, Grid } from './grid';
+export { GridProvider, GridItem, Grid } from './grid';
 
-export {
-  Cell,
-  CellItem,
-  Text,
-  Label,
-  SubmitBtn,
-  ValuesProvider
-} from './cell/index';
+export { ValuesProvider, Cell, CellItem } from './cell';
 
 export { default as Form } from './Form';
