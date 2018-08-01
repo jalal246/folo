@@ -19,9 +19,7 @@
     "react-dom": "16.3.2",
     "prop-types": "^15.6.1"
   },
-  "dependencies": {
-    "classnames": "^2.2.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.2",
     "@storybook/addon-links": "^3.4.2",
