@@ -11,9 +11,17 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalal246/folio.git"
+  },
+  "author": "Jalal Maskoun jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folio/issues"
+  },
+  "homepage": "https://github.com/jalal246/folio#readme",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "peerDependencies": {
     "react": "16.3.2",
     "react-dom": "16.3.2",
