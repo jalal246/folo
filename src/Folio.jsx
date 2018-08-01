@@ -10,6 +10,7 @@ import {
   GridItem
 } from './components';
 
+// eslint-disable-next-line
 export default function Folio({ children }) {
   return (
     <GridProvider>

@@ -89,8 +89,9 @@ export class GridProvider extends React.PureComponent {
   // };
 
   render() {
-    console.log('GridProvider update');
+    // console.log('GridProvider update');
 
+    // eslint-disable-next-line
     const { children } = this.props;
 
     const { /* remCellPosition, */ cellAutoPosition } = this;

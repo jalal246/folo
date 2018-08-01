@@ -35,12 +35,14 @@ export class ValuesProvider extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
+    const { isGroupValuesUpdate } = this.state;
+    return isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
   }
 
   onSubmitBtnClick = (e, onSubmit) => {
     if (onSubmit) {
-      onSubmit(e, { ...this.state.values });
+      const { values } = this.state;
+      onSubmit(e, { ...values });
     }
   };
 
@@ -124,6 +126,7 @@ export class ValuesProvider extends React.Component {
 
     const { values /* errors */ } = this.state;
 
+    // eslint-disable-next-line
     const { children } = this.props;
 
     const {

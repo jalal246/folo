@@ -19,6 +19,7 @@ class Form extends React.PureComponent {
     const {
       component: FormComponent,
       onSubmit,
+      // eslint-disable-next-line
       children,
       ...other
     } = this.props;

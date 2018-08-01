@@ -21,7 +21,6 @@ function genFixedTemp(rowColNum, min, max) {
 //
 class Grid extends React.PureComponent {
   render() {
-    console.log('Grid update');
     const {
       col,
       colMinWidth,

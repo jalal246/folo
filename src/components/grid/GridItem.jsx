@@ -55,7 +55,7 @@ class GridItem extends PureComponent {
 
     const { key } = this.state;
 
-    console.log('GridItem updated');
+    // console.log('GridItem updated');
 
     const autoPosition = cellAutoPosition(key, row, toRow);
 
