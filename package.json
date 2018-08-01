@@ -9,7 +9,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "gh-pages:clean": "rimraf _gh-pages",
+    "gh-pages:build": "build-storybook -c .storybook -o  _gh-pages",
+    "gh-pages:publish": "gh-pages -d  _gh-pages",
+    "gh-pages": "npm run gh-pages:clean && npm run gh-pages:build && npm run gh-pages:publish",
+    "postpublish": "npm run gh-pages"
   },
   "repository": {
     "type": "git",
@@ -44,8 +49,10 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
+    "gh-pages": "^1.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "rimraf": "^2.6.2"
   }
 }
