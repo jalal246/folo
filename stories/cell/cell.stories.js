@@ -36,7 +36,8 @@ storiesOf('Cell', module)
       <CellItem>B</CellItem>
       <CellItem>C</CellItem>
     </Cell>
-  ));
+  ))
+  .add('text', () => <Cell cn={required} type="text" />);
 
 storiesOf('Cell/type', module)
   .add('text', () => <Cell cn={required} type="text" />)
