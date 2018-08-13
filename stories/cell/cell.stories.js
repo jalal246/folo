@@ -5,8 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 import TextField from '@material-ui/core/TextField';
 
-import Cell from '../../src/components/cell/Cell';
-import CellItem from '../../src/components/cell/CellItem';
+import { Cell, CellItem } from '../../src/components/cell';
 
 const required = {
   registerCellInfo: action('registerCellInfo'),

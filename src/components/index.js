@@ -1,5 +1,20 @@
-export { GridProvider, GridItem, Grid } from './grid';
+import withContext from './withContext';
 
-export { ValuesProvider, Cell, CellItem } from './cell';
+import Form from './Form';
 
-export { default as Form } from './Form';
+import { ValuesConsumer, ValuesProvider, Cell, CellItem } from './cell';
+
+import { GridConsumer, GridProvider, Grid, GridItem } from './grid';
+
+const WrappedCell = withContext(Cell, ValuesConsumer);
+const WrappedGridItem = withContext(GridItem, GridConsumer);
+
+export {
+  ValuesProvider,
+  GridProvider,
+  Form,
+  WrappedCell as Cell,
+  CellItem,
+  Grid,
+  WrappedGridItem as GridItem
+};

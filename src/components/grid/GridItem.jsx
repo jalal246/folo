@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { GridConsumer } from './context';
-
-import withContext from '../withContext';
-
 import { keyGenerator } from '../../utils';
 
 function location(colOrRow, to) {
@@ -115,4 +111,4 @@ const defaultProps = {
 GridItem.propTypes = propTypes;
 GridItem.defaultProps = defaultProps;
 
-export default withContext(GridItem, GridConsumer);
+export default GridItem;
