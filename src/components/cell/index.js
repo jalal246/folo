@@ -1,4 +1,8 @@
-export { default as Cell } from './Cell';
-export { default as CellItem } from './CellItem';
+import { ValuesProvider, ValuesConsumer } from './context';
+import withContext from '../withContext';
+import Cell from './Cell';
 
-export { ValuesProvider } from './context';
+const wrappedCell = withContext(Cell, ValuesConsumer);
+
+export { default as CellItem } from './CellItem';
+export { ValuesProvider, wrappedCell as Cell };

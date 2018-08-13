@@ -46,11 +46,11 @@ export class ValuesProvider extends React.Component {
     }
   };
 
-  registerCellInfo = (nameRef, cellInitValue, groupName) => {
+  registerCellInfo = ({ nameRef, iniValue, groupName }) => {
     if (this.didMount) return;
 
     // push cell name ref to data holder
-    this.datatObj[nameRef] = cellInitValue;
+    this.datatObj[nameRef] = iniValue;
 
     // if it has group, handle it
     if (groupName) {
@@ -83,7 +83,7 @@ export class ValuesProvider extends React.Component {
     }
   };
 
-  updateCellValue = (nameRef, newValue, cellType, groupName) => {
+  updateCellValue = ({ nameRef, newValue, cellType, groupName }) => {
     const { values: { [nameRef]: oldValue } } = this.state;
     // dont update if it is the same value
     if (cellType === INPUT && oldValue === newValue) {

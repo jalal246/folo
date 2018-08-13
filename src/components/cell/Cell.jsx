@@ -5,9 +5,6 @@ import { keyGenerator } from '../../utils';
 
 import { TEXT, SELECT, LIST, CHECKBOX, RADIO, INPUT, BTN } from './constants';
 
-import { ValuesConsumer } from './context';
-import withContext from '../withContext';
-
 const propTypes = {
   component: PropTypes.node,
 
@@ -123,7 +120,11 @@ class Cell extends Component {
     }
 
     // register cell info in context state
-    registerCellInfo(artificialNameRe, localValue, groupName);
+    registerCellInfo({
+      nameRef: artificialNameRe,
+      iniValue: localValue,
+      groupName
+    });
 
     this.nameRef = artificialNameRe;
     this.valueRef = this.isBtn ? 'checked' : 'value';
@@ -159,12 +160,12 @@ class Cell extends Component {
     });
 
     if (!this.isInput) {
-      updateCellValue(
-        this.nameRef,
+      updateCellValue({
+        nameRef: this.nameRef,
         newValue,
-        this.isBtn ? BTN : SELECT,
+        cellType: this.isBtn ? BTN : SELECT,
         groupName
-      );
+      });
     }
     if (onChange) {
       onChange(e);
@@ -175,7 +176,12 @@ class Cell extends Component {
     const { target: { value } } = e;
     const { cn: { updateCellValue }, onBlur } = this.props;
 
-    updateCellValue(this.nameRef, value, INPUT);
+    updateCellValue({
+      nameRef: this.nameRef,
+      newValue: value,
+      cellType: INPUT,
+      groupName: null
+    });
 
     if (onBlur) {
       onBlur(e);
@@ -228,4 +234,4 @@ class Cell extends Component {
 Cell.propTypes = propTypes;
 Cell.defaultProps = defaultProps;
 
-export default withContext(Cell, ValuesConsumer);
+export default Cell;
