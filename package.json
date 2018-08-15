@@ -37,7 +37,7 @@
     "css-grid",
     "css-layout",
     "form-builder-api",
-    "dynamic-forms",
+    "dynamic-forms"
   ],
   "peerDependencies": {
     "react": "^16.4.1",
