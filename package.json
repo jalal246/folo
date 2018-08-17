@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "mocha test/**/*.{jsx,js}",
-    "test:comp:w": "mocha --watch --watch-extensions jsx test/components/*.jsx",
-    "test:utils:w": "mocha --watch --watch-extensions js test/utils/*.js",
+    "test:comp:w": "mocha --watch  --watch-extensions jsx test/components/*.jsx",
+    "test:utils:w": "mocha --watch test/utils/*.js",
     "test:karma": "karma start",
     "precover": "rimraf coverage",
     "cover": "cross-env NODE_ENV=test nyc mocha",
@@ -76,6 +76,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "rimraf": "^2.6.2",
+    "sinon": "^6.1.5",
     "sinon-sandbox": "^2.0.0"
   }
 }
