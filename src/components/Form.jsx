@@ -25,7 +25,7 @@ class Form extends React.PureComponent {
     } = this.props;
     return (
       <ValuesConsumer>
-        {({ cn: { onSubmitBtnClick } }) => (
+        {({ formContext: { onSubmitBtnClick } }) => (
           <FormComponent
             onSubmit={e => (onSubmit ? onSubmitBtnClick(e, onSubmit) : null)}
             {...other}
