@@ -17,6 +17,15 @@ describe('Cell', () => {
       expect(wrapper.html()).to.equal('<input type="text" value=""/>');
     });
 
+    it('generates nameRef combined of type + _ + id + _ + groupName', () => {
+      const type = 'input';
+      const id = 'unique';
+      const groupName = 'gn';
+      const separator = '_';
+      const wrapper = shallow(<Cell type={type} id={id} groupName={groupName} />);
+      expect(wrapper.instance().nameRef).to.equal(type + separator + id + separator + groupName);
+    });
+
     it('returns select type when passes select as type', () => {
       const wrapperSelect = shallow(<Cell type="select" />);
 
@@ -28,6 +37,24 @@ describe('Cell', () => {
       const wrapperInit = shallow(<Cell value={init} />);
 
       expect(wrapperInit.state().localValue).to.equal(init);
+    });
+
+    it('returns custom component', () => {
+      const Custom = () => (
+        <div className="wrapper class">
+          <input
+            aria-invalid="false"
+            className="inner class"
+            type="text"
+            value="custom"
+            onChange={() => {}}
+          />
+        </div>
+      );
+      const wrapperComp = shallow(<Cell component={Custom} />);
+      const wrapperCustom = shallow(<Custom />);
+
+      expect(wrapperComp.html()).to.equal(wrapperCustom.html());
     });
 
     it('calls registerCellInfo with expected args', () => {
@@ -65,7 +92,7 @@ describe('Cell', () => {
         expect(handleChange).to.have.property('callCount', 1);
       });
 
-      it('calls props.updateCellValue', () => {
+      it('calls props.updateCellValue when button', () => {
         const updateCellValue = sinon.stub();
 
         const nameRef = 'testName';
@@ -91,6 +118,35 @@ describe('Cell', () => {
             nameRef,
             newValue,
             cellType: 'button',
+            groupName,
+          }),
+        ).to.equal(true);
+      });
+
+      it('calls props.updateCellValue when select', () => {
+        const updateCellValue = sinon.stub();
+
+        const nameRef = 'testName';
+        const groupName = 'gName';
+        const wrapper = shallow(
+          <Cell
+            type="select"
+            nameRef={nameRef}
+            groupName={groupName}
+            cellContext={{ updateCellValue, registerCellInfo() {}, values: {} }}
+          />,
+        );
+
+        const newValue = 'A';
+        const event = { target: { value: newValue } };
+        wrapper.instance().handleChange(event);
+
+        expect(updateCellValue).to.have.property('callCount', 1);
+        expect(
+          updateCellValue.calledWith({
+            nameRef,
+            newValue,
+            cellType: 'select',
             groupName,
           }),
         ).to.equal(true);
