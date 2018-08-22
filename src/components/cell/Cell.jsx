@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { keyGenerator } from '../../utils';
+import { ValuesConsumer } from "./context";
 
-import { TEXT, SELECT, LIST, CHECKBOX, RADIO, INPUT, BTN } from './constants';
+import { keyGenerator } from "../../utils";
+import withContext from "../withContext";
+
+import { TEXT, SELECT, LIST, CHECKBOX, RADIO, INPUT, BTN } from "./constants";
 
 const propTypes = {
   component: PropTypes.node,
@@ -17,11 +20,9 @@ const propTypes = {
   id: PropTypes.string,
 
   /** context props */
-  cellContext: PropTypes.shape({
-    registerCellInfo: PropTypes.func,
-    updateCellValue: PropTypes.func,
-    values: PropTypes.objectOf(PropTypes.string)
-  }),
+  registerCellInfo: PropTypes.func,
+  updateCellValue: PropTypes.func,
+  values: PropTypes.objectOf(PropTypes.string),
 
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -36,16 +37,14 @@ const defaultProps = {
   nameRef: null,
   groupName: null,
 
-  value: '',
+  value: "",
   checked: false,
-  id: keyGenerator('autoID'),
+  id: keyGenerator("autoID"),
 
   /** context props */
-  cellContext: {
-    registerCellInfo() {},
-    updateCellValue() {},
-    values: {}
-  },
+  registerCellInfo() {},
+  updateCellValue() {},
+  values: {},
 
   onChange: null,
   onBlur: null,
@@ -87,7 +86,7 @@ class Cell extends Component {
       value,
       checked,
       id,
-      cellContext: { registerCellInfo },
+      registerCellInfo,
       groupName,
       type
     } = props;
@@ -123,7 +122,7 @@ class Cell extends Component {
       * if there's id so be it
       * otherwise, generate new one
       * */
-      artificialNameRe = `${type}_${id}${groupName ? `_${groupName}` : ''}`;
+      artificialNameRe = `${type}_${id}${groupName ? `_${groupName}` : ""}`;
     }
 
     // register cell info in context state
@@ -134,7 +133,7 @@ class Cell extends Component {
     });
 
     this.nameRef = artificialNameRe;
-    this.valueRef = this.isBtn ? 'checked' : 'value';
+    this.valueRef = this.isBtn ? "checked" : "value";
 
     this.state = { localValue };
 
@@ -145,7 +144,7 @@ class Cell extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const { groupName } = this.props;
     const {
-      cellContext: { values: { [this.nameRef]: contextValue } }
+      values: { [this.nameRef]: contextValue }
     } = nextProps;
 
     const { localValue } = this.state;
@@ -160,12 +159,10 @@ class Cell extends Component {
   }
 
   handleChange(e) {
-    const { target: { checked, value } } = e;
     const {
-      groupName,
-      cellContext: { updateCellValue },
-      onChange
-    } = this.props;
+      target: { checked, value }
+    } = e;
+    const { groupName, updateCellValue, onChange } = this.props;
     const newValue = this.isBtn ? checked : value;
 
     this.setState({
@@ -186,8 +183,10 @@ class Cell extends Component {
   }
 
   handleBlur(e) {
-    const { target: { value } } = e;
-    const { cellContext: { updateCellValue }, onBlur } = this.props;
+    const {
+      target: { value }
+    } = e;
+    const { updateCellValue, onBlur } = this.props;
 
     updateCellValue({
       nameRef: this.nameRef,
@@ -216,11 +215,9 @@ class Cell extends Component {
       id,
 
       /** context props */
-      cellContext,
-
-      // NOTE: it must be another way to avoid passing unrequried props
-      // eslint-disable-next-line
-      formContext,
+      registerCellInfo,
+      updateCellValue,
+      values,
 
       onChange,
       onBlur,
@@ -251,4 +248,10 @@ class Cell extends Component {
 Cell.propTypes = propTypes;
 Cell.defaultProps = defaultProps;
 
-export default Cell;
+export { Cell as PureCell };
+
+export default withContext({
+  Component: Cell,
+  Consumer: ValuesConsumer,
+  contextProps: ["registerCellInfo", "updateCellValue", "values"]
+});
