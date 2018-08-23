@@ -1,8 +1,15 @@
-import React, { createContext } from 'react';
+import React, { createContext } from "react";
 
-import { INPUT } from '../constants';
+import { INPUT } from "../constants";
 
-const ValuesHolder = createContext();
+const ValuesHolder = createContext({
+  values: {},
+  updateCellValue() {},
+  registerCellInfo() {},
+  formContext: {
+    onSubmitBtnClick() {}
+  }
+});
 
 export const { Consumer: ValuesConsumer } = ValuesHolder;
 
@@ -84,7 +91,9 @@ export class ValuesProvider extends React.Component {
   };
 
   updateCellValue = ({ nameRef, newValue, cellType, groupName }) => {
-    const { values: { [nameRef]: oldValue } } = this.state;
+    const {
+      values: { [nameRef]: oldValue }
+    } = this.state;
     // dont update if it is the same value
     if (cellType === INPUT && oldValue === newValue) {
       return;
@@ -139,14 +148,11 @@ export class ValuesProvider extends React.Component {
     return (
       <ValuesHolder.Provider
         value={{
-          cellContext: {
-            values,
-            updateCellValue,
-            registerCellInfo
-          },
-          formContext: {
-            onSubmitBtnClick
-          }
+          values,
+          updateCellValue,
+          registerCellInfo,
+          // formContext
+          onSubmitBtnClick
         }}
       >
         {children}
