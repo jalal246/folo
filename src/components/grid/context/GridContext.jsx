@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext } from "react";
 
 const GridController = createContext();
 
@@ -99,10 +99,7 @@ export class GridProvider extends React.PureComponent {
     return (
       <GridController.Provider
         value={{
-          cnFuncs: {
-            // remCellPosition,
-            cellAutoPosition
-          }
+          cellAutoPosition
         }}
       >
         {children}
