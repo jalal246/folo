@@ -1,7 +1,10 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
-import { keyGenerator } from '../../utils';
+import { GridConsumer } from "./context";
+
+import { keyGenerator } from "../../utils";
+import withContext from "../withContext";
 
 function location(colOrRow, to) {
   if (colOrRow && to) {
@@ -10,19 +13,55 @@ function location(colOrRow, to) {
   return `${colOrRow}`;
 }
 
-const CENTER = 'center';
-const START = 'flex-start ';
-const ROW = 'row';
-const COLUMN = 'column';
+const CENTER = "center";
+const START = "flex-start ";
+const ROW = "row";
+const COLUMN = "column";
 
 const container = {
-  display: 'flex',
-  backgroundColor: 'red'
+  display: "flex",
+  backgroundColor: "red"
+};
+
+const propTypes = {
+  component: PropTypes.node,
+
+  row: PropTypes.number,
+  toRow: PropTypes.number,
+
+  col: PropTypes.number,
+  toCol: PropTypes.number,
+  isCenter: PropTypes.bool,
+
+  style: PropTypes.objectOf(PropTypes.string),
+
+  cnFuncs: PropTypes.shape({
+    cellAutoPosition: PropTypes.func.isRequired
+    // remCellPosition: PropTypes.func.isRequired
+  }).isRequired,
+
+  isHorizontal: PropTypes.bool,
+  children: PropTypes.node.isRequired
+};
+
+const defaultProps = {
+  component: "div",
+
+  row: null,
+  toRow: null,
+
+  col: null,
+  toCol: null,
+  isCenter: false,
+
+  style: {},
+
+  isHorizontal: true
 };
 
 class GridItem extends PureComponent {
   state = {
-    key: keyGenerator('gridItem')
+    key: keyGenerator("gridItem")
   };
 
   // componentWillUnmount() {
@@ -72,43 +111,13 @@ class GridItem extends PureComponent {
   }
 }
 
-const propTypes = {
-  component: PropTypes.node,
-
-  row: PropTypes.number,
-  toRow: PropTypes.number,
-
-  col: PropTypes.number,
-  toCol: PropTypes.number,
-  isCenter: PropTypes.bool,
-
-  style: PropTypes.objectOf(PropTypes.string),
-
-  cnFuncs: PropTypes.shape({
-    cellAutoPosition: PropTypes.func.isRequired
-    // remCellPosition: PropTypes.func.isRequired
-  }).isRequired,
-
-  isHorizontal: PropTypes.bool,
-  children: PropTypes.node.isRequired
-};
-
-const defaultProps = {
-  component: 'div',
-
-  row: null,
-  toRow: null,
-
-  col: null,
-  toCol: null,
-  isCenter: false,
-
-  style: {},
-
-  isHorizontal: true
-};
-
 GridItem.propTypes = propTypes;
 GridItem.defaultProps = defaultProps;
 
-export default GridItem;
+export { GridItem as PureGrid };
+
+export default withContext({
+  Component: GridItem,
+  Consumer: GridConsumer,
+  contextProps: null /* all conusmer props */
+});
