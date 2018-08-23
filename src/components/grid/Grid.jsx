@@ -1,14 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const container = {
-  display: 'grid',
-  justifyItems: 'stretch',
-  alignItems: 'stretch'
+  display: "grid",
+  justifyItems: "stretch",
+  alignItems: "stretch"
 };
 
-const FR = '1fr';
-const AUTO_FIT = 'auto-fit';
+const propTypes = {
+  // direct props used only for fixed temp
+  col: PropTypes.number,
+  colMinWidth: PropTypes.string,
+  colMaxWidth: PropTypes.string,
+
+  row: PropTypes.number,
+  rowMinWidth: PropTypes.string,
+  rowMaxWidth: PropTypes.string,
+
+  // grid dimensions
+  gridRowWidth: PropTypes.string,
+  autoFlow: PropTypes.string,
+  gap: PropTypes.string,
+
+  //
+  children: PropTypes.node.isRequired
+};
+
+const defaultProps = {
+  col: 0,
+  colMinWidth: null,
+  colMaxWidth: null,
+
+  row: 0,
+  rowMinWidth: null,
+  rowMaxWidth: null,
+
+  gridRowWidth: null,
+  autoFlow: null,
+  gap: "1em"
+};
+
+const FR = "1fr";
+const AUTO_FIT = "auto-fit";
 
 function genFixedTemp(rowColNum, min, max) {
   const rowCol = rowColNum || AUTO_FIT;
@@ -64,36 +97,7 @@ class Grid extends React.PureComponent {
   }
 }
 
-Grid.propTypes = {
-  // direct props used only for fixed temp
-  col: PropTypes.number,
-  colMinWidth: PropTypes.string,
-  colMaxWidth: PropTypes.string,
-
-  row: PropTypes.number,
-  rowMinWidth: PropTypes.string,
-  rowMaxWidth: PropTypes.string,
-
-  // grid dimensions
-  gridRowWidth: PropTypes.string,
-  autoFlow: PropTypes.string,
-  gap: PropTypes.string,
-
-  //
-  children: PropTypes.node.isRequired
-};
-Grid.defaultProps = {
-  col: 0,
-  colMinWidth: null,
-  colMaxWidth: null,
-
-  row: 0,
-  rowMinWidth: null,
-  rowMaxWidth: null,
-
-  gridRowWidth: null,
-  autoFlow: null,
-  gap: '1em'
-};
+Grid.propTypes = propTypes;
+Grid.defaultProps = defaultProps;
 
 export default Grid;
