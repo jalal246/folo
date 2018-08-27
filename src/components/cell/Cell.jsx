@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import { ValuesConsumer } from "./context";
@@ -22,7 +22,9 @@ const propTypes = {
   /** context props */
   registerCellInfo: PropTypes.func,
   updateCellValue: PropTypes.func,
-  values: PropTypes.objectOf(PropTypes.string),
+  values: PropTypes.objectOf(
+    PropTypes.oneOf([PropTypes.string, PropTypes.bool])
+  ),
 
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -76,7 +78,7 @@ function recognizeCellType(type) {
   };
 }
 
-class Cell extends Component {
+class Cell extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -141,22 +143,22 @@ class Cell extends Component {
     this.handleBlur = this.handleBlur.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const { groupName } = this.props;
-    const {
-      values: { [this.nameRef]: contextValue }
-    } = nextProps;
-
-    const { localValue } = this.state;
-
-    if (groupName && contextValue !== localValue) {
-      this.setState({
-        localValue: contextValue
-      });
-    }
-
-    return localValue !== nextState.localValue;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   const { groupName } = this.props;
+  //   const {
+  //     values: { [this.nameRef]: contextValue }
+  //   } = nextProps;
+  //
+  //   const { localValue } = this.state;
+  //
+  //   if (groupName && contextValue !== localValue) {
+  //     this.setState({
+  //       localValue: contextValue
+  //     });
+  //   }
+  //
+  //   return localValue !== nextState.localValue;
+  // }
 
   handleChange(e) {
     const {
@@ -201,7 +203,7 @@ class Cell extends Component {
   }
 
   render() {
-    // console.log('cell update');
+    console.log("cell update");
 
     const {
       component,
