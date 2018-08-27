@@ -9,7 +9,7 @@ import React from "react";
  * @param {Array} contextProps contains props required from consumer
  * @return {Component} - new component connected to context props
  */
-function withContext({ Component, Consumer, contextProps = [] }) {
+function withContext({ Component, Consumer, contextProps }) {
   return function ComponentWithContext(props) {
     return (
       <Consumer>
@@ -18,10 +18,17 @@ function withContext({ Component, Consumer, contextProps = [] }) {
            * if contextProps length is zero, pass all context props
            * otherwise extract the required props
            */
-          const cn =
-            contextProps.length > 0
-              ? contextProps.reduce((acc, val) => context[val], {})
-              : context;
+          let cn;
+          if (contextProps.length > 0) {
+            const obj = {};
+            contextProps.forEach(prop => {
+              obj[prop] = context[prop];
+            });
+            cn = obj;
+          } else {
+            cn = context;
+          }
+
           return <Component {...props} {...cn} />;
         }}
       </Consumer>
