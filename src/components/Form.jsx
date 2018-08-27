@@ -6,11 +6,13 @@ import withContext from "./withContext";
 
 const propTypes = {
   component: PropTypes.node,
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  getContextValues: PropTypes.func
 };
 const defaultProps = {
   component: "form",
-  onSubmit() {}
+  onSubmit() {},
+  getContextValues() {}
 };
 
 class Form extends React.PureComponent {

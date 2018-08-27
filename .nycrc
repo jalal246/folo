@@ -8,7 +8,7 @@
     ".jsx"
   ],
   "include": [
-    "src"
+    "src/components/cell"
   ],
   "require": [
     "babel-core/register"

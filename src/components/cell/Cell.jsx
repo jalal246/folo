@@ -225,7 +225,6 @@ class Cell extends Component {
       children,
       ...other
     } = this.props;
-
     const { localValue } = this.state;
 
     const onBlurFunc = this.isInput ? this.handleBlur : onBlur;

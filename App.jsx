@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Folio, { Form, Grid, Cell, CellItem, GridItem } from './src';
+import Folio, { Form, Grid, Cell, CellItem, GridItem } from "./src";
 
 export default function FormApp(props) {
   const { onSubmit } = props;
@@ -8,18 +8,15 @@ export default function FormApp(props) {
   return (
     <Folio>
       <Form
-        onSubmit={(e, d) => {
-          e.preventDefault();
-          onSubmit(d);
-        }}
+        onSubmit={onSubmit}
         style={{
-          backgroundColor: 'grey'
+          backgroundColor: "grey"
         }}
       >
         <Grid col={3} colMaxWidth="3.5fr">
           <GridItem
             style={{
-              backgroundColor: 'blue'
+              backgroundColor: "blue"
             }}
             isHorizontal={false}
             row={8}
@@ -34,7 +31,7 @@ export default function FormApp(props) {
               type="input"
               value="username"
               style={{
-                fontSize: '17px'
+                fontSize: "17px"
               }}
             />
             <label text="error msg22" />

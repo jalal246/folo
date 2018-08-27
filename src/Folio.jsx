@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   ValuesProvider,
@@ -8,7 +8,7 @@ import {
   GridProvider,
   Grid,
   GridItem
-} from './components';
+} from "./components";
 
 // eslint-disable-next-line
 export default function Folio({ children }) {
