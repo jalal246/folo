@@ -9,4 +9,8 @@
     "afterEach": true
   },
   "extends": "airbnb",
+  "rules": {
+    "react/prop-types": [1],
+    "react/jsx-one-expression-per-line": "off"
+      }
 }
