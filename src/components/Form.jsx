@@ -1,39 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { ValuesConsumer } from './cell/context';
+import { ValuesConsumer } from "./cell/context";
+import withContext from "./withContext";
 
 const propTypes = {
   component: PropTypes.node,
-  // onClick: PropTypes.func,
   onSubmit: PropTypes.func
 };
 const defaultProps = {
-  component: 'form',
-  // onClick: null,
-  onSubmit: null
+  component: "form",
+  onSubmit() {}
 };
 
 class Form extends React.PureComponent {
+  onSubmit = e => {
+    e.preventDefault();
+    const { getContextValues, onSubmit } = this.props;
+    onSubmit(e, getContextValues());
+  };
+
   render() {
     const {
       component: FormComponent,
       onSubmit,
+      getContextValues,
       // eslint-disable-next-line
       children,
       ...other
     } = this.props;
     return (
-      <ValuesConsumer>
-        {({ formContext: { onSubmitBtnClick } }) => (
-          <FormComponent
-            onSubmit={e => (onSubmit ? onSubmitBtnClick(e, onSubmit) : null)}
-            {...other}
-          >
-            {children}
-          </FormComponent>
-        )}
-      </ValuesConsumer>
+      <FormComponent onSubmit={this.onSubmit} {...other}>
+        {children}
+      </FormComponent>
     );
   }
 }
@@ -41,4 +40,10 @@ class Form extends React.PureComponent {
 Form.propTypes = propTypes;
 Form.defaultProps = defaultProps;
 
-export default Form;
+export { Form as PureForm };
+
+export default withContext({
+  Component: Form,
+  Consumer: ValuesConsumer,
+  contextProps: ["getContextValues"]
+});
