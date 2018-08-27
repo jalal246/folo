@@ -35,10 +35,7 @@ const propTypes = {
 
   style: PropTypes.objectOf(PropTypes.string),
 
-  cnFuncs: PropTypes.shape({
-    cellAutoPosition: PropTypes.func.isRequired
-    // remCellPosition: PropTypes.func.isRequired
-  }).isRequired,
+  cellAutoPosition: PropTypes.func.isRequired,
 
   isHorizontal: PropTypes.bool,
   children: PropTypes.node.isRequired
@@ -82,7 +79,7 @@ class GridItem extends PureComponent {
 
       style,
 
-      cnFuncs: { cellAutoPosition },
+      cellAutoPosition,
 
       isHorizontal,
       children
@@ -119,5 +116,5 @@ export { GridItem as PureGrid };
 export default withContext({
   Component: GridItem,
   Consumer: GridConsumer,
-  contextProps: null /* all conusmer props */
+  contextProps: ["cellAutoPosition"]
 });
