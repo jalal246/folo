@@ -2,7 +2,12 @@ import React, { createContext } from "react";
 
 import { INPUT } from "../constants";
 
-const ValuesHolder = createContext({});
+const ValuesHolder = createContext({
+  values: {},
+  updateCellValue() {},
+  registerCellInfo() {},
+  getContextValues() {}
+});
 
 export const { Consumer: ValuesConsumer } = ValuesHolder;
 
@@ -39,8 +44,10 @@ export class ValuesProvider extends React.Component {
     return isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
   }
 
-  // eslint-disable-next-line
-  getContextValues = () => this.state.values;
+  getContextValues = name => {
+    const { values } = this.state;
+    return name ? values[name] : values;
+  };
 
   registerCellInfo = ({ nameRef, iniValue, groupName }) => {
     if (this.didMount) return;
@@ -117,13 +124,9 @@ export class ValuesProvider extends React.Component {
     });
   };
 
-  updateErrors = () => {};
-
   render() {
-    // console.log('ValuesHolder update');
-
-    const { values /* errors */ } = this.state;
-
+    // console.log("ValuesHolder update");
+    const { values } = this.state;
     // eslint-disable-next-line
     const { children } = this.props;
 
@@ -132,10 +135,10 @@ export class ValuesProvider extends React.Component {
     return (
       <ValuesHolder.Provider
         value={{
-          values,
           updateCellValue,
           registerCellInfo,
-          getContextValues
+          getContextValues,
+          values
         }}
       >
         {children}
