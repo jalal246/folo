@@ -6,34 +6,37 @@ import { ValuesConsumer } from "./context";
 import withContext from "../withContext";
 
 const propTypes = {
-  CellComponent: PropTypes.node.isRequired,
-
+  id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  nameRef: PropTypes.string.isRequired,
+  valueRef: PropTypes.string.isRequired,
+  initValue: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+  isInput: PropTypes.bool.isRequired,
+  cellType: PropTypes.string.isRequired,
   groupName: PropTypes.string,
+  nameRef: PropTypes.string.isRequired,
+  cellUpdated: PropTypes.bool.isRequired,
+  CellComponent: PropTypes.node.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  rest: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.objectOf(PropTypes.string)
+    ])
+  ).isRequired,
 
   /** context props */
-  updateCellValue: PropTypes.func,
+  updateCellValue: PropTypes.func.isRequired,
   values: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
   ),
-
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
 
   children: PropTypes.node
 };
 
 const defaultProps = {
   groupName: null,
-
-  /** context props */
-  updateCellValue() {},
   values: {},
-
-  onChange() {},
-  onBlur() {},
-
   children: null
 };
 
@@ -111,50 +114,23 @@ class CellEngine extends Component {
   render() {
     // console.log("CellEngine update");
 
-    const {
-      CellComponent,
-
-      valueRef,
-      isSelect,
-      isInput,
-      initValue,
-      cellType,
-      nameRef,
-      cellUpdated,
-      groupName,
-
-      /** context props */
-      updateCellValue,
-      getContextValues,
-      values,
-
-      onChange,
-      onBlur,
-
-      children,
-      ...other
-    } = this.props;
+    const { CellComponent, id, type, valueRef, rest, children } = this.props;
 
     const { localValue } = this.state;
 
     const { handleEvent } = this;
 
-    const cellProps = {
-      /**
-       * valueRef is value for regular input
-       * checked when button
-       */
-      [valueRef]: localValue,
-      // all type bind to it
-      onChange: handleEvent,
-      onBlur: handleEvent,
-      ...other
-    };
-
-    return isSelect ? (
-      <CellComponent {...cellProps}>{children}</CellComponent>
-    ) : (
-      <CellComponent {...cellProps} />
+    return (
+      <CellComponent
+        {...{ [valueRef]: localValue }}
+        type={type}
+        id={id}
+        onChange={handleEvent}
+        onBlur={handleEvent}
+        {...rest}
+      >
+        {children}
+      </CellComponent>
     );
   }
 }
@@ -167,5 +143,5 @@ export { CellEngine as PureCellEngine };
 export default withContext({
   Component: CellEngine,
   Consumer: ValuesConsumer,
-  contextProps: ["updateCellValue", "getContextValues", "values"]
+  contextProps: ["updateCellValue", "values"]
 });
