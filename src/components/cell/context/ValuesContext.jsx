@@ -39,6 +39,7 @@ export class ValuesProvider extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     const { isGroupValuesUpdate } = this.state;
+
     return isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
   }
 
@@ -83,12 +84,13 @@ export class ValuesProvider extends React.Component {
     }
   };
 
-  updateCellValue = ({ nameRef, newValue, cellType, groupName }) => {
+  updateCellValue = ({ nameRef, newValue, groupName }) => {
     const {
       values: { [nameRef]: oldValue }
     } = this.state;
+
     // dont update if it is the same value
-    if (cellType === INPUT && oldValue === newValue) {
+    if (oldValue === newValue) {
       return;
     }
 
@@ -122,7 +124,7 @@ export class ValuesProvider extends React.Component {
   };
 
   render() {
-    // console.log("ValuesContext update");
+    console.log("ValuesContext update");
     const { values } = this.state;
     // eslint-disable-next-line
     const { children } = this.props;
