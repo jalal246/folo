@@ -52,10 +52,17 @@ const defaultProps = {
  * Gets the cell type
  * returns booleans type flage.
  *
- * @param {string} cell_type
- * @return {Object} - isBtn, isSelect, isInput
+ * @param {string} type
+ * @param {boolean} checked
+ * @param {string} value
+ * @return {Object} -
+     isInput,
+     valueRef,
+     initValue,
+     cellType,
+     RecommendedComponent
  */
-function recognizeCellType(type, checked, value) {
+function recognizeCellProps(type, checked, value) {
   let isInput = false;
   let RecommendedComponent = INPUT;
   let valueRef = VALUE;
@@ -111,14 +118,12 @@ class Cell extends PureComponent {
       initValue,
       cellType,
       RecommendedComponent
-    } = recognizeCellType(type, checked, value);
+    } = recognizeCellProps(type, checked, value);
 
     const nameRef =
       valueKey || `${type}_${id}${groupName ? `_${groupName}` : ""}`;
 
     // register cell info in context state
-    console.log("initValue", initValue);
-
     registerCellInfo({
       nameRef,
       initValue,
