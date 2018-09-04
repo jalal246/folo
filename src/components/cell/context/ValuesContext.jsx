@@ -1,7 +1,5 @@
 import React, { createContext } from "react";
 
-import { INPUT } from "../constants";
-
 const ValuesContext = createContext({
   values: {},
   updateCellValue() {},
@@ -124,7 +122,7 @@ export class ValuesProvider extends React.Component {
   };
 
   render() {
-    console.log("ValuesContext update");
+    // console.log("ValuesContext update");
     const { values } = this.state;
     // eslint-disable-next-line
     const { children } = this.props;

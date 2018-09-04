@@ -16,8 +16,7 @@ import {
   LIST,
   CHECKBOX,
   RADIO,
-  INPUT,
-  BTN
+  INPUT
 } from "./constants";
 
 const propTypes = {
@@ -91,7 +90,7 @@ class Cell extends PureComponent {
   }
 
   render() {
-    console.log("Cell update");
+    // console.log("Cell update");
 
     const {
       component: userComponent,

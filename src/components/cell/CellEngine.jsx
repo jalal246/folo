@@ -108,7 +108,7 @@ class CellEngine extends Component {
   }
 
   render() {
-    console.log("CellEngine update");
+    // console.log("CellEngine update");
 
     const { CellComponent, id, type, valueRef, rest, children } = this.props;
 
