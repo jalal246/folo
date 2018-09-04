@@ -19,7 +19,7 @@ export class ValuesProvider extends React.Component {
 
     this.datatObj = {};
 
-    this.didMount = false;
+    this.isAllCellsRegistered = false;
 
     this.state = {
       values: {},
@@ -28,7 +28,7 @@ export class ValuesProvider extends React.Component {
   }
 
   componentDidMount() {
-    this.didMount = true;
+    this.isAllCellsRegistered = true;
 
     /*
     * This wont update the component
@@ -49,8 +49,6 @@ export class ValuesProvider extends React.Component {
   };
 
   registerCellInfo = ({ nameRef, initValue, groupName }) => {
-    if (this.didMount) return;
-
     // push cell name ref to data holder
     this.datatObj[nameRef] = initValue;
 
