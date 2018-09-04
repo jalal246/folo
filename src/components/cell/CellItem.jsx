@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { keyGenerator } from '../../utils';
+import { keyGenerator } from "../../utils";
 
 export default function CellItem({
   component: CellComponent,
@@ -24,7 +24,7 @@ CellItem.propTypes = {
   children: PropTypes.node.isRequired
 };
 CellItem.defaultProps = {
-  component: 'option',
+  component: "option",
   value: null,
-  key: keyGenerator('autoKey')
+  key: keyGenerator("autoKey")
 };

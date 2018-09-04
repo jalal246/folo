@@ -72,7 +72,6 @@ function recognizeCellType(type, checked, value) {
   } else {
     isInput = true;
   }
-
   return {
     isInput,
     valueRef,
@@ -118,6 +117,8 @@ class Cell extends PureComponent {
       valueKey || `${type}_${id}${groupName ? `_${groupName}` : ""}`;
 
     // register cell info in context state
+    console.log("initValue", initValue);
+
     registerCellInfo({
       nameRef,
       initValue,

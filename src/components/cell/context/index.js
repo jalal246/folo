@@ -1,1 +1,1 @@
-export { ValuesConsumer, ValuesProvider } from './ValuesHolder';
+export { ValuesConsumer, ValuesProvider } from './ValuesContext';
