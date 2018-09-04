@@ -29,7 +29,9 @@ const propTypes = {
   type: PropTypes.string,
   groupName: PropTypes.string,
   children: PropTypes.node,
-  registerCellInfo: PropTypes.func
+  registerCellInfo: PropTypes.func,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func
 };
 
 const defaultProps = {
@@ -41,7 +43,9 @@ const defaultProps = {
   type: TEXT,
   groupName: null,
   children: null,
-  registerCellInfo() {}
+  registerCellInfo() {},
+  onChange() {},
+  onBlur() {}
 };
 
 /**
@@ -52,7 +56,6 @@ const defaultProps = {
  * @return {Object} - isBtn, isSelect, isInput
  */
 function recognizeCellType(type, checked, value) {
-  let isSelect = false;
   let isInput = false;
   let RecommendedComponent = INPUT;
   let valueRef = VALUE;
@@ -60,7 +63,6 @@ function recognizeCellType(type, checked, value) {
   let cellType = INPUT;
 
   if (type === SELECT || type === LIST) {
-    isSelect = true;
     RecommendedComponent = SELECT;
     cellType = SELECT;
   } else if (type === CHECKBOX || type === RADIO) {
@@ -72,7 +74,6 @@ function recognizeCellType(type, checked, value) {
   }
 
   return {
-    isSelect,
     isInput,
     valueRef,
     initValue,
@@ -100,12 +101,13 @@ class Cell extends PureComponent {
       groupName,
       children,
       registerCellInfo,
+      onChange,
+      onBlur,
       ...rest
     } = this.props;
 
     const {
       valueRef,
-      isSelect,
       isInput,
       initValue,
       cellType,
@@ -130,14 +132,15 @@ class Cell extends PureComponent {
         type={type}
         valueRef={valueRef}
         initValue={initValue}
-        isSelect={isSelect}
         isInput={isInput}
         cellType={cellType}
         groupName={groupName}
         nameRef={nameRef}
         cellUpdated={this.cellUpdated}
         CellComponent={userComponent || RecommendedComponent}
-        {...rest}
+        onChange={onChange}
+        onBlur={onBlur}
+        rest={rest}
       >
         {children}
       </CellEngine>
