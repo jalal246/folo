@@ -11,7 +11,6 @@ const propTypes = {
   valueRef: PropTypes.string.isRequired,
   initValue: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   isInput: PropTypes.bool.isRequired,
-  cellType: PropTypes.string.isRequired,
   groupName: PropTypes.string,
   nameRef: PropTypes.string.isRequired,
   cellUpdated: PropTypes.bool.isRequired,
@@ -75,7 +74,6 @@ class CellEngine extends Component {
     const {
       nameRef,
       valueRef,
-      cellType,
       isInput,
       groupName,
       updateCellValue,
@@ -91,7 +89,6 @@ class CellEngine extends Component {
       updateCellValue({
         nameRef,
         newValue,
-        cellType,
         groupName
       });
       onBlur(e);
@@ -103,7 +100,6 @@ class CellEngine extends Component {
         updateCellValue({
           nameRef,
           newValue,
-          cellType,
           groupName
         });
       }
@@ -112,7 +108,7 @@ class CellEngine extends Component {
   }
 
   render() {
-    // console.log("CellEngine update");
+    console.log("CellEngine update");
 
     const { CellComponent, id, type, valueRef, rest, children } = this.props;
 

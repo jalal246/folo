@@ -67,15 +67,12 @@ function recognizeCellProps(type, checked, value) {
   let RecommendedComponent = INPUT;
   let valueRef = VALUE;
   let initValue = value;
-  let cellType = INPUT;
 
   if (type === SELECT || type === LIST) {
     RecommendedComponent = SELECT;
-    cellType = SELECT;
   } else if (type === CHECKBOX || type === RADIO) {
     valueRef = CHECKED;
     initValue = checked;
-    cellType = BTN;
   } else {
     isInput = true;
   }
@@ -83,7 +80,6 @@ function recognizeCellProps(type, checked, value) {
     isInput,
     valueRef,
     initValue,
-    cellType,
     RecommendedComponent
   };
 }
@@ -95,7 +91,7 @@ class Cell extends PureComponent {
   }
 
   render() {
-    // console.log("Cell update");
+    console.log("Cell update");
 
     const {
       component: userComponent,
@@ -116,7 +112,6 @@ class Cell extends PureComponent {
       valueRef,
       isInput,
       initValue,
-      cellType,
       RecommendedComponent
     } = recognizeCellProps(type, checked, value);
 
@@ -139,7 +134,6 @@ class Cell extends PureComponent {
         valueRef={valueRef}
         initValue={initValue}
         isInput={isInput}
-        cellType={cellType}
         groupName={groupName}
         nameRef={nameRef}
         cellUpdated={this.cellUpdated}
