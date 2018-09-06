@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import { CellItem } from '../../src/components/cell';
+import { CellItem } from '../../../src/components/cell';
 
 describe('CellItem', () => {
   it('#render', () => {
