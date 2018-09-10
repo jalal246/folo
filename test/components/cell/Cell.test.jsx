@@ -69,17 +69,21 @@ describe('Cell', () => {
       expect(nameRef).to.be.equal(key);
     });
 
-    it.only('calls registerCellInfo with expected args', () => {
+    it('calls registerCellInfo with expected args', () => {
       const registerCellInfo = sinon.stub();
 
       const key = 'someKey';
+      const value = 'test';
 
-      wrapper = shallow(<PureCell valueKey={key} value="h" registerCellInfo={registerCellInfo} />);
-      // expect(registerCellInfo).to.have.property('callCount', 1);
+      wrapper = shallow(
+        <PureCell valueKey={key} value={value} registerCellInfo={registerCellInfo} />,
+      );
+      expect(registerCellInfo).to.have.property('callCount', 1);
+
       expect(
-        wrapper.instance().props.registerCellInfo.calledWith({
+        registerCellInfo.calledWith({
           nameRef: key,
-          iniValue: 'h',
+          initValue: value,
           groupName: null,
         }),
       ).to.equal(true);
