@@ -17,7 +17,7 @@ const required = {
   CellComponent: 'input',
   onChange() {},
   onBlur() {},
-  rest: null,
+  rest: {},
   updateCellValue() {},
 };
 
