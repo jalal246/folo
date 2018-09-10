@@ -30,7 +30,7 @@ const propTypes = {
   children: PropTypes.node,
   registerCellInfo: PropTypes.func,
   onChange: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlurF: PropTypes.func
 };
 
 const defaultProps = {
@@ -44,7 +44,7 @@ const defaultProps = {
   children: null,
   registerCellInfo() {},
   onChange() {},
-  onBlur() {}
+  onBlurF() {}
 };
 
 /**
@@ -86,7 +86,7 @@ function recognizeCellProps(type, checked, value) {
 class Cell extends PureComponent {
   constructor(props) {
     super(props);
-    this.cellUpdated = false;
+    this.isCellUpdated = false;
   }
 
   render() {
@@ -103,7 +103,7 @@ class Cell extends PureComponent {
       children,
       registerCellInfo,
       onChange,
-      onBlur,
+      onBlurF,
       ...rest
     } = this.props;
 
@@ -124,7 +124,7 @@ class Cell extends PureComponent {
       groupName
     });
 
-    this.cellUpdated = !this.cellUpdated;
+    this.isCellUpdated = !this.isCellUpdated;
 
     return (
       <CellEngine
@@ -135,10 +135,10 @@ class Cell extends PureComponent {
         isInput={isInput}
         groupName={groupName}
         nameRef={nameRef}
-        cellUpdated={this.cellUpdated}
+        isCellUpdated={this.isCellUpdated}
         CellComponent={userComponent || RecommendedComponent}
         onChange={onChange}
-        onBlur={onBlur}
+        onBlur={onBlurF}
         rest={rest}
       >
         {children}
