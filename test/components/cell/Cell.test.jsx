@@ -101,14 +101,6 @@ describe('Cell', () => {
       expect(nameRef).to.be.equal(key);
     });
 
-    // it('return expected function', () => {
-    //   wrapper = shallow(<PureCell />);
-    //
-    //   const { onChange } = wrapper.props();
-    //   console.log(onChange.toString());
-    //   expect(onChange.toString()).to.be.equal('onChange() {}');
-    // });
-
     it('calls registerCellInfo with expected args', () => {
       const registerCellInfo = sinon.stub();
 
