@@ -15,7 +15,6 @@ describe('Cell', () => {
 
     it('passes props to CellEngine as expected for defalut', () => {
       wrapper = shallow(<PureCell />);
-
       const {
         id,
         type,
@@ -25,6 +24,8 @@ describe('Cell', () => {
         groupName,
         nameRef,
         CellComponent,
+        onChange,
+        onBlur,
       } = wrapper.props();
       expect(id).to.match(/autoID/);
       expect(type).to.equal('text');
@@ -34,11 +35,16 @@ describe('Cell', () => {
       expect(groupName).to.equal(null);
       expect(nameRef).to.match(/text_autoID/);
       expect(CellComponent).to.equal('input');
+      expect(nameRef).to.match(/text_autoID/);
+      expect(CellComponent).to.equal('input');
+      expect(onChange()).to.be.a('undefined');
+      expect(onBlur()).to.be.a('undefined');
     });
 
-    it('passes props to CellEngine when setting custom prop', () => {
+    it('passes props to CellEngine when setting custom prop for checkbox', () => {
       const checkbox = 'checkbox';
       const uniqueID = 'uniqueID';
+
       wrapper = shallow(<PureCell type={checkbox} id={uniqueID} />);
 
       const {
@@ -48,7 +54,7 @@ describe('Cell', () => {
         initValue,
         isInput,
         groupName,
-        nameRef,
+        // nameRef, will be covered alone to test both cases
         CellComponent,
       } = wrapper.props();
       expect(id).to.be.equal(uniqueID);
@@ -57,8 +63,34 @@ describe('Cell', () => {
       expect(initValue).to.equal(false);
       expect(isInput).to.equal(false);
       expect(groupName).to.equal(null);
-      expect(nameRef).to.be.equal(`${checkbox}_${uniqueID}`);
       expect(CellComponent).to.equal('input');
+    });
+
+    it('return type props to CellEngine when setting custom prop for list', () => {
+      const list = 'list';
+
+      wrapper = shallow(<PureCell type={list} />);
+
+      const { type } = wrapper.props();
+      expect(type).to.equal(list);
+    });
+
+    it('return expected nameRef when groupName:null', () => {
+      const uniqueID = 'uniqueID';
+
+      wrapper = shallow(<PureCell id={uniqueID} />);
+
+      const { nameRef } = wrapper.props();
+      expect(nameRef).to.be.equal(`text_${uniqueID}`);
+    });
+
+    it('return expected nameRef when groupName:value', () => {
+      const uniqueID = 'uniqueID';
+      const groupName = 'groupName';
+      wrapper = shallow(<PureCell id={uniqueID} groupName={groupName} />);
+
+      const { nameRef } = wrapper.props();
+      expect(nameRef).to.be.equal(`${'text'}_${uniqueID}_${groupName}`);
     });
 
     it('passes valueKey as nameRef when provided', () => {
@@ -68,6 +100,14 @@ describe('Cell', () => {
       const { nameRef } = wrapper.props();
       expect(nameRef).to.be.equal(key);
     });
+
+    // it('return expected function', () => {
+    //   wrapper = shallow(<PureCell />);
+    //
+    //   const { onChange } = wrapper.props();
+    //   console.log(onChange.toString());
+    //   expect(onChange.toString()).to.be.equal('onChange() {}');
+    // });
 
     it('calls registerCellInfo with expected args', () => {
       const registerCellInfo = sinon.stub();
