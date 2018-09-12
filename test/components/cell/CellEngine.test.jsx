@@ -26,7 +26,7 @@ describe('CellEngine', () => {
     sinon.restore();
   });
 
-  describe('#render', () => {
+  describe('render', () => {
     it('returns input element', () => {
       const wrapper = shallow(<PureCellEngine {...required} />);
 
@@ -141,7 +141,7 @@ describe('CellEngine', () => {
     });
   });
 
-  describe('#handlers and functions calls', () => {
+  describe('handlers and functions calls', () => {
     let handleChange;
     beforeEach(() => {
       handleChange = sinon.spy(PureCellEngine.prototype, 'handleEvent');

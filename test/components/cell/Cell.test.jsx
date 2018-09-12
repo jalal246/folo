@@ -10,7 +10,7 @@ describe('Cell', () => {
     sinon.restore();
   });
 
-  describe('#render', () => {
+  describe('render', () => {
     let wrapper;
 
     it('passes props to CellEngine as expected for defalut', () => {

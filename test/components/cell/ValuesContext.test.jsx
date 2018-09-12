@@ -10,7 +10,7 @@ describe('ValuesContext', () => {
     sinon.restore();
   });
 
-  describe('#render', () => {
+  describe('render', () => {
     let wrapper;
 
     it('returns functions and values as expected for defalut', () => {

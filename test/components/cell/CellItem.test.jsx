@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { CellItem } from '../../../src/components/cell';
 
 describe('CellItem', () => {
-  it('#render', () => {
+  it('render', () => {
     const wrapper = shallow(<CellItem>A</CellItem>);
 
     expect(wrapper.html()).to.equal('<option>A</option>');
