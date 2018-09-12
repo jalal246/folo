@@ -70,6 +70,7 @@ class CellEngine extends Component {
         localValue: nextContextValue
       });
     }
+
     return (
       localValue !== nextState.localValue || isCellUpdated !== nextCellUpdated
     );

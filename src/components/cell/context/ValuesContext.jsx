@@ -1,10 +1,10 @@
 import React, { createContext } from "react";
 
 const ValuesContext = createContext({
-  values: {},
-  updateCellValue() {},
-  registerCellInfo() {},
-  getContextValues() {}
+  values: {}
+  // updateCellValue() {},
+  // registerCellInfo() {},
+  // getContextValues() {}
 });
 
 export const { Consumer: ValuesConsumer } = ValuesContext;
@@ -18,7 +18,6 @@ export class ValuesProvider extends React.Component {
     this.datatObj = {};
 
     this.isAllCellsRegistered = false;
-
     this.state = {
       values: {},
       isGroupValuesUpdate: false
@@ -64,18 +63,6 @@ export class ValuesProvider extends React.Component {
         // create new set for the group
         this.btnGroup[groupName] = new Set();
       }
-
-      // then add the cell name to where its belong
-      // to its group
-      this.btnGroup[groupName].add(nameRef);
-      if (!this.btnGroup.has(groupName)) {
-        // add it because it is new group
-        this.btnGroup.add(groupName);
-
-        // create new set for the group
-        this.btnGroup[groupName] = new Set();
-      }
-
       // then add the cell name to where its belong
       // to its group
       this.btnGroup[groupName].add(nameRef);
@@ -113,7 +100,6 @@ export class ValuesProvider extends React.Component {
           });
         }
       }
-
       return {
         values: { ...ps.values, ...newValuesHolder },
         isGroupValuesUpdate

@@ -6,8 +6,7 @@
     "node": true,
     "es6": true
   },
-    "rules": {
-      "react/prop-types": [1],
-      "react/jsx-one-expression-per-line": "off"
-    }
+  "rules": {
+    "react/jsx-one-expression-per-line": "off"
+  }
 }

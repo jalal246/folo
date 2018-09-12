@@ -27,7 +27,7 @@ export default function FormApp(props) {
           >
             <label>first type text</label>
             <Cell
-              nameRef="souldBeCobinationOfColAndRow"
+              valueKey="souldBeCobinationOfColAndRow"
               type="input"
               value="username"
               style={{
@@ -38,7 +38,7 @@ export default function FormApp(props) {
           </GridItem>
           <GridItem rowWidth="5rem">
             <Cell
-              nameRef="try_button"
+              valueKey="try_button"
               type="checkbox"
               checked
               groupName="alpha"
@@ -46,7 +46,7 @@ export default function FormApp(props) {
             <label>try button</label>
           </GridItem>
           <GridItem row={3} rowWidth="3rem">
-            <Cell nameRef="try_not_groupde_button" type="checkbox" />
+            <Cell valueKey="try_not_groupde_button" type="checkbox" />
             <label>try not groupde button</label>
           </GridItem>
           <GridItem row={4}>
@@ -55,7 +55,7 @@ export default function FormApp(props) {
           </GridItem>
           <GridItem isHorizontal={false}>
             <label>try button</label>
-            <Cell nameRef="select4" type="list" value="world">
+            <Cell valueKey="select4" type="list" value="world">
               <CellItem>hello</CellItem>
               <CellItem>world</CellItem>
               <CellItem>!</CellItem>
