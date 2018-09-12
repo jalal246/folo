@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha test/**/*.{jsx,js}",
-    "test:comp:w": "mocha --watch  --watch-extensions jsx test/components/**/*.jsx",
+    "test:comp:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions jsx test/components/**/*.jsx",
     "test:utils:w": "mocha --watch test/utils/*.js",
     "test:karma": "karma start",
     "precover": "rimraf coverage",
@@ -72,6 +72,8 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^1.2.0",
+    "jsdom": "12.0.0",
+    "jsdom-global": "3.0.2",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "prettier": "^1.14.2",
