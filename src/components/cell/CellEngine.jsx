@@ -13,8 +13,9 @@ const propTypes = {
   isInput: PropTypes.bool.isRequired,
   groupName: PropTypes.string,
   nameRef: PropTypes.string.isRequired,
-  cellUpdated: PropTypes.bool.isRequired,
-  CellComponent: PropTypes.node.isRequired,
+  isCellUpdated: PropTypes.bool.isRequired,
+  CellComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+    .isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   rest: PropTypes.objectOf(
@@ -51,22 +52,26 @@ class CellEngine extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { nameRef, groupName, cellUpdated } = this.props;
     const {
-      values: { [nameRef]: contextValue },
-      cellUpdated: nextCellUpdated
+      nameRef,
+      groupName,
+      isCellUpdated,
+      values: { [nameRef]: contextValue }
+    } = this.props;
+    const {
+      values: { [nameRef]: nextContextValue },
+      isCellUpdated: nextCellUpdated
     } = nextProps;
 
     const { localValue } = this.state;
 
-    if (groupName && contextValue !== localValue) {
+    if (groupName && contextValue !== nextContextValue) {
       this.setState({
-        localValue: contextValue
+        localValue: nextContextValue
       });
     }
-
     return (
-      localValue !== nextState.localValue || cellUpdated !== nextCellUpdated
+      localValue !== nextState.localValue || isCellUpdated !== nextCellUpdated
     );
   }
 
@@ -109,7 +114,6 @@ class CellEngine extends Component {
 
   render() {
     // console.log("CellEngine update");
-
     const { CellComponent, id, type, valueRef, rest, children } = this.props;
 
     const { localValue } = this.state;
