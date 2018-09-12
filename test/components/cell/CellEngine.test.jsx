@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon-sandbox';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import { PureCellEngine } from '../../../src/components/cell/CellEngine';
 
@@ -52,7 +52,7 @@ describe('CellEngine', () => {
     });
 
     it('sets state equal to initValue ', () => {
-      const wrapper = shallow(<PureCellEngine {...required} />);
+      const wrapper = mount(<PureCellEngine {...required} />);
 
       expect(wrapper.state().localValue).to.equal(required.initValue);
     });
@@ -79,6 +79,65 @@ describe('CellEngine', () => {
       const wrapperCustom = shallow(<Custom />);
 
       expect(wrapperComp.html()).to.equal(wrapperCustom.html());
+    });
+  });
+
+  describe('shouldComponentUpdate', () => {
+    let wrapper;
+    let shouldComponentUpdate;
+    const newRequiredProps = {
+      ...Object.assign({}, required, {
+        type: 'checkbox',
+        valueRef: 'checked',
+        initValue: false,
+        isInput: false,
+        groupName: 'whatEver',
+      }),
+    };
+
+    beforeEach(() => {
+      wrapper = mount(<PureCellEngine {...newRequiredProps} />);
+
+      shouldComponentUpdate = sinon.spy(PureCellEngine.prototype, 'shouldComponentUpdate');
+    });
+
+    it('updates when changing isCellUpdated from props', () => {
+      expect(shouldComponentUpdate).to.have.property('callCount', 0);
+
+      wrapper.setProps({ isCellUpdated: !newRequiredProps.isCellUpdated });
+
+      expect(shouldComponentUpdate).to.have.property('callCount', 1);
+
+      expect(shouldComponentUpdate.returned(true)).to.be.equal(true);
+    });
+    it('updates when changing values from context/props', () => {
+      expect(shouldComponentUpdate).to.have.property('callCount', 0);
+
+      const values = Object.assign(
+        {},
+        { ...newRequiredProps.values },
+        { [newRequiredProps.nameRef]: !newRequiredProps.initValue },
+      );
+
+      wrapper.setProps({ values });
+
+      /*
+      * Triggers shouldComponentUpdate twice
+      * first call will be when recivieng new props
+      * second one when updating the state, which will return true
+      */
+      expect(shouldComponentUpdate).to.have.property('callCount', 2);
+
+      expect(shouldComponentUpdate.returned(true)).to.be.equal(true);
+    });
+    it('updates when changing state locally', () => {
+      expect(shouldComponentUpdate).to.have.property('callCount', 0);
+
+      wrapper.setState({ localValue: !newRequiredProps.initValue });
+
+      expect(shouldComponentUpdate).to.have.property('callCount', 1);
+
+      expect(shouldComponentUpdate.returned(true)).to.be.equal(true);
     });
   });
 
