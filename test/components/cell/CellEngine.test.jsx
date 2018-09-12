@@ -130,6 +130,7 @@ describe('CellEngine', () => {
 
       expect(shouldComponentUpdate.returned(true)).to.be.equal(true);
     });
+
     it('updates when changing state locally', () => {
       expect(shouldComponentUpdate).to.have.property('callCount', 0);
 
