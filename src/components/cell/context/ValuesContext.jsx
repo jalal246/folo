@@ -40,12 +40,33 @@ export class ValuesProvider extends React.Component {
     return isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
   }
 
+  /**
+   *
+   * This function will be called when trigger submit
+   * which returns state.values
+   *
+   * @return {{value :string||boolean}}
+   */
   getContextValues = () => {
     const { values } = this.state;
-    // console.log(values);
     return values;
   };
 
+  /**
+   * Add cell to datatObj
+   * Add groupName to btnGroup
+   *
+   * This function will be called when cells mount
+   * after componentDidMount, the data in datatObj will be moved to state
+   * datatObj is a temp object holds value to avoid update state while rendeing
+   * in this case will init all cells in datatObj until rendering happens
+   * then update the state so all the values update happen in state
+   *
+   * @param {object} cell - new cell that should be register
+   * @param {string} cell.nameRef   key for value
+   * @param {string||boolean} cell.initValue value
+   * @param {string} cell.groupName group name in case the cell is group-toggle
+   */
   registerCellInfo = ({ nameRef, initValue, groupName }) => {
     // push cell name ref to data holder
     this.datatObj[nameRef] = initValue;
@@ -69,6 +90,14 @@ export class ValuesProvider extends React.Component {
     }
   };
 
+  /**
+   * update cell value in the state
+   *
+   * @param {object} cell - new cell that should be register
+   * @param {string} cell.nameRef   key for value
+   * @param {string||boolean} cell.initValue value
+   * @param {string} cell.groupName group name in case the cell is group-toggle
+   */
   updateCellValue = ({ nameRef, newValue, groupName }) => {
     const {
       values: { [nameRef]: oldValue }

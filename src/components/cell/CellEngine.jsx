@@ -3,21 +3,60 @@ import PropTypes from "prop-types";
 
 import { ValuesConsumer } from "./context";
 
+import componentShape from "../shapes/componentShape";
+
 import withContext from "../withContext";
 
 const propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+
+  /**
+   * value ref to the element
+   * value or checked; depends on the type
+   * detected by parent Cell
+   */
   valueRef: PropTypes.string.isRequired,
   initValue: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+
+  /**
+   * only true when cell is button
+   */
   isInput: PropTypes.bool.isRequired,
+
+  /**
+   * group name in case the cell is group-toggle
+   * this is only valid for boolean cells
+   */
   groupName: PropTypes.string,
+
+  /**
+   * key used to store value in values object
+   * that owned by context
+   * orginal name is valueKey
+   * changing its name after being
+   */
   nameRef: PropTypes.string.isRequired,
+
+  /**
+   * flag chane its value when the parent Cell render
+   * this flag is created for props that changed in paren level only
+   * which require this component to update
+   */
   isCellUpdated: PropTypes.bool.isRequired,
-  CellComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-    .isRequired,
+
+  /**
+   * custom render-component
+   */
+  CellComponent: componentShape.isRequired,
+
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
+
+  /**
+   * rest object contains extra props
+   * passed by user to Cell
+   */
   rest: PropTypes.objectOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -25,8 +64,15 @@ const propTypes = {
     ])
   ).isRequired,
 
-  /** context props */
+  /**
+   * a context function
+   * trigger the context to when a updating the value
+   */
   updateCellValue: PropTypes.func.isRequired,
+
+  /**
+   * cells values, owned by context
+   */
   values: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
   ),
@@ -40,6 +86,10 @@ const defaultProps = {
   children: null
 };
 
+/**
+ * manage value updates for all cell types
+ * all controlled
+ */
 class CellEngine extends Component {
   constructor(props) {
     super(props);

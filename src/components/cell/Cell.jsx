@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import CellEngine from "./CellEngine";
 
+import componentShape from "../shapes/componentShape";
+
 import { ValuesConsumer } from "./context";
 
 import { keyGenerator } from "../../utils";
@@ -20,17 +22,47 @@ import {
 } from "./constants";
 
 const propTypes = {
-  component: PropTypes.node,
+  /**
+   * custom render-component
+   */
+  component: componentShape,
+
+  /**
+   * key used to store value in values object
+   * this will be later nameRef after being processed
+   */
   valueKey: PropTypes.string,
+
+  /**
+   * init value if it is string
+   */
   value: PropTypes.string,
+
+  /**
+   * init value if it is boolean
+   */
   checked: PropTypes.bool,
+
   id: PropTypes.string,
   type: PropTypes.string,
+
+  /**
+   * group name in case the cell is group-toggle
+   * this is only valid for boolean cells
+   */
   groupName: PropTypes.string,
+
   children: PropTypes.node,
+
+  /**
+   * supposed to be context function
+   * helps to register values and key reference
+   * beacuse context values is not aware of data we have, yet.
+   */
   registerCellInfo: PropTypes.func,
+
   onChange: PropTypes.func,
-  onBlurF: PropTypes.func
+  onBlur: PropTypes.func
 };
 
 const defaultProps = {
@@ -44,7 +76,7 @@ const defaultProps = {
   children: null,
   registerCellInfo() {},
   onChange() {},
-  onBlurF() {}
+  onBlur() {}
 };
 
 /**
@@ -54,17 +86,19 @@ const defaultProps = {
  * @param {string} type
  * @param {boolean} checked
  * @param {string} value
- * @return {Object} -
-     isInput,
-     valueRef,
-     initValue,
-     cellType,
-     RecommendedComponent
+ * @return {{isInput:boolean, valueRef: string, initValue: string||boolean, RecommendedComponent: string }}
  */
 function recognizeCellProps(type, checked, value) {
+  // only true when cell is button
   let isInput = false;
+
+  // input or select
   let RecommendedComponent = INPUT;
+
+  // value ref to the element: value or checked; depends on the type
   let valueRef = VALUE;
+
+  // is it boolean or string; depends on the type
   let initValue = value;
 
   if (type === SELECT || type === LIST) {
@@ -83,6 +117,12 @@ function recognizeCellProps(type, checked, value) {
   };
 }
 
+/**
+ * mainly reposible for user props
+ * handling cell type, init value and pass it to CellEngine
+ * update when cell basic change
+ * like attr
+ */
 class Cell extends PureComponent {
   constructor(props) {
     super(props);
@@ -103,7 +143,7 @@ class Cell extends PureComponent {
       children,
       registerCellInfo,
       onChange,
-      onBlurF,
+      onBlur,
       ...rest
     } = this.props;
 
@@ -138,7 +178,7 @@ class Cell extends PureComponent {
         isCellUpdated={this.isCellUpdated}
         CellComponent={userComponent || RecommendedComponent}
         onChange={onChange}
-        onBlur={onBlurF}
+        onBlur={onBlur}
         rest={rest}
       >
         {children}
