@@ -35,7 +35,7 @@ const propTypes = {
 
   style: PropTypes.objectOf(PropTypes.string),
 
-  cellAutoPosition: PropTypes.func.isRequired,
+  autoPositionCell: PropTypes.func.isRequired,
 
   isHorizontal: PropTypes.bool,
   children: PropTypes.node.isRequired
@@ -56,14 +56,14 @@ const defaultProps = {
   isHorizontal: true
 };
 
+/**
+ * Used only when the Cell type is list
+ * render option as defautl
+ */
 class GridItem extends PureComponent {
   state = {
     key: keyGenerator("gridItem")
   };
-
-  // componentWillUnmount() {
-  //   this.props.cnFuncs.remCellPosition(this.state.key);
-  // }
 
   render() {
     const {
@@ -79,7 +79,7 @@ class GridItem extends PureComponent {
 
       style,
 
-      cellAutoPosition,
+      autoPositionCell,
 
       isHorizontal,
       children
@@ -89,7 +89,7 @@ class GridItem extends PureComponent {
 
     // console.log('GridItem updated');
 
-    const autoPosition = cellAutoPosition(key, row, toRow);
+    const autoPosition = autoPositionCell(key, row, toRow);
 
     container.flexDirection = isHorizontal ? ROW : COLUMN;
     container.gridRow = location(autoPosition, toRow);
@@ -116,5 +116,5 @@ export { GridItem as PureGrid };
 export default withContext({
   Component: GridItem,
   Consumer: GridConsumer,
-  contextProps: ["cellAutoPosition"]
+  contextProps: ["autoPositionCell"]
 });

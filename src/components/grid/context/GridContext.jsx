@@ -29,7 +29,7 @@ export class GridProvider extends React.PureComponent {
    * @param {Number} toRow extends to row number
    * @return {Number} position
    */
-  cellAutoPosition = (key, row, toRow) => {
+  autoPositionCell = (key, row, toRow) => {
     this.cellDefaultRow[key] = { row, toRow };
 
     let isRowUpdated = false;
@@ -74,32 +74,18 @@ export class GridProvider extends React.PureComponent {
     return this.cellPositions[key];
   };
 
-  // remCellPosition = key => {
-  //   delete this.cellPositions[key];
-  //
-  //   //
-  //   const rows = Object.keys(this.cellPositions);
-  //   let tempBiggest = 0;
-  //   rows.forEach(ky => {
-  //     if (this.cellPositions[ky] > tempBiggest) {
-  //       tempBiggest = this.cellPositions[ky];
-  //     }
-  //   });
-  //   this.biggestRowItem = tempBiggest;
-  // };
-
   render() {
     // console.log('GridProvider update');
 
     // eslint-disable-next-line
     const { children } = this.props;
 
-    const { /* remCellPosition, */ cellAutoPosition } = this;
+    const { autoPositionCell } = this;
 
     return (
       <GridController.Provider
         value={{
-          cellAutoPosition
+          autoPositionCell
         }}
       >
         {children}
