@@ -25,8 +25,9 @@ export class GridProvider extends React.PureComponent {
    *
    * @param {object} GridItem -  GridItem that should be register and calculated
    * @param {string} GridItem.key unique key generated in GridItem
-   * @param {string} GridItem.row
-   * @param {string} GridItem.toRow
+   * @param {number} GridItem.row
+   * @param {number} GridItem.toRow
+   * @return {number} row position
    */
   autoPositionCell = ({ key, row, toRow }) => {
     /*
