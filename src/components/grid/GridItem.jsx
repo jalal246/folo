@@ -89,7 +89,7 @@ class GridItem extends PureComponent {
 
     // console.log('GridItem updated');
 
-    const autoPosition = autoPositionCell(key, row, toRow);
+    const autoPosition = autoPositionCell({ key, row, toRow });
 
     container.flexDirection = isHorizontal ? ROW : COLUMN;
     container.gridRow = location(autoPosition, toRow);
