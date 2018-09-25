@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import componentShape from "../shapes/componentShape";
+
 const container = {
   display: "grid",
   justifyItems: "stretch",
@@ -8,25 +10,33 @@ const container = {
 };
 
 const propTypes = {
-  // direct props used only for fixed temp
+  /**
+   * custom render-component
+   */
+  component: componentShape,
+
+  /**
+   * number of columns in grid
+   */
   col: PropTypes.number,
   colMinWidth: PropTypes.string,
   colMaxWidth: PropTypes.string,
 
+  /**
+   * number of rows in grid
+   */
   row: PropTypes.number,
   rowMinWidth: PropTypes.string,
   rowMaxWidth: PropTypes.string,
 
-  // grid dimensions
-  gridRowWidth: PropTypes.string,
-  autoFlow: PropTypes.string,
-  gap: PropTypes.string,
-
+  style: PropTypes.objectOf(PropTypes.string),
   //
   children: PropTypes.node.isRequired
 };
 
 const defaultProps = {
+  component: "div",
+
   col: 0,
   colMinWidth: null,
   colMaxWidth: null,
@@ -35,26 +45,33 @@ const defaultProps = {
   rowMinWidth: null,
   rowMaxWidth: null,
 
-  gridRowWidth: null,
-  autoFlow: null,
-  gap: "1em"
+  style: {}
 };
 
 const FR = "1fr";
 const AUTO_FIT = "auto-fit";
+const DEFAULT_GAP = "1em";
 
-function genFixedTemp(rowColNum, min, max) {
-  const rowCol = rowColNum || AUTO_FIT;
-
-  const width = min ? `minmax(${min}, ${max || FR}` : FR;
-
-  return `repeat(${rowCol}, ${width})`;
+/**
+ * call repeat() CSS function
+ * depending on length, min,max
+ * with some enhancements
+ *
+ *
+ * @param {number} length row or column number in grid
+ * @param {string} min minimum unit for row or column
+ * @param {string} max maximum unit for row or column
+ * @return {string}   repeat() CSS function represents a repeated fragment of the track list
+ */
+function repeat(length = AUTO_FIT, min, max = FR) {
+  return `repeat(${length}, ${min ? `minmax(${min}, ${max}` : FR})`;
 }
 
 //
 class Grid extends React.PureComponent {
   render() {
     const {
+      component: CellComponent,
       col,
       colMinWidth,
       colMaxWidth,
@@ -63,36 +80,36 @@ class Grid extends React.PureComponent {
       rowMinWidth,
       rowMaxWidth,
 
-      // grid dimensions
-      gridRowWidth,
-      autoFlow,
-      gap,
-
+      style: { gap = DEFAULT_GAP, ...otherStyles },
       children,
 
       //
       ...otherProps
     } = this.props;
 
-    const template = {};
+    const style = {
+      /**
+       * The grid-template-columns CSS property
+       * defines the line names and track sizing functions of the grid columns.
+       * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns|MDN}
+       */
+      gridTemplateColumns: repeat(col, colMinWidth, colMaxWidth),
 
-    template.gridTemplateColumns = genFixedTemp(col, colMinWidth, colMaxWidth);
-
-    template.gridTemplateRows = genFixedTemp(row, rowMinWidth, rowMaxWidth);
-
-    const style = Object.assign(
-      {},
-      container,
-      template,
-      gridRowWidth && { gridAutoRows: gridRowWidth },
-      autoFlow && { gridAutoFlow: autoFlow },
-      { gridGap: gap }
-    );
+      /**
+       * The grid-template-rows CSS property
+       * defines the line names and track sizing functions of the grid rows.
+       * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows|MDN}
+       */
+      gridTemplateRows: repeat(row, rowMinWidth, rowMaxWidth),
+      gap,
+      ...container,
+      ...otherStyles
+    };
 
     return (
-      <div style={style} {...otherProps}>
+      <CellComponent style={style} {...otherProps}>
         {children}
-      </div>
+      </CellComponent>
     );
   }
 }
