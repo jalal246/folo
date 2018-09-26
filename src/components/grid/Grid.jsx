@@ -9,6 +9,10 @@ const container = {
   alignItems: "stretch"
 };
 
+const FR = "1fr";
+const AUTO_FIT = "auto-fit";
+const DEFAULT_GAP = "1em";
+
 const propTypes = {
   /**
    * custom render-component
@@ -37,20 +41,16 @@ const propTypes = {
 const defaultProps = {
   component: "div",
 
-  col: 0,
+  col: null,
   colMinWidth: null,
   colMaxWidth: null,
 
-  row: 0,
+  row: null,
   rowMinWidth: null,
   rowMaxWidth: null,
 
   style: {}
 };
-
-const FR = "1fr";
-const AUTO_FIT = "auto-fit";
-const DEFAULT_GAP = "1em";
 
 /**
  * call repeat() CSS function
@@ -63,8 +63,8 @@ const DEFAULT_GAP = "1em";
  * @param {string} max maximum unit for row or column
  * @return {string}   repeat() CSS function represents a repeated fragment of the track list
  */
-function repeat(length = AUTO_FIT, min, max = FR) {
-  return `repeat(${length}, ${min ? `minmax(${min}, ${max}` : FR})`;
+function repeat(length, min, max) {
+  return `repeat(${length}, ${min ? `minmax(${min}, ${max || FR}` : FR})`;
 }
 
 //
@@ -88,21 +88,23 @@ class Grid extends React.PureComponent {
     } = this.props;
 
     const style = {
+      ...container,
       /**
        * The grid-template-columns CSS property
        * defines the line names and track sizing functions of the grid columns.
        * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns|MDN}
        */
-      gridTemplateColumns: repeat(col, colMinWidth, colMaxWidth),
+      ...((col || colMinWidth) && {
+        gridTemplateColumns: repeat(col || AUTO_FIT, colMinWidth, colMaxWidth)
+      }),
 
       /**
        * The grid-template-rows CSS property
        * defines the line names and track sizing functions of the grid rows.
        * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows|MDN}
        */
-      gridTemplateRows: repeat(row, rowMinWidth, rowMaxWidth),
+      ...(row && { gridTemplateRows: repeat(row, rowMinWidth, rowMaxWidth) }),
       gap,
-      ...container,
       ...otherStyles
     };
 
