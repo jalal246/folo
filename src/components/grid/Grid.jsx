@@ -81,10 +81,8 @@ class Grid extends React.PureComponent {
         display = GRID,
         justifyItems = STRETCH,
         alignItems = STRETCH,
-        gridTemplateColumns = col || colMinWidth
-          ? repeat(col || AUTO_FIT, colMinWidth, colMaxWidth)
-          : null,
-        gridTemplateRows = row ? repeat(row, rowMinWidth, rowMaxWidth) : null,
+        gridTemplateColumns: gtc,
+        gridTemplateRows: gtr,
         gap = DEFAULT_GAP,
         ...otherStyles
       },
@@ -98,8 +96,14 @@ class Grid extends React.PureComponent {
       display,
       justifyItems,
       alignItems,
-      gridTemplateColumns,
-      gridTemplateRows,
+      ...(gtc ||
+        ((col || colMinWidth) && {
+          gridTemplateColumns: repeat(col || AUTO_FIT, colMinWidth, colMaxWidth)
+        })),
+      ...(gtr ||
+        (row && {
+          gridTemplateRows: repeat(row, rowMinWidth, rowMaxWidth)
+        })),
       gap,
       ...otherStyles
     };
