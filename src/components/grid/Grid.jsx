@@ -3,11 +3,8 @@ import PropTypes from "prop-types";
 
 import componentShape from "../shapes/componentShape";
 
-const container = {
-  display: "grid",
-  justifyItems: "stretch",
-  alignItems: "stretch"
-};
+const GRID = "grid";
+const STRETCH = "stretch";
 
 const FR = "1fr";
 const AUTO_FIT = "auto-fit";
@@ -80,7 +77,17 @@ class Grid extends React.PureComponent {
       rowMinWidth,
       rowMaxWidth,
 
-      style: { gap = DEFAULT_GAP, ...otherStyles },
+      style: {
+        display = GRID,
+        justifyItems = STRETCH,
+        alignItems = STRETCH,
+        gridTemplateColumns = col || colMinWidth
+          ? repeat(col || AUTO_FIT, colMinWidth, colMaxWidth)
+          : null,
+        gridTemplateRows = row ? repeat(row, rowMinWidth, rowMaxWidth) : null,
+        gap = DEFAULT_GAP,
+        ...otherStyles
+      },
       children,
 
       //
@@ -88,22 +95,11 @@ class Grid extends React.PureComponent {
     } = this.props;
 
     const style = {
-      ...container,
-      /**
-       * The grid-template-columns CSS property
-       * defines the line names and track sizing functions of the grid columns.
-       * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns|MDN}
-       */
-      ...((col || colMinWidth) && {
-        gridTemplateColumns: repeat(col || AUTO_FIT, colMinWidth, colMaxWidth)
-      }),
-
-      /**
-       * The grid-template-rows CSS property
-       * defines the line names and track sizing functions of the grid rows.
-       * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows|MDN}
-       */
-      ...(row && { gridTemplateRows: repeat(row, rowMinWidth, rowMaxWidth) }),
+      display,
+      justifyItems,
+      alignItems,
+      gridTemplateColumns,
+      gridTemplateRows,
       gap,
       ...otherStyles
     };
