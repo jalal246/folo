@@ -1,8 +1,9 @@
 import React, { createContext } from "react";
 
 const ValuesContext = createContext({
-  values: {}
-  // updateCellValue() {},
+  values: {},
+  /* istanbul ignore next */
+  updateCellValue() {}
   // registerCellInfo() {},
   // getContextValues() {}
 });
