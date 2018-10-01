@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha test/**/*.{jsx,js}",
     "test:comp:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions jsx test/components/**/*.jsx",
-    "test:utils:w": "mocha --watch test/utils/*.js",
+    "test:utils:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions js test/utils.js",
     "test:karma": "karma start",
     "precover": "rimraf coverage",
     "cover": "cross-env NODE_ENV=test nyc npm run test",
