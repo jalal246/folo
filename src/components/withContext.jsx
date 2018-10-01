@@ -9,7 +9,7 @@ import React from "react";
  * @param {Array} contextProps contains props required from consumer
  * @return {Component} - new component connected to context props
  */
-function withContext({ Component, Consumer, contextProps }) {
+function withContext({ Component, Consumer, contextProps = [] }) {
   return function ComponentWithContext(props) {
     return (
       <Consumer>

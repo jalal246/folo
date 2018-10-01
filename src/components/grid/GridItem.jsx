@@ -6,25 +6,23 @@ import { GridConsumer } from "./context";
 import { keyGenerator } from "../../utils";
 import withContext from "../withContext";
 
-function location(colOrRow, to) {
-  if (colOrRow && to) {
-    return `${colOrRow} / ${to}`;
+import componentShape from "../shapes/componentShape";
+
+function location(from, to) {
+  if (from !== null && to !== null) {
+    return `${from} / ${to}`;
   }
-  return `${colOrRow}`;
+  return `${from}`;
 }
 
 const CENTER = "center";
-const START = "flex-start ";
+const FLEX_START = "flex-start";
 const ROW = "row";
 const COLUMN = "column";
-
-const container = {
-  display: "flex",
-  backgroundColor: "red"
-};
+const DISPLAY_FLEX = "flex";
 
 const propTypes = {
-  component: PropTypes.node,
+  component: componentShape,
 
   row: PropTypes.number,
   toRow: PropTypes.number,
@@ -76,12 +74,16 @@ class GridItem extends PureComponent {
       toCol,
 
       isCenter,
+      isHorizontal,
 
-      style,
+      style: {
+        display = DISPLAY_FLEX,
+        flexDirection = isHorizontal ? ROW : COLUMN,
+        ...otherStyle
+      },
 
       autoPositionCell,
 
-      isHorizontal,
       children
     } = this.props;
 
@@ -91,18 +93,26 @@ class GridItem extends PureComponent {
 
     const autoPosition = autoPositionCell({ key, row, toRow });
 
-    container.flexDirection = isHorizontal ? ROW : COLUMN;
-    container.gridRow = location(autoPosition, toRow);
+    const container = {
+      display,
+      flexDirection,
+      // position row grid
+      gridRow: location(autoPosition, toRow)
+    };
 
+    /**
+     * justifyContent only set when there are:
+     * col, toCol or isCenter
+     */
     if (isCenter) {
       container.justifyContent = CENTER;
       container.gridColumn = location(1, -1);
     } else if (col || toCol) {
-      container.justifyContent = START;
+      container.justifyContent = FLEX_START;
       container.gridColumn = location(col || 0, toCol);
     }
 
-    const styles = Object.assign({}, container, style);
+    const styles = Object.assign({}, container, otherStyle);
 
     return <CellComponent style={styles}>{children}</CellComponent>;
   }
@@ -111,7 +121,7 @@ class GridItem extends PureComponent {
 GridItem.propTypes = propTypes;
 GridItem.defaultProps = defaultProps;
 
-export { GridItem as PureGrid };
+export { GridItem as PureGridItem };
 
 export default withContext({
   Component: GridItem,
