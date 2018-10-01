@@ -77,6 +77,7 @@ class Grid extends React.PureComponent {
       rowMinWidth,
       rowMaxWidth,
 
+      // TODO: add style and shape to propTypes
       style: {
         display = GRID,
         justifyItems = STRETCH,
