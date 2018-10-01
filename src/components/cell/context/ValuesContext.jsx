@@ -1,10 +1,14 @@
-import React, { createContext } from 'react';
+import React, { createContext } from "react";
 
-import { INPUT } from '../constants';
+const ValuesContext = createContext({
+  values: {},
+  /* istanbul ignore next */
+  updateCellValue() {}
+  // registerCellInfo() {},
+  // getContextValues() {}
+});
 
-const ValuesHolder = createContext();
-
-export const { Consumer: ValuesConsumer } = ValuesHolder;
+export const { Consumer: ValuesConsumer } = ValuesContext;
 
 export class ValuesProvider extends React.Component {
   constructor(props) {
@@ -14,8 +18,7 @@ export class ValuesProvider extends React.Component {
 
     this.datatObj = {};
 
-    this.didMount = false;
-
+    this.isAllCellsRegistered = false;
     this.state = {
       values: {},
       isGroupValuesUpdate: false
@@ -23,34 +26,51 @@ export class ValuesProvider extends React.Component {
   }
 
   componentDidMount() {
-    this.didMount = true;
+    this.isAllCellsRegistered = true;
 
     /*
     * This wont update the component
     * just set collected data obj as state
     * */
-
-    // eslint-disable-next-line
     this.setState({ values: { ...this.datatObj } });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     const { isGroupValuesUpdate } = this.state;
+
     return isGroupValuesUpdate !== nextState.isGroupValuesUpdate;
   }
 
-  onSubmitBtnClick = (e, onSubmit) => {
-    if (onSubmit) {
-      const { values } = this.state;
-      onSubmit(e, { ...values });
-    }
+  /**
+   *
+   * This function will be called when trigger submit
+   * which returns state.values
+   *
+   * @return {{value :string||boolean}}
+   */
+  getContextValues = () => {
+    const { values } = this.state;
+    return values;
   };
 
-  registerCellInfo = ({ nameRef, iniValue, groupName }) => {
-    if (this.didMount) return;
-
+  /**
+   * Add cell to datatObj
+   * Add groupName to btnGroup
+   *
+   * This function will be called when cells mount
+   * after componentDidMount, the data in datatObj will be moved to state
+   * datatObj is a temp object holds value to avoid update state while rendeing
+   * in this case will init all cells in datatObj until rendering happens
+   * then update the state so all the values update happen in state
+   *
+   * @param {object} cell - new cell that should be register
+   * @param {string} cell.nameRef   key for value
+   * @param {string||boolean} cell.initValue value
+   * @param {string} cell.groupName group name in case the cell is group-toggle
+   */
+  registerCellInfo = ({ nameRef, initValue, groupName }) => {
     // push cell name ref to data holder
-    this.datatObj[nameRef] = iniValue;
+    this.datatObj[nameRef] = initValue;
 
     // if it has group, handle it
     if (groupName) {
@@ -65,28 +85,27 @@ export class ValuesProvider extends React.Component {
         // create new set for the group
         this.btnGroup[groupName] = new Set();
       }
-
-      // then add the cell name to where its belong
-      // to its group
-      this.btnGroup[groupName].add(nameRef);
-      if (!this.btnGroup.has(groupName)) {
-        // add it because it is new group
-        this.btnGroup.add(groupName);
-
-        // create new set for the group
-        this.btnGroup[groupName] = new Set();
-      }
-
       // then add the cell name to where its belong
       // to its group
       this.btnGroup[groupName].add(nameRef);
     }
   };
 
-  updateCellValue = ({ nameRef, newValue, cellType, groupName }) => {
-    const { values: { [nameRef]: oldValue } } = this.state;
+  /**
+   * update cell value in the state
+   *
+   * @param {object} cell - new cell that should be register
+   * @param {string} cell.nameRef   key for value
+   * @param {string||boolean} cell.initValue value
+   * @param {string} cell.groupName group name in case the cell is group-toggle
+   */
+  updateCellValue = ({ nameRef, newValue, groupName }) => {
+    const {
+      values: { [nameRef]: oldValue }
+    } = this.state;
+
     // dont update if it is the same value
-    if (cellType === INPUT && oldValue === newValue) {
+    if (oldValue === newValue) {
       return;
     }
 
@@ -111,7 +130,6 @@ export class ValuesProvider extends React.Component {
           });
         }
       }
-
       return {
         values: { ...ps.values, ...newValuesHolder },
         isGroupValuesUpdate
@@ -119,36 +137,25 @@ export class ValuesProvider extends React.Component {
     });
   };
 
-  updateErrors = () => {};
-
   render() {
-    // console.log('ValuesHolder update');
-
-    const { values /* errors */ } = this.state;
-
+    // console.log("ValuesContext update");
+    const { values } = this.state;
     // eslint-disable-next-line
     const { children } = this.props;
 
-    const {
-      registerCellInfo,
-      updateCellValue,
-      onSubmitBtnClick
-      // updateErrors
-    } = this;
+    const { registerCellInfo, updateCellValue, getContextValues } = this;
 
     return (
-      <ValuesHolder.Provider
+      <ValuesContext.Provider
         value={{
-          cn: {
-            values,
-            updateCellValue,
-            registerCellInfo,
-            onSubmitBtnClick
-          }
+          updateCellValue,
+          registerCellInfo,
+          getContextValues,
+          values
         }}
       >
         {children}
-      </ValuesHolder.Provider>
+      </ValuesContext.Provider>
     );
   }
 }

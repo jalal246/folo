@@ -1,0 +1,16 @@
+{
+  "globals": {
+    "describe": true,
+    "context": true,
+    "it": true,
+    "before": true,
+    "after": true,
+    "beforeEach": true,
+    "afterEach": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "react/prop-types": [0],
+    "react/jsx-one-expression-per-line": "off"
+  }
+}

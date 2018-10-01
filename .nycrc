@@ -1,0 +1,20 @@
+{
+  "all": false,
+  "check-coverage": false,
+  "sourceMap": false,
+  "instrument": false,
+  "extension": [
+    ".js",
+    ".jsx"
+  ],
+  "include": [
+    "src"
+  ],
+  "require": [
+    "babel-core/register"
+  ],
+  "reporter": [
+    "text",
+    "lcov"
+  ]
+}

@@ -1,4 +1,4 @@
-export { default as Cell } from './Cell';
-export { default as CellItem } from './CellItem';
+export { default as Cell } from "./Cell";
+export { default as CellItem } from "./CellItem";
 
-export { ValuesConsumer, ValuesProvider } from './context';
+export { ValuesProvider } from "./context";

@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
 
-import FormApp from '../App';
+import FormApp from "../App";
 
-storiesOf('FormApp', module).add('with text', () => (
-  <FormApp isIntractive onSubmit={action('onSubmit')} />
+storiesOf("FormApp", module).add("with text", () => (
+  <FormApp isIntractive onSubmit={action("onSubmit")} />
 ));
 // .add('with some emoji', () => (
 //   <Button onClick={action('clicked')}>

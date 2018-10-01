@@ -1,27 +1,74 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-const container = {
-  display: 'grid',
-  justifyItems: 'stretch',
-  alignItems: 'stretch'
+import componentShape from "../shapes/componentShape";
+
+const GRID = "grid";
+const STRETCH = "stretch";
+
+const FR = "1fr";
+const AUTO_FIT = "auto-fit";
+const DEFAULT_GAP = "1em";
+
+const propTypes = {
+  /**
+   * custom render-component
+   */
+  component: componentShape,
+
+  /**
+   * number of columns in grid
+   */
+  col: PropTypes.number,
+  colMinWidth: PropTypes.string,
+  colMaxWidth: PropTypes.string,
+
+  /**
+   * number of rows in grid
+   */
+  row: PropTypes.number,
+  rowMinWidth: PropTypes.string,
+  rowMaxWidth: PropTypes.string,
+
+  style: PropTypes.objectOf(PropTypes.string),
+  //
+  children: PropTypes.node.isRequired
 };
 
-const FR = '1fr';
-const AUTO_FIT = 'auto-fit';
+const defaultProps = {
+  component: "div",
 
-function genFixedTemp(rowColNum, min, max) {
-  const rowCol = rowColNum || AUTO_FIT;
+  col: null,
+  colMinWidth: null,
+  colMaxWidth: null,
 
-  const width = min ? `minmax(${min}, ${max || FR}` : FR;
+  row: null,
+  rowMinWidth: null,
+  rowMaxWidth: null,
 
-  return `repeat(${rowCol}, ${width})`;
+  style: {}
+};
+
+/**
+ * call repeat() CSS function
+ * depending on length, min,max
+ * with some enhancements
+ *
+ *
+ * @param {number} length row or column number in grid
+ * @param {string} min minimum unit for row or column
+ * @param {string} max maximum unit for row or column
+ * @return {string}   repeat() CSS function represents a repeated fragment of the track list
+ */
+function repeat(length, min, max) {
+  return `repeat(${length}, ${min ? `minmax(${min}, ${max || FR}` : FR})`;
 }
 
 //
 class Grid extends React.PureComponent {
   render() {
     const {
+      component: CellComponent,
       col,
       colMinWidth,
       colMaxWidth,
@@ -30,70 +77,47 @@ class Grid extends React.PureComponent {
       rowMinWidth,
       rowMaxWidth,
 
-      // grid dimensions
-      gridRowWidth,
-      autoFlow,
-      gap,
-
+      // TODO: add style and shape to propTypes
+      style: {
+        display = GRID,
+        justifyItems = STRETCH,
+        alignItems = STRETCH,
+        gridTemplateColumns: gtc,
+        gridTemplateRows: gtr,
+        gap = DEFAULT_GAP,
+        ...otherStyles
+      },
       children,
 
       //
       ...otherProps
     } = this.props;
 
-    const template = {};
-
-    template.gridTemplateColumns = genFixedTemp(col, colMinWidth, colMaxWidth);
-
-    template.gridTemplateRows = genFixedTemp(row, rowMinWidth, rowMaxWidth);
-
-    const style = Object.assign(
-      {},
-      container,
-      template,
-      gridRowWidth && { gridAutoRows: gridRowWidth },
-      autoFlow && { gridAutoFlow: autoFlow },
-      { gridGap: gap }
-    );
+    const style = {
+      display,
+      justifyItems,
+      alignItems,
+      ...(gtc ||
+        ((col || colMinWidth) && {
+          gridTemplateColumns: repeat(col || AUTO_FIT, colMinWidth, colMaxWidth)
+        })),
+      ...(gtr ||
+        (row && {
+          gridTemplateRows: repeat(row, rowMinWidth, rowMaxWidth)
+        })),
+      gap,
+      ...otherStyles
+    };
 
     return (
-      <div style={style} {...otherProps}>
+      <CellComponent style={style} {...otherProps}>
         {children}
-      </div>
+      </CellComponent>
     );
   }
 }
 
-Grid.propTypes = {
-  // direct props used only for fixed temp
-  col: PropTypes.number,
-  colMinWidth: PropTypes.string,
-  colMaxWidth: PropTypes.string,
-
-  row: PropTypes.number,
-  rowMinWidth: PropTypes.string,
-  rowMaxWidth: PropTypes.string,
-
-  // grid dimensions
-  gridRowWidth: PropTypes.string,
-  autoFlow: PropTypes.string,
-  gap: PropTypes.string,
-
-  //
-  children: PropTypes.node.isRequired
-};
-Grid.defaultProps = {
-  col: 0,
-  colMinWidth: null,
-  colMaxWidth: null,
-
-  row: 0,
-  rowMinWidth: null,
-  rowMaxWidth: null,
-
-  gridRowWidth: null,
-  autoFlow: null,
-  gap: '1em'
-};
+Grid.propTypes = propTypes;
+Grid.defaultProps = defaultProps;
 
 export default Grid;
