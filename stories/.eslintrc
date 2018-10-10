@@ -1,6 +1,8 @@
 {
   "rules": {
-    "import/no-extraneous-dependencies":'off',
-    "react/jsx-filename-extension": 'off',
+    "import/no-extraneous-dependencies": "off",
+    "react/jsx-filename-extension": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": "off"
   }
 }
