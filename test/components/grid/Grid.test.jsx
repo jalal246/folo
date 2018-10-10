@@ -5,91 +5,149 @@ import { shallow } from 'enzyme';
 import Grid from '../../../src/components/grid/Grid';
 
 const DEFAULT_DISPLAY = 'grid';
-const DEFAULT_JUSTIFY_ITEMS = 'stretch';
-const DEFAULT_ALIGNH_ITEMS = 'stretch';
+const STRETCH = 'stretch';
 const DEFAULT_GAP = '1em';
+const SPACE_BETWEEN = 'space-between';
+const AUTO_FIT = 'auto-fit';
+
+const CENTER = 'center';
+
+const wrapperStyle = ({ props, style }) =>
+  // eslint-disable-next-line
+  shallow(
+    <Grid {...props} style={style}>
+      <div />
+    </Grid>,
+  ).prop('style');
 
 describe('Grid', () => {
   describe('style', () => {
     it('returns default grid style as expected', () => {
-      const wrapper = shallow(
-        <Grid>
-          <div />
-        </Grid>,
-      );
-
-      expect(wrapper.prop('style')).to.deep.equal({
+      const expected = {
         display: DEFAULT_DISPLAY,
-        justifyItems: DEFAULT_JUSTIFY_ITEMS,
-        alignItems: DEFAULT_ALIGNH_ITEMS,
+        gridTemplateColumns: `repeat(${AUTO_FIT}, minmax(auto, 1fr))`,
+        alignItems: STRETCH,
+        justifyContent: STRETCH,
         gap: DEFAULT_GAP,
-      });
+      };
+
+      expect(wrapperStyle({})).to.deep.equal(expected);
     });
 
     it('returns override style', () => {
       const DISPLAY_ENLINE = 'inline-grid';
 
-      const wrapper = shallow(
-        <Grid
-          style={{
-            display: DISPLAY_ENLINE,
-          }}
-        >
-          <div />
-        </Grid>,
-      );
-      expect(wrapper.prop('style')).to.deep.equal({
+      const expected = {
         display: DISPLAY_ENLINE,
-        justifyItems: DEFAULT_JUSTIFY_ITEMS,
-        alignItems: DEFAULT_ALIGNH_ITEMS,
+        gridTemplateColumns: `repeat(${AUTO_FIT}, minmax(auto, 1fr))`,
+        alignItems: STRETCH,
+        justifyContent: STRETCH,
         gap: DEFAULT_GAP,
+      };
+
+      expect(wrapperStyle({ style: { display: DISPLAY_ENLINE } })).to.deep.equal(expected);
+    });
+
+    describe('alignItems', () => {
+      it('returns alignItems justifyContent center when no columns passed', () => {
+        const expected = {
+          display: DEFAULT_DISPLAY,
+          gridTemplateColumns: `repeat(${AUTO_FIT}, minmax(auto, 1fr))`,
+          alignItems: CENTER,
+          justifyContent: CENTER,
+          gap: DEFAULT_GAP,
+        };
+
+        expect(wrapperStyle({ props: { isCenter: true } })).to.deep.equal(expected);
+      });
+
+      it('returns alignItems center and justifyContent when columns passed', () => {
+        const expected = {
+          display: DEFAULT_DISPLAY,
+          gridTemplateColumns: 'repeat(1, minmax(auto, 1fr))',
+          alignItems: CENTER,
+          justifyContent: SPACE_BETWEEN,
+          gap: DEFAULT_GAP,
+        };
+
+        expect(wrapperStyle({ props: { isCenter: true, col: 1 } })).to.deep.equal(expected);
       });
     });
 
-    describe('templates', () => {
+    describe('rows', () => {
+      it('returns gridTemplateRows when passing row with minmax', () => {
+        const expected = {
+          display: DEFAULT_DISPLAY,
+          gridTemplateColumns: `repeat(${AUTO_FIT}, minmax(auto, 1fr))`,
+          gridTemplateRows: 'repeat(1, minmax(auto, 1fr))',
+          alignItems: STRETCH,
+          justifyContent: STRETCH,
+          gap: DEFAULT_GAP,
+        };
+
+        expect(wrapperStyle({ props: { row: 1 } })).to.deep.equal(expected);
+      });
+
+      it('returns gridTemplateRows when passing row with width', () => {
+        const expected = {
+          display: DEFAULT_DISPLAY,
+          gridTemplateColumns: `repeat(${AUTO_FIT}, minmax(auto, 1fr))`,
+          gridTemplateRows: 'repeat(1, 20px)',
+          alignItems: STRETCH,
+          justifyContent: STRETCH,
+          gap: DEFAULT_GAP,
+        };
+
+        expect(wrapperStyle({ props: { row: 1, rowWidth: '20px' } })).to.deep.equal(expected);
+      });
+
+      it('returns gridAutoRows when passing rowWidth only', () => {
+        const expected = {
+          display: DEFAULT_DISPLAY,
+          gridTemplateColumns: `repeat(${AUTO_FIT}, minmax(auto, 1fr))`,
+          gridAutoRows: '20px',
+          alignItems: STRETCH,
+          justifyContent: STRETCH,
+          gap: DEFAULT_GAP,
+        };
+
+        expect(wrapperStyle({ props: { rowWidth: '20px' } })).to.deep.equal(expected);
+      });
+    });
+    describe('coulmns', () => {
+      it('returns gridAutoColumns when passing colWidth only', () => {
+        const expected = {
+          display: DEFAULT_DISPLAY,
+          gridAutoColumns: '20px',
+          alignItems: STRETCH,
+          justifyContent: SPACE_BETWEEN,
+          gap: DEFAULT_GAP,
+        };
+
+        expect(wrapperStyle({ props: { colWidth: '20px' } })).to.deep.equal(expected);
+      });
+
       it('returns gridTemplateColumns when passing col', () => {
-        const wrapper = shallow(
-          <Grid col={2}>
-            <div />
-          </Grid>,
-        );
-        expect(wrapper.prop('style')).to.deep.equal({
+        const expected = {
           display: DEFAULT_DISPLAY,
-          justifyItems: DEFAULT_JUSTIFY_ITEMS,
-          alignItems: DEFAULT_ALIGNH_ITEMS,
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: 'repeat(4, minmax(auto, 1fr))',
+          alignItems: STRETCH,
+          justifyContent: SPACE_BETWEEN,
           gap: DEFAULT_GAP,
-        });
-      });
+        };
 
-      it('returns gridTemplateColumns when passing colMinWidth', () => {
-        const wrapper = shallow(
-          <Grid colMinWidth="2px">
-            <div />
-          </Grid>,
-        );
-        expect(wrapper.prop('style')).to.deep.equal({
-          display: DEFAULT_DISPLAY,
-          justifyItems: DEFAULT_JUSTIFY_ITEMS,
-          alignItems: DEFAULT_ALIGNH_ITEMS,
-          gridTemplateColumns: 'repeat(auto-fit, minmax(2px, 1fr)',
-          gap: DEFAULT_GAP,
-        });
+        expect(wrapperStyle({ props: { col: 4 } })).to.deep.equal(expected);
       });
-
-      it('returns gridTemplateRows when passing row', () => {
-        const wrapper = shallow(
-          <Grid row={5}>
-            <div />
-          </Grid>,
-        );
-        expect(wrapper.prop('style')).to.deep.equal({
+      it('returns gridTemplateColumns when passing colWidth and col', () => {
+        const expected = {
           display: DEFAULT_DISPLAY,
-          justifyItems: DEFAULT_JUSTIFY_ITEMS,
-          alignItems: DEFAULT_ALIGNH_ITEMS,
-          gridTemplateRows: 'repeat(5, 1fr)',
+          gridTemplateColumns: 'repeat(4, 20px)',
+          alignItems: STRETCH,
+          justifyContent: SPACE_BETWEEN,
           gap: DEFAULT_GAP,
-        });
+        };
+
+        expect(wrapperStyle({ props: { col: 4, colWidth: '20px' } })).to.deep.equal(expected);
       });
     });
   });

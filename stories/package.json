@@ -9,7 +9,8 @@
   "keywords": [],
   "author": "Jalal Maskoun jimmy002020@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "@material-ui/core": "^1.5.0"
+  "dependencies": {},
+  "devDependencies": {
+    "@material-ui/core": "^1.5.1"
   }
 }

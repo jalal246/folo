@@ -8,18 +8,21 @@ import withContext from "../withContext";
 
 import componentShape from "../shapes/componentShape";
 
+import {
+  CENTER,
+  SPACE_BETWEEN,
+  ROW,
+  COLUMN,
+  DISPLAY_FLEX,
+  STRETCH
+} from "./constants";
+
 function location(from, to) {
   if (from !== null && to !== null) {
     return `${from} / ${to}`;
   }
   return `${from}`;
 }
-
-const CENTER = "center";
-const FLEX_START = "flex-start";
-const ROW = "row";
-const COLUMN = "column";
-const DISPLAY_FLEX = "flex";
 
 const propTypes = {
   component: componentShape,
@@ -45,7 +48,7 @@ const defaultProps = {
   row: null,
   toRow: null,
 
-  col: null,
+  col: 0,
   toCol: null,
   isCenter: false,
 
@@ -78,7 +81,9 @@ class GridItem extends PureComponent {
 
       style: {
         display = DISPLAY_FLEX,
-        flexDirection = isHorizontal ? ROW : COLUMN,
+
+        flexDirection: fDirection,
+        alignItems: aItems,
         ...otherStyle
       },
 
@@ -90,31 +95,30 @@ class GridItem extends PureComponent {
     const { key } = this.state;
 
     // console.log('GridItem updated');
-
     const autoPosition = autoPositionCell({ key, row, toRow });
 
     const container = {
       display,
-      flexDirection,
-      // position row grid
-      gridRow: location(autoPosition, toRow)
+
+      ...(isHorizontal
+        ? {
+            flexDirection: fDirection || ROW,
+            alignItems: aItems || CENTER
+          }
+        : {
+            flexDirection: fDirection || COLUMN,
+            alignItems: aItems || STRETCH
+          }),
+
+      justifyContent: isCenter ? CENTER : SPACE_BETWEEN,
+
+      gridRow: location(autoPosition, toRow),
+      gridColumn: location(col, toCol),
+
+      ...otherStyle
     };
 
-    /**
-     * justifyContent only set when there are:
-     * col, toCol or isCenter
-     */
-    if (isCenter) {
-      container.justifyContent = CENTER;
-      container.gridColumn = location(1, -1);
-    } else if (col || toCol) {
-      container.justifyContent = FLEX_START;
-      container.gridColumn = location(col || 0, toCol);
-    }
-
-    const styles = Object.assign({}, container, otherStyle);
-
-    return <CellComponent style={styles}>{children}</CellComponent>;
+    return <CellComponent style={container}>{children}</CellComponent>;
   }
 }
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import componentShape from "../shapes/componentShape";
 
-import { keyGenerator } from "../../utils";
+// import { keyGenerator } from "../../utils";
 
 const propTypes = {
   /**
@@ -13,18 +13,18 @@ const propTypes = {
   /**
    * option value
    */
-  value: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * @see See [key](https://reactjs.org/docs/lists-and-keys.html) for a list of color names
    */
-  key: PropTypes.string,
+  // key: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 
 const defaultProps = {
   component: "option",
-  value: null,
-  key: keyGenerator("autoKey")
+  value: null
+  // key: keyGenerator("autoKey")
 };
 
 /**
@@ -34,12 +34,11 @@ const defaultProps = {
 export default function CellItem({
   component: CellComponent,
   value,
-  key,
   children,
   ...other
 }) {
   return (
-    <CellComponent value={value} key={key} {...other}>
+    <CellComponent value={value} {...other}>
       {children}
     </CellComponent>
   );

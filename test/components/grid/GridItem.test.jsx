@@ -6,10 +6,11 @@ import sinon from 'sinon-sandbox';
 import { PureGridItem } from '../../../src/components/grid/GridItem';
 
 const CENTER = 'center';
-const FLEX_START = 'flex-start';
 const ROW = 'row';
 const COLUMN = 'column';
 const DISPLAY_FLEX = 'flex';
+const SPACE_BETWEEN = 'space-between';
+const STRETCH = 'stretch';
 
 describe('GridItem', () => {
   afterEach(() => {
@@ -26,11 +27,16 @@ describe('GridItem', () => {
         </PureGridItem>,
       );
 
-      expect(wrapper.prop('style')).to.deep.equal({
+      const expected = {
         display: DISPLAY_FLEX,
+        alignItems: CENTER,
         flexDirection: ROW,
-        gridRow: DEFAULT_ROW,
-      });
+        gridRow: '0',
+        gridColumn: '0',
+        justifyContent: SPACE_BETWEEN,
+      };
+
+      expect(wrapper.prop('style')).to.deep.equal(expected);
     });
 
     it('returns flexDirection column when it is isHorizontal = false', () => {
@@ -40,11 +46,16 @@ describe('GridItem', () => {
         </PureGridItem>,
       );
 
-      expect(wrapper.prop('style')).to.deep.equal({
+      const expected = {
         display: DISPLAY_FLEX,
+        alignItems: STRETCH,
         flexDirection: COLUMN,
-        gridRow: DEFAULT_ROW,
-      });
+        gridRow: '0',
+        gridColumn: '0',
+        justifyContent: SPACE_BETWEEN,
+      };
+
+      expect(wrapper.prop('style')).to.deep.equal(expected);
     });
 
     it('overrides styles', () => {
@@ -53,32 +64,62 @@ describe('GridItem', () => {
           autoPositionCell={autoPositionCell}
           style={{
             flexDirection: COLUMN,
+            alignItems: STRETCH,
           }}
         >
           <div />
         </PureGridItem>,
       );
 
-      expect(wrapper.prop('style')).to.deep.equal({
+      const expected = {
         display: DISPLAY_FLEX,
+        alignItems: STRETCH,
         flexDirection: COLUMN,
-        gridRow: DEFAULT_ROW,
-      });
+        gridRow: '0',
+        gridColumn: '0',
+        justifyContent: SPACE_BETWEEN,
+      };
+
+      expect(wrapper.prop('style')).to.deep.equal(expected);
+    });
+
+    it('returns center', () => {
+      const wrapper = shallow(
+        <PureGridItem autoPositionCell={autoPositionCell} isCenter>
+          <div />
+        </PureGridItem>,
+      );
+
+      const expected = {
+        display: DISPLAY_FLEX,
+        alignItems: CENTER,
+        flexDirection: ROW,
+        gridRow: '0',
+        gridColumn: '0',
+        justifyContent: CENTER,
+      };
+
+      expect(wrapper.prop('style')).to.deep.equal(expected);
     });
 
     describe('gridRow', () => {
-      it('returns gridRow with toRow', () => {
+      it('returns gridRow with toRow and alignItems center', () => {
         const wrapper = shallow(
           <PureGridItem autoPositionCell={autoPositionCell} toRow={6}>
             <div />
           </PureGridItem>,
         );
 
-        expect(wrapper.prop('style')).to.deep.equal({
+        const expected = {
           display: DISPLAY_FLEX,
+          alignItems: CENTER,
           flexDirection: ROW,
           gridRow: '0 / 6',
-        });
+          gridColumn: '0',
+          justifyContent: SPACE_BETWEEN,
+        };
+
+        expect(wrapper.prop('style')).to.deep.equal(expected);
       });
 
       it('returns gridRow with toRow =0', () => {
@@ -87,29 +128,37 @@ describe('GridItem', () => {
             <div />
           </PureGridItem>,
         );
-
-        expect(wrapper.prop('style')).to.deep.equal({
+        const expected = {
           display: DISPLAY_FLEX,
+          alignItems: CENTER,
           flexDirection: ROW,
           gridRow: '0 / 0',
-        });
+          gridColumn: '0',
+          justifyContent: SPACE_BETWEEN,
+        };
+
+        expect(wrapper.prop('style')).to.deep.equal(expected);
       });
     });
+
     describe('gridColumn', () => {
-      it('returns column position with justifyContent, when col is provided', () => {
+      it('returns column position with when col is provided', () => {
         const wrapper = shallow(
           <PureGridItem autoPositionCell={autoPositionCell} col={10}>
             <div />
           </PureGridItem>,
         );
 
-        expect(wrapper.prop('style')).to.deep.equal({
+        const expected = {
           display: DISPLAY_FLEX,
+          alignItems: CENTER,
           flexDirection: ROW,
-          gridRow: DEFAULT_ROW,
-          justifyContent: FLEX_START,
+          gridRow: '0',
           gridColumn: '10',
-        });
+          justifyContent: SPACE_BETWEEN,
+        };
+
+        expect(wrapper.prop('style')).to.deep.equal(expected);
       });
 
       it('returns column position with justifyContent, when toCol is provided', () => {
@@ -119,30 +168,16 @@ describe('GridItem', () => {
           </PureGridItem>,
         );
 
-        expect(wrapper.prop('style')).to.deep.equal({
+        const expected = {
           display: DISPLAY_FLEX,
+          alignItems: CENTER,
           flexDirection: ROW,
-          gridRow: DEFAULT_ROW,
-          justifyContent: FLEX_START,
+          gridRow: '0',
           gridColumn: '0 / 10',
-        });
-      });
-    });
-    describe('isCenter', () => {
-      it('returns center justifyContent with expected gridColumn', () => {
-        const wrapper = shallow(
-          <PureGridItem autoPositionCell={autoPositionCell} isCenter>
-            <div />
-          </PureGridItem>,
-        );
+          justifyContent: SPACE_BETWEEN,
+        };
 
-        expect(wrapper.prop('style')).to.deep.equal({
-          display: DISPLAY_FLEX,
-          flexDirection: ROW,
-          gridRow: DEFAULT_ROW,
-          justifyContent: CENTER,
-          gridColumn: '1 / -1',
-        });
+        expect(wrapper.prop('style')).to.deep.equal(expected);
       });
     });
   });

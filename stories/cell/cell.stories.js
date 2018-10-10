@@ -6,44 +6,83 @@ import { action } from "@storybook/addon-actions";
 import TextField from "@material-ui/core/TextField";
 
 import { Cell, CellItem } from "../../src/components/cell";
+import { PureCell } from "../../src/components/cell/Cell";
+import { ValuesProvider } from "../../src/components/cell/context";
 
-const required = {
-  registerCellInfo: action("registerCellInfo"),
-  updateCellValue: action("updateCellValue"),
-  values: {}
-};
+const CELL = "Cell";
 
-storiesOf("Cell", module)
-  .add("default", () => <Cell cn={required} />)
-  .add("with nameRef", () => <Cell cn={required} nameRef="storybook_test" />)
-  .add("with init value", () => <Cell cn={required} value="Hi there!" />)
-  .add("with groupName", () => (
-    <Cell cn={required} checked type="radio" groupName="gender" />
+const PURE_CELL = "PureCell";
+const TYPE = "type";
+
+const CONTEXT = "context";
+
+/**
+ * directory for PureCell
+ */
+storiesOf(`${CELL}/${PURE_CELL}`, module)
+  .add("default", () => <PureCell />)
+  .add("with init value", () => <PureCell value="Hi there!" />)
+  .add("with button type and groupName", () => (
+    <PureCell checked type="radio" groupName="gender" />
   ))
   .add("with component", () => (
-    <Cell cn={required} component={TextField} label="Name" margin="normal" />
+    <PureCell component={TextField} label="Name" margin="normal" />
   ))
   .add("with handlers", () => (
-    <Cell
-      cn={required}
-      onChange={action("onChange")}
-      onBlur={action("onBlur")}
-    />
+    <PureCell onChange={action("onChange")} onBlur={action("onBlur")} />
   ))
   .add("with items", () => (
-    <Cell cn={required} type="select">
+    <PureCell type="select">
       <CellItem>A</CellItem>
       <CellItem>B</CellItem>
       <CellItem>C</CellItem>
-    </Cell>
-  ))
-  .add("text", () => <Cell cn={required} type="text" />);
+    </PureCell>
+  ));
 
-storiesOf("Cell/type", module)
-  .add("text", () => <Cell cn={required} type="text" />)
-  .add("password", () => <Cell cn={required} type="password" />)
-  .add("email", () => <Cell cn={required} type="email" />)
-  .add("radio", () => <Cell cn={required} type="radio" />)
-  .add("checkbox", () => <Cell cn={required} type="checkbox" />)
-  .add("color", () => <Cell cn={required} type="color" />)
-  .add("date", () => <Cell cn={required} type="date" />);
+/**
+ * directory for types
+ */
+storiesOf(`${CELL}/${PURE_CELL}/${TYPE}`, module)
+  .add("text", () => <PureCell type="text" />)
+  .add("password", () => <PureCell type="password" />)
+  .add("email", () => <PureCell type="email" />)
+  .add("radio", () => <PureCell type="radio" />)
+  .add("checkbox", () => <PureCell type="checkbox" />)
+  .add("color", () => <PureCell type="color" />)
+  .add("date", () => <PureCell type="date" />);
+
+/**
+ * directory connected with context
+ */
+
+storiesOf(`${CELL}/${CONTEXT}`, module)
+  .add("group toggle", () => (
+    <ValuesProvider>
+      <Cell type="radio" id="1" groupName="test" />
+      <Cell type="radio" id="2" groupName="test" />
+      <Cell type="radio" id="3" groupName="test" />
+    </ValuesProvider>
+  ))
+  .add("another way of toggling", () => (
+    <ValuesProvider>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column"
+        }}
+      >
+        <label htmlFor="1">
+          grouped:
+          <Cell type="checkbox" id="1" groupName="test" />
+        </label>
+        <label htmlFor="2">
+          grouped:
+          <Cell type="checkbox" id="2" groupName="test" />
+        </label>
+        <label htmlFor="3">
+          not grouped:
+          <Cell type="checkbox" id="3" />
+        </label>
+      </div>
+    </ValuesProvider>
+  ));

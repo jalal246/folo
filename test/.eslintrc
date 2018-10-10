@@ -10,7 +10,6 @@
   },
   "extends": "airbnb",
   "rules": {
-    "react/prop-types": [0],
-    "react/jsx-one-expression-per-line": "off"
+    "react/prop-types": [0]
   }
 }
