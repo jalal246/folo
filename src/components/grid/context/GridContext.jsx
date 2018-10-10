@@ -30,22 +30,24 @@ export class GridProvider extends React.PureComponent {
    * @return {number} row position
    */
   autoPositionCell = ({ key, row, toRow }) => {
+    const parseRow = parseInt(row, 10);
+
     /*
     * if we have row,
     * then set position & calculate the biggest
     */
-    if (row) {
+    if (parseRow) {
       /*
       * if we have new value, then update
       * update flag
       * update biggestRowItem
       */
-      if (this.cellPositions[key] !== row) {
-        this.cellPositions[key] = row;
+      if (this.cellPositions[key] !== parseRow) {
+        this.cellPositions[key] = parseRow;
       }
 
-      if (row > this.biggestRowItem) {
-        this.biggestRowItem = row;
+      if (parseRow > this.biggestRowItem) {
+        this.biggestRowItem = parseRow;
       }
       /*
       * we dont have row so let's update biggestRowItem
@@ -73,7 +75,6 @@ export class GridProvider extends React.PureComponent {
 
   render() {
     // console.log('GridProvider update');
-
     // eslint-disable-next-line
     const { children } = this.props;
 
