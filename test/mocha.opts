@@ -1,1 +1,1 @@
---require babel-core/register ./test/_helpers
+--require @babel/register ./test/_helpers

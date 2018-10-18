@@ -11,7 +11,7 @@
     "src"
   ],
   "require": [
-    "babel-core/register"
+    "@babel/register"
   ],
   "reporter": [
     "text",
