@@ -6,7 +6,7 @@
 
 ![live example](https://raw.githubusercontent.com/jalal246/folio/master/folio-demo.gif)
 
-[![Travis (.org)](https://img.shields.io/travis/:user/:repo.svg)](https://travis-ci.org/jalal246/folio)
+[![Build Status](https://travis-ci.org/jalal246/folio.svg?branch=master)](https://travis-ci.org/jalal246/folio)
 [![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg)](https://codecov.io/gh/jalal246/folio)
 [![npm](https://img.shields.io/npm/v/:package.svg)](https://www.npmjs.com/package/package/folio)
 [![npm](https://img.shields.io/npm/dt/:package.svg)](https://www.npmjs.com/package/package/folio)
