@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import { ValuesConsumer } from "./cell/context";
 import withContext from "./withContext";
 
+import componentShape from "./shapes/componentShape";
+
 const propTypes = {
-  component: PropTypes.node,
+  component: componentShape,
   onSubmit: PropTypes.func,
   getContextValues: PropTypes.func
 };

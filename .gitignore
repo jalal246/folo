@@ -36,6 +36,8 @@ node_modules
 
 # build folder
 dist
+lib
+esm
 
 # gh-pages
 _gh-pages
