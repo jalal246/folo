@@ -69,7 +69,7 @@ const myForm = ({ mySubmitFunc }) => (
 ### Components
 
 ```js
-import Folio, { Form, Grid, Cell, CellItem, GridItem } from "folio";
+import Folio, { Form, Grid, Cell, CellItem, GridItem } from "folio-forms";
 ```
 
 ### Components Props
