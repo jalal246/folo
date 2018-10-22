@@ -11,10 +11,6 @@ const propTypes = {
    */
   component: componentShape,
   /**
-   * option value
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /**
    * @see See [key](https://reactjs.org/docs/lists-and-keys.html) for a list of color names
    */
   // key: PropTypes.string,
@@ -22,9 +18,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  component: "option",
-  value: null
-  // key: keyGenerator("autoKey")
+  component: "option"
 };
 
 /**
@@ -33,15 +27,10 @@ const defaultProps = {
  */
 export default function CellItem({
   component: CellComponent,
-  value,
   children,
   ...other
 }) {
-  return (
-    <CellComponent value={value} {...other}>
-      {children}
-    </CellComponent>
-  );
+  return <CellComponent {...other}>{children}</CellComponent>;
 }
 
 CellItem.propTypes = propTypes;
