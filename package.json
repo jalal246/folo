@@ -33,8 +33,6 @@
     "postversion": "git add . && git commit -m \"Version $npm_package_version\" && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
     "prepublishOnly": "in-publish && npm run check-cover && safe-publish-latest && npm run build || not-in-publish",
     "postpublish": "[ \"${npm_config_tag:-latest}\" != latest ] || npm run gh-pages",
-    "check-changelog": "expr $(git status --porcelain 2>/dev/null| grep \"^\\s*M.*CHANGELOG.md\" | wc -l) >/dev/null || (echo 'Please edit CHANGELOG.md' && exit 1)",
-    "check-only-changelog-changed": "(expr $(git status --porcelain 2>/dev/null| grep -v \"CHANGELOG.md\" | wc -l) >/dev/null && echo 'Only CHANGELOG.md may have uncommitted changes' && exit 1) || exit 0"
   },
   "repository": {
     "type": "git",
