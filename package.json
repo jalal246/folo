@@ -29,7 +29,8 @@
     "version:patch": "npm --no-git-tag-version version patch",
     "version:minor": "npm --no-git-tag-version version minor",
     "version:major": "npm --no-git-tag-version version major",
-    "postversion": "cross-var git add . && git commit -m \"version $npm_package_version\" && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
+    "commit": "git commit -m \"version %npm_package_version%\"",
+    "postversion": "git add . && npm run commit && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
     "prepublishOnly": "in-publish && npm run check-cover && safe-publish-latest && npm run build || not-in-publish",
     "postpublish": "[ \"${npm_config_tag:-latest}\" != latest ] || npm run gh-pages"
   },
