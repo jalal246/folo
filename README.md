@@ -45,27 +45,22 @@ https://unpkg.com/folio/dist/
 #### Example
 
 ```js
-const myForm = { mySubmitFunc } => {
- return (
-   <Folio>
-     <Form
-       onSubmit={mySubmitFunc}
-     >
-       <Grid>
-       <GridItem row={1} col={1}>
-         <Cell valueKey="myFullName" type="text" />
-       </GridItem>
-       <GridItem row={2} col={1}>
-         <Cell valueKey="myEmail" type="email" />
-       </GridItem>
-         <button type="submit">
-           submit
-         </button>
-       </Grid>
-     </Form>
-   </Folio>
- );
-};
+const myForm = ({ mySubmitFunc }) => (
+  <Folio>
+    <Form onSubmit={mySubmitFunc}>
+      <Grid>
+        <GridItem row={1} col={1}>
+          <Cell valueKey="myFullName" type="text" />
+        </GridItem>
+        <GridItem row={2} col={1}>
+          <Cell valueKey="myEmail" type="email" />
+        </GridItem>
+        <button type="submit">submit</button>
+      </Grid>
+    </Form>
+  </Folio>
+);
+
 // mySubmitFunc will return: (event, {myFullName: "" myEmail: ""})
 ```
 
