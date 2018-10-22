@@ -4,6 +4,8 @@
 
 <hr />
 
+<!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
+
 ![live example](https://raw.githubusercontent.com/jalal246/folio/master/folio-demo.gif)
 
 [![Build Status](https://travis-ci.org/jalal246/folio.svg?branch=master)](https://travis-ci.org/jalal246/folio)
