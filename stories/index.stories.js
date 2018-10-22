@@ -12,7 +12,6 @@ const styleLabel = {
   padding: "17px"
 };
 
-// eslint-desabled-next-line
 const Label = ({ children }) => <label style={styleLabel}>{children}</label>;
 
 storiesOf(`example`, module).add("default", () => (
