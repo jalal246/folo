@@ -14,7 +14,7 @@
 
 ## Overview
 
-folio has two major bases `Cells` for data and `Grid` for layout. With these components, making a form should be easier than ever. See full examples of folio :point_right: https://jalal246.github.io/folio/.
+`Folio` has two major bases `Cells` for data and `Grid` for layout. With these components, making a form should be easier than ever. See full examples of folio :point_right: https://jalal246.github.io/folio/.
 
 ## Installation
 
