@@ -30,7 +30,7 @@ Run locally:
 Using npm:
 
 ```
-npm install --save folio
+npm install --save folio-forms
 ```
 
 > folio depends on `react` and `prop-types`. Please make sure you
@@ -39,7 +39,7 @@ npm install --save folio
 unpkg
 
 ```
-https://unpkg.com/folio/dist/
+https://unpkg.com/folio-forms/dist/
 ```
 
 ## Usage
