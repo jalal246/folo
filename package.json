@@ -32,7 +32,7 @@
     "preversion": "npm run test && npm run check-changelog && npm run check-only-changelog-changed",
     "postversion": "git add . && git commit -m \"Version $npm_package_version\" && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
     "prepublishOnly": "in-publish && npm run check-cover && safe-publish-latest && npm run build || not-in-publish",
-    "postpublish": "[ \"${npm_config_tag:-latest}\" != latest ] || npm run gh-pages",
+    "postpublish": "[ \"${npm_config_tag:-latest}\" != latest ] || npm run gh-pages"
   },
   "repository": {
     "type": "git",
