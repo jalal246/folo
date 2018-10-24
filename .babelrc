@@ -4,12 +4,6 @@
   "env": {
     "test": {
       "plugins": ["istanbul"]
-    },
-    "cjs": {
-      "presets": [["airbnb", { "removePropTypes": true }]]
-    },
-    "esm": {
-      "presets": [["airbnb", { "modules": false, "removePropTypes": true }]]
     }
   }
 }

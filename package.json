@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "eslint --ext .js,.jsx src test",
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx src test",
     "pretest": "npm run --silent lint",
     "test": "mocha test/**/*.{jsx,js}",
     "test:comp:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions jsx test/components/**/*.jsx",
