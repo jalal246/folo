@@ -1,6 +1,6 @@
 {
   "name": "folio-forms",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dynamic Form Built With React & CSS Grid",
   "main": "dist/folio.commonjs2.js",
   "unpkg": "dist/folio.umd.min.js",
@@ -48,9 +48,9 @@
     "LICENSE.md",
     "README.md",
     "CHANGELOG.md",
-    "dist/index.commonjs2.js",
-    "dist/index.umd.js",
-    "dist/index.umd.min.js"
+    "dist/folio.commonjs2.js",
+    "dist/folio.umd.min.js",
+    "dist/folio.umd.js"
   ],
   "keywords": [
     "react",
