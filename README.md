@@ -9,9 +9,9 @@
 ![live example](https://raw.githubusercontent.com/jalal246/folio/master/folio-demo.gif)
 
 [![Build Status](https://travis-ci.org/jalal246/folio.svg?branch=master)](https://travis-ci.org/jalal246/folio)
-[![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg)](https://codecov.io/gh/jalal246/folio)
-[![npm](https://img.shields.io/npm/v/:package.svg)](https://www.npmjs.com/package/folio-forms)
-[![npm](https://img.shields.io/npm/dt/:package.svg)](https://www.npmjs.com/package/folio-forms)
+[![Codecov](https://img.shields.io/codecov/c/github/jalal246/folio.svg)](https://codecov.io/gh/jalal246/folio)
+[![npm](https://img.shields.io/npm/v/folio-forms.svg)](https://www.npmjs.com/package/folio-forms)
+[![npm](https://img.shields.io/npm/dt/folio-forms.svg)](https://www.npmjs.com/package/folio-forms)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folio/blob/master/LICENSE)
 
 ## Overview
