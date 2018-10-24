@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/eslint --ext .js,.jsx src test",
+    "lint": "eslint --ext .js,.jsx src test",
     "pretest": "npm run --silent lint",
     "test": "mocha test/**/*.{jsx,js}",
     "test:comp:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions jsx test/components/**/*.jsx",
@@ -83,6 +83,7 @@
     "@storybook/addon-options": "^3.4.11",
     "@storybook/addons": "^4.0.0-alpha.25",
     "@storybook/react": "^4.0.0-alpha.25",
+    "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.4",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-preset-airbnb": "^3.0.1",
