@@ -100,10 +100,12 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^2.0.0",
+    "husky": "^1.1.2",
     "in-publish": "^2.0.0",
     "jsdom": "^12.1.0",
     "jsdom-global": "3.0.2",
     "lerna": "^3.4.3",
+    "lint-staged": "^8.0.3",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "prettier": "^1.14.3",
@@ -115,5 +117,16 @@
     "sinon": "^6.3.4",
     "sinon-sandbox": "^2.0.0",
     "webpack": "^4.20.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
