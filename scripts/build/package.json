@@ -6,6 +6,7 @@
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
     "babel-preset-folio": "0.0.0",
     "folio-div-utils": "0.0.0",
     "lerna-alias": "^3.0.2",

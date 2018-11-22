@@ -18,7 +18,8 @@ const {
   getPackagesInfo,
   msg,
   camelize,
-  error
+  error,
+  sortPackages
 } = require("folio-div-utils");
 
 const UMD = "umd";
@@ -32,17 +33,22 @@ const { SILENT } = process.env;
 
 const isSilent = SILENT === "true";
 
+let BUILD_FORMAT = "";
+let BABEL_ENV = "";
+
 async function start() {
   const packages = getPackages();
 
+  const packagesArr = getPackagesInfo(packages);
+
   clean({
-    packages,
+    packages: packages,
     filenames: ["dist"]
   });
 
-  const packagesArr = getPackagesInfo({ packages });
+  const sortedPackagesArr = sortPackages({ packages: packagesArr });
 
-  await packagesArr.forEach(async (pkg, i) => {
+  for (const pkg of sortedPackagesArr) {
     const {
       sourcePath,
       distPath,
@@ -58,12 +64,7 @@ async function start() {
 
     const globals = getGlobal(peerDependencies);
 
-    const external = getExternal({
-      peerDependencies,
-      dependencies
-    });
-
-    msg(` bundle ${name} as ${modifiedName} ${i}`);
+    msg(` bundle ${name} as ${modifiedName}`);
 
     const opts = [
       { format: UMD, isProd: false },
@@ -74,12 +75,22 @@ async function start() {
       { format: ES, isProd: true }
     ];
 
-    opts.forEach(async ({ format, isProd }) => {
-      process.env.BUILD_FORMAT = format;
-      process.env.BABEL_ENV = isProd ? PROD : DEV;
+    for (const { format, isProd } of opts) {
+      BUILD_FORMAT = format;
+      BABEL_ENV = `${isProd ? PROD : DEV}`;
+
+      const external = getExternal({
+        peerDependencies,
+        dependencies
+      });
 
       // babel presets according to env
-      const presets = [require("babel-preset-folio")];
+      const presets = [
+        require("babel-preset-folio")({
+          BUILD_FORMAT: format,
+          BABEL_ENV: `${isProd ? PROD : DEV}`
+        })
+      ];
 
       const input = getInput({
         sourcePath,
@@ -94,8 +105,8 @@ async function start() {
       });
 
       await build(input, ouput);
-    });
-  });
+    }
+  }
 }
 
 /**
@@ -106,7 +117,6 @@ async function start() {
  */
 
 function getOutPut({ name, distPath, globals }) {
-  const { BUILD_FORMAT, BABEL_ENV } = process.env;
   let fname;
 
   const modifiedName = name.replace("@", "").replace("/", "-");
@@ -145,8 +155,6 @@ function getGlobal(peerDependencies) {
  * then final function: getInput
  */
 function getInput({ sourcePath, external, presets }) {
-  const { BUILD_FORMAT, BABEL_ENV } = process.env;
-
   return {
     input: sourcePath,
     external,
@@ -176,27 +184,17 @@ function getInput({ sourcePath, external, presets }) {
   };
 }
 
-function getExternal({
-  peerDependencies,
-  dependencies,
-  isBundleFolioDeps = true
-}) {
+function getExternal({ peerDependencies, dependencies }) {
   let external = [];
+
+  // always exlude peerdeps
   if (peerDependencies) {
     external.push(...Object.keys(peerDependencies));
   }
 
-  // always treat dependencies as external?
-  // even with umd.
-  // if (BUILD_FORMAT !== UMD) {
-  //   external.push(...Object.keys(dependencies));
-  // }
-
-  external.push(...Object.keys(dependencies));
-
-  // buundle other sub packages.
-  if (isBundleFolioDeps) {
-    external = external.filter(dep => !dep.includes("folio"));
+  // add dependencies to bundle when umd
+  if (BUILD_FORMAT !== UMD) {
+    external.push(...Object.keys(dependencies));
   }
 
   return external.length === 0

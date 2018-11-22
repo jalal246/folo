@@ -90,10 +90,10 @@ function clean({ packages = [], filenames = ["dist" /* "coverage" */] } = {}) {
 /**
  * Get package json for each directories
  *
- * @param {object} packages
+ * @param {array} packages
  * @return {array} array of objects contains json, src path and dist path
  */
-function getPackagesInfo({ packages } = {}) {
+function getPackagesInfo(packages) {
   msg("Reading package.json and setting packages paths");
 
   if (packages.length === 0) {
@@ -132,6 +132,48 @@ function getPackagesInfo({ packages } = {}) {
   return packagesInfo.filter(Boolean);
 }
 
+function sortPackages({ packages, accordingTo = "folio" }) {
+  const filtered = [];
+
+  function addInedx(i, isClean = true) {
+    if (isClean) {
+      filtered.push(packages[i]);
+
+      // remove it from unsorted
+      packages.splice(i, 1);
+    }
+  }
+
+  function check(arr, targetedDep) {
+    let match = false;
+    match = arr.find(({ name }) => name === targetedDep);
+    return match;
+  }
+
+  function sort() {
+    packages.forEach(({ dependencies }, i) => {
+      let isClean = true;
+
+      Object.keys(dependencies).forEach(dep => {
+        if (dep.includes(accordingTo)) {
+          if (check(filtered, dep)) {
+            isClean = true;
+          } else {
+            isClean = false;
+          }
+        }
+      });
+      addInedx(i, isClean);
+    });
+  }
+
+  while (packages.length > 0) {
+    sort();
+  }
+
+  return filtered;
+}
+
 module.exports = {
   msg,
   success,
@@ -141,5 +183,6 @@ module.exports = {
   getPackages,
   clean,
   getPackagesInfo,
-  camelize: require("camelize")
+  camelize: require("camelize"),
+  sortPackages
 };

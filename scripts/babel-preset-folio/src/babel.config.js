@@ -1,6 +1,7 @@
-module.exports = () => {
-  const { BUILD_FORMAT, BABEL_ENV } = process.env;
-
+module.exports = ({
+  BUILD_FORMAT = process.env.BUILD_FORMAT,
+  BABEL_ENV = process.env.BABEL_ENV || "production"
+}) => {
   const preset = {
     presets: [
       [
@@ -15,9 +16,16 @@ module.exports = () => {
     ],
 
     plugins: [
-      // By default, this plugin uses Babel's extends helper which polyfills Object.assign.
-      // Enabling useBuiltIns option will use Object.assign directly.
       [
+        require.resolve("@babel/plugin-transform-runtime"),
+        {
+          useESModules: BUILD_FORMAT !== "cjs"
+        }
+      ],
+
+      [
+        // By default, this plugin uses Babel's extends helper which polyfills Object.assign.
+        // Enabling useBuiltIns option will use Object.assign directly.
         require.resolve("@babel/plugin-proposal-object-rest-spread"),
         {
           useBuiltIns: true
@@ -38,14 +46,7 @@ module.exports = () => {
     ]
   };
 
-  preset.plugins.push.apply(preset.plugins, [
-    [
-      require.resolve("@babel/plugin-transform-runtime"),
-      { useESModules: BUILD_FORMAT !== "cjs" }
-    ]
-  ]);
-
-  if (BABEL_ENV === "production") {
+  if (BABEL_ENV === "production" || BUILD_FORMAT == "umd") {
     preset.plugins.push.apply(preset.plugins, [
       [
         require.resolve("babel-plugin-transform-react-remove-prop-types"),
