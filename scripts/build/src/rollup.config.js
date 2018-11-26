@@ -122,17 +122,17 @@ function getOutPut({ name, distPath, globals }) {
   const modifiedName = name.replace("@", "").replace("/", "-");
 
   if (BUILD_FORMAT === UMD) {
-    fname = `${modifiedName}.${BABEL_ENV === PROD ? "umd.min.js" : "umd.js"}`;
+    fname = `${modifiedName}.${BABEL_ENV === PROD ? "min.umd.js" : "umd.js"}`;
   } else if (BUILD_FORMAT === CJS) {
-    fname = `${modifiedName}.${BABEL_ENV === PROD ? "cjs.js" : "cjs.dev.js"}`;
+    fname = `${modifiedName}.${BABEL_ENV === PROD ? "js" : "dev.js"}`;
   } else if (BUILD_FORMAT === ES) {
-    fname = `${modifiedName}.${BABEL_ENV === PROD ? "esm.js" : "esm.dev.js"}`;
+    fname = `${modifiedName}.${BABEL_ENV === PROD ? "mjs" : "dev.mjs"}`;
   }
 
   return {
     file: path.join(distPath, fname),
     format: BUILD_FORMAT,
-    ...(BUILD_FORMAT === UMD && { sourcemap: true }),
+    ...((BABEL_ENV === PROD || BUILD_FORMAT === UMD) && { sourcemap: true }),
     name: modifiedName,
     ...(BUILD_FORMAT === UMD && { globals }),
     interop: false
@@ -177,7 +177,12 @@ function getInput({ sourcePath, external, presets }) {
       BUILD_FORMAT === UMD && alias(lernaAliases()),
       commonjs(),
       BUILD_FORMAT === UMD && resolve(),
-      BABEL_ENV === PROD && terser(),
+      BABEL_ENV === PROD &&
+        terser({
+          output: { comments: false, beautify: false },
+          warnings: true,
+          toplevel: BUILD_FORMAT === CJS || BUILD_FORMAT === ES
+        }),
       !isSilent && filesize(),
       sizeSnapshot({ threshold: false, matchSnapshot: false, printInfo: false })
     ].filter(Boolean)
