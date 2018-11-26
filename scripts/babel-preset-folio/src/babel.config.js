@@ -46,7 +46,7 @@ module.exports = ({
     ]
   };
 
-  if (BABEL_ENV === "production" || BUILD_FORMAT == "umd") {
+  if (BABEL_ENV === "production") {
     preset.plugins.push.apply(preset.plugins, [
       [
         require.resolve("babel-plugin-transform-react-remove-prop-types"),
