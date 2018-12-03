@@ -1,0 +1,48 @@
+{
+  "name": "@folio/forms",
+  "version": "0.1.1",
+  "description": "Full package combined of @folio/layout & @folio/values",
+  "main": "dist/folioForms.js",
+  "umd:main": "dist/folioForms.min.umd.js",
+  "module": "dist/folioForms.mjs",
+  "scripts": {},
+  "repository": "https://github.com/jalal246/folio/tree/master/packages/folio-forms",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folio/issues"
+  },
+  "homepage": "https://github.com/jalal246/folio",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "@folio",
+    "@folio/withContext",
+    "@folio/values",
+    "@folio/layout",
+    "@folio/utils",
+    "react",
+    "react-component",
+    "context",
+    "css-grid",
+    "css-layout",
+    "form-builder-api",
+    "dynamic-forms"
+  ],
+  "dependencies": {
+    "@folio/layout": "0.0.0",
+    "@folio/values": "0.0.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}
