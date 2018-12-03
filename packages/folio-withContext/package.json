@@ -19,10 +19,14 @@
     "README.md"
   ],
   "keywords": [
+    "@folio",
+    "@folio/layout",
+    "@folio/values",
+    "@folio/forms",
+    "@folio/utils",
     "react",
+    "react-component",
     "context",
-    "component",
-    "folio",
     "HOC",
     "utility",
     "higher-order",
