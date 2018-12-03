@@ -1,6 +1,6 @@
 # @folio/withContext
 
-> Micro HOC compose component accepts custom context values as props
+> micro HOC compose component accepts custom context values as props
 
 <hr />
 
