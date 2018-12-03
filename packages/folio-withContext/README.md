@@ -26,7 +26,7 @@ import withContext from "@folio/withContext";
 const ComponentWithContext = withContext({
   Component: MyComponent,
   Consumer,
-  contextProps: ["prop1", "prop4"] // with no contextProps provided that means accepts all context props
+  contextProps: ["prop1", "prop4"] // with no contextProps provided, it accepts all context props
 });
 ```
 
