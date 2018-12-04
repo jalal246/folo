@@ -31,8 +31,8 @@
     "dynamic-forms"
   ],
   "dependencies": {
-    "@folio/utils": "0.0.0",
-    "@folio/withContext": "0.0.0"
+    "@folio/utils": "0.1.1",
+    "@folio/withContext": "0.1.1"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",

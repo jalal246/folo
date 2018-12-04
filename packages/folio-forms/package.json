@@ -33,8 +33,8 @@
     "dynamic-forms"
   ],
   "dependencies": {
-    "@folio/layout": "0.0.0",
-    "@folio/values": "0.0.0"
+    "@folio/layout": "0.1.1",
+    "@folio/values": "0.1.1"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
