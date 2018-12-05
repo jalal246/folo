@@ -21,28 +21,30 @@ npm install @folio/values
 ## Usage
 
 ```js
-import { Cell, CellItem, Form } from "@folio/values";
+import { FolioValues, Cell, CellItem, Form } from "@folio/values";
 
 const MyComponent = ({ onSubmit }) => (
-  <Form onSubmit={onSubmit}>
-    <label>
-      username:
-      <Cell valueKey="myName" type="text" />
-    </label>
-    <label>
-      password:
-      <Cell valueKey="myPass" type="password" />
-    </label>
-    <label>
-      choose:
-      <Cell valueKey="alphabet" type="select">
-        <CellItem valueKey="a">A</CellItem>
-        <CellItem valueKey="b">B</CellItem>
-        <CellItem valueKey="c">C</CellItem>
-      </Cell>
-    </label>
-    <button type="submit">submit</button>
-  </Form>
+  <FolioValues>
+    <Form onSubmit={onSubmit}>
+      <label>
+        username:
+        <Cell valueKey="myName" type="text" />
+      </label>
+      <label>
+        password:
+        <Cell valueKey="myPass" type="password" />
+      </label>
+      <label>
+        choose:
+        <Cell valueKey="alphabet" type="select">
+          <CellItem valueKey="a">A</CellItem>
+          <CellItem valueKey="b">B</CellItem>
+          <CellItem valueKey="c">C</CellItem>
+        </Cell>
+      </label>
+      <button type="submit">submit</button>
+    </Form>
+  </FolioValues>
 );
 // submit function will return: (event, {myName: "" myPass: "", alphabet:""})
 ```

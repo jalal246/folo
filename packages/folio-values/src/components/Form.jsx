@@ -21,7 +21,7 @@ class Form extends React.PureComponent {
   onSubmit = e => {
     e.preventDefault();
     const { getContextValues, onSubmit } = this.props;
-    console.log(getContextValues());
+
     onSubmit(e, getContextValues());
   };
 
@@ -34,11 +34,9 @@ class Form extends React.PureComponent {
       ...other
     } = this.props;
     return (
-      <ValuesProvider>
-        <FormComponent onSubmit={this.onSubmit} {...other}>
-          {children}
-        </FormComponent>
-      </ValuesProvider>
+      <FormComponent onSubmit={this.onSubmit} {...other}>
+        {children}
+      </FormComponent>
     );
   }
 }

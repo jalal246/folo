@@ -21,33 +21,35 @@ npm install @folio/layout
 ## Usage
 
 ```js
-import { Grid, GridItem } from "@folio/layout";
+import { FolioLayout, Grid, GridItem } from "@folio/layout";
 
 const MyGrid = () => (
-  <Grid>
-    <GridItem col={4} row={1}>
-      item
-    </GridItem>
-    <GridItem col={3} row={2}>
-      item
-    </GridItem>
-    <GridItem col={2} row={3}>
-      item
-    </GridItem>
-    <GridItem col={1} row={5}>
-      item
-    </GridItem>
-    <GridItem col={4} row={10}>
-      item
-    </GridItem>
-  </Grid>
+  <FolioLayout>
+    <Grid>
+      <GridItem col={4} row={1}>
+        item
+      </GridItem>
+      <GridItem col={3} row={2}>
+        item
+      </GridItem>
+      <GridItem col={2} row={3}>
+        item
+      </GridItem>
+      <GridItem col={1} row={5}>
+        item
+      </GridItem>
+      <GridItem col={4} row={10}>
+        item
+      </GridItem>
+    </Grid>
+  </FolioLayout>
 );
 ```
 
 ### Components
 
 ```js
-import { Grid, GridItem } from "@folio/layout";
+import { FolioLayout, Grid, GridItem } from "@folio/layout";
 ```
 
 ### Components Props

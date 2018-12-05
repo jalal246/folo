@@ -10,7 +10,9 @@ import React from "react";
  * @return {Component} - new component connected to context props
  */
 function withContext({ Component, Consumer, contextProps = [] } = {}) {
+  console.log("in here");
   return function ComponentWithContext(props) {
+    console.log(props);
     return (
       <Consumer>
         {context => {

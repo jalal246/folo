@@ -25,7 +25,7 @@ npm install @folio/forms
 ## Components
 
 ```js
-import { Form, Cell, CellItem, Grid, GridItem } from "@folio/forms";
+import Folio, { Form, Cell, CellItem, Grid, GridItem } from "@folio/forms";
 ```
 
 ## License

@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 
 import TextField from "@material-ui/core/TextField";
 
-import { Form, Cell, CellItem } from "../src";
+import { FolioValues, Cell, CellItem } from "../src";
 import { PureCell } from "../src/components/Cell";
 
 const CELL = "Cells";
@@ -56,14 +56,14 @@ storiesOf(`${CELL}/${PURE_CELL}/${TYPE}`, module)
 
 storiesOf(`${CELL}/${CONTEXT}`, module)
   .add("group toggle", () => (
-    <Form>
+    <FolioValues>
       <Cell type="radio" id="1" groupName="test" />
       <Cell type="radio" id="2" groupName="test" />
       <Cell type="radio" id="3" groupName="test" />
-    </Form>
+    </FolioValues>
   ))
   .add("another way of toggling", () => (
-    <Form>
+    <FolioValues>
       <div
         style={{
           display: "flex",
@@ -83,5 +83,5 @@ storiesOf(`${CELL}/${CONTEXT}`, module)
           <Cell type="checkbox" id="3" />
         </label>
       </div>
-    </Form>
+    </FolioValues>
   ));
