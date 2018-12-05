@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import withContext from "@folio/withContext";
-import { keyGenerator } from "@folio/utils";
 
+import { keyGenerator } from "@folio/utils";
 import { GridConsumer } from "./context";
 
 import {
