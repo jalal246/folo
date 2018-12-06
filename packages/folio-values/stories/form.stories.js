@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 
 import { FolioValues, Form, Cell, CellItem } from "../src";
 
-const FORM = "form";
+import { MAIN_APP, FORM } from "./_directories";
 
 /**
  * directory connected with context
@@ -14,7 +14,7 @@ const styleLabel = {
   padding: "17px"
 };
 
-storiesOf(`${FORM}`, module)
+storiesOf(`${MAIN_APP}/${FORM}`, module)
   .add("basic form connected to context", () => (
     <FolioValues>
       <Form

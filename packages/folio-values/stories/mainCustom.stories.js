@@ -10,9 +10,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 
+import { MAIN_APP, CUSTOM } from "./_directories";
+
 import { FolioValues, Form, Cell } from "../src";
 
-storiesOf(`Custom components`, module).add(
+storiesOf(`${MAIN_APP}/${CUSTOM}`, module).add(
   "using component form material-ui",
   () => (
     <FolioValues>

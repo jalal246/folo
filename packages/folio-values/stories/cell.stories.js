@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import { FolioValues, Cell, CellItem } from "../src";
 import { PureCell } from "../src/components/Cell";
 
-const CELL = "Cells";
+import { MAIN_APP, CELL } from "./_directories";
 
 const PURE_CELL = "PureCell";
 const TYPE = "type";
@@ -18,7 +18,7 @@ const CONTEXT = "context";
 /**
  * directory for PureCell
  */
-storiesOf(`${CELL}/${PURE_CELL}`, module)
+storiesOf(`${MAIN_APP}/${CELL}/${PURE_CELL}`, module)
   .add("default", () => <PureCell />)
   .add("with init value", () => <PureCell value="Hi there!" />)
   .add("with button type and groupName", () => (
@@ -41,7 +41,7 @@ storiesOf(`${CELL}/${PURE_CELL}`, module)
 /**
  * directory for types
  */
-storiesOf(`${CELL}/${PURE_CELL}/${TYPE}`, module)
+storiesOf(`${MAIN_APP}/${CELL}/${PURE_CELL}/${TYPE}`, module)
   .add("text", () => <PureCell type="text" />)
   .add("password", () => <PureCell type="password" />)
   .add("email", () => <PureCell type="email" />)
@@ -54,7 +54,7 @@ storiesOf(`${CELL}/${PURE_CELL}/${TYPE}`, module)
  * directory connected with context
  */
 
-storiesOf(`${CELL}/${CONTEXT}`, module)
+storiesOf(`${MAIN_APP}/${CELL}/${CONTEXT}`, module)
   .add("group toggle", () => (
     <FolioValues>
       <Cell type="radio" id="1" groupName="test" />
