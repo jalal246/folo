@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { GridProvider } from "./context";
-
 import {
   GRID,
   STRETCH,
@@ -136,11 +134,9 @@ class Grid extends React.PureComponent {
     };
 
     return (
-      <GridProvider>
-        <CellComponent style={style} {...otherProps}>
-          {children}
-        </CellComponent>
-      </GridProvider>
+      <CellComponent style={style} {...otherProps}>
+        {children}
+      </CellComponent>
     );
   }
 }

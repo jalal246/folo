@@ -21,7 +21,7 @@ npm install @folio/values
 ## Usage
 
 ```js
-import { FolioValues, Cell, CellItem, Form } from "@folio/values";
+import FolioValues, { Cell, CellItem, Form } from "@folio/values";
 
 const MyComponent = ({ onSubmit }) => (
   <FolioValues>
@@ -52,7 +52,7 @@ const MyComponent = ({ onSubmit }) => (
 ### Components
 
 ```js
-import { Form, Cell, CellItem } from "@folio/values";
+import FolioValues, { Form, Cell, CellItem } from "@folio/values";
 ```
 
 ### Components Props
