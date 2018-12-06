@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import { FolioValues, Form, Cell, CellItem } from "../src";
+import FolioValues, { Form, Cell, CellItem } from "../src";
 
 import { MAIN_APP, FORM } from "./_directories";
 

@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 
 import TextField from "@material-ui/core/TextField";
 
-import { FolioValues, Cell, CellItem } from "../src";
+import FolioValues, { Cell, CellItem } from "../src";
 import { PureCell } from "../src/components/Cell";
 
 import { MAIN_APP, CELL } from "./_directories";

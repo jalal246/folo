@@ -12,7 +12,7 @@ import Button from "@material-ui/core/Button";
 
 import { MAIN_APP, CUSTOM } from "./_directories";
 
-import { FolioValues, Form, Cell } from "../src";
+import FolioValues, { Form, Cell } from "../src";
 
 storiesOf(`${MAIN_APP}/${CUSTOM}`, module).add(
   "using component form material-ui",
