@@ -6,7 +6,7 @@
 
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
-![live example](https://raw.githubusercontent.com/jalal246/folio/master/packages/folio-values/folio-demo.gif)
+![live example](https://raw.githubusercontent.com/jalal246/folio/master/packages/folio-values/folioValues-demo.gif)
 
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folio/values.svg)](https://www.npmjs.com/package/@folio/values)
