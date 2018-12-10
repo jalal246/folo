@@ -14,32 +14,25 @@ const styleLabel = {
   padding: "17px"
 };
 
+const styleForm = {
+  display: "flex",
+  flexDirection: "column",
+  background: "beige",
+  width: "40%",
+  margin: "10px",
+  padding: "17px"
+};
+
 storiesOf(`${MAIN_APP}/${FORM}`, module)
   .add("basic form connected to context", () => (
     <FolioValues>
-      <Form
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          background: "beige",
-          width: "40%",
-          margin: "10px",
-          padding: "17px"
-        }}
-        onSubmit={action("onSubmit")}
-      >
-        <label style={styleLabel} htmlFor="1">
-          type a text:
-          <Cell type="text" />
-        </label>
-        <label style={styleLabel} htmlFor="2">
-          choose this checkbox:
-          <Cell type="checkbox" groupName="test" />
-        </label>
-        <label style={styleLabel} htmlFor="2">
-          or this checkbox:
-          <Cell type="checkbox" groupName="test" />
-        </label>
+      <Form style={styleForm} onSubmit={action("onSubmit")}>
+        type a text:
+        <Cell type="text" />
+        choose this checkbox:
+        <Cell type="checkbox" groupName="test" />
+        or this checkbox:
+        <Cell type="checkbox" groupName="test" />
         <label style={styleLabel} htmlFor="3">
           items
           <Cell type="select">
@@ -54,17 +47,7 @@ storiesOf(`${MAIN_APP}/${FORM}`, module)
   ))
   .add("with more custom attr", () => (
     <FolioValues>
-      <Form
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          background: "beige",
-          width: "40%",
-          margin: "10px",
-          padding: "17px"
-        }}
-        onSubmit={action("onSubmit")}
-      >
+      <Form style={styleForm} onSubmit={action("onSubmit")}>
         <label style={styleLabel}>
           type a text:
           <Cell valueKey="text1" value="someText" type="text" />

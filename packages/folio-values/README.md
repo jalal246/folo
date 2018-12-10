@@ -4,6 +4,11 @@
 
 <hr />
 
+<!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
+
+![live example](https://raw.githubusercontent.com/jalal246/folio/master/packages/folio-values/folio-demo.gif)
+
+<!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folio/values.svg)](https://www.npmjs.com/package/@folio/values)
 [![NPM Download](https://img.shields.io/npm/dt/@folio/values.svg)](https://www.npmjs.com/package/@folio/values)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folio/values)
@@ -11,6 +16,7 @@
 [![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folio/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/jalal246/folio.svg?branch=master)](https://travis-ci.org/jalal246/folio)
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folio.svg)](https://codecov.io/gh/jalal246/folio)
+<!-- prettier-ignore-end -->
 
 ## Installation
 
