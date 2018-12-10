@@ -21,7 +21,7 @@ npm install @folio/layout
 ## Usage
 
 ```js
-import FolioLayout, { Grid, GridItem } from "@folio/layout";
+import { FolioLayout, Grid, GridItem } from "@folio/layout";
 
 const MyGrid = () => (
   <FolioLayout>
@@ -49,7 +49,7 @@ const MyGrid = () => (
 ### Components
 
 ```js
-import FolioLayout, { Grid, GridItem } from "@folio/layout";
+import { FolioLayout, Grid, GridItem } from "@folio/layout";
 ```
 
 ### Components Props

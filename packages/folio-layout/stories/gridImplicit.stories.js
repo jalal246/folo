@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 
 import { MAIN_APP, GRID_IMPLICIT } from "./_directories";
 
-import FolioLayout, { Grid, GridItem } from "../src";
+import { FolioLayout, Grid, GridItem } from "../src";
 
 const styleLabel = {
   backgroundColor: "red",

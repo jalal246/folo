@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "react/jsx-filename-extension": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": "off",
+    "react/prop-types": [2, { "ignore": ["children"] }]
+  }
+}
