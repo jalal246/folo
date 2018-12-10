@@ -1,0 +1,14 @@
+{
+  "name": "folio-dev-utils",
+  "main": "src/index.js",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "camelize": "^1.0.0",
+    "chalk": "^2.4.1",
+    "glob": "^7.1.3",
+    "rimraf": "^2.6.2"
+  }
+}
