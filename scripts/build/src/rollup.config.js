@@ -20,7 +20,7 @@ const {
   camelize,
   error,
   sortPackages
-} = require("folio-div-utils");
+} = require("folio-dev-utils");
 
 const UMD = "umd";
 const CJS = "cjs";
@@ -86,7 +86,7 @@ async function start() {
 
       // babel presets according to env
       const presets = [
-        require("babel-preset-folio")({
+        require("babel-preset-folio-dev")({
           BUILD_FORMAT: format,
           BABEL_ENV: `${isProd ? PROD : DEV}`
         })
@@ -117,17 +117,20 @@ async function start() {
  */
 
 function getOutPut({ name, distPath, globals }) {
-  let fname;
-
   const modifiedName = name.replace("@", "").replace("/", "-");
 
+  let ext;
   if (BUILD_FORMAT === UMD) {
-    fname = `${modifiedName}.${BABEL_ENV === PROD ? "min.umd.js" : "umd.js"}`;
+    ext = "umd.js";
   } else if (BUILD_FORMAT === CJS) {
-    fname = `${modifiedName}.${BABEL_ENV === PROD ? "js" : "dev.js"}`;
+    ext = "cjs.js";
   } else if (BUILD_FORMAT === ES) {
-    fname = `${modifiedName}.${BABEL_ENV === PROD ? "mjs" : "dev.mjs"}`;
+    ext = "esm.js";
   }
+
+  const fname = `${modifiedName}.${
+    BABEL_ENV === PROD ? `min.${ext}` : `${ext}`
+  }`;
 
   return {
     file: path.join(distPath, fname),

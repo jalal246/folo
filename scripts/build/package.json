@@ -6,11 +6,10 @@
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
-    "babel-preset-folio": "0.0.0",
-    "folio-div-utils": "0.0.0",
+    "rollup": "^0.67.4",
+    "babel-preset-folio-dev": "0.0.0",
+    "folio-dev-utils": "0.0.0",
     "lerna-alias": "^3.0.2",
-    "rollup": "^0.67.0",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -19,6 +18,5 @@
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-size-snapshot": "^0.7.0",
     "rollup-plugin-terser": "^3.0.0"
-  },
-  "devDependencies": {}
+  }
 }
