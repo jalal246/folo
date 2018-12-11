@@ -6,6 +6,7 @@
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
 ![live example](https://raw.githubusercontent.com/jalal246/folio/master/packages/folio-forms/folioForms-demo.gif)
+
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folio/forms.svg)](https://www.npmjs.com/package/@folio/forms)
 [![NPM Download](https://img.shields.io/npm/dt/@folio/forms.svg)](https://www.npmjs.com/package/@folio/forms)
@@ -31,8 +32,8 @@ npm install @folio/forms
 ```js
 import { Folio, Form, Cell, CellItem, Grid, GridItem } from "@folio/forms";
 ```
-See [Cells](https://github.com/jalal246/folio/tree/master/packages/folio-values) for data and [Grid](https://github.com/jalal246/folio/tree/master/packages/folio-layout) for more documentation.
 
+See [Cells](https://github.com/jalal246/folio/tree/master/packages/folio-values) and [Grid](https://github.com/jalal246/folio/tree/master/packages/folio-layout) for more documentations.
 
 ## License
 
