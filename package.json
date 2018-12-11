@@ -13,6 +13,7 @@
   },
   "scripts": {
     "webpack:pkg": "lerna exec --stream --parallel build",
+    "bootstrap": "lerna bootstrap",
     "lint": "lerna exec --stream --parallel -- eslint --ext .js,.jsx src test",
     "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
     "test:w": "cross-env NODE_ENV=test mocha --opts mocha.opts --watch --watch-extensions jsx",

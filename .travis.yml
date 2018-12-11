@@ -8,6 +8,7 @@ notifications:
 node_js: "8"
 install:
   - npm install
+  - npm run bootstrap
   - npm link scripts/babel-preset-folio-dev
   - npm link scripts/folio-test-helpers
 after_success:
