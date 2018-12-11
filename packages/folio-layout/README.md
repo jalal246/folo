@@ -3,6 +3,9 @@
 > micro CSS grid react-components
 
 <hr />
+<!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
+
+![live example](https://raw.githubusercontent.com/jalal246/folio/master/packages/folio-layout/folioLayout-demo.gif)
 
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folio/layout.svg)](https://www.npmjs.com/package/@folio/layout)

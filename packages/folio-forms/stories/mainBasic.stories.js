@@ -19,8 +19,8 @@ storiesOf(`${MAIN_APP}/${BASIC}`, module)
         }}
       >
         <Grid>
-          <Cell valueKey="name" type="text" placeHolder="names goes here" />
-          <Cell valueKey="email" type="email" placeHolder="your email" />
+          <Cell valueKey="name" type="text" placeholder="names goes here" />
+          <Cell valueKey="email" type="email" placeholder="your email" />
           <label>
             single?
             <Cell valueKey="isSingle" type="checkbox" />
@@ -61,8 +61,8 @@ storiesOf(`${MAIN_APP}/${BASIC}`, module)
           colMinWidth="30%"
           colMaxWidth="70%"
         >
-          <Cell valueKey="username" type="text" placeHolder="username" />
-          <Cell valueKey="pass" type="password" placeHolder="password" />
+          <Cell valueKey="username" type="text" placeholder="username" />
+          <Cell valueKey="pass" type="password" placeholder="password" />
         </Grid>
         <button
           style={{
