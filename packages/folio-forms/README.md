@@ -24,13 +24,15 @@ npm install @folio/forms
 
 ## Overview
 
-`@folio/forms` has two major bases [Cells](https://github.com/jalal246/folio/tree/master/packages/folio-values) for data and [Grid](https://github.com/jalal246/folio/tree/master/packages/folio-layout) for layout. With these components, making and designing a form should be easier than ever.
+`@folio/forms` has two major bases [Cells](https://github.com/jalal246/folio/tree/master/packages/folio-values) and [Grid](https://github.com/jalal246/folio/tree/master/packages/folio-layout) for layout. With these components, making and designing a form should be easier than ever.
 
 ## Components
 
 ```js
 import { Folio, Form, Cell, CellItem, Grid, GridItem } from "@folio/forms";
 ```
+See [Cells](https://github.com/jalal246/folio/tree/master/packages/folio-values) for data and [Grid](https://github.com/jalal246/folio/tree/master/packages/folio-layout) for more documentation.
+
 
 ## License
 
