@@ -1,13 +1,13 @@
 module.exports = ({
   BUILD_FORMAT = process.env.BUILD_FORMAT,
-  BABEL_ENV = process.env.BABEL_ENV || "production"
+  BABEL_ENV = process.env.BABEL_ENV || process.env.NODE_ENV || "development"
 }) => {
   const preset = {
     presets: [
       [
         require.resolve("@babel/preset-env"),
         {
-          modules: false,
+          modules: BABEL_ENV === "test" ? "cjs" : false,
           loose: true
         }
       ],
@@ -16,13 +16,6 @@ module.exports = ({
     ],
 
     plugins: [
-      [
-        require.resolve("@babel/plugin-transform-runtime"),
-        {
-          useESModules: BUILD_FORMAT !== "cjs"
-        }
-      ],
-
       [
         // By default, this plugin uses Babel's extends helper which polyfills Object.assign.
         // Enabling useBuiltIns option will use Object.assign directly.
@@ -39,25 +32,41 @@ module.exports = ({
       [
         require.resolve("@babel/plugin-proposal-class-properties"),
         { loose: true }
-      ],
-
-      // remove inused code
-      require.resolve("babel-plugin-minify-dead-code-elimination")
+      ]
     ]
   };
 
-  if (BABEL_ENV === "production") {
+  if (BABEL_ENV === "test") {
     preset.plugins.push.apply(preset.plugins, [
       [
-        require.resolve("babel-plugin-transform-react-remove-prop-types"),
-        {
-          mode: "remove",
-          removeImport: true
-        }
+        // remove inused code
+        require.resolve("babel-plugin-istanbul")
       ]
     ]);
-  } else if (BABEL_ENV === "test") {
-    ["babel-plugin-istanbul"];
+  } else {
+    preset.plugins.push.apply(preset.plugins, [
+      [
+        require.resolve("@babel/plugin-transform-runtime"),
+        {
+          useESModules: BUILD_FORMAT !== "cjs"
+        }
+      ],
+      [
+        // remove inused code
+        require.resolve("babel-plugin-minify-dead-code-elimination")
+      ]
+    ]);
+    if (BABEL_ENV === "production") {
+      preset.plugins.push.apply(preset.plugins, [
+        [
+          require.resolve("babel-plugin-transform-react-remove-prop-types"),
+          {
+            mode: "remove",
+            removeImport: true
+          }
+        ]
+      ]);
+    }
   }
 
   return preset;

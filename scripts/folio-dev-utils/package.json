@@ -1,7 +1,7 @@
 {
   "name": "folio-dev-utils",
   "main": "src/index.js",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "private": true,
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",

@@ -1,14 +1,14 @@
 {
   "name": "build",
   "main": "src/index",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "private": true,
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "rollup": "^0.67.4",
-    "babel-preset-folio-dev": "0.0.0",
-    "folio-dev-utils": "0.0.0",
+    "babel-preset-folio-dev": "0.1.1",
+    "folio-dev-utils": "0.1.1",
     "lerna-alias": "^3.0.2",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^4.0.3",

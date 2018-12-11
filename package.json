@@ -4,27 +4,30 @@
   "description": "Dynamic Form Built With React & CSS Grid",
   "main": "dist/folio.commonjs2.js",
   "unpkg": "dist/folio.umd.min.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "lint": "eslint --ext .js,.jsx src test",
-    "pretest": "npm run --silent lint",
-    "test": "mocha test/**/*.{jsx,js}",
-    "test:comp:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions jsx test/components/**/*.jsx",
-    "test:utils:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions js test/utils.js",
+    "webpack:pkg": "lerna exec --stream --parallel build",
+    "lint": "lerna exec --stream --parallel -- eslint --ext .js,.jsx src test",
+    "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
+    "test:w": "cross-env NODE_ENV=test mocha --opts mocha.opts --watch --watch-extensions jsx",
     "precover": "rimraf coverage",
     "cover": "cross-env NODE_ENV=test nyc npm run test",
     "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "precheck-cover": "npm run cover",
     "check-cover": "nyc check-coverage --lines 100 --branches 100 --statements 100 --functions 100",
-    "storybook": "start-storybook -p 6006",
+    "oldstorybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "gh-pages:clean": "rimraf _gh-pages",
     "gh-pages:build": "build-storybook -c .storybook -o  _gh-pages",
     "gh-pages:publish": "gh-pages -d  _gh-pages",
     "gh-pages": "npm run gh-pages:clean && npm run gh-pages:build && npm run gh-pages:publish",
-    "build": "webpack --env.FILE_NAME_BASE=folio",
+    "build": "node scripts/build",
     "tag": "cross-var git tag $npm_package_version",
     "version:patch": "npm --no-git-tag-version version patch",
     "version:minor": "npm --no-git-tag-version version minor",
@@ -32,7 +35,8 @@
     "commit": "git commit -m \"version %npm_package_version%\"",
     "postversion": "git add . && npm run commit && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
     "prepublishOnly": "in-publish && npm run check-cover && safe-publish-latest && npm run build || not-in-publish",
-    "postpublish": "[ \"${npm_config_tag:-latest}\" != latest ] || npm run gh-pages"
+    "postpublish": "[ \"${npm_config_tag:-latest}\" != latest ] || npm run gh-pages",
+    "storybook": "start-storybook -p 6006"
   },
   "repository": {
     "type": "git",
@@ -71,18 +75,22 @@
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
+    "@babel/plugin-external-helpers": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@material-ui/core": "^3.2.2",
-    "@storybook/addon-actions": "^4.0.0-alpha.25",
-    "@storybook/addon-knobs": "^3.4.11",
-    "@storybook/addon-links": "^4.0.0-alpha.25",
+    "@storybook/addon-actions": "^4.0.12",
+    "@storybook/addon-info": "^4.0.12",
+    "@storybook/addon-knobs": "^4.0.12",
+    "@storybook/addon-links": "^4.0.12",
+    "@storybook/addon-notes": "^4.0.12",
     "@storybook/addon-options": "^3.4.11",
-    "@storybook/addons": "^4.0.0-alpha.25",
-    "@storybook/react": "^4.0.0-alpha.25",
-    "babel-eslint": "^8.2.6",
+    "@storybook/addons": "^4.0.12",
+    "@storybook/react": "^4.0.12",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-preset-airbnb": "^3.0.1",
@@ -102,7 +110,7 @@
     "gh-pages": "^2.0.0",
     "husky": "^1.1.2",
     "in-publish": "^2.0.0",
-    "jsdom": "^12.1.0",
+    "jsdom": "^13.0.0",
     "jsdom-global": "3.0.2",
     "lerna": "^3.4.3",
     "lint-staged": "^8.0.3",
@@ -114,19 +122,9 @@
     "react-dom": "^16.5.2",
     "rimraf": "^2.6.2",
     "safe-publish-latest": "^1.1.2",
-    "sinon": "^6.3.4",
+    "sinon": "^7.1.1",
     "sinon-sandbox": "^2.0.0",
     "webpack": "^4.20.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,md}": [
-      "prettier --write",
-      "git add"
-    ]
-  }
+  "dependencies": {}
 }
