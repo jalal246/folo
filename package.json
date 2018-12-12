@@ -125,7 +125,9 @@
     "safe-publish-latest": "^1.1.2",
     "sinon": "^7.1.1",
     "sinon-sandbox": "^2.0.0",
-    "webpack": "^4.20.2"
+    "webpack": "^4.20.2",
+    "babel-preset-folio-dev": "file:scripts/babel-preset-folio-dev",
+    "folio-test-helpers": "file:scripts/folio-test-helpers"
   },
   "dependencies": {}
 }

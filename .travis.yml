@@ -1,16 +1,15 @@
 sudo: false
+node_js:
+  - "8.11.1"
 language: node_js
 cache:
   directories:
     - node_modules
 notifications:
   email: false
-node_js: "8"
 install:
   - npm install
   - npm run bootstrap
-  - npm link scripts/babel-preset-folio-dev
-  - npm link scripts/folio-test-helpers
 after_success:
   - npm run cover
   - npm run report
