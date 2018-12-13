@@ -1,7 +1,7 @@
 import React from "react";
 
-import FolioValues, { Form, Cell, CellItem } from "@folio/values";
-import FolioLayout, { GridItem, Grid } from "@folio/layout";
+import { FolioValues, Form, Cell, CellItem } from "@folio/values";
+import { FolioLayout, GridItem, Grid } from "@folio/layout";
 
 export function Folio({ children }) {
   return (
