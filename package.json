@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "lint": "eslint --ext .js,.jsx --fix packages scripts",
+    "preset": "yarn lint",
     "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
     "test:watch": "cross-env NODE_ENV=test mocha --opts mocha.opts --watch --watch-extensions jsx",
     "precover": "rimraf coverage",
