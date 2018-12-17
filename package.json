@@ -7,7 +7,7 @@
     "scripts/*"
   ],
   "scripts": {
-    "lint": "lerna exec --stream --parallel -- eslint --ext .js,.jsx src test",
+    "lint": "eslint --ext .js,.jsx --fix packages scripts",
     "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
     "test:watch": "cross-env NODE_ENV=test mocha --opts mocha.opts --watch --watch-extensions jsx",
     "precover": "rimraf coverage",
@@ -57,8 +57,22 @@
     "eslint-config-folio": "file:scripts/eslint-config-folio",
     "folio-test-helpers": "file:scripts/folio-test-helpers",
     "gh-pages": "^2.0.1",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
 }
