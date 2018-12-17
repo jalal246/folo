@@ -11,17 +11,16 @@
     "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
     "test:watch": "cross-env NODE_ENV=test mocha --opts mocha.opts --watch --watch-extensions jsx",
     "precover": "rimraf coverage",
-    "cover": "cross-env NODE_ENV=test nyc npm run test",
+    "cover": "cross-env NODE_ENV=test nyc yarn run test",
     "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "storybook": "start-storybook -p 6006",
     "check-cover": "nyc check-coverage --lines 100 --branches 100 --statements 100 --functions 100",
-    "build-storybook": "build-storybook",
     "gh-pages:clean": "rimraf _gh-pages",
-    "gh-pages:build": "build-storybook -c .storybook -o  _gh-pages",
+    "gh-pages:build": "cross-env NODE_ENV=production build-storybook -c .storybook -o  _gh-pages",
     "gh-pages:publish": "gh-pages -d  _gh-pages",
-    "gh-pages": "npm run gh-pages:clean && npm run gh-pages:build && npm run gh-pages:publish",
+    "gh-pages": "yarn gh-pages:clean && yarn gh-pages:build && yarn gh-pages:publish",
     "build": "node scripts/build",
-    "release": "npm run build && lerna publish"
+    "release": "yarn run build && lerna publish"
   },
   "repository": {
     "type": "git",
