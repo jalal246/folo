@@ -14,5 +14,6 @@ install:
 after_success:
   - yarn cover
   - yarn report
+  - yarn gh-pages
 branches:
   only: masterh

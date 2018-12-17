@@ -1,9 +1,8 @@
 import { configure, addDecorator } from "@storybook/react";
 
 import { withInfo } from "@storybook/addon-info";
-import { withNotes } from "@storybook/addon-notes";
 import { withKnobs } from "@storybook/addon-knobs";
-import { setOptions } from "@storybook/addon-options";
+import { withOptions } from "@storybook/addon-options";
 
 const requests = [];
 
@@ -31,15 +30,15 @@ requests.push(folioValues);
 requests.push(folioLayout);
 requests.push(folioForms);
 
-setOptions({
+const opts = withOptions({
   name: "Folio",
   url: "https://jalal246.github.io/folio/"
 });
 
 function loadStories() {
   addDecorator(withKnobs);
-  addDecorator(withNotes);
   addDecorator(withInfo);
+  addDecorator(opts);
 
   requests.forEach(req => {
     req.keys().forEach(fname => req(fname));

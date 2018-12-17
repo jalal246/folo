@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import withContext from "@folio/withContext";
 
-import { ValuesConsumer, ValuesProvider } from "./context";
+import { ValuesConsumer } from "./context";
 
 const propTypes = {
   component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),

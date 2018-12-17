@@ -1,0 +1,242 @@
+{
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-utils\\dist\\folioUtils.umd.js": {
+    "bundled": 741,
+    "minified": 316,
+    "gzipped": 232
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-utils\\dist\\folioUtils.min.umd.js": {
+    "bundled": 316,
+    "minified": 316,
+    "gzipped": 232
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-utils\\dist\\folioUtils.cjs.js": {
+    "bundled": 439,
+    "minified": 185,
+    "gzipped": 161
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-utils\\dist\\folioUtils.min.cjs.js": {
+    "bundled": 150,
+    "minified": 150,
+    "gzipped": 148
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-utils\\dist\\folioUtils.esm.js": {
+    "bundled": 348,
+    "minified": 104,
+    "gzipped": 109,
+    "treeshaked": {
+      "rollup": {
+        "code": 0,
+        "import_statements": 0
+      },
+      "webpack": {
+        "code": 951
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-utils\\dist\\folioUtils.min.esm.js": {
+    "bundled": 88,
+    "minified": 88,
+    "gzipped": 101,
+    "treeshaked": {
+      "rollup": {
+        "code": 0,
+        "import_statements": 0
+      },
+      "webpack": {
+        "code": 951
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-withContext\\dist\\folioWithContext.umd.js": {
+    "bundled": 1924,
+    "minified": 712,
+    "gzipped": 410
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-withContext\\dist\\folioWithContext.min.umd.js": {
+    "bundled": 712,
+    "minified": 712,
+    "gzipped": 410
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-withContext\\dist\\folioWithContext.cjs.js": {
+    "bundled": 1561,
+    "minified": 588,
+    "gzipped": 358
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-withContext\\dist\\folioWithContext.min.cjs.js": {
+    "bundled": 532,
+    "minified": 532,
+    "gzipped": 334
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-withContext\\dist\\folioWithContext.esm.js": {
+    "bundled": 1541,
+    "minified": 573,
+    "gzipped": 346,
+    "treeshaked": {
+      "rollup": {
+        "code": 14,
+        "import_statements": 14
+      },
+      "webpack": {
+        "code": 998
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-withContext\\dist\\folioWithContext.min.esm.js": {
+    "bundled": 516,
+    "minified": 516,
+    "gzipped": 324,
+    "treeshaked": {
+      "rollup": {
+        "code": 14,
+        "import_statements": 14
+      },
+      "webpack": {
+        "code": 998
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-layout\\dist\\folioLayout.umd.js": {
+    "bundled": 14620,
+    "minified": 5036,
+    "gzipped": 1914
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-layout\\dist\\folioLayout.min.umd.js": {
+    "bundled": 4492,
+    "minified": 4484,
+    "gzipped": 1762
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-layout\\dist\\folioLayout.cjs.js": {
+    "bundled": 11740,
+    "minified": 5360,
+    "gzipped": 1974
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-layout\\dist\\folioLayout.min.cjs.js": {
+    "bundled": 3882,
+    "minified": 3882,
+    "gzipped": 1602
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-layout\\dist\\folioLayout.esm.js": {
+    "bundled": 11658,
+    "minified": 5299,
+    "gzipped": 1960,
+    "treeshaked": {
+      "rollup": {
+        "code": 3729,
+        "import_statements": 164
+      },
+      "webpack": {
+        "code": 4889
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-layout\\dist\\folioLayout.min.esm.js": {
+    "bundled": 3823,
+    "minified": 3823,
+    "gzipped": 1591,
+    "treeshaked": {
+      "rollup": {
+        "code": 3748,
+        "import_statements": 138
+      },
+      "webpack": {
+        "code": 4819
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-values\\dist\\folioValues.umd.js": {
+    "bundled": 21664,
+    "minified": 7312,
+    "gzipped": 2478
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-values\\dist\\folioValues.min.umd.js": {
+    "bundled": 6331,
+    "minified": 6295,
+    "gzipped": 2230
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-values\\dist\\folioValues.cjs.js": {
+    "bundled": 18352,
+    "minified": 8037,
+    "gzipped": 2523
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-values\\dist\\folioValues.min.cjs.js": {
+    "bundled": 5715,
+    "minified": 5711,
+    "gzipped": 2136
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-values\\dist\\folioValues.esm.js": {
+    "bundled": 18264,
+    "minified": 7971,
+    "gzipped": 2511,
+    "treeshaked": {
+      "rollup": {
+        "code": 5182,
+        "import_statements": 179
+      },
+      "webpack": {
+        "code": 6571
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-values\\dist\\folioValues.min.esm.js": {
+    "bundled": 5656,
+    "minified": 5652,
+    "gzipped": 2123,
+    "treeshaked": {
+      "rollup": {
+        "code": 5401,
+        "import_statements": 153
+      },
+      "webpack": {
+        "code": 6473
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-forms\\dist\\folioForms.umd.js": {
+    "bundled": 34031,
+    "minified": 11589,
+    "gzipped": 3533
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-forms\\dist\\folioForms.min.umd.js": {
+    "bundled": 10113,
+    "minified": 10077,
+    "gzipped": 3178
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-forms\\dist\\folioForms.cjs.js": {
+    "bundled": 537,
+    "minified": 454,
+    "gzipped": 252
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-forms\\dist\\folioForms.min.cjs.js": {
+    "bundled": 386,
+    "minified": 386,
+    "gzipped": 237
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-forms\\dist\\folioForms.esm.js": {
+    "bundled": 394,
+    "minified": 324,
+    "gzipped": 185,
+    "treeshaked": {
+      "rollup": {
+        "code": 58,
+        "import_statements": 58
+      },
+      "webpack": {
+        "code": 1108
+      }
+    }
+  },
+  "D:\\folio\\projects\\publish\\folio\\packages\\folio-forms\\dist\\folioForms.min.esm.js": {
+    "bundled": 303,
+    "minified": 303,
+    "gzipped": 183,
+    "treeshaked": {
+      "rollup": {
+        "code": 58,
+        "import_statements": 58
+      },
+      "webpack": {
+        "code": 1108
+      }
+    }
+  }
+}

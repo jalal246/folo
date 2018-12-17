@@ -37,7 +37,7 @@ const propTypes = {
   autoPositionCell: PropTypes.func.isRequired,
 
   isHorizontal: PropTypes.bool,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node
 };
 
 const defaultProps = {
@@ -52,7 +52,8 @@ const defaultProps = {
 
   style: {},
 
-  isHorizontal: true
+  isHorizontal: true,
+  children: null
 };
 
 /**

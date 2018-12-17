@@ -44,31 +44,29 @@ module.exports = ({
       ]
     ]);
   } else if (BABEL_ENV === "production") {
-    preset.plugins.push.apply(preset.plugins, [
+    preset.plugins.push.apply(
+      preset.plugins,
+      [
+        [
+          require.resolve("babel-plugin-transform-react-remove-prop-types"),
+          {
+            mode: "remove",
+            removeImport: true
+          }
+        ]
+      ],
+      [
+        // remove inused code
+        require.resolve("babel-plugin-minify-dead-code-elimination")
+      ],
       [
         require.resolve("@babel/plugin-transform-runtime"),
         {
           useESModules: BUILD_FORMAT !== "cjs"
         }
-      ],
-
-      [
-        require.resolve("babel-plugin-transform-react-remove-prop-types"),
-        {
-          mode: "remove",
-          removeImport: true
-        }
-      ],
-      [
-        // remove inused code
-        require.resolve("babel-plugin-minify-dead-code-elimination")
       ]
-    ]);
-  } else {
-    // solving this issue: https://github.com/webpack/webpack/issues/4039
-    preset.plugins.push.apply(preset.plugins, [
-      [require.resolve("@babel/plugin-transform-modules-commonjs")]
-    ]);
+    );
   }
+
   return preset;
 };

@@ -60,6 +60,7 @@ const propTypes = {
    */
   rest: PropTypes.objectOf(
     PropTypes.oneOfType([
+      PropTypes.bool,
       PropTypes.string,
       PropTypes.objectOf(PropTypes.string)
     ])

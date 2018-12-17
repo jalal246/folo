@@ -45,9 +45,14 @@ Project designed and being developed to deal with everything related with forms
 Run locally:
 
 - `git clone https://github.com/jalal246/folio.git`
-- `npm install`
-- `npm run storybook`
+- `yarn`
+- `yarn build`
+- `yarn storybook`
 - Go to http://localhost:6006/
+
+## Contributing
+
+Need some company in this repo. PRs welcome! :point_right: [Contribute](CONTRIBUTING.md) :blue_heart:
 
 ## License
 

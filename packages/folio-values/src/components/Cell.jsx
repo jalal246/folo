@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 import withContext from "@folio/withContext";
 import { keyGenerator } from "@folio/utils";
 
-// import componentShape from "../shapes/componentShape";
-
 import CellEngine from "./CellEngine";
-
 import { ValuesConsumer } from "./context";
 
 import {
@@ -20,6 +17,9 @@ import {
   RADIO,
   INPUT
 } from "../constants";
+
+// import componentShape from "../shapes/componentShape";
+// console.log("withContext>>>>>>>>>>>>>>>", withContext);
 
 const propTypes = {
   /**
