@@ -1,0 +1,44 @@
+{
+  "name": "@folio/withContext",
+  "version": "0.1.1",
+  "description": "micro HOC compose component accepts custom context values as props",
+  "main": "dist/folioWithContext.cjs.js",
+  "umd:main": "dist/folioWithContext.min.umd.js",
+  "module": "dist/folioWithContext.esm.js",
+  "scripts": {},
+  "repository": "https://github.com/jalal246/folio/tree/master/packages/folio-withContext",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folio/issues"
+  },
+  "homepage": "https://github.com/jalal246/folio",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "@folio",
+    "@folio/layout",
+    "@folio/values",
+    "@folio/forms",
+    "@folio/utils",
+    "react",
+    "react-component",
+    "context",
+    "HOC",
+    "utility",
+    "higher-order",
+    "toolkit"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.4.1"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}

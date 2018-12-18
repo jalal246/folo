@@ -1,143 +1,58 @@
-# Folio
+<h1 align="center">
+  Folio
+</h1>
 
-> Dynamic Form Built With `React` & `CSS Grid` layout
-
+<h6 align="center">
+Project designed and being developed to deal with everything related with forms
+</h6>
 <hr />
 
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
-![live example](https://raw.githubusercontent.com/jalal246/folio/master/folio-demo.gif)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/jalal246/folio/master/folio-demo.gif" alt="folio live example" />
+</p>
 
-[![Build Status](https://travis-ci.org/jalal246/folio.svg?branch=master)](https://travis-ci.org/jalal246/folio)
-[![Codecov](https://img.shields.io/codecov/c/github/jalal246/folio.svg)](https://codecov.io/gh/jalal246/folio)
-[![npm](https://img.shields.io/npm/v/folio-forms.svg)](https://www.npmjs.com/package/folio-forms)
-[![npm](https://img.shields.io/npm/dt/folio-forms.svg)](https://www.npmjs.com/package/folio-forms)
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folio/blob/master/LICENSE)
+<p align="center">
+<a href="https://travis-ci.org/jalal246/folio">
+  <img src="https://travis-ci.org/jalal246/folio.svg?branch=master" alt="folio build status" />
+</a>
+<a href="https://codecov.io/gh/jalal246/folio">
+  <img src="https://img.shields.io/codecov/c/github/jalal246/folio.svg" alt="folio code converge status" />
+</a>
+<a href="https://github.com/jalal246/folio/blob/master/LICENSE">
+  <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="folio MIT license" />
+</a>
+<a href="https://www.npmjs.com/package/folio-forms">
+  <img src="https://img.shields.io/npm/v/folio-forms.svg" alt="folio npm version" />
+</a>
+<a href="https://www.npmjs.com/package/folio-forms">
+  <img src="https://img.shields.io/npm/dt/folio-forms.svg" alt="folio downloads on npm" />
+</a>
+<a href="https://github.com/jalal246/folio/pulls">
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
+</a>
+</p>
 
-## Overview
+## Packages Overview
 
-`Folio` has two major bases `Cells` for data and `Grid` for layout. With these components, making a form should be easier than ever. See full examples of folio :point_right: https://jalal246.github.io/folio/.
+- [**@folio/values** ](https://github.com/jalal246/folio/tree/master/packages/folio-values) returns input values with zero config.
+- [**@folio/layout**](https://github.com/jalal246/folio/tree/master/packages/folio-layout) CSS grid react-components.
+- [**@folio/forms**](https://github.com/jalal246/folio/tree/master/packages/folio-forms) Full package combined of `@folio/layout` & `@folio/values`.
 
 ## Installation
 
 Run locally:
 
 - `git clone https://github.com/jalal246/folio.git`
-- `npm install`
-- `npm run storybook`
+- `yarn`
+- `yarn build`
+- `yarn storybook`
 - Go to http://localhost:6006/
 
-Using npm:
+## Contributing
 
-```
-npm install --save folio-forms
-```
-
-> folio depends on `react` and `prop-types`. Please make sure you
-> have those installed as well.
-
-unpkg
-
-```
-https://unpkg.com/folio-forms/dist/
-```
-
-## Usage
-
-#### Example
-
-```js
-const myForm = ({ mySubmitFunc }) => (
-  <Folio>
-    <Form onSubmit={mySubmitFunc}>
-      <Grid>
-        <GridItem row={1} col={1}>
-          <Cell valueKey="myFullName" type="text" />
-        </GridItem>
-        <GridItem row={2} col={1}>
-          <Cell valueKey="myEmail" type="email" />
-        </GridItem>
-        <button type="submit">submit</button>
-      </Grid>
-    </Form>
-  </Folio>
-);
-
-// mySubmitFunc will return: (event, {myFullName: "" myEmail: ""})
-```
-
-### Components
-
-```js
-import Folio, { Form, Grid, Cell, CellItem, GridItem } from "folio-forms";
-```
-
-### Components Props
-
-All components accept custom props + children which is required in all except `Cell`
-
-<!-- all tables were generated via http://www.tablesgenerator.com/markdown_tables -->
-
-#### Form
-
-| property  | type          | description                                                      | default |
-| --------- | ------------- | ---------------------------------------------------------------- | ------- |
-| component | node/function | custom render-component                                          | form    |
-| onSubmit  | function      | submit function returns values in all cells (event, {...values}) | () {}   |
-
-#### Grid
-
-| property    | type          | description               | default |
-| ----------- | ------------- | ------------------------- | ------- |
-| component   | node/function | custom render-component   | div     |
-| col         | number        | number of columns in grid |         |
-| colWidth    | string        | fixed column width        |         |
-| colMinWidth | string        | column minimum width      | auto    |
-| colMaxWidth | string        | column maximum width      | 1fr     |
-| row         | number        | number of rows in grid    |         |
-| rowWidth    | string        | fixed row width           |         |
-| rowMinWidth | string        | row minimum width         | auto    |
-| rowMaxWidth | string        | row maximum width         | 1fr     |
-
-#### GridItem
-
-Used for implicit grid layout.
-
-| property     | type          | description               | default |
-| ------------ | ------------- | ------------------------- | ------- |
-| component    | node/function | custom render-component   | div     |
-| row          | number        | number of columns in grid |         |
-| toRow        | number        | column width              |         |
-| col          | number        | column minimum width      | 0       |
-| toCol        | number        | column maximum width      |         |
-| isCenter     | Boolean       | number of rows in grid    | false   |
-| isHorizontal | Boolean       |                           | true    |
-
-#### Cell
-
-Essential to register values in the store, return values it when submit.
-
-| property  | type          | description                              | default                        |
-| --------- | ------------- | ---------------------------------------- | ------------------------------ |
-| component | node/function | custom render-component                  | div                            |
-| valueKey  | string        | key used to store value in values object | type + id + groupname (if any) |
-| id        | string        |                                          | auto generated by function     |
-| value     | string        | if type not button                       | ""                             |
-| checked   | Boolean       | if type button                           | false                          |
-| type      | Boolean       |                                          | text                           |
-| groupName | string        | only for button toggle                   |                                |
-
-#### CellItem
-
-Used with list to wrap children.
-
-| property  | type          | description             | default |
-| --------- | ------------- | ----------------------- | ------- |
-| component | node/function | custom render-component | option  |
-
-## What's next?
-
-Enable end-user to create, design and shape forms.
+Need some company in this repo. PRs welcome! :point_right: [Contribute](CONTRIBUTING.md) :blue_heart:
 
 ## License
 

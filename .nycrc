@@ -8,7 +8,7 @@
     ".jsx"
   ],
   "include": [
-    "src"
+    "packages/*/src"
   ],
   "require": [
     "@babel/register"

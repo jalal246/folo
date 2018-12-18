@@ -1,15 +1,19 @@
 sudo: false
+node_js:
+  - "8.11.1"
 language: node_js
 cache:
+  yarn: true
   directories:
     - node_modules
 notifications:
   email: false
-node_js: "8"
 install:
-  - npm install
+  - yarn
+  - yarn build
 after_success:
-  - npm run cover
-  - npm run report
+  - yarn cover
+  - yarn report
+  - yarn gh-pages
 branches:
-  only: master
+  only: masterh

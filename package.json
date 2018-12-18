@@ -1,38 +1,27 @@
 {
-  "name": "folio-forms",
+  "private": true,
+  "name": "folio-monorepo",
   "version": "0.1.1",
-  "description": "Dynamic Form Built With React & CSS Grid",
-  "main": "dist/folio.commonjs2.js",
-  "unpkg": "dist/folio.umd.min.js",
-  "directories": {
-    "test": "test"
-  },
+  "workspaces": [
+    "packages/*",
+    "scripts/*"
+  ],
   "scripts": {
-    "lint": "eslint --ext .js,.jsx src test",
-    "pretest": "npm run --silent lint",
-    "test": "mocha test/**/*.{jsx,js}",
-    "test:comp:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions jsx test/components/**/*.jsx",
-    "test:utils:w": "cross-env NODE_ENV=test mocha --watch  --watch-extensions js test/utils.js",
+    "lint": "eslint --ext .js,.jsx --fix packages scripts",
+    "preset": "yarn lint",
+    "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
+    "test:watch": "cross-env NODE_ENV=test mocha --opts mocha.opts --watch --watch-extensions jsx",
     "precover": "rimraf coverage",
-    "cover": "cross-env NODE_ENV=test nyc npm run test",
+    "cover": "cross-env NODE_ENV=test nyc yarn run test",
     "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "precheck-cover": "npm run cover",
-    "check-cover": "nyc check-coverage --lines 100 --branches 100 --statements 100 --functions 100",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "check-cover": "nyc check-coverage --lines 100 --branches 100 --statements 100 --functions 100",
     "gh-pages:clean": "rimraf _gh-pages",
-    "gh-pages:build": "build-storybook -c .storybook -o  _gh-pages",
+    "gh-pages:build": "cross-env NODE_ENV=production build-storybook -c .storybook -o  _gh-pages",
     "gh-pages:publish": "gh-pages -d  _gh-pages",
-    "gh-pages": "npm run gh-pages:clean && npm run gh-pages:build && npm run gh-pages:publish",
-    "build": "webpack --env.FILE_NAME_BASE=folio",
-    "tag": "cross-var git tag $npm_package_version",
-    "version:patch": "npm --no-git-tag-version version patch",
-    "version:minor": "npm --no-git-tag-version version minor",
-    "version:major": "npm --no-git-tag-version version major",
-    "commit": "git commit -m \"version %npm_package_version%\"",
-    "postversion": "git add . && npm run commit && npm run tag && git push && git push --tags && npm publish --registry=https://registry.npmjs.org/",
-    "prepublishOnly": "in-publish && npm run check-cover && safe-publish-latest && npm run build || not-in-publish",
-    "postpublish": "[ \"${npm_config_tag:-latest}\" != latest ] || npm run gh-pages"
+    "gh-pages": "yarn gh-pages:clean && yarn gh-pages:build && yarn gh-pages:publish",
+    "build": "node scripts/build",
+    "release": "yarn run build && lerna publish"
   },
   "repository": {
     "type": "git",
@@ -44,76 +33,47 @@
     "url": "https://github.com/jalal246/folio/issues"
   },
   "homepage": "https://github.com/jalal246/folio#readme",
-  "files": [
-    "LICENSE.md",
-    "README.md",
-    "CHANGELOG.md",
-    "dist/folio.commonjs2.js",
-    "dist/folio.umd.min.js",
-    "dist/folio.umd.js"
-  ],
   "keywords": [
-    "react",
-    "component",
-    "react-component",
-    "ui",
-    "css-flexbox",
-    "css-grid",
-    "css-layout",
+    "@folio",
     "form-builder-api",
     "dynamic-forms"
   ],
   "peerDependencies": {
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "prop-types": "^15.6.2"
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@storybook/addon-actions": "^4.1.1",
+    "@storybook/addon-info": "^4.1.1",
+    "@storybook/addon-knobs": "^4.1.1",
+    "@storybook/addon-links": "^4.1.1",
+    "@storybook/addon-options": "^4.1.1",
+    "@storybook/addons": "^4.1.1",
+    "@storybook/react": "^4.1.1",
+    "babel-loader": "^8.0.4",
+    "babel-preset-folio-dev": "file:scripts/babel-preset-folio-dev",
+    "cross-env": "^5.2.0",
+    "eslint-config-folio": "file:scripts/eslint-config-folio",
+    "folio-test-helpers": "file:scripts/folio-test-helpers",
+    "gh-pages": "^2.0.1",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.14.3",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {},
-  "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "@material-ui/core": "^3.2.2",
-    "@storybook/addon-actions": "^4.0.0-alpha.25",
-    "@storybook/addon-knobs": "^3.4.11",
-    "@storybook/addon-links": "^4.0.0-alpha.25",
-    "@storybook/addon-options": "^3.4.11",
-    "@storybook/addons": "^4.0.0-alpha.25",
-    "@storybook/react": "^4.0.0-alpha.25",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^8.0.4",
-    "babel-plugin-istanbul": "^5.1.0",
-    "babel-preset-airbnb": "^3.0.1",
-    "chai": "^4.2.0",
-    "codecov": "^3.1.0",
-    "cross-env": "^5.2.0",
-    "cross-var": "^1.1.0",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
-    "eslint": "^5.6.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-react": "^7.11.1",
-    "gh-pages": "^2.0.0",
-    "in-publish": "^2.0.0",
-    "jsdom": "^12.1.0",
-    "jsdom-global": "3.0.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.0.1",
-    "prettier": "^1.14.3",
-    "prop-types": "^15.6.2",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "rimraf": "^2.6.2",
-    "safe-publish-latest": "^1.1.2",
-    "sinon": "^6.3.4",
-    "sinon-sandbox": "^2.0.0",
-    "webpack": "^4.20.2"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   }
 }

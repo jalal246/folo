@@ -1,0 +1,20 @@
+{
+  "name": "folio-test-helpers",
+  "version": "0.1.1",
+  "private": true,
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
+    "codecov": "^3.1.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "jsdom": "^13.0.0",
+    "jsdom-global": "3.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "sinon": "^6.3.4",
+    "sinon-sandbox": "^2.0.0"
+  }
+}

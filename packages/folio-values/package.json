@@ -1,0 +1,48 @@
+{
+  "name": "@folio/values",
+  "version": "0.1.1",
+  "description": "micro form components return input values with zero config",
+  "main": "dist/folioValues.cjs.js",
+  "umd:main": "dist/folioValues.min.umd.js",
+  "module": "dist/folioValues.esm.js",
+  "scripts": {},
+  "repository": "https://github.com/jalal246/folio/tree/master/packages/folio-values",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folio/issues"
+  },
+  "homepage": "https://github.com/jalal246/folio",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "@folio",
+    "@folio/withContext",
+    "@folio/layout",
+    "@folio/forms",
+    "@folio/utils",
+    "react",
+    "react-component",
+    "context",
+    "form-builder-api",
+    "dynamic-forms"
+  ],
+  "dependencies": {
+    "@folio/utils": "0.1.1",
+    "@folio/withContext": "0.1.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^3.6.2"
+  }
+}
