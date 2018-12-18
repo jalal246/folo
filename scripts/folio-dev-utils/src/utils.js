@@ -48,7 +48,6 @@ function error(txt) {
  * @return {array} - contains path packages
  */
 function getPackages(path = "./packages/*") {
-  console.log("here");
   msg("Getting packages path...");
   const folders = glob.sync(path);
   if (folders.length === 0) {

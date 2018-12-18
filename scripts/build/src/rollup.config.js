@@ -87,8 +87,8 @@ async function start() {
       // babel presets according to env
       const presets = [
         require("babel-preset-folio-dev")({
-          BUILD_FORMAT: format,
-          BABEL_ENV: `${isProd ? PROD : DEV}`
+          BUILD_FORMAT,
+          BABEL_ENV
         })
       ];
 
