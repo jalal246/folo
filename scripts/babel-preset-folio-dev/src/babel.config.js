@@ -64,8 +64,10 @@ module.exports = ({
         require.resolve("babel-plugin-minify-dead-code-elimination")
       ]
     ]);
-  } else {
-    // solving this issue: https://github.com/webpack/webpack/issues/4039
+  }
+
+  // solving this issue: https://github.com/webpack/webpack/issues/4039
+  if (BABEL_ENV === "storybook") {
     preset.plugins.push.apply(preset.plugins, [
       [require.resolve("@babel/plugin-transform-modules-commonjs")]
     ]);
