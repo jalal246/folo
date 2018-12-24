@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "folio-monorepo",
+  "name": "folo-monorepo",
   "version": "0.1.1",
   "workspaces": [
     "packages/*",
@@ -20,21 +20,21 @@
     "gh-pages:build": "cross-env NODE_ENV=production build-storybook -c .storybook -o  _gh-pages",
     "gh-pages:publish": "gh-pages -d  _gh-pages",
     "gh-pages": "yarn gh-pages:clean && yarn gh-pages:build && yarn gh-pages:publish",
-    "build": "node scripts/build",
+    "build": "node scripts/folo-build",
     "release": "yarn run build && lerna publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jalal246/folio.git"
+    "url": "git+https://github.com/jalal246/folo.git"
   },
   "author": "Jalal Maskoun jimmy002020@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jalal246/folio/issues"
+    "url": "https://github.com/jalal246/folo/issues"
   },
-  "homepage": "https://github.com/jalal246/folio#readme",
+  "homepage": "https://github.com/jalal246/folo#readme",
   "keywords": [
-    "@folio",
+    "@folo",
     "form-builder-api",
     "dynamic-forms"
   ],
@@ -67,8 +67,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,md}": [
+    "*.{js,jsx}": [
       "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{md}": [
       "prettier --write",
       "git add"
     ]

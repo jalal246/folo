@@ -1,0 +1,48 @@
+{
+  "name": "@folo/values",
+  "version": "0.0.0",
+  "description": "micro form components return input values with zero config",
+  "main": "dist/foloValues.cjs.js",
+  "umd:main": "dist/foloValues.min.umd.js",
+  "module": "dist/foloValues.esm.js",
+  "scripts": {},
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folo/issues"
+  },
+  "homepage": "https://github.com/jalal246/folo",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "@folo",
+    "@folo/withContext",
+    "@folo/layout",
+    "@folo/forms",
+    "@folo/utils",
+    "react",
+    "react-component",
+    "context",
+    "form-builder-api",
+    "dynamic-forms"
+  ],
+  "dependencies": {
+    "@folo/utils": "0.0.0",
+    "@folo/withContext": "0.0.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^3.6.2"
+  }
+}

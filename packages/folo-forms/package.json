@@ -1,0 +1,48 @@
+{
+  "name": "@folo/forms",
+  "version": "0.0.0",
+  "description": "Full package combined of @folo/layout & @folo/values",
+  "main": "dist/foloForms.cjs.js",
+  "umd:main": "dist/foloForms.min.umd.js",
+  "module": "dist/foloForms.esm.js",
+  "scripts": {},
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-forms",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folo/issues"
+  },
+  "homepage": "https://github.com/jalal246/folo",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "@folo",
+    "@folo/withContext",
+    "@folo/values",
+    "@folo/layout",
+    "@folo/utils",
+    "react",
+    "react-component",
+    "context",
+    "css-grid",
+    "css-layout",
+    "form-builder-api",
+    "dynamic-forms"
+  ],
+  "dependencies": {
+    "@folo/layout": "0.0.0",
+    "@folo/values": "0.0.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}

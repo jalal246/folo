@@ -1,0 +1,38 @@
+{
+  "name": "@folo/utils",
+  "version": "0.0.0",
+  "description": "utils used in folo packages",
+  "main": "dist/foloUtils.cjs.js",
+  "umd:main": "dist/foloUtils.min.umd.js",
+  "module": "dist/foloUtils.esm.js",
+  "scripts": {},
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-utils",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folo/issues"
+  },
+  "homepage": "https://github.com/jalal246/folo",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "@folo",
+    "@folo/layout",
+    "@folo/values",
+    "@folo/forms",
+    "@folo/withContext",
+    "react",
+    "react-component",
+    "utility",
+    "toolkit"
+  ],
+  "dependencies": {},
+  "peerDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}

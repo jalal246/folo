@@ -8,31 +8,31 @@ const requests = [];
 
 // TODO: it must be a better way to do this!
 // see this: https://github.com/storybooks/storybook/issues/4890
-const folioValues = require.context(
-  "../packages/folio-values/stories",
+const foloValues = require.context(
+  "../packages/folo-values/stories",
   true,
   /.stories.js$/
 );
 
-const folioLayout = require.context(
-  "../packages/folio-layout/stories",
+const foloLayout = require.context(
+  "../packages/folo-layout/stories",
   true,
   /.stories.js$/
 );
 
-const folioForms = require.context(
-  "../packages/folio-forms/stories",
+const foloForms = require.context(
+  "../packages/folo-forms/stories",
   true,
   /.stories.js$/
 );
 
-requests.push(folioValues);
-requests.push(folioLayout);
-requests.push(folioForms);
+requests.push(foloValues);
+requests.push(foloLayout);
+requests.push(foloForms);
 
 const opts = withOptions({
-  name: "Folio",
-  url: "https://jalal246.github.io/folio/"
+  name: "Folo",
+  url: "https://jalal246.github.io/folo/"
 });
 
 function loadStories() {

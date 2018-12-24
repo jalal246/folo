@@ -1,0 +1,44 @@
+{
+  "name": "@folo/withContext",
+  "version": "0.0.0",
+  "description": "micro HOC compose component accepts custom context values as props",
+  "main": "dist/foloWithContext.cjs.js",
+  "umd:main": "dist/foloWithContext.min.umd.js",
+  "module": "dist/foloWithContext.esm.js",
+  "scripts": {},
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-withContext",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalal246/folo/issues"
+  },
+  "homepage": "https://github.com/jalal246/folo",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "@folo",
+    "@folo/layout",
+    "@folo/values",
+    "@folo/forms",
+    "@folo/utils",
+    "react",
+    "react-component",
+    "context",
+    "HOC",
+    "utility",
+    "higher-order",
+    "toolkit"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.4.1"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}
