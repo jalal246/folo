@@ -20,7 +20,7 @@
   ],
   "keywords": [
     "@folo",
-    "@folo/withContext",
+    "@folo/withcontext",
     "@folo/values",
     "@folo/layout",
     "@folo/utils",

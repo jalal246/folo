@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-import withContext from "@folo/withContext";
+import withcontext from "@folo/withcontext";
 import { keyGenerator } from "@folo/utils";
 
 import CellEngine from "./CellEngine";
@@ -19,7 +19,7 @@ import {
 } from "../constants";
 
 // import componentShape from "../shapes/componentShape";
-// console.log("withContext>>>>>>>>>>>>>>>", withContext);
+// console.log("withcontext>>>>>>>>>>>>>>>", withcontext);
 
 const propTypes = {
   /**
@@ -192,7 +192,7 @@ Cell.defaultProps = defaultProps;
 
 export { Cell as PureCell };
 
-export default withContext({
+export default withcontext({
   Component: Cell,
   Consumer: ValuesConsumer,
   contextProps: ["registerCellInfo"]

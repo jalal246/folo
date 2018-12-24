@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import withContext from "@folo/withContext";
+import withcontext from "@folo/withcontext";
 
 // import componentShape from "../shapes/componentShape";
 
@@ -193,7 +193,7 @@ CellEngine.defaultProps = defaultProps;
 
 export { CellEngine as PureCellEngine };
 
-export default withContext({
+export default withcontext({
   Component: CellEngine,
   Consumer: ValuesConsumer,
   contextProps: ["updateCellValue", "values"]

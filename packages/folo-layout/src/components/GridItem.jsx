@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-import withContext from "@folo/withContext";
+import withcontext from "@folo/withcontext";
 
 import { keyGenerator } from "@folo/utils";
 import { GridConsumer } from "./context";
@@ -126,7 +126,7 @@ GridItem.defaultProps = defaultProps;
 
 export { GridItem as PureGridItem };
 
-export default withContext({
+export default withcontext({
   Component: GridItem,
   Consumer: GridConsumer,
   contextProps: ["autoPositionCell"]

@@ -1,12 +1,12 @@
 {
-  "name": "@folo/withContext",
+  "name": "@folo/withcontext",
   "version": "0.0.0",
   "description": "micro HOC compose component accepts custom context values as props",
-  "main": "dist/foloWithContext.cjs.js",
-  "umd:main": "dist/foloWithContext.min.umd.js",
-  "module": "dist/foloWithContext.esm.js",
+  "main": "dist/foloWithcontext.cjs.js",
+  "umd:main": "dist/foloWithcontext.min.umd.js",
+  "module": "dist/foloWithcontext.esm.js",
   "scripts": {},
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-withContext",
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-withcontext",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
   "bugs": {

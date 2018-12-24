@@ -23,7 +23,7 @@
     "@folo/layout",
     "@folo/values",
     "@folo/forms",
-    "@folo/withContext",
+    "@folo/withcontext",
     "react",
     "react-component",
     "utility",

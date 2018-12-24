@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import withContext from "@folo/withContext";
+import withcontext from "@folo/withcontext";
 
 import { ValuesConsumer } from "./context";
 
@@ -46,7 +46,7 @@ Form.defaultProps = defaultProps;
 
 export { Form as PureForm };
 
-export default withContext({
+export default withcontext({
   Component: Form,
   Consumer: ValuesConsumer,
   contextProps: ["getContextValues"]

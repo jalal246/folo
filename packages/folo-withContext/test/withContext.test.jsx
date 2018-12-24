@@ -1,13 +1,13 @@
 import React, { createContext } from "react";
 
-import withContext from "../src/withContext";
+import withcontext from "../src/withcontext";
 
 // eslint-disable-next-line
 const MyComponent = ({ id = "unique", type = "text" }) => (
   <div id={id} type={type} />
 );
 
-describe("withContext", () => {
+describe("withcontext", () => {
   const TestContext = createContext({
     prop1: "extra1",
     prop2: "extra2",
@@ -16,7 +16,7 @@ describe("withContext", () => {
   });
 
   const { Consumer } = TestContext;
-  const Cell = withContext({
+  const Cell = withcontext({
     Component: MyComponent,
     Consumer,
     contextProps: ["prop1", "prop4"]
@@ -41,7 +41,7 @@ describe("withContext", () => {
   // });
 
   it("retruns all context props when contextProps is not defined", () => {
-    const ComponentWithContext = withContext({
+    const ComponentWithContext = withcontext({
       Component: MyComponent,
       Consumer
     });

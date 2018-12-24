@@ -20,7 +20,7 @@
   ],
   "keywords": [
     "@folo",
-    "@folo/withContext",
+    "@folo/withcontext",
     "@folo/values",
     "@folo/forms",
     "@folo/utils",
@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "@folo/utils": "0.0.0",
-    "@folo/withContext": "0.0.0"
+    "@folo/withcontext": "0.0.0"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
