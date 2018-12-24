@@ -1,6 +1,6 @@
 {
   "name": "@folo/layout",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "description": "micro css grid react-components",
   "main": "dist/foloLayout.cjs.js",
   "umd:main": "dist/foloLayout.min.umd.js",
@@ -31,8 +31,8 @@
     "css-layout"
   ],
   "dependencies": {
-    "@folo/utils": "0.0.0",
-    "@folo/withcontext": "0.0.0"
+    "@folo/utils": "^0.1.0-alpha.0",
+    "@folo/withcontext": "^0.1.0-alpha.0"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",

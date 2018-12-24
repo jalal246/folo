@@ -1,6 +1,6 @@
 {
   "name": "@folo/utils",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "description": "utils used in folo packages",
   "main": "dist/foloUtils.cjs.js",
   "umd:main": "dist/foloUtils.min.umd.js",
@@ -29,8 +29,6 @@
     "utility",
     "toolkit"
   ],
-  "dependencies": {},
-  "peerDependencies": {},
   "publishConfig": {
     "access": "public",
     "tag": "next"
