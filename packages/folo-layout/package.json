@@ -41,5 +41,6 @@
   "publishConfig": {
     "access": "public",
     "tag": "next"
-  }
+  },
+  "gitHead": "883b358b8edf20446e704743add6e518e1cb5148"
 }

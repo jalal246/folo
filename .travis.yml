@@ -16,4 +16,4 @@ after_success:
   - yarn report
   - yarn gh-pages
 branches:
-  only: masterh
+  only: -masterh

@@ -1,6 +1,6 @@
 {
   "name": "@folo/withcontext",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.1-alpha.0",
   "description": "micro HOC compose component accepts custom context values as props",
   "main": "dist/foloWithcontext.cjs.js",
   "umd:main": "dist/foloWithcontext.min.umd.js",
@@ -38,5 +38,6 @@
   "publishConfig": {
     "access": "public",
     "tag": "next"
-  }
+  },
+  "gitHead": "883b358b8edf20446e704743add6e518e1cb5148"
 }
