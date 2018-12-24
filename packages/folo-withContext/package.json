@@ -32,11 +32,9 @@
     "higher-order",
     "toolkit"
   ],
-  "dependencies": {},
   "peerDependencies": {
     "react": "^16.4.1"
   },
-  "devDependencies": {},
   "publishConfig": {
     "access": "public",
     "tag": "next"

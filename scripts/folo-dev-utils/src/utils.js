@@ -151,7 +151,7 @@ function sortPackages({ packages, accordingTo = "folo" }) {
   }
 
   function sort() {
-    packages.forEach(({ dependencies }, i) => {
+    packages.forEach(({ dependencies = {} }, i) => {
       let isClean = true;
 
       Object.keys(dependencies).forEach(dep => {
