@@ -6,7 +6,8 @@ jobs:
       - image: circleci/node:8.11.1
     steps:
       - checkout
-      - run: yarn install --pure-lockfile
+      - run: yarn
+      - run: yarn build
       - run: yarn lint
 
   build:
@@ -15,7 +16,7 @@ jobs:
       - image: circleci/node:8.11.1
     steps:
       - checkout
-      - run: yarn install --pure-lockfile
+      - run: yarn
       - run: yarn build
 
   test:
@@ -24,6 +25,8 @@ jobs:
       - image: circleci/node:8.11.1
     steps:
       - checkout
+      - run: yarn
+      - run: yarn build
       - run: yarn test
       - run: yarn cover
 
