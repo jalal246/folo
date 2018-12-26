@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  lint:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.11.1
+    steps:
+      - checkout
+      - run: yarn install --pure-lockfile
+      - run: yarn lint
+
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.11.1
+    steps:
+      - checkout
+      - run: yarn install --pure-lockfile
+      - run: yarn build
+
+  test:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.11.1
+    steps:
+      - checkout
+      - run: yarn test
+      - run: yarn cover
+
+workflows:
+  version: 2
+  do-all:
+    jobs:
+      - lint
+      - buil
+      - test
