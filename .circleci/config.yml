@@ -11,7 +11,7 @@ jobs:
             - v2-dependencies-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v2-dependencies-
-      - run: yarn install --pure-lockfile
+      - run: yarn
       - run: yarn build
       - run: yarn lint
 
