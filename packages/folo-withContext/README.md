@@ -3,6 +3,7 @@
 > micro HOC compose component accepts custom context values as props
 
 <hr />
+
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folo/withcontext.svg)](https://www.npmjs.com/package/@folo/withcontext)
 [![NPM Download](https://img.shields.io/npm/dt/@folo/withcontext.svg)](https://www.npmjs.com/package/@folo/withcontext)
