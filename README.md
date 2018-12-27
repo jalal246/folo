@@ -10,41 +10,41 @@ Project designed and being developed to deal with everything related with forms
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jalal246/folio/master/folio-demo.gif" alt="folio live example" />
+  <img src="https://raw.githubusercontent.com/jalal246/folo/master/folo-demo.gif" alt="folo live example" />
 </p>
 
 <p align="center">
-<a href="https://travis-ci.org/jalal246/folio">
-  <img src="https://travis-ci.org/jalal246/folio.svg?branch=master" alt="folio build status" />
+<a href="https://circleci.com/gh/jalal246/folo/tree/master">
+  <img src="https://circleci.com/gh/jalal246/folo/tree/master.svg?style=svg" alt="folo build status" />
 </a>
-<a href="https://codecov.io/gh/jalal246/folio">
-  <img src="https://img.shields.io/codecov/c/github/jalal246/folio.svg" alt="folio code converge status" />
+<a href="https://codecov.io/gh/jalal246/folo">
+  <img src="https://img.shields.io/codecov/c/github/jalal246/folo.svg" alt="folo code converge status" />
 </a>
-<a href="https://github.com/jalal246/folio/blob/master/LICENSE">
-  <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="folio MIT license" />
+<a href="https://github.com/jalal246/folo/blob/master/LICENSE">
+  <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="folo MIT license" />
 </a>
-<a href="https://www.npmjs.com/package/folio-forms">
-  <img src="https://img.shields.io/npm/v/folio-forms.svg" alt="folio npm version" />
+<a href="https://www.npmjs.com/package/folo-forms">
+  <img src="https://img.shields.io/npm/v/folo-forms.svg" alt="folo npm version" />
 </a>
-<a href="https://www.npmjs.com/package/folio-forms">
-  <img src="https://img.shields.io/npm/dt/folio-forms.svg" alt="folio downloads on npm" />
+<a href="https://www.npmjs.com/package/folo-forms">
+  <img src="https://img.shields.io/npm/dt/folo-forms.svg" alt="folo downloads on npm" />
 </a>
-<a href="https://github.com/jalal246/folio/pulls">
+<a href="https://github.com/jalal246/folo/pulls">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
 </a>
 </p>
 
 ## Packages Overview
 
-- [**@folio/values** ](https://github.com/jalal246/folio/tree/master/packages/folio-values) returns input values with zero config.
-- [**@folio/layout**](https://github.com/jalal246/folio/tree/master/packages/folio-layout) CSS grid react-components.
-- [**@folio/forms**](https://github.com/jalal246/folio/tree/master/packages/folio-forms) Full package combined of `@folio/layout` & `@folio/values`.
+- [**@folo/values** ](https://github.com/jalal246/folo/tree/master/packages/folo-values) returns input values with zero config.
+- [**@folo/layout**](https://github.com/jalal246/folo/tree/master/packages/folo-layout) CSS grid react-components.
+- [**@folo/forms**](https://github.com/jalal246/folo/tree/master/packages/folo-forms) Full package combined of `@folo/layout` & `@folo/values`.
 
 ## Installation
 
 Run locally:
 
-- `git clone https://github.com/jalal246/folio.git`
+- `git clone https://github.com/jalal246/folo.git`
 - `yarn`
 - `yarn build`
 - `yarn storybook`
@@ -56,4 +56,4 @@ Need some company in this repo. PRs welcome! :point_right: [Contribute](CONTRIBU
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/jalal246/folio/blob/master/LICENSE)
+This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/LICENSE)
