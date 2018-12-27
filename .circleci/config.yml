@@ -1,5 +1,27 @@
 version: 2
 jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.11.1
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - yarn-packages-
+      - run:
+          name: Install Dependencies
+          command: yarn install --pure-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - node_modules
+
   lint:
     working_directory: ~/repo
     docker:
@@ -8,26 +30,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v2-dependencies-
-      - run: yarn
-      - run: yarn build
-      - run: yarn lint
-
-  build:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:8.11.1
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v2-dependencies-{{ checksum "yarn.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v2-dependencies-
+            - yarn-packages-
       - run: yarn install --pure-lockfile
       - run: yarn build
+      - run: yarn lint
 
   test:
     working_directory: ~/repo
@@ -36,10 +44,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+          name: Restore Yarn Package Cache
           keys:
-            - v2-dependencies-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
             # fallback to using the latest cache if no exact match is found
-            - v2-dependencies-
+            - yarn-packages-
       - run: yarn install --pure-lockfile
       - run: yarn build
       - run: yarn test
@@ -47,8 +56,8 @@ jobs:
 
 workflows:
   version: 2
-  do-all:
+  build-lint-test:
     jobs:
-      - lint
       - build
+      - lint
       - test
