@@ -53,6 +53,7 @@ jobs:
       - run: yarn build
       - run: yarn test
       - run: yarn cover
+      - run: yarn report
 
 workflows:
   version: 2
