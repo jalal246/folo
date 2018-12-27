@@ -46,7 +46,6 @@ _gh-pages
 .nyc_output
 
 # Only apps should have lockfiles
-yarn.lock
 package-lock.json
 
 .size-snapshot.json

@@ -3,13 +3,14 @@
 > micro HOC compose component accepts custom context values as props
 
 <hr />
+
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folo/withcontext.svg)](https://www.npmjs.com/package/@folo/withcontext)
 [![NPM Download](https://img.shields.io/npm/dt/@folo/withcontext.svg)](https://www.npmjs.com/package/@folo/withcontext)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/withcontext)
 [![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/withcontext)
 [![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/jalal246/folo.svg?branch=master)](https://travis-ci.org/jalal246/folo)
+[![CircleCI](https://circleci.com/gh/jalal246/folo/tree/master.svg?style=svg)](https://circleci.com/gh/jalal246/folo/tree/master)
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
 <!-- prettier-ignore-end -->
 
