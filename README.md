@@ -1,5 +1,5 @@
 <h1 align="center">
-  Folio
+  Folo
 </h1>
 
 <h6 align="center">
@@ -23,11 +23,11 @@ Project designed and being developed to deal with everything related with forms
 <a href="https://github.com/jalal246/folo/blob/master/LICENSE">
   <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="folo MIT license" />
 </a>
-<a href="https://www.npmjs.com/package/folo-forms">
-  <img src="https://img.shields.io/npm/v/folo-forms.svg" alt="folo npm version" />
+<a href="https://www.npmjs.com/package/@folo/forms">
+  <img src="https://img.shields.io/npm/v/@folo/forms.svg" alt="folo npm version" />
 </a>
-<a href="https://www.npmjs.com/package/folo-forms">
-  <img src="https://img.shields.io/npm/dt/folo-forms.svg" alt="folo downloads on npm" />
+<a href="https://www.npmjs.com/package/@folo/forms">
+  <img src="https://img.shields.io/npm/dt/@folo/forms.svg" alt="folo downloads on npm" />
 </a>
 <a href="https://github.com/jalal246/folo/pulls">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
