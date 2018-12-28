@@ -1,6 +1,6 @@
 {
   "name": "@folo/values",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "micro form components return input values with zero config",
   "main": "dist/foloValues.cjs.js",
   "umd:main": "dist/foloValues.min.umd.js",
@@ -31,7 +31,7 @@
     "dynamic-forms"
   ],
   "dependencies": {
-    "@folo/withcontext": "^0.1.2"
+    "@folo/withcontext": "^0.1.3"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
