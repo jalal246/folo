@@ -38,11 +38,9 @@
     "react": "^16.4.1"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "next"
+    "access": "public"
   },
   "devDependencies": {
     "@material-ui/core": "^3.6.2"
-  },
-  "gitHead": "7ec0eb3f0e773fdfacd9963a449abc169b8056ed"
+  }
 }

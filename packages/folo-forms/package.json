@@ -41,8 +41,6 @@
     "react": "^16.4.1"
   },
   "publishConfig": {
-    "access": "public",
-    "tag": "next"
-  },
-  "gitHead": "7ec0eb3f0e773fdfacd9963a449abc169b8056ed"
+    "access": "public"
+  }
 }
