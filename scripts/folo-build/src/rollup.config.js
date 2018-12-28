@@ -165,6 +165,7 @@ function getInput({ sourcePath, external, presets }) {
       nodeResolve({
         extensions: [".js", ".jsx"]
       }),
+
       babel({
         runtimeHelpers: true,
         // pass env as arg solve be issue here, since it is async
@@ -174,19 +175,55 @@ function getInput({ sourcePath, external, presets }) {
         presets,
         babelrc: false
       }),
+
       replace({
-        "process.env.NODE_ENV": JSON.stringify(BABEL_ENV)
+        "process.env.NODE_ENV": JSON.stringify("BABEL_ENV")
       }),
+
       BUILD_FORMAT === UMD && alias(lernaAliases()),
+
       commonjs(),
+
       BUILD_FORMAT === UMD && resolve(),
+
       BABEL_ENV === PROD &&
         terser({
-          output: { comments: false, beautify: false },
+          // default undefined
+          ecma: 5,
+
+          // default false
+          sourcemap: true,
+
+          // display warnings when dropping unreachable code or unused declarations etc
           warnings: true,
+
+          compress: {
+            // default: false
+            // true to discard calls to console.* functions.
+            drop_console: true,
+
+            // default: false
+            // true to prevent Infinity from being compressed into 1/0, which may cause performance issues on Chrome.
+            keep_infinity: true
+          },
+
+          // pass an empty object {} or a previously used nameCache object
+          // if you wish to cache mangled variable
+          // and property names across multiple invocations of minify
+          nameCache: {},
+
+          mangle: {
+            properties: false
+          },
+
+          // true if to enable top level variable
+          // and function name mangling
+          // and to drop unused variables and functions.
           toplevel: BUILD_FORMAT === CJS || BUILD_FORMAT === ES
         }),
+
       !isSilent && filesize(),
+
       sizeSnapshot({ threshold: false, matchSnapshot: false, printInfo: false })
     ].filter(Boolean)
   };

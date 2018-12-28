@@ -24,15 +24,13 @@ describe("Cell", () => {
         onChange,
         onBlur
       } = wrapper.props();
-      expect(id).to.match(/autoID/);
+      expect(id).to.closeTo(Date.now(), Date.now());
       expect(type).to.equal("text");
       expect(valueRef).to.equal("value");
       expect(initValue).to.equal("");
       expect(isInput).to.equal(true);
       expect(groupName).to.equal(null);
-      expect(nameRef).to.match(/text_autoID/);
-      expect(CellComponent).to.equal("input");
-      expect(nameRef).to.match(/text_autoID/);
+      expect(nameRef).to.match(/text/);
       expect(CellComponent).to.equal("input");
       expect(onChange()).to.be.a("undefined");
       expect(onBlur()).to.be.a("undefined");

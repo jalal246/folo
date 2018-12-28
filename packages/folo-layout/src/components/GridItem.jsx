@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import withcontext from "@folo/withcontext";
 
-import { keyGenerator } from "@folo/utils";
 import { GridConsumer } from "./context";
 
 import {
@@ -62,7 +61,7 @@ const defaultProps = {
  */
 class GridItem extends PureComponent {
   state = {
-    key: keyGenerator("gridItem")
+    key: new Date().getTime()
   };
 
   render() {
