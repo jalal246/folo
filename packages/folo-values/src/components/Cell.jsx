@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import withcontext from "@folo/withcontext";
-import { keyGenerator } from "@folo/utils";
 
 import CellEngine from "./CellEngine";
 import { ValuesConsumer } from "./context";
@@ -17,9 +16,6 @@ import {
   RADIO,
   INPUT
 } from "../constants";
-
-// import componentShape from "../shapes/componentShape";
-// console.log("withcontext>>>>>>>>>>>>>>>", withcontext);
 
 const propTypes = {
   /**
@@ -137,7 +133,7 @@ class Cell extends PureComponent {
       valueKey,
       value,
       checked,
-      id = keyGenerator("autoID"),
+      id = new Date().getTime(),
       type,
       groupName,
       children,

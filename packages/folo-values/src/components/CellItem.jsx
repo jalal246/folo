@@ -1,10 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// import componentShape from "../shapes/componentShape";
-
-// import { keyGenerator } from "../../utils";
-
 const propTypes = {
   /**
    * custom render-component

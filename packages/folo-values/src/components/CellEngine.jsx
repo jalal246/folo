@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 
 import withcontext from "@folo/withcontext";
 
-// import componentShape from "../shapes/componentShape";
-
 import { ValuesConsumer } from "./context";
 
 const propTypes = {

@@ -31,7 +31,6 @@
     "css-layout"
   ],
   "dependencies": {
-    "@folo/utils": "^0.1.2-alpha.0",
     "@folo/withcontext": "^0.1.2-alpha.0"
   },
   "peerDependencies": {
@@ -42,5 +41,5 @@
     "access": "public",
     "tag": "next"
   },
-  "gitHead": "883b358b8edf20446e704743add6e518e1cb5148"
+  "gitHead": "7ec0eb3f0e773fdfacd9963a449abc169b8056ed"
 }
