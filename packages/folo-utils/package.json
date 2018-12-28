@@ -1,6 +1,6 @@
 {
   "name": "@folo/utils",
-  "version": "0.1.2-alpha.0",
+  "version": "0.1.2",
   "description": "utils used in folo packages",
   "main": "dist/foloUtils.cjs.js",
   "umd:main": "dist/foloUtils.min.umd.js",
