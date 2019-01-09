@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 
 import TextField from "@material-ui/core/TextField";
 
-import { FoloValues, Cell, CellItem } from "../src";
+import { FoloValues, Cell } from "../src";
 import { PureCell } from "../src/components/Cell";
 
 import { MAIN_APP, CELL } from "./_directories";
@@ -32,9 +32,9 @@ storiesOf(`${MAIN_APP}/${CELL}/${PURE_CELL}`, module)
   ))
   .add("with items", () => (
     <PureCell type="select">
-      <CellItem>A</CellItem>
-      <CellItem>B</CellItem>
-      <CellItem>C</CellItem>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
     </PureCell>
   ));
 
