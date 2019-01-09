@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import Registry from "./Registry";
 
 const ValuesContext = createContext({
   values: {},
@@ -8,17 +9,14 @@ const ValuesContext = createContext({
   // getContextValues() {}
 });
 
-export const { Consumer: ValuesConsumer } = ValuesContext;
+const { Provider, Consumer: ValuesConsumer } = ValuesContext;
 
-export class ValuesProvider extends React.Component {
+class ValuesProvider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.btnGroup = new Set();
+    this.Registry = new Registry();
 
-    this.datatObj = {};
-
-    this.isAllCellsRegistered = false;
     this.state = {
       values: {},
       isGroupValuesUpdate: false
@@ -26,13 +24,14 @@ export class ValuesProvider extends React.Component {
   }
 
   componentDidMount() {
-    this.isAllCellsRegistered = true;
-
     /*
      * This wont update the component
      * just set collected data obj as state
      * */
-    this.setState({ values: { ...this.datatObj } });
+    this.setState({ values: this.Registry.datatObj });
+
+    // clear it
+    this.Registry.reset();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -51,44 +50,6 @@ export class ValuesProvider extends React.Component {
   getContextValues = () => {
     const { values } = this.state;
     return values;
-  };
-
-  /**
-   * Add cell to datatObj
-   * Add groupName to btnGroup
-   *
-   * This function will be called when cells mount
-   * after componentDidMount, the data in datatObj will be moved to state
-   * datatObj is a temp object holds value to avoid update state while rendeing
-   * in this case will init all cells in datatObj until rendering happens
-   * then update the state so all the values update happen in state
-   *
-   * @param {object} cell - new cell that should be register
-   * @param {string} cell.nameRef   key for value
-   * @param {string||boolean} cell.initValue value
-   * @param {string} cell.groupName group name in case the cell is group-toggle
-   */
-  registerCellInfo = ({ nameRef, initValue, groupName }) => {
-    // push cell name ref to data holder
-    this.datatObj[nameRef] = initValue;
-
-    // if it has group, handle it
-    if (groupName) {
-      /*
-       * check if group name not exist then add it and create its own set
-       * then add the cell to its group
-       */
-      if (!this.btnGroup.has(groupName)) {
-        // add it because it is new group
-        this.btnGroup.add(groupName);
-
-        // create new set for the group
-        this.btnGroup[groupName] = new Set();
-      }
-      // then add the cell name to where its belong
-      // to its group
-      this.btnGroup[groupName].add(nameRef);
-    }
   };
 
   /**
@@ -121,7 +82,7 @@ export class ValuesProvider extends React.Component {
           // update group of values
 
           // toggle group values
-          this.btnGroup[groupName].forEach(cellNameRef => {
+          this.Registry.btnGroup[groupName].forEach(cellNameRef => {
             // toggle all except the targeted key name which called nameRef
             // since we already changed its value above
             if (cellNameRef !== nameRef) {
@@ -140,13 +101,17 @@ export class ValuesProvider extends React.Component {
   render() {
     // console.log("ValuesContext update");
     const { values } = this.state;
-    // eslint-disable-next-line
+
     const { children } = this.props;
 
-    const { registerCellInfo, updateCellValue, getContextValues } = this;
+    const {
+      getContextValues,
+      updateCellValue,
+      Registry: { registerCellInfo }
+    } = this;
 
     return (
-      <ValuesContext.Provider
+      <Provider
         value={{
           updateCellValue,
           registerCellInfo,
@@ -155,7 +120,9 @@ export class ValuesProvider extends React.Component {
         }}
       >
         {children}
-      </ValuesContext.Provider>
+      </Provider>
     );
   }
 }
+
+export { ValuesProvider, ValuesConsumer };
