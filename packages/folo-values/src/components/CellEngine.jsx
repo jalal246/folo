@@ -6,9 +6,6 @@ import withcontext from "@folo/withcontext";
 import { ValuesConsumer } from "./context";
 
 const propTypes = {
-  id: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-
   /**
    * value ref to the element
    * value or checked; depends on the type
@@ -75,15 +72,12 @@ const propTypes = {
    */
   values: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-  ),
-
-  children: PropTypes.node
+  )
 };
 
 const defaultProps = {
   groupName: null,
-  values: {},
-  children: null
+  values: {}
 };
 
 /**
@@ -120,7 +114,6 @@ class CellEngine extends Component {
         localValue: nextContextValue
       });
     }
-
     return (
       localValue !== nextState.localValue || isCellUpdated !== nextCellUpdated
     );
@@ -165,7 +158,7 @@ class CellEngine extends Component {
 
   render() {
     // console.log("CellEngine update");
-    const { CellComponent, id, type, valueRef, rest, children } = this.props;
+    const { CellComponent, valueRef, rest, children } = this.props;
 
     const { localValue } = this.state;
 
@@ -174,8 +167,6 @@ class CellEngine extends Component {
     return (
       <CellComponent
         {...{ [valueRef]: localValue }}
-        type={type}
-        id={id}
         onChange={handleEvent}
         onBlur={handleEvent}
         {...rest}
