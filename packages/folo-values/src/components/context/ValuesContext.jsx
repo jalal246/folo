@@ -31,10 +31,10 @@ class ValuesProvider extends React.Component {
      * This wont update the component
      * just set collected data obj as state
      * */
-    const { datatObj, reset } = this.Registry;
+    const { datatObj, btnGroup } = this.Registry;
+
+    this.btnGroup = btnGroup;
     this.setState({ values: datatObj });
-    // clear it
-    reset();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -85,9 +85,7 @@ class ValuesProvider extends React.Component {
           // update group of values
 
           // toggle group values
-          const { btnGroup } = this.Registry;
-
-          btnGroup[groupName].forEach(cellNameRef => {
+          this.btnGroup[groupName].forEach(cellNameRef => {
             // toggle all except the targeted key name which called nameRef
             // since we already changed its value above
             if (cellNameRef !== nameRef) {
@@ -112,14 +110,16 @@ class ValuesProvider extends React.Component {
     const {
       getContextValues,
       updateCellValue,
-      Registry: { registerCellInfo }
+      Registry: { registerCellInfo, cellRecognizer }
     } = this;
 
     return (
       <Provider
         value={{
-          updateCellValue,
           registerCellInfo,
+          cellRecognizer,
+
+          updateCellValue,
           getContextValues,
           values
         }}

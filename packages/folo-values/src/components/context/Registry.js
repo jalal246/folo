@@ -1,11 +1,9 @@
 class Registry {
   constructor() {
     this.btnGroup = new Set();
-
     this.datatObj = {};
 
     this.registerCellInfo = this.registerCellInfo.bind(this);
-    this.reset = this.reset.bind(this);
   }
 
   /**
@@ -24,6 +22,19 @@ class Registry {
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
   registerCellInfo({ nameRef, initValue, groupName }) {
+    // setting ignore case
+    // this is happinig when Cell render again for some changes
+    // not releated to store
+    // like id or nameRef...ect.
+    // that's why we cannot clear the store
+    // should rather keep it to know when to update
+    // and detect the change.
+    if (
+      this.datatObj[nameRef] === initValue ||
+      [this.btnGroup[groupName]][nameRef]
+    ) {
+      return;
+    }
     // push cell name ref to data holder
     this.datatObj[nameRef] = initValue;
 
@@ -44,14 +55,6 @@ class Registry {
       // to its group
       this.btnGroup[groupName].add(nameRef);
     }
-  }
-
-  reset(/* { isAll = false } = {} */) {
-    this.datatObj = null;
-    // TODO: Do i need to clear btnGroup? When?
-    // if (isAll) {
-    //   this.btnGroup = null;
-    // }
   }
 }
 
