@@ -3,6 +3,9 @@ class Registry {
     this.btnGroup = new Set();
 
     this.datatObj = {};
+
+    this.registerCellInfo = this.registerCellInfo.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   /**
@@ -20,7 +23,7 @@ class Registry {
    * @param {string||boolean} cell.initValue value
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
-  registerCellInfo = ({ nameRef, initValue, groupName }) => {
+  registerCellInfo({ nameRef, initValue, groupName }) {
     // push cell name ref to data holder
     this.datatObj[nameRef] = initValue;
 
@@ -41,19 +44,14 @@ class Registry {
       // to its group
       this.btnGroup[groupName].add(nameRef);
     }
-  };
+  }
 
-  get = () => {
-    this.datatObj;
-    this.btnGroup;
-  };
-
-  reset({ isAll = false } = {}) {
-    // clear it
+  reset(/* { isAll = false } = {} */) {
     this.datatObj = null;
-    if (isAll) {
-      this.btnGroup = null;
-    }
+    // TODO: Do i need to clear btnGroup? When?
+    // if (isAll) {
+    //   this.btnGroup = null;
+    // }
   }
 }
 

@@ -21,6 +21,9 @@ class ValuesProvider extends React.Component {
       values: {},
       isGroupValuesUpdate: false
     };
+
+    this.getContextValues = this.getContextValues.bind(this);
+    this.updateCellValue = this.updateCellValue.bind(this);
   }
 
   componentDidMount() {
@@ -28,10 +31,10 @@ class ValuesProvider extends React.Component {
      * This wont update the component
      * just set collected data obj as state
      * */
-    this.setState({ values: this.Registry.datatObj });
-
+    const { datatObj, reset } = this.Registry;
+    this.setState({ values: datatObj });
     // clear it
-    this.Registry.reset();
+    reset();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -47,10 +50,10 @@ class ValuesProvider extends React.Component {
    *
    * @return {{value :string||boolean}}
    */
-  getContextValues = () => {
+  getContextValues() {
     const { values } = this.state;
     return values;
-  };
+  }
 
   /**
    * update cell value in the state
@@ -60,7 +63,7 @@ class ValuesProvider extends React.Component {
    * @param {string||boolean} cell.initValue value
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
-  updateCellValue = ({ nameRef, newValue, groupName }) => {
+  updateCellValue({ nameRef, newValue, groupName }) {
     const {
       values: { [nameRef]: oldValue }
     } = this.state;
@@ -82,7 +85,9 @@ class ValuesProvider extends React.Component {
           // update group of values
 
           // toggle group values
-          this.Registry.btnGroup[groupName].forEach(cellNameRef => {
+          const { btnGroup } = this.Registry;
+
+          btnGroup[groupName].forEach(cellNameRef => {
             // toggle all except the targeted key name which called nameRef
             // since we already changed its value above
             if (cellNameRef !== nameRef) {
@@ -96,7 +101,7 @@ class ValuesProvider extends React.Component {
         isGroupValuesUpdate
       };
     });
-  };
+  }
 
   render() {
     // console.log("ValuesContext update");
