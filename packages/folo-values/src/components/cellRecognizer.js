@@ -17,7 +17,7 @@ import {
  * @param {string} value
  * @return {{isInput:boolean, valueRef: string, initValue: string||boolean, RecommendedComponent: string }}
  */
-function cellRecognizer(type, checked, value) {
+function cellRecognizer({ type, checked, value }) {
   // only true when cell is button
   let isInput = false;
 
@@ -38,6 +38,7 @@ function cellRecognizer(type, checked, value) {
   } else {
     isInput = true;
   }
+
   return {
     isInput,
     valueRef,

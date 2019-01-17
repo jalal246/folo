@@ -29,14 +29,11 @@ class Registry {
     // that's why we cannot clear the store
     // should rather keep it to know when to update
     // and detect the change.
-    if (
-      this.datatObj[nameRef] === initValue ||
-      [this.btnGroup[groupName]][nameRef]
-    ) {
-      return;
+
+    if (this.datatObj[nameRef] !== initValue) {
+      // push cell name ref to data holder
+      this.datatObj[nameRef] = initValue;
     }
-    // push cell name ref to data holder
-    this.datatObj[nameRef] = initValue;
 
     // if it has group, handle it
     if (groupName) {
@@ -44,16 +41,20 @@ class Registry {
        * check if group name not exist then add it and create its own set
        * then add the cell to its group
        */
+
       if (!this.btnGroup.has(groupName)) {
-        // add it because it is new group
+        // add it because it is new groupء
         this.btnGroup.add(groupName);
 
         // create new set for the group
         this.btnGroup[groupName] = new Set();
       }
-      // then add the cell name to where its belong
-      // to its group
-      this.btnGroup[groupName].add(nameRef);
+
+      if (!this.btnGroup[groupName].has(nameRef)) {
+        // then add the cell name to where its belong
+        // to its group
+        this.btnGroup[groupName].add(nameRef);
+      }
     }
   }
 }

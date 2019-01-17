@@ -100,7 +100,7 @@ class Cell extends PureComponent {
       isInput,
       initValue,
       RecommendedComponent
-    } = cellRecognizer(type, checked, value);
+    } = cellRecognizer({ type, checked, value });
 
     const nameRef =
       valueKey ||

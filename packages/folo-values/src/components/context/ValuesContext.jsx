@@ -1,5 +1,6 @@
 import React, { createContext } from "react";
 import Registry from "./Registry";
+import updateValue from "./updateCellValue";
 
 const ValuesContext = createContext({
   values: {},
@@ -31,9 +32,8 @@ class ValuesProvider extends React.Component {
      * This wont update the component
      * just set collected data obj as state
      * */
-    const { datatObj, btnGroup } = this.Registry;
+    const { datatObj } = this.Registry;
 
-    this.btnGroup = btnGroup;
     this.setState({ values: datatObj });
   }
 
@@ -73,32 +73,18 @@ class ValuesProvider extends React.Component {
       return;
     }
 
-    this.setState(ps => {
-      const newValuesHolder = {};
-      newValuesHolder[nameRef] = newValue;
-      let { isGroupValuesUpdate } = ps;
+    const { btnGroup } = this.Registry;
 
-      if (groupName) {
-        isGroupValuesUpdate = !isGroupValuesUpdate;
-
-        if (newValue !== false) {
-          // update group of values
-
-          // toggle group values
-          this.btnGroup[groupName].forEach(cellNameRef => {
-            // toggle all except the targeted key name which called nameRef
-            // since we already changed its value above
-            if (cellNameRef !== nameRef) {
-              newValuesHolder[cellNameRef] = !newValue;
-            }
-          });
-        }
-      }
-      return {
-        values: { ...ps.values, ...newValuesHolder },
-        isGroupValuesUpdate
-      };
-    });
+    this.setState(({ values, isGroupValuesUpdate }) =>
+      updateValue({
+        values,
+        isGroupValuesUpdate,
+        btnGroup,
+        nameRef,
+        newValue,
+        groupName
+      })
+    );
   }
 
   render() {
@@ -110,14 +96,13 @@ class ValuesProvider extends React.Component {
     const {
       getContextValues,
       updateCellValue,
-      Registry: { registerCellInfo, cellRecognizer }
+      Registry: { registerCellInfo }
     } = this;
 
     return (
       <Provider
         value={{
           registerCellInfo,
-          cellRecognizer,
 
           updateCellValue,
           getContextValues,
