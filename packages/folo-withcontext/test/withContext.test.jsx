@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { render } from "react-testing-library";
+import { render, cleanup } from "react-testing-library";
 
 import withcontext from "../src/withcontext";
 
@@ -45,6 +45,8 @@ const App = () => (
     <MyComponentWIithContextConsumer />
   </CNProvider>
 );
+
+afterEach(cleanup);
 
 describe("withcontext", () => {
   describe("custom context props", () => {
