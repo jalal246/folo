@@ -31,14 +31,7 @@ class AutoPositionCell {
      * then set position & calculate the biggest
      */
     if (parseRow) {
-      /*
-       * if we have new value, then update
-       * update flag
-       * update biggestRowItem
-       */
-      if (this.cellPositions[key] !== parseRow) {
-        this.cellPositions[key] = parseRow;
-      }
+      this.cellPositions[key] = parseRow;
 
       if (parseRow > this.biggestRowItem) {
         this.biggestRowItem = parseRow;

@@ -22,18 +22,7 @@ class Registry {
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
   registerCellInfo({ nameRef, initValue, groupName }) {
-    // setting ignore case
-    // this is happinig when Cell render again for some changes
-    // not releated to store
-    // like id or nameRef...ect.
-    // that's why we cannot clear the store
-    // should rather keep it to know when to update
-    // and detect the change.
-
-    if (this.datatObj[nameRef] !== initValue) {
-      // push cell name ref to data holder
-      this.datatObj[nameRef] = initValue;
-    }
+    this.datatObj[nameRef] = initValue;
 
     // if it has group, handle it
     if (groupName) {
