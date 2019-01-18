@@ -25,36 +25,28 @@ class AutoPositionCell {
    */
   autoPosition({ key, row, toRow }) {
     const parseRow = parseInt(row, 10);
+    const parseToRow = parseInt(toRow, 10);
 
-    /*
-     * if we have row,
-     * then set position & calculate the biggest
-     */
-    if (parseRow) {
+    if (parseToRow && parseRow) {
+      this.cellPositions[key] = parseRow;
+
+      const bigger = parseToRow > parseRow ? parseToRow : parseRow;
+      if (bigger > this.biggestRowItem) {
+        this.biggestRowItem = bigger;
+      }
+    } else if (parseRow) {
       this.cellPositions[key] = parseRow;
 
       if (parseRow > this.biggestRowItem) {
         this.biggestRowItem = parseRow;
       }
-      /*
-       * we dont have row so let's update biggestRowItem
-       *
-       * if toRow is the biggest so be it
-       */
     } else {
-      if (toRow && toRow > this.biggestRowItem) {
-        this.biggestRowItem = toRow;
-      } else {
-        /*
-         * then auto increment
-         */
-        this.biggestRowItem += 1;
-      }
-      /*
-       * we are definitely didnt update row
-       * let's give it the biigest
-       */
+      this.biggestRowItem += 1;
       this.cellPositions[key] = this.biggestRowItem;
+
+      if (parseToRow > this.biggestRowItem) {
+        this.biggestRowItem = parseToRow;
+      }
     }
 
     return this.cellPositions[key];
