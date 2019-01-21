@@ -90,7 +90,9 @@ class GridItem extends PureComponent {
 
       autoPosition,
 
-      children
+      children,
+
+      ...rest
     } = this.props;
 
     const { key } = this.state;
@@ -119,7 +121,11 @@ class GridItem extends PureComponent {
       ...otherStyle
     };
 
-    return <CellComponent style={container}>{children}</CellComponent>;
+    return (
+      <CellComponent style={container} {...rest}>
+        {children}
+      </CellComponent>
+    );
   }
 }
 

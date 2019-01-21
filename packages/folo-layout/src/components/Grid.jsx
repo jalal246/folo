@@ -37,7 +37,7 @@ const propTypes = {
   isCenter: PropTypes.bool,
 
   style: PropTypes.objectOf(PropTypes.string),
-  //
+
   children: PropTypes.node.isRequired
 };
 
