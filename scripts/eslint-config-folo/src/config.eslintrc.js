@@ -23,30 +23,31 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        "packages/folo-forms/stories/*.stories.js",
-        "packages/folo-layout/stories/*.stories.js",
-        "packages/folo-values/stories/*.stories.js"
-      ],
+      files: ["packages/**/stories/*.stories.js"],
       rules: {
         "import/no-extraneous-dependencies": "off",
         "react/jsx-filename-extension": "off",
         "jsx-a11y/label-has-associated-control": "off",
         "jsx-a11y/label-has-for": "off"
       }
+    },
+    {
+      files: ["packages/**/test/*.test.jsx"],
+      rules: {
+        "react/prop-types": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
     }
   ],
   globals: {
+    jest: true,
     describe: true,
-    context: true,
     it: true,
     before: true,
     after: true,
     beforeEach: true,
     afterEach: true,
-    sinon: true,
-    shallow: true,
-    mount: true,
-    expect: true
+    expect: true,
+    render: true
   }
 };
