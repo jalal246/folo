@@ -10,7 +10,6 @@
     "lint": "eslint --ext .js,.jsx --fix packages scripts",
     "test": "jest",
     "test:watch": "jest  --watch",
-    "precover": "rimraf coverage",
     "cover": "jest --coverage --no-cache --ci --runInBand",
     "storybook": "cross-env NODE_ENV=storybook start-storybook -p 6006",
     "gh-pages:clean": "rimraf _gh-pages",
