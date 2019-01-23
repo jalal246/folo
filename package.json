@@ -11,6 +11,7 @@
     "test": "jest",
     "test:watch": "jest  --watch",
     "cover": "jest --coverage --no-cache --ci --runInBand",
+    "report": " yarn cover && codecov",
     "storybook": "cross-env NODE_ENV=storybook start-storybook -p 6006",
     "gh-pages:clean": "rimraf _gh-pages",
     "gh-pages:build": "cross-env NODE_ENV=production build-storybook -c .storybook -o  _gh-pages",
