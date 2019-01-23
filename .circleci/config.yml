@@ -52,8 +52,7 @@ jobs:
       - run: yarn install --pure-lockfile
       - run: yarn build
       - run: yarn test
-      - run: yarn cover
-      - run: yarn report
+      - run: yarn cover && codecov
 
 workflows:
   version: 2
