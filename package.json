@@ -12,6 +12,7 @@
     "test:watch": "jest  --watch",
     "cover": "jest --coverage --no-cache --ci --runInBand",
     "report": " yarn cover && codecov",
+    "size": "bundlesize",
     "storybook": "cross-env NODE_ENV=storybook start-storybook -p 6006",
     "gh-pages:clean": "rimraf _gh-pages",
     "gh-pages:build": "cross-env NODE_ENV=production build-storybook -c .storybook -o  _gh-pages",
@@ -52,6 +53,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "bundlesize": "^0.17.1",
     "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
@@ -74,5 +76,23 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "packages/folo-forms/dist/foloForms.min.umd.js",
+      "maxSize": "5 Kb"
+    },
+    {
+      "path": "packages/folo-values/dist/foloValues.min.umd.js",
+      "maxSize": "3 Kb"
+    },
+    {
+      "path": "packages/folo-layout/dist/foloLayout.min.umd.js",
+      "maxSize": "2 Kb"
+    },
+    {
+      "path": "packages/folo-withcontext/dist/foloWithcontext.min.umd.js",
+      "maxSize": "1 Kb"
+    }
+  ]
 }
