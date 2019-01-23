@@ -1,1 +1,1 @@
-export { Folo, Form, Grid, Cell, CellItem, GridItem } from "./Folo";
+export { Folo, Form, Grid, Cell, GridItem } from "./Folo";

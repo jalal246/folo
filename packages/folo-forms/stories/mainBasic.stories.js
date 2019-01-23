@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 
 import { MAIN_APP, BASIC } from "./_directories";
 
-import { Folo, Form, Grid, Cell, CellItem } from "../src";
+import { Folo, Form, Grid, Cell } from "../src";
 
 storiesOf(`${MAIN_APP}/${BASIC}`, module)
   .add("form with auto-grid", () => (
@@ -22,13 +22,13 @@ storiesOf(`${MAIN_APP}/${BASIC}`, module)
           <Cell valueKey="name" type="text" placeholder="names goes here" />
           <Cell valueKey="email" type="email" placeholder="your email" />
           <label>
-            single?
+            option single?
             <Cell valueKey="isSingle" type="checkbox" />
           </label>
           <label>
             <Cell valueKey="city" type="list">
-              <CellItem>ABC</CellItem>
-              <CellItem>DEF</CellItem>
+              <option>ABC</option>
+              <option>DEF</option>
             </Cell>
           </label>
           <button

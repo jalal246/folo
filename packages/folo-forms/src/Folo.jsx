@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FoloValues, Form, Cell, CellItem } from "@folo/values";
+import { FoloValues, Form, Cell } from "@folo/values";
 import { FoloLayout, GridItem, Grid } from "@folo/layout";
 
 export function Folo({ children }) {
@@ -11,4 +11,4 @@ export function Folo({ children }) {
   );
 }
 
-export { Form, Grid, Cell, CellItem, GridItem };
+export { Form, Grid, Cell, GridItem };
