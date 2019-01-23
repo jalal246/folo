@@ -52,7 +52,7 @@ jobs:
       - run: yarn install --pure-lockfile
       - run: yarn build
       - run: yarn test
-      - run: report
+      - run: yarn report
 
 workflows:
   version: 2
