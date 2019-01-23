@@ -20,15 +20,18 @@
   ],
   "keywords": [
     "@folo",
+    "@folo/forms",
     "@folo/withcontext",
     "@folo/values",
-    "@folo/forms",
+    "@folo/layout",
     "@folo/utils",
     "react",
     "react-component",
     "context",
     "css-grid",
-    "css-layout"
+    "css-layout",
+    "form-builder-api",
+    "dynamic-forms"
   ],
   "dependencies": {
     "@folo/withcontext": "^0.1.3"

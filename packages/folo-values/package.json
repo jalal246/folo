@@ -20,13 +20,16 @@
   ],
   "keywords": [
     "@folo",
-    "@folo/withcontext",
-    "@folo/layout",
     "@folo/forms",
+    "@folo/withcontext",
+    "@folo/values",
+    "@folo/layout",
     "@folo/utils",
     "react",
     "react-component",
     "context",
+    "css-grid",
+    "css-layout",
     "form-builder-api",
     "dynamic-forms"
   ],
