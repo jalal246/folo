@@ -1,6 +1,6 @@
 {
   "name": "@folo/forms",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Full package combined of @folo/layout & @folo/values",
   "main": "dist/foloForms.cjs.js",
   "umd:main": "dist/foloForms.min.umd.js",
@@ -34,8 +34,8 @@
     "dynamic-forms"
   ],
   "dependencies": {
-    "@folo/layout": "^0.1.2",
-    "@folo/values": "^0.1.2"
+    "@folo/layout": "^0.1.3",
+    "@folo/values": "^0.1.3"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
