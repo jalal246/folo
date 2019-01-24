@@ -30,7 +30,7 @@ npm install @folo/forms
 ## Components
 
 ```js
-import { Folio, Form, Cell, Grid, GridItem } from "@folo/forms";
+import { Folo, Form, Cell, Grid, GridItem } from "@folo/forms";
 ```
 
 See [Cells](https://github.com/jalal246/folo/tree/master/packages/folo-values) and [Grid](https://github.com/jalal246/folo/tree/master/packages/folo-layout) for more documentations.

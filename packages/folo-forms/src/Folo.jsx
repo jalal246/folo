@@ -3,7 +3,7 @@ import React from "react";
 import { FoloValues, Form, Cell } from "@folo/values";
 import { FoloLayout, GridItem, Grid } from "@folo/layout";
 
-export function Folo({ children }) {
+function Folo({ children }) {
   return (
     <FoloLayout>
       <FoloValues>{children}</FoloValues>
@@ -11,4 +11,4 @@ export function Folo({ children }) {
   );
 }
 
-export { Form, Grid, Cell, GridItem };
+export { Folo, Form, Grid, Cell, GridItem };
