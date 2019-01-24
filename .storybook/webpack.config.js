@@ -13,6 +13,6 @@ module.exports = {
   module: {
     rules: [
       // add your custom rules.
-    ],
-  },
+    ]
+  }
 };
