@@ -3,18 +3,17 @@
   "name": "folo-monorepo",
   "version": "0.1.1",
   "workspaces": [
-    "packages/*",
-    "scripts/*"
+    "packages/**",
+    "scripts/**"
   ],
   "scripts": {
     "lint": "eslint --ext .js,.jsx --fix packages scripts",
-    "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
-    "test:watch": "cross-env NODE_ENV=test mocha --opts mocha.opts --watch --watch-extensions jsx",
-    "precover": "rimraf coverage",
-    "cover": "cross-env NODE_ENV=test nyc yarn run test",
-    "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "test": "jest",
+    "test:watch": "jest  --watch",
+    "cover": "jest --coverage --no-cache --ci --runInBand",
+    "report": " yarn cover && codecov",
+    "size": "bundlesize",
     "storybook": "cross-env NODE_ENV=storybook start-storybook -p 6006",
-    "check-cover": "nyc check-coverage --lines 100 --branches 100 --statements 100 --functions 100",
     "gh-pages:clean": "rimraf _gh-pages",
     "gh-pages:build": "cross-env NODE_ENV=production build-storybook -c .storybook -o  _gh-pages",
     "gh-pages:publish": "gh-pages -d  _gh-pages",
@@ -51,12 +50,19 @@
     "@storybook/addon-options": "^4.1.1",
     "@storybook/addons": "^4.1.1",
     "@storybook/react": "^4.1.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "bundlesize": "^0.17.1",
+    "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "husky": "^1.2.1",
+    "jest": "^23.6.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.14.3",
+    "react": "^16.7.0",
+    "react-testing-library": "^5.4.4",
     "rimraf": "^2.6.2"
   },
   "dependencies": {},
@@ -70,5 +76,23 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "packages/folo-forms/dist/foloForms.min.umd.js",
+      "maxSize": "5 Kb"
+    },
+    {
+      "path": "packages/folo-values/dist/foloValues.min.umd.js",
+      "maxSize": "3 Kb"
+    },
+    {
+      "path": "packages/folo-layout/dist/foloLayout.min.umd.js",
+      "maxSize": "2 Kb"
+    },
+    {
+      "path": "packages/folo-withcontext/dist/foloWithcontext.min.umd.js",
+      "maxSize": "1 Kb"
+    }
+  ]
 }

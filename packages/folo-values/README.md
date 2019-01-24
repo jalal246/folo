@@ -27,7 +27,7 @@ npm install @folo/values
 ## Usage
 
 ```js
-import { FoloValues, Cell, CellItem, Form } from "@folo/values";
+import { FoloValues, Cell, Form } from "@folo/values";
 
 const MyComponent = ({ onSubmit }) => (
   <FoloValues>
@@ -43,9 +43,9 @@ const MyComponent = ({ onSubmit }) => (
       <label>
         choose:
         <Cell valueKey="alphabet" type="select">
-          <CellItem valueKey="a">A</CellItem>
-          <CellItem valueKey="b">B</CellItem>
-          <CellItem valueKey="c">C</CellItem>
+          <option valueKey="a">A</option>
+          <option valueKey="b">B</option>
+          <option valueKey="c">C</option>
         </Cell>
       </label>
       <button type="submit">submit</button>
@@ -58,7 +58,7 @@ const MyComponent = ({ onSubmit }) => (
 ### Components
 
 ```js
-import { FoloValues, Form, Cell, CellItem } from "@folo/values";
+import { FoloValues, Form, Cell } from "@folo/values";
 ```
 
 ### Components Props
@@ -87,14 +87,6 @@ Essential to register values in the store, returns its value when submit.
 | checked   | Boolean       | if type button                           | false                          |
 | type      | Boolean       |                                          | text                           |
 | groupName | string        | only for button toggle                   |                                |
-
-#### CellItem
-
-Used with list to wrap children.
-
-| property  | type          | description             | default |
-| --------- | ------------- | ----------------------- | ------- |
-| component | node/function | custom render-component | option  |
 
 ## License
 

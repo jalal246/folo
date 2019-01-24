@@ -33,7 +33,7 @@ const propTypes = {
 
   style: PropTypes.objectOf(PropTypes.string),
 
-  autoPositionCell: PropTypes.func.isRequired,
+  autoPosition: PropTypes.func.isRequired,
 
   isHorizontal: PropTypes.bool,
   children: PropTypes.node
@@ -56,8 +56,11 @@ const defaultProps = {
 };
 
 /**
- * Used only when the Cell type is list
- * render option as defautl
+ * For implicit grid
+ * Takes column and row number
+ * to inform the grid parent of total positions
+ *
+ * It collects numbers report it to Grid
  */
 class GridItem extends PureComponent {
   state = {
@@ -85,15 +88,17 @@ class GridItem extends PureComponent {
         ...otherStyle
       },
 
-      autoPositionCell,
+      autoPosition,
 
-      children
+      children,
+
+      ...rest
     } = this.props;
 
     const { key } = this.state;
 
     // console.log('GridItem updated');
-    const autoPosition = autoPositionCell({ key, row, toRow });
+    const calculatedPosition = autoPosition({ key, row, toRow });
 
     const container = {
       display,
@@ -110,13 +115,17 @@ class GridItem extends PureComponent {
 
       justifyContent: isCenter ? CENTER : SPACE_BETWEEN,
 
-      gridRow: location(autoPosition, toRow),
+      gridRow: location(calculatedPosition, toRow),
       gridColumn: location(col, toCol),
 
       ...otherStyle
     };
 
-    return <CellComponent style={container}>{children}</CellComponent>;
+    return (
+      <CellComponent style={container} {...rest}>
+        {children}
+      </CellComponent>
+    );
   }
 }
 
@@ -128,5 +137,5 @@ export { GridItem as PureGridItem };
 export default withcontext({
   Component: GridItem,
   Consumer: GridConsumer,
-  contextProps: ["autoPositionCell"]
+  contextProps: ["autoPosition"]
 });

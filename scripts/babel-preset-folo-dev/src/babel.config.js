@@ -36,14 +36,7 @@ module.exports = ({
     ]
   };
 
-  if (BABEL_ENV === "test") {
-    preset.plugins.push.apply(preset.plugins, [
-      [
-        // remove inused code
-        require.resolve("babel-plugin-istanbul")
-      ]
-    ]);
-  } else if (BABEL_ENV === "production") {
+  if (BABEL_ENV === "production") {
     preset.plugins.push.apply(preset.plugins, [
       [
         require.resolve("@babel/plugin-transform-runtime"),

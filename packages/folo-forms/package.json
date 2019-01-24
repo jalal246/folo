@@ -20,6 +20,7 @@
   ],
   "keywords": [
     "@folo",
+    "@folo/forms",
     "@folo/withcontext",
     "@folo/values",
     "@folo/layout",

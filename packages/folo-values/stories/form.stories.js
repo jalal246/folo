@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import { FoloValues, Form, Cell, CellItem } from "../src";
+import { FoloValues, Form, Cell } from "../src";
 
 import { MAIN_APP, FORM } from "./_directories";
 
@@ -36,9 +36,9 @@ storiesOf(`${MAIN_APP}/${FORM}`, module)
         <label style={styleLabel} htmlFor="3">
           items
           <Cell type="select">
-            <CellItem>A</CellItem>
-            <CellItem>B</CellItem>
-            <CellItem>C</CellItem>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
           </Cell>
         </label>
         <button type="submit">submit</button>
@@ -63,9 +63,9 @@ storiesOf(`${MAIN_APP}/${FORM}`, module)
         <label style={styleLabel}>
           items
           <Cell valueKey="itemsGroup" type="select" value="B">
-            <CellItem>A</CellItem>
-            <CellItem value="B">B</CellItem>
-            <CellItem>C</CellItem>
+            <option>A</option>
+            <option value="B">B</option>
+            <option>C</option>
           </Cell>
         </label>
         <button type="submit">submit</button>

@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  init:
     working_directory: ~/repo
     docker:
       - image: circleci/node:8.11.1
@@ -21,6 +21,20 @@ jobs:
           paths:
             - ~/.cache/yarn
             - node_modules
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8.11.1
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - yarn-packages-
+      - run: yarn install --pure-lockfile
+      - run: yarn build
+      - run: yarn size
 
   lint:
     working_directory: ~/repo
@@ -52,13 +66,13 @@ jobs:
       - run: yarn install --pure-lockfile
       - run: yarn build
       - run: yarn test
-      - run: yarn cover
       - run: yarn report
 
 workflows:
   version: 2
   build-lint-test:
     jobs:
+      - init
       - build
       - lint
       - test

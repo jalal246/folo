@@ -20,9 +20,10 @@
   ],
   "keywords": [
     "@folo",
-    "@folo/layout",
-    "@folo/values",
     "@folo/forms",
+    "@folo/withcontext",
+    "@folo/values",
+    "@folo/layout",
     "@folo/utils",
     "react",
     "react-component",

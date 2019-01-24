@@ -1,123 +1,142 @@
 import React from "react";
+import { render, fireEvent, cleanup } from "react-testing-library";
 
-import { PureCell } from "../src/components/Cell";
+import { ValuesProvider } from "../src/components/context";
+import Cell from "../src/components/Cell";
+import Form from "../src/components/Form";
 
-describe("Cell", () => {
-  afterEach(() => {
-    sinon.restore();
+const TEST_DEFAULT = "defalut";
+const TEST_BTN_1 = "btn1";
+const TEST_BTN_2 = "btn2";
+const TEST_FORM = "form";
+
+const ID_1 = "unique";
+const ID_2 = "unique2";
+
+const VAL_KEY = "myRefName";
+const GROUP_NAME = "gr";
+
+const NEW_VAL = "hello!";
+
+const onSubmitMock = jest.fn((e, value) => value);
+
+const App = () => (
+  <ValuesProvider>
+    <Form data-testid={TEST_FORM} onSubmit={onSubmitMock}>
+      <Cell id={ID_2} data-testid={TEST_DEFAULT} />
+      <Cell />
+      <Cell
+        type="checkbox"
+        groupName={GROUP_NAME}
+        id={ID_1}
+        data-testid={TEST_BTN_1}
+      />
+      <Cell
+        type="checkbox"
+        checked
+        groupName={GROUP_NAME}
+        valueKey={VAL_KEY}
+        data-testid={TEST_BTN_2}
+      />
+    </Form>
+  </ValuesProvider>
+);
+
+const { baseElement, getByTestId } = render(<App />);
+
+const txt = getByTestId(TEST_DEFAULT);
+
+const btn1 = getByTestId(TEST_BTN_1);
+const btn2 = getByTestId(TEST_BTN_2);
+
+const form = getByTestId(TEST_FORM);
+
+describe("Cell#CellEngine & Form", () => {
+  it("returns expected values and name attr", () => {
+    expect(baseElement).toMatchSnapshot();
   });
 
-  describe("render", () => {
-    let wrapper;
+  it("sets one btn to false deesnt toggle the other one which is false", () => {
+    // from
+    expect(btn1.checked).toBe(false);
+    expect(btn2.checked).toBe(true);
 
-    it("passes props to CellEngine as expected for defalut", () => {
-      wrapper = shallow(<PureCell />);
-      const {
-        id,
-        type,
-        valueRef,
-        initValue,
-        isInput,
-        groupName,
-        nameRef,
-        CellComponent,
-        onChange,
-        onBlur
-      } = wrapper.props();
-      expect(id).to.closeTo(Date.now(), Date.now());
-      expect(type).to.equal("text");
-      expect(valueRef).to.equal("value");
-      expect(initValue).to.equal("");
-      expect(isInput).to.equal(true);
-      expect(groupName).to.equal(null);
-      expect(nameRef).to.match(/text/);
-      expect(CellComponent).to.equal("input");
-      expect(onChange()).to.be.a("undefined");
-      expect(onBlur()).to.be.a("undefined");
-    });
+    fireEvent.blur(btn2, { target: { checked: false } });
 
-    it("passes props to CellEngine when setting custom prop for checkbox", () => {
-      const checkbox = "checkbox";
-      const uniqueID = "uniqueID";
+    // to
+    expect(btn1.checked).toBe(false);
+    expect(btn2.checked).toBe(false);
+  });
 
-      wrapper = shallow(<PureCell type={checkbox} id={uniqueID} />);
+  it("sets one btn to true deesnt toggle the other one which is false", () => {
+    // from
+    expect(btn1.checked).toBe(false);
+    expect(btn2.checked).toBe(false);
 
-      const {
-        id,
-        type,
-        valueRef,
-        initValue,
-        isInput,
-        groupName,
-        // nameRef, will be covered alone to test both cases
-        CellComponent
-      } = wrapper.props();
-      expect(id).to.be.equal(uniqueID);
-      expect(type).to.equal(checkbox);
-      expect(valueRef).to.equal("checked");
-      expect(initValue).to.equal(false);
-      expect(isInput).to.equal(false);
-      expect(groupName).to.equal(null);
-      expect(CellComponent).to.equal("input");
-    });
+    fireEvent.blur(btn2, { target: { checked: true } });
 
-    it("return type props to CellEngine when setting custom prop for list", () => {
-      const list = "list";
+    // to
+    expect(btn1.checked).toBe(false);
+    expect(btn2.checked).toBe(true);
+  });
 
-      wrapper = shallow(<PureCell type={list} />);
+  it("sets one btn to true, toggles the other to false", () => {
+    // from
+    expect(btn1.checked).toBe(false);
+    expect(btn2.checked).toBe(true);
 
-      const { type } = wrapper.props();
-      expect(type).to.equal(list);
-    });
+    fireEvent.blur(btn1, { target: { checked: true } });
 
-    it("return expected nameRef when groupName:null", () => {
-      const uniqueID = "uniqueID";
+    // to
+    expect(btn1.checked).toBe(true);
+    expect(btn2.checked).toBe(false);
+  });
 
-      wrapper = shallow(<PureCell id={uniqueID} />);
+  it("sets same value to btn", () => {
+    // from
+    expect(btn1.checked).toBe(true);
+    expect(btn2.checked).toBe(false);
 
-      const { nameRef } = wrapper.props();
-      expect(nameRef).to.be.equal(`text_${uniqueID}`);
-    });
+    fireEvent.blur(btn1, { target: { checked: true } });
 
-    it("return expected nameRef when groupName:value", () => {
-      const uniqueID = "uniqueID";
-      const groupName = "groupName";
-      wrapper = shallow(<PureCell id={uniqueID} groupName={groupName} />);
+    // to
+    expect(btn1.checked).toBe(true);
+    expect(btn2.checked).toBe(false);
+  });
 
-      const { nameRef } = wrapper.props();
-      expect(nameRef).to.be.equal(`${"text"}_${uniqueID}_${groupName}`);
-    });
+  it("sets new value to text input", () => {
+    // from
+    expect(txt.value).toBe("");
 
-    it("passes valueKey as nameRef when provided", () => {
-      const key = "someKey";
-      wrapper = shallow(<PureCell valueKey={key} />);
+    fireEvent.change(txt, { target: { value: NEW_VAL } });
 
-      const { nameRef } = wrapper.props();
-      expect(nameRef).to.be.equal(key);
-    });
+    // to
+    expect(txt.value).toBe(NEW_VAL);
+  });
 
-    it("calls registerCellInfo with expected args", () => {
-      const registerCellInfo = sinon.stub();
+  it("sets same value to text input", () => {
+    // from
+    expect(txt.value).toBe(NEW_VAL);
 
-      const key = "someKey";
-      const value = "test";
+    fireEvent.change(txt, { target: { value: NEW_VAL } });
 
-      wrapper = shallow(
-        <PureCell
-          valueKey={key}
-          value={value}
-          registerCellInfo={registerCellInfo}
-        />
-      );
-      expect(registerCellInfo).to.have.property("callCount", 1);
+    // to
+    expect(txt.value).toBe(NEW_VAL);
+  });
 
-      expect(
-        registerCellInfo.calledWith({
-          nameRef: key,
-          initValue: value,
-          groupName: null
-        })
-      ).to.equal(true);
-    });
+  it("return context value when sbmit", () => {
+    fireEvent.submit(form, {});
+
+    // to
+    expect(onSubmitMock).toHaveReturnedWith(
+      expect.objectContaining({
+        text_unique2: "",
+        // unknown_valueKey_created_at_1547750212936: "",
+        checkbox_unique_gr: true,
+        myRefName: false
+      })
+    );
+
+    cleanup();
   });
 });

@@ -1,57 +1,96 @@
 import React, { createContext } from "react";
+import { render, cleanup } from "react-testing-library";
 
 import withcontext from "../src/withcontext";
 
-// eslint-disable-next-line
-const MyComponent = ({ id = "unique", type = "text" }) => (
-  <div id={id} type={type} />
+const orginalProps = {
+  type: "text"
+};
+
+const MyComponent = ({
+  type = orginalProps.type,
+  /* form context? */ disabled,
+  /* form context? */ id,
+  /* form context */ value,
+  /* form context */ placeholder
+}) => (
+  <input
+    data-testid="withcontextTest"
+    type={type}
+    onChange={() => {}}
+    value={value}
+    placeholder={placeholder}
+    disabled={disabled}
+    id={id}
+  />
 );
 
+const contextProps = {
+  value: "test",
+  placeholder: "Username",
+  id: "unique",
+  disabled: true
+};
+
+const { Consumer, Provider } = createContext({});
+
+const CNProvider = ({ children }) => (
+  <Provider value={contextProps}>{children}</Provider>
+);
+
+let MyComponentWIithContextConsumer;
+
+const App = () => (
+  <CNProvider>
+    <MyComponentWIithContextConsumer />
+  </CNProvider>
+);
+
+afterEach(cleanup);
+
 describe("withcontext", () => {
-  const TestContext = createContext({
-    prop1: "extra1",
-    prop2: "extra2",
-    prop3: "extra3",
-    prop4: "extra4"
-  });
-
-  const { Consumer } = TestContext;
-  const Cell = withcontext({
-    Component: MyComponent,
-    Consumer,
-    contextProps: ["prop1", "prop4"]
-  });
-
-  const wrapper = mount(shallow(<Cell />).get(0));
-
-  const { prop1, prop2, prop4 /*, type */ } = wrapper.props();
-
-  it("returns component with required context", () => {
-    expect(prop1).to.be.equal("extra1");
-    expect(prop4).to.be.equal("extra4");
-  });
-
-  it("does not have all context props, just the required", () => {
-    expect(prop2).to.be.equal(undefined);
-  });
-
-  // TODO: fix this
-  // it("has the orginal props", () => {
-  //   expect(type).to.be.equal("text");
-  // });
-
-  it("retruns all context props when contextProps is not defined", () => {
-    const ComponentWithContext = withcontext({
+  describe("custom context props", () => {
+    MyComponentWIithContextConsumer = withcontext({
       Component: MyComponent,
-      Consumer
+      Consumer,
+      contextProps: ["value", "placeholder"]
     });
 
-    const wrapper2 = mount(shallow(<ComponentWithContext />).get(0));
+    const { getByTestId } = render(<App />);
 
-    const { prop1: p1, prop2: p2, prop3: p3, prop4: p4 } = wrapper2.props();
-    expect(p1).to.be.equal("extra1");
-    expect(p2).to.be.equal("extra2");
-    expect(p3).to.be.equal("extra3");
-    expect(p4).to.be.equal("extra4");
+    const { value, placeholder, type, disabled } = getByTestId(
+      "withcontextTest"
+    );
+
+    it("returns component props bind with context values", () => {
+      expect(value).toBe(contextProps.value);
+
+      expect(placeholder).toBe(contextProps.placeholder);
+    });
+
+    it("retruns all context props when contextProps is not defined", () => {
+      expect(disabled).toBe(false);
+    });
+
+    it("orginal component props still exist", () => {
+      expect(type).toBe(orginalProps.type);
+    });
+  });
+
+  describe("all context props", () => {
+    it("does not have all context props, just the required", () => {
+      MyComponentWIithContextConsumer = withcontext({
+        Component: MyComponent,
+        Consumer
+      });
+
+      const { getByTestId } = render(<App />);
+
+      const { disabled, id } = getByTestId("withcontextTest");
+
+      expect(disabled).toBe(true);
+
+      expect(id).toBe(contextProps.id);
+    });
   });
 });

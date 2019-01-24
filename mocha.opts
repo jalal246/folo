@@ -1,3 +1,0 @@
---require @babel/register  scripts/folo-test-helpers
-
-packages/*/test/**/*.{jsx,js}

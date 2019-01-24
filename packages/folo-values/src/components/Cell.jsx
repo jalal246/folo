@@ -4,18 +4,11 @@ import PropTypes from "prop-types";
 import withcontext from "@folo/withcontext";
 
 import CellEngine from "./CellEngine";
+import cellRecognizer from "./cellRecognizer";
+
 import { ValuesConsumer } from "./context";
 
-import {
-  VALUE,
-  CHECKED,
-  TEXT,
-  SELECT,
-  LIST,
-  CHECKBOX,
-  RADIO,
-  INPUT
-} from "../constants";
+import { TEXT } from "../constants";
 
 const propTypes = {
   /**
@@ -48,8 +41,6 @@ const propTypes = {
    */
   groupName: PropTypes.string,
 
-  children: PropTypes.node,
-
   /**
    * supposed to be context function
    * helps to register values and key reference
@@ -69,50 +60,11 @@ const defaultProps = {
   id: undefined,
   type: TEXT,
   groupName: null,
-  children: null,
   registerCellInfo() {},
   onChange() {},
   onBlur() {}
 };
-
-/**
- * Gets the cell type
- * returns booleans type flage.
- *
- * @param {string} type
- * @param {boolean} checked
- * @param {string} value
- * @return {{isInput:boolean, valueRef: string, initValue: string||boolean, RecommendedComponent: string }}
- */
-function recognizeCellProps(type, checked, value) {
-  // only true when cell is button
-  let isInput = false;
-
-  // input or select
-  let RecommendedComponent = INPUT;
-
-  // value ref to the element: value or checked; depends on the type
-  let valueRef = VALUE;
-
-  // is it boolean or string; depends on the type
-  let initValue = value;
-
-  if (type === SELECT || type === LIST) {
-    RecommendedComponent = SELECT;
-  } else if (type === CHECKBOX || type === RADIO) {
-    valueRef = CHECKED;
-    initValue = checked;
-  } else {
-    isInput = true;
-  }
-  return {
-    isInput,
-    valueRef,
-    initValue,
-    RecommendedComponent
-  };
-}
-
+// `unknown_valueKey_created_at_${new Date().getTime()}`;
 /**
  * mainly reposible for user props
  * handling cell type, init value and pass it to CellEngine
@@ -129,11 +81,11 @@ class Cell extends PureComponent {
     // console.log("Cell update");
 
     const {
-      component: userComponent,
+      component: UserComponent,
       valueKey,
       value,
       checked,
-      id = new Date().getTime(),
+      id,
       type,
       groupName,
       children,
@@ -148,10 +100,13 @@ class Cell extends PureComponent {
       isInput,
       initValue,
       RecommendedComponent
-    } = recognizeCellProps(type, checked, value);
+    } = cellRecognizer({ type, checked, value });
 
     const nameRef =
-      valueKey || `${type}_${id}${groupName ? `_${groupName}` : ""}`;
+      valueKey ||
+      (id
+        ? `${type}_${id}${groupName ? `_${groupName}` : ""}`
+        : `unknown_valueKey_created_at_${new Date().getTime()}`);
 
     // register cell info in context state
     registerCellInfo({
@@ -164,18 +119,16 @@ class Cell extends PureComponent {
 
     return (
       <CellEngine
-        id={id}
-        type={type}
         valueRef={valueRef}
         initValue={initValue}
         isInput={isInput}
         groupName={groupName}
         nameRef={nameRef}
         isCellUpdated={this.isCellUpdated}
-        CellComponent={userComponent || RecommendedComponent}
+        CellComponent={UserComponent || RecommendedComponent}
         onChange={onChange}
         onBlur={onBlur}
-        rest={rest}
+        rest={{ ...rest, id, type }}
       >
         {children}
       </CellEngine>

@@ -34,8 +34,10 @@ const propTypes = {
   rowMinWidth: PropTypes.string,
   rowMaxWidth: PropTypes.string,
 
+  isCenter: PropTypes.bool,
+
   style: PropTypes.objectOf(PropTypes.string),
-  //
+
   children: PropTypes.node.isRequired
 };
 
@@ -51,6 +53,9 @@ const defaultProps = {
   rowWidth: undefined,
   rowMinWidth: AUTO,
   rowMaxWidth: FR,
+
+  isCenter: false,
+
   style: {}
 };
 
