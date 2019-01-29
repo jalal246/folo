@@ -49,3 +49,4 @@ _gh-pages
 package-lock.json
 
 .size-snapshot.json
+.env
