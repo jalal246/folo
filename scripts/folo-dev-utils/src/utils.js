@@ -47,7 +47,7 @@ function error(txt) {
  *
  * @return {array} - contains path packages
  */
-function getPackages(path = "./packages/*") {
+function getPackagesPath(path = "./packages/*") {
   msg("Getting packages path...");
   const folders = glob.sync(path);
   if (folders.length === 0) {
@@ -180,7 +180,7 @@ module.exports = {
   warning,
   error,
 
-  getPackages,
+  getPackagesPath,
   clean,
   getPackagesInfo,
   camelize: require("camelize"),

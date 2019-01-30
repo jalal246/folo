@@ -13,7 +13,7 @@ const { sizeSnapshot } = require("rollup-plugin-size-snapshot");
 const lernaAliases = require("lerna-alias").rollup;
 
 const {
-  getPackages,
+  getPackagesPath,
   clean,
   getPackagesInfo,
   msg,
@@ -37,18 +37,39 @@ let BUILD_FORMAT = "";
 let BABEL_ENV = "";
 
 async function start() {
-  const packages = getPackages();
+  // array of packages with paths
+  let allPackages = getPackagesPath();
 
-  const packagesArr = getPackagesInfo(packages);
+  // array of packages info according to package.json
+  let packagesInfo = getPackagesInfo(allPackages);
+
+  // this array will be empty if there's no specfic package is targeted
+  const selectedPackages = [];
+
+  msg("looking if there are any required packages in args...");
+  if (process.argv.length > 2) {
+    const args = process.argv.slice(2);
+
+    packagesInfo = packagesInfo.filter(({ name }, i) => {
+      if (args.includes(name)) {
+        selectedPackages.push(allPackages[i]);
+        return true;
+      }
+    });
+  } else {
+    msg("build all...");
+  }
 
   clean({
-    packages: packages,
+    packages: selectedPackages.length === 0 ? allPackages : selectedPackages,
     filenames: ["dist"]
   });
 
-  const sortedPackagesArr = sortPackages({ packages: packagesArr });
-
-  for (const pkg of sortedPackagesArr) {
+  // if we build targeted packages according to args
+  // escape sorting
+  for (const pkg of selectedPackages.length === 0
+    ? sortPackages({ packages: packagesInfo })
+    : packagesInfo) {
     const {
       sourcePath,
       distPath,
