@@ -5,6 +5,7 @@ const { resolve } = require("path");
 const fs = require("fs");
 const chalk = require("chalk");
 const rimraf = require("rimraf");
+const camelize = require("camelize");
 
 const { SILENT } = process.env;
 const isSilent = SILENT === "silent";
@@ -174,6 +175,10 @@ function sortPackages({ packages, accordingTo = "folo" }) {
   return filtered;
 }
 
+function _camelize(name) {
+  return camelize(name.replace("@", "").replace("/", "-"));
+}
+
 module.exports = {
   msg,
   success,
@@ -183,6 +188,8 @@ module.exports = {
   getPackagesPath,
   clean,
   getPackagesInfo,
-  camelize: require("camelize"),
+  camelize: _camelize,
+  hasFlag: require("has-flag"),
+  ms: require("ms"),
   sortPackages
 };

@@ -26,6 +26,20 @@ In the repository's root directory:
 ## Building
 
 - Run `yarn build` in the root directory to build the modules.
+  build accepts flags:
+
+  `--silent`: mutes build massages.
+
+  `--watch`: for watch mode.
+
+  `PACKAGE_NAME`: for building specific package.
+
+  _Example:_
+
+  ```js
+    build-custom: "node scripts/folo-build  @folo/forms --silent --watch",
+  ```
+
 - Run `yarn build-storybook` to build the static version of modules.
 
 ## Documentation and Development

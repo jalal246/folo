@@ -19,8 +19,11 @@ const {
   msg,
   camelize,
   error,
-  sortPackages
+  sortPackages,
+  hasFlag
 } = require("@folo/dev-utils");
+
+const { onWatch } = require("./onWatch");
 
 const UMD = "umd";
 const CJS = "cjs";
@@ -29,9 +32,8 @@ const ES = "es";
 const DEV = "development";
 const PROD = "production";
 
-const { SILENT } = process.env;
-
-const isSilent = SILENT === "true";
+const isSilent = hasFlag("silent");
+const isWatch = hasFlag("watch");
 
 let BUILD_FORMAT = "";
 let BABEL_ENV = "";
@@ -273,12 +275,20 @@ function getExternal({ peerDependencies, dependencies }) {
 
 async function build(inputOptions, outputOptions) {
   try {
-    // create a bundle
-    const bundle = await rollup.rollup(inputOptions);
+    if (isWatch) {
+      const watcher = rollup.watch({
+        ...inputOptions,
+        output: [outputOptions]
+      });
+      onWatch(watcher);
+    } else {
+      // create a bundle
+      const bundle = await rollup.rollup(inputOptions);
 
-    // or write the bundle to disk
-    //
-    await bundle.write(outputOptions);
+      // or write the bundle to disk
+      //
+      await bundle.write(outputOptions);
+    }
   } catch (e) {
     error(e);
   }
