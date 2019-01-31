@@ -24,7 +24,7 @@ function withcontext({ Component, Consumer, contextProps = [] }) {
               cn[prop] = context[prop];
             });
           }
-          return <Component {...props} {...cn} />;
+          return React.createElement(Component, Object.assign({}, props, cn));
         }}
       </Consumer>
     );
