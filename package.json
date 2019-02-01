@@ -9,7 +9,6 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx --fix packages scripts",
     "test": "jest",
-    "test:watch": "jest  --watch",
     "cover": "jest --coverage --no-cache --ci --runInBand",
     "report": " yarn cover && codecov",
     "size": "bundlesize",
