@@ -22,9 +22,6 @@ class ValuesProvider extends React.Component {
       values: {},
       isGroupValuesUpdate: false
     };
-
-    this.getContextValues = this.getContextValues.bind(this);
-    this.updateCellValue = this.updateCellValue.bind(this);
   }
 
   componentDidMount() {
@@ -44,18 +41,6 @@ class ValuesProvider extends React.Component {
   }
 
   /**
-   *
-   * This function will be called when trigger submit
-   * which returns state.values
-   *
-   * @return {{value :string||boolean}}
-   */
-  getContextValues() {
-    const { values } = this.state;
-    return values;
-  }
-
-  /**
    * update cell value in the state
    *
    * @param {object} cell - new cell that should be register
@@ -63,7 +48,7 @@ class ValuesProvider extends React.Component {
    * @param {string||boolean} cell.initValue value
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
-  updateCellValue({ nameRef, newValue, groupName }) {
+  updateCellValue = ({ nameRef, newValue, groupName }) => {
     const {
       values: { [nameRef]: oldValue }
     } = this.state;
@@ -85,7 +70,7 @@ class ValuesProvider extends React.Component {
         groupName
       })
     );
-  }
+  };
 
   render() {
     // console.log("ValuesContext update");
@@ -94,7 +79,6 @@ class ValuesProvider extends React.Component {
     const { children } = this.props;
 
     const {
-      getContextValues,
       updateCellValue,
       Registry: { registerCellInfo }
     } = this;
@@ -105,7 +89,7 @@ class ValuesProvider extends React.Component {
           registerCellInfo,
 
           updateCellValue,
-          getContextValues,
+          getContextValues: () => values,
           values
         }}
       >

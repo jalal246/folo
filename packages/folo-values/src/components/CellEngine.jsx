@@ -93,8 +93,6 @@ class CellEngine extends Component {
     const { initValue } = props;
 
     this.state = { localValue: initValue };
-
-    this.handleEvent = this.handleEvent.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -126,7 +124,7 @@ class CellEngine extends Component {
     );
   }
 
-  handleEvent(e) {
+  handleEvent = e => {
     const {
       nameRef,
       valueRef,
@@ -163,7 +161,7 @@ class CellEngine extends Component {
         groupName
       });
     }
-  }
+  };
 
   render() {
     // console.log("CellEngine update");

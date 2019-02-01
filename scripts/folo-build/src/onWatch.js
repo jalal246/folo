@@ -17,7 +17,7 @@ function onWatch(watcher) {
       }
 
       case "FATAL":
-        error(`encountered an unrecoverable error: ${watchErr}`);
+        error(`encountered an unrecoverable: ${watchErr}`);
         break;
 
       case "ERROR":
