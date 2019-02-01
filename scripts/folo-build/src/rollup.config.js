@@ -58,6 +58,10 @@ async function start() {
         return true;
       }
     });
+
+    if (selectedPackages.length === 0) {
+      error(`Cannot find package name in: ${args}`);
+    }
   } else {
     msg("build all...");
   }
