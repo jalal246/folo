@@ -28,17 +28,23 @@ In the repository's root directory:
 - Run `yarn build` in the root directory to build the modules.
   build accepts flags:
 
-  `--silent`: mutes build massages.
+  `-s, --silent` silent mode, mutes build massages
 
-  `--watch`: for watch mode.
+  `-w, --watch` watch mode
 
-  `PACKAGE_NAME`: for building specific package.
+  `-m, --minify` minify bundle works only if format is provided
 
-  _Example:_
+  `--format` [format] specific build format
 
-  ```js
-    build-custom: "node scripts/folo-build  @folo/forms --silent --watch",
-  ```
+  `PACKAGE_NAME` for building specific package[s]
+
+  `-h, --help` output usage information
+
+_Example:_
+
+```js
+  build-custom: "node scripts/folo-build  @folo/forms -s --watch",
+```
 
 - Run `yarn build-storybook` to build the static version of modules.
 

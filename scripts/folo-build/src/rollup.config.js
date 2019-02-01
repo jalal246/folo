@@ -20,7 +20,8 @@ const {
   camelize,
   error,
   sortPackages,
-  hasFlag
+  setSilent,
+  getArgs
 } = require("@folo/dev-utils");
 
 const { onWatch } = require("./onWatch");
@@ -32,8 +33,14 @@ const ES = "es";
 const DEV = "development";
 const PROD = "production";
 
-const isSilent = hasFlag("silent");
-const isWatch = hasFlag("watch");
+const {
+  silent: isSilent,
+  watch: isWatch,
+  format: argFormat,
+  minify: isMinify,
+  args: argListOfPackages
+} = getArgs();
+setSilent(isSilent);
 
 let BUILD_FORMAT = "";
 let BABEL_ENV = "";
@@ -49,18 +56,16 @@ async function start() {
   const selectedPackages = [];
 
   msg("looking if there are any required packages in args...");
-  if (process.argv.length > 2) {
-    const args = process.argv.slice(2);
-
+  if (argListOfPackages.length > 0) {
     packagesInfo = packagesInfo.filter(({ name }, i) => {
-      if (args.includes(name)) {
+      if (argListOfPackages.includes(name)) {
         selectedPackages.push(allPackages[i]);
         return true;
       }
     });
 
     if (selectedPackages.length === 0) {
-      error(`Cannot find package name in: ${args}`);
+      error(`Cannot find package name in: ${argListOfPackages}`);
     }
   } else {
     msg("build all...");
@@ -93,14 +98,16 @@ async function start() {
 
     msg(` bundle ${name} as ${modifiedName}`);
 
-    const opts = [
-      { format: UMD, isProd: false },
-      { format: UMD, isProd: true },
-      { format: CJS, isProd: false },
-      { format: CJS, isProd: true },
-      { format: ES, isProd: false },
-      { format: ES, isProd: true }
-    ];
+    const opts = argFormat
+      ? [{ format: argFormat, isProd: isMinify }]
+      : [
+          { format: UMD, isProd: false },
+          { format: UMD, isProd: true },
+          { format: CJS, isProd: false },
+          { format: CJS, isProd: true },
+          { format: ES, isProd: false },
+          { format: ES, isProd: true }
+        ];
 
     for (const { format, isProd } of opts) {
       BUILD_FORMAT = format;

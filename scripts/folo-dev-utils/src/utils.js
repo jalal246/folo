@@ -6,9 +6,9 @@ const fs = require("fs");
 const chalk = require("chalk");
 const rimraf = require("rimraf");
 const camelize = require("camelize");
+const args = require("commander");
 
-const { SILENT } = process.env;
-const isSilent = SILENT === "silent";
+let isSilent = false;
 
 const {
   bgBlue,
@@ -16,6 +16,10 @@ const {
   yellow: { bold: yellow },
   green: { bold: green }
 } = chalk;
+
+function setSilent(value) {
+  isSilent = value;
+}
 
 function msg(txt) {
   if (isSilent) {
@@ -45,8 +49,8 @@ function error(txt) {
 
 /**
  * Get array of packages directory
- *
- * @return {array} - contains path packages
+ * @param  {String} path="./packages/*" packages folder path
+ * @return {Array}                      array of packages path
  */
 function getPackagesPath(path = "./packages/*") {
   msg("Getting packages path...");
@@ -61,10 +65,8 @@ function getPackagesPath(path = "./packages/*") {
 
 /**
  * Clean directories
- *
- * @param {object} obj
- * @param {array} obj.packages
- * @param {array} obj.filenames
+ * @param  {Array}  packages=[]         array of packages path
+ * @param  {Array}  filenames=["dist"]  name of bundle folder
  */
 function clean({ packages = [], filenames = ["dist" /* "coverage" */] } = {}) {
   msg("Clearing if there is any...");
@@ -91,7 +93,7 @@ function clean({ packages = [], filenames = ["dist" /* "coverage" */] } = {}) {
 /**
  * Get package json for each directories
  *
- * @param {array} packages
+ * @param {array} packages array of packages path
  * @return {array} array of objects contains json, src path and dist path
  */
 function getPackagesInfo(packages) {
@@ -133,6 +135,16 @@ function getPackagesInfo(packages) {
   return packagesInfo.filter(Boolean);
 }
 
+/**
+ * Sorting package
+ *
+ * package with no deps will come first
+ * then package that depinding of package that is built
+ *
+ * @param  {Array} packages                   array of packages path
+ * @param  {String} [accordingTo="folo" }]    sort according to which monorepo
+ * @return {Array}                            array of sorted packages path
+ */
 function sortPackages({ packages, accordingTo = "folo" }) {
   const filtered = [];
 
@@ -175,8 +187,30 @@ function sortPackages({ packages, accordingTo = "folo" }) {
   return filtered;
 }
 
+/**
+ * [Modify package name in package.json
+ * remove @
+ * replace / with -
+ * remove - and capitalize the first letter after it
+ * @param       {String} name package.json name
+ * @return      {String}      modifid name for bundle
+ */
 function _camelize(name) {
   return camelize(name.replace("@", "").replace("/", "-"));
+}
+
+/**
+ * Get args pass to build command
+ * @return {Object} contains flags and array of packages name
+ */
+function getArgs() {
+  return args
+    .option("-s, --silent", "silent mode, mutes build massages")
+    .option("-w, --watch", "watch mode")
+    .option("--format [format]", "specific build format")
+    .option("-m, --minify", "minify bundle works only if format is provided")
+    .option("PACKAGE_NAME", "for building specific package[s]")
+    .parse(process.argv);
 }
 
 module.exports = {
@@ -184,12 +218,13 @@ module.exports = {
   success,
   warning,
   error,
+  setSilent,
 
   getPackagesPath,
   clean,
   getPackagesInfo,
   camelize: _camelize,
-  hasFlag: require("has-flag"),
+  getArgs,
   ms: require("ms"),
   sortPackages
 };
