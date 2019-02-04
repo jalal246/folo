@@ -7,10 +7,8 @@ const replace = require("rollup-plugin-replace");
 const commonjs = require("rollup-plugin-commonjs");
 const resolve = require("rollup-plugin-node-resolve");
 const { terser } = require("rollup-plugin-terser");
-const alias = require("rollup-plugin-alias");
 const filesize = require("rollup-plugin-filesize");
 const { sizeSnapshot } = require("rollup-plugin-size-snapshot");
-const lernaAliases = require("lerna-alias").rollup;
 
 const {
   getPackagesPath,
@@ -196,6 +194,8 @@ function getInput({ sourcePath, external, presets }) {
     input: sourcePath,
     external,
     plugins: [
+      BUILD_FORMAT === UMD && getPeerSrc(),
+
       nodeResolve({
         extensions: [".js", ".jsx"]
       }),
@@ -213,8 +213,6 @@ function getInput({ sourcePath, external, presets }) {
       replace({
         "process.env.NODE_ENV": JSON.stringify("BABEL_ENV")
       }),
-
-      BUILD_FORMAT === UMD && alias(lernaAliases()),
 
       commonjs(),
 
@@ -279,6 +277,25 @@ function getExternal({ peerDependencies, dependencies }) {
   return external.length === 0
     ? () => false
     : id => new RegExp(`^(${external.join("|")})($|/)`).test(id);
+}
+
+const SRC = "src";
+const PROJ = "@folo/";
+
+/**
+ * pluging to resolve @folo/projects to src
+ * bundle all in umd
+ * prevent duplicated function
+ * @return {String} resolved project
+ */
+function getPeerSrc() {
+  return {
+    resolveId(importee) {
+      return importee.includes(PROJ) && !importee.includes(SRC)
+        ? require.resolve(`${importee}/${SRC}`)
+        : null;
+    }
+  };
 }
 
 // end of input functions collection

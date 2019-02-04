@@ -79,11 +79,11 @@
   "bundlesize": [
     {
       "path": "packages/folo-forms/dist/foloForms.min.umd.js",
-      "maxSize": "5 Kb"
+      "maxSize": "3.5 Kb"
     },
     {
       "path": "packages/folo-values/dist/foloValues.min.umd.js",
-      "maxSize": "3 Kb"
+      "maxSize": "2.5 Kb"
     },
     {
       "path": "packages/folo-layout/dist/foloLayout.min.umd.js",
@@ -91,7 +91,7 @@
     },
     {
       "path": "packages/folo-withcontext/dist/foloWithcontext.min.umd.js",
-      "maxSize": "1 Kb"
+      "maxSize": "0.4 Kb"
     }
   ]
 }
