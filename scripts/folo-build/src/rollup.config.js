@@ -8,7 +8,6 @@ const commonjs = require("rollup-plugin-commonjs");
 const resolve = require("rollup-plugin-node-resolve");
 const { terser } = require("rollup-plugin-terser");
 const filesize = require("rollup-plugin-filesize");
-const { sizeSnapshot } = require("rollup-plugin-size-snapshot");
 
 const {
   getPackagesPath,
@@ -250,9 +249,7 @@ function getInput({ sourcePath, external, presets }) {
           toplevel: BUILD_FORMAT === CJS || BUILD_FORMAT === ES
         }),
 
-      !isSilent && filesize(),
-
-      sizeSnapshot({ threshold: false, matchSnapshot: false, printInfo: false })
+      !isSilent && filesize()
     ].filter(Boolean)
   };
 }
