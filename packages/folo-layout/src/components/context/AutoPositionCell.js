@@ -4,8 +4,6 @@ class AutoPositionCell {
     this.cellPositions = {};
 
     this.biggestRowItem = 0;
-
-    this.autoPosition = this.autoPosition.bind(this);
   }
 
   /**
@@ -23,7 +21,7 @@ class AutoPositionCell {
    * @param {number} GridItem.toRow
    * @return {number} row position
    */
-  autoPosition({ key, row, toRow }) {
+  autoPosition = ({ key, row, toRow }) => {
     const parseRow = parseInt(row, 10);
     const parseToRow = parseInt(toRow, 10);
 
@@ -50,7 +48,7 @@ class AutoPositionCell {
     }
 
     return this.cellPositions[key];
-  }
+  };
 }
 
 export default AutoPositionCell;

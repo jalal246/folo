@@ -7,20 +7,21 @@ const replace = require("rollup-plugin-replace");
 const commonjs = require("rollup-plugin-commonjs");
 const resolve = require("rollup-plugin-node-resolve");
 const { terser } = require("rollup-plugin-terser");
-const alias = require("rollup-plugin-alias");
 const filesize = require("rollup-plugin-filesize");
-const { sizeSnapshot } = require("rollup-plugin-size-snapshot");
-const lernaAliases = require("lerna-alias").rollup;
 
 const {
-  getPackages,
+  getPackagesPath,
   clean,
   getPackagesInfo,
   msg,
   camelize,
   error,
-  sortPackages
+  sortPackages,
+  setSilent,
+  getArgs
 } = require("@folo/dev-utils");
+
+const { onWatch } = require("./onWatch");
 
 const UMD = "umd";
 const CJS = "cjs";
@@ -29,26 +30,54 @@ const ES = "es";
 const DEV = "development";
 const PROD = "production";
 
-const { SILENT } = process.env;
-
-const isSilent = SILENT === "true";
+const {
+  silent: isSilent,
+  watch: isWatch,
+  format: argFormat,
+  minify: isMinify,
+  args: argListOfPackages
+} = getArgs();
+setSilent(isSilent);
 
 let BUILD_FORMAT = "";
 let BABEL_ENV = "";
 
 async function start() {
-  const packages = getPackages();
+  // array of packages with paths
+  let allPackages = getPackagesPath();
 
-  const packagesArr = getPackagesInfo(packages);
+  // array of packages info according to package.json
+  let packagesInfo = getPackagesInfo(allPackages);
+
+  // this array will be empty if there's no specfic package is targeted
+  const selectedPackages = [];
+
+  msg("looking if there are any required packages in args...");
+  if (argListOfPackages.length > 0) {
+    packagesInfo = packagesInfo.filter(({ name }, i) => {
+      if (argListOfPackages.includes(name)) {
+        selectedPackages.push(allPackages[i]);
+        return true;
+      }
+    });
+
+    if (selectedPackages.length === 0) {
+      error(`Cannot find package name in: ${argListOfPackages}`);
+    }
+  } else {
+    msg("build all...");
+  }
 
   clean({
-    packages: packages,
+    packages: selectedPackages.length === 0 ? allPackages : selectedPackages,
     filenames: ["dist"]
   });
 
-  const sortedPackagesArr = sortPackages({ packages: packagesArr });
-
-  for (const pkg of sortedPackagesArr) {
+  // if we build targeted packages according to args
+  // escape sorting
+  for (const pkg of selectedPackages.length === 0
+    ? sortPackages({ packages: packagesInfo })
+    : packagesInfo) {
     const {
       sourcePath,
       distPath,
@@ -66,14 +95,16 @@ async function start() {
 
     msg(` bundle ${name} as ${modifiedName}`);
 
-    const opts = [
-      { format: UMD, isProd: false },
-      { format: UMD, isProd: true },
-      { format: CJS, isProd: false },
-      { format: CJS, isProd: true },
-      { format: ES, isProd: false },
-      { format: ES, isProd: true }
-    ];
+    const opts = argFormat
+      ? [{ format: argFormat, isProd: isMinify }]
+      : [
+          { format: UMD, isProd: false },
+          { format: UMD, isProd: true },
+          { format: CJS, isProd: false },
+          { format: CJS, isProd: true },
+          { format: ES, isProd: false },
+          { format: ES, isProd: true }
+        ];
 
     for (const { format, isProd } of opts) {
       BUILD_FORMAT = format;
@@ -162,16 +193,14 @@ function getInput({ sourcePath, external, presets }) {
     input: sourcePath,
     external,
     plugins: [
+      BUILD_FORMAT === UMD && getPeerSrc(),
+
       nodeResolve({
         extensions: [".js", ".jsx"]
       }),
 
       babel({
         runtimeHelpers: true,
-        // pass env as arg solve be issue here, since it is async
-        // the env is changed befroe write is done, it took me a while to figure the solution
-        // dont judge me
-        // have better solution, PR is welome.
         presets,
         babelrc: false
       }),
@@ -179,8 +208,6 @@ function getInput({ sourcePath, external, presets }) {
       replace({
         "process.env.NODE_ENV": JSON.stringify("BABEL_ENV")
       }),
-
-      BUILD_FORMAT === UMD && alias(lernaAliases()),
 
       commonjs(),
 
@@ -222,9 +249,7 @@ function getInput({ sourcePath, external, presets }) {
           toplevel: BUILD_FORMAT === CJS || BUILD_FORMAT === ES
         }),
 
-      !isSilent && filesize(),
-
-      sizeSnapshot({ threshold: false, matchSnapshot: false, printInfo: false })
+      !isSilent && filesize()
     ].filter(Boolean)
   };
 }
@@ -247,17 +272,44 @@ function getExternal({ peerDependencies, dependencies }) {
     : id => new RegExp(`^(${external.join("|")})($|/)`).test(id);
 }
 
+const SRC = "src";
+const PROJ = "@folo/";
+
+/**
+ * pluging to resolve @folo/projects to src
+ * bundle all in umd
+ * prevent duplicated function
+ * @return {String} resolved project
+ */
+function getPeerSrc() {
+  return {
+    resolveId(importee) {
+      return importee.includes(PROJ) && !importee.includes(SRC)
+        ? require.resolve(`${importee}/${SRC}`)
+        : null;
+    }
+  };
+}
+
 // end of input functions collection
 // ********************************
 
 async function build(inputOptions, outputOptions) {
   try {
-    // create a bundle
-    const bundle = await rollup.rollup(inputOptions);
+    if (isWatch) {
+      const watcher = rollup.watch({
+        ...inputOptions,
+        output: [outputOptions]
+      });
+      onWatch(watcher);
+    } else {
+      // create a bundle
+      const bundle = await rollup.rollup(inputOptions);
 
-    // or write the bundle to disk
-    //
-    await bundle.write(outputOptions);
+      // or write the bundle to disk
+      //
+      await bundle.write(outputOptions);
+    }
   } catch (e) {
     error(e);
   }

@@ -2,8 +2,6 @@ class Registry {
   constructor() {
     this.btnGroup = new Set();
     this.datatObj = {};
-
-    this.registerCellInfo = this.registerCellInfo.bind(this);
   }
 
   /**
@@ -21,7 +19,7 @@ class Registry {
    * @param {string||boolean} cell.initValue value
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
-  registerCellInfo({ nameRef, initValue, groupName }) {
+  registerCellInfo = ({ nameRef, initValue, groupName }) => {
     this.datatObj[nameRef] = initValue;
 
     // if it has group, handle it
@@ -45,7 +43,7 @@ class Registry {
         this.btnGroup[groupName].add(nameRef);
       }
     }
-  }
+  };
 }
 
 export default Registry;
