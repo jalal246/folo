@@ -202,10 +202,6 @@ function getInput({ sourcePath, external, presets }) {
 
       babel({
         runtimeHelpers: true,
-        // pass env as arg solve be issue here, since it is async
-        // the env is changed befroe write is done, it took me a while to figure the solution
-        // dont judge me
-        // have better solution, PR is welome.
         presets,
         babelrc: false
       }),
