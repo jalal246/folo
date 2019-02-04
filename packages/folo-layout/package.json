@@ -1,6 +1,6 @@
 {
   "name": "@folo/layout",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "micro css grid react-components",
   "main": "dist/foloLayout.cjs.js",
   "umd:main": "dist/foloLayout.min.umd.js",
@@ -34,7 +34,7 @@
     "dynamic-forms"
   ],
   "dependencies": {
-    "@folo/withcontext": "^0.1.4"
+    "@folo/withcontext": "^0.1.5"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
