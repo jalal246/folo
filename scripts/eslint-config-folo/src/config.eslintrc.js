@@ -6,6 +6,10 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended"
   ],
+  plugins: [
+    // ...
+    "react-hooks"
+  ],
   env: {
     browser: true,
     node: true,
@@ -19,7 +23,8 @@ module.exports = {
       {
         ignore: ["children"]
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error"
   },
   overrides: [
     {
