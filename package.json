@@ -12,7 +12,7 @@
     "cover": "jest --coverage --no-cache --ci --runInBand",
     "report": " yarn cover && codecov",
     "size": "bundlesize",
-    "storybook": "cross-env NODE_ENV=storybook start-storybook -p 6006",
+    "storybook": "cross-env NODE_ENV=storybook start-storybook -p 6006 --ci",
     "gh-pages:clean": "rimraf _gh-pages",
     "gh-pages:build": "cross-env NODE_ENV=production build-storybook -c .storybook -o  _gh-pages",
     "gh-pages:publish": "gh-pages -d  _gh-pages",
