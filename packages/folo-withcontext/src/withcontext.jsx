@@ -9,7 +9,7 @@ import React from "react";
  * @param {Array} contextProps contains props required from consumer
  * @return {Component} - new component connected to context props
  */
-function withcontext({ Component, Consumer, contextProps = [] }) {
+export default function({ Component, Consumer, contextProps = [] }) {
   return function ComponentWithContext(props) {
     return (
       <Consumer>
@@ -30,5 +30,3 @@ function withcontext({ Component, Consumer, contextProps = [] }) {
     );
   };
 }
-
-export default withcontext;
