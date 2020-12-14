@@ -33,7 +33,9 @@
     "form-builder-api",
     "dynamic-forms"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@folo/store": "^0.1.0"
+  },
   "peerDependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.8.0"

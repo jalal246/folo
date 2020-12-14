@@ -16,9 +16,6 @@ module.exports = {
     "react/prop-types": 0,
     "comma-dangle": 0,
     "react/jsx-props-no-spreading": 0,
-    "import/no-unresolved": [
-      "error",
-      { ignore: Object.keys(peerDependencies) }, // https://github.com/benmosher/eslint-plugin-import/issues/825#issuecomment-542618188
-    ],
+    "import/no-unresolved": ["error", { ignore: ["^react$"] }],
   },
 };

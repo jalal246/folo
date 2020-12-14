@@ -1,12 +1,12 @@
 /**
- * update cell value in the previousState
+ * Update cell value in the previousState
  *
  * @param {object} cell - new cell that should be register
  * @param {string} cell.nameRef   key for value
  * @param {string||boolean} cell.initValue value
  * @param {string} cell.groupName group name in case the cell is group-toggle
  */
-function updateValue({
+function updater({
   values: oldValues,
   isGroupValuesUpdate,
   btnGroup,
@@ -42,4 +42,4 @@ function updateValue({
   };
 }
 
-export default updateValue;
+export default updater;

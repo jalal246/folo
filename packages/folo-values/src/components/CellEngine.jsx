@@ -82,70 +82,64 @@ const defaultProps = {
  * manage value updates for all cell types
  * all controlled
  */
-class CellEngine extends Component {
-  constructor(props) {
-    super(props);
+const CellEngine = ({
+  component: CellComponent,
+  initValue,
+  nameRef,
+  groupName,
+  valueRef,
+  isInput,
+  updateCellValue,
+  onBlur: onBlurProps,
+  onChange: onChangeProps,
+  isCellUpdated,
+  values: { [nameRef]: contextValue },
+  children,
+  ...rest
+}) => {
+  const [setState, state] = React.useState({ localValue: initValue });
 
-    const { initValue } = props;
+  // function shouldComponentUpdate(nextProps, nextState) {
+  //   const {
+  //     values: { [nameRef]: nextContextValue },
+  //     isCellUpdated: nextCellUpdated,
+  //   } = nextProps;
 
-    this.state = { localValue: initValue };
-  }
+  //   const { localValue } = state;
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const {
-      nameRef,
-      groupName,
-      isCellUpdated,
-      values: { [nameRef]: contextValue },
-    } = this.props;
+  //   // if our cell is btn belongs to group the change may come form the store
+  //   if (groupName && contextValue !== nextContextValue) {
+  //     setState({
+  //       localValue: nextContextValue,
+  //     });
+  //   }
 
-    const {
-      values: { [nameRef]: nextContextValue },
-      isCellUpdated: nextCellUpdated,
-    } = nextProps;
+  //   // only update when local value is updated
+  //   // or the parent is updated
+  //   return (
+  //     localValue !== nextState.localValue || isCellUpdated !== nextCellUpdated
+  //   );
+  // }
 
-    const { localValue } = this.state;
-
-    // if our cell is btn belongs to group the change may come form the store
-    if (groupName && contextValue !== nextContextValue) {
-      this.setState({
-        localValue: nextContextValue,
-      });
-    }
-
-    // only update when local value is updated
-    // or the parent is updated
-    return (
-      localValue !== nextState.localValue || isCellUpdated !== nextCellUpdated
-    );
-  }
-
-  handleEvent = (e) => {
-    const {
-      nameRef,
-      valueRef,
-      isInput,
-      groupName,
-      updateCellValue,
-      onBlur,
-      onChange,
-    } = this.props;
+  function handleEvent(e) {
     const {
       target: { [valueRef]: newValue },
       type,
     } = e;
 
-    if (type === BLUR) {
+    if (type === BLUR && typeof onBlurProps === "function") {
       // trigger onBlur coming form props
-      onBlur(e);
+      onBlurProps(e);
     } else {
-      // update local value while the change is happining
-      // dont notify the global store yet
-      this.setState({
+      // update local value while the change is happening
+      // don't notify the global store yet
+      setState({
         localValue: newValue,
       });
-      // trigger onChange coming form props
-      onChange(e);
+
+      if (typeof onChangeProps === "function") {
+        onChangeProps(e);
+      }
     }
 
     if (!isInput || type === BLUR) {
@@ -157,30 +151,23 @@ class CellEngine extends Component {
         groupName,
       });
     }
-  };
-
-  render() {
-    // console.log("CellEngine update");
-    const { CellComponent, valueRef, rest, children } = this.props;
-
-    const { localValue } = this.state;
-
-    const { handleEvent } = this;
-
-    return (
-      <CellComponent
-        {...{ [valueRef]: localValue }}
-        onChange={handleEvent}
-        onBlur={handleEvent}
-        {...rest}
-      >
-        {children}
-      </CellComponent>
-    );
   }
-}
+
+  const { localValue } = state;
+
+  return (
+    <CellComponent
+      {...{ [valueRef]: localValue }}
+      onChange={handleEvent}
+      onBlur={handleEvent}
+      {...rest}
+    >
+      {children}
+    </CellComponent>
+  );
+};
 
 CellEngine.propTypes = propTypes;
 CellEngine.defaultProps = defaultProps;
 
-export { CellEngine as PureCellEngine };
+export default CellEngine;

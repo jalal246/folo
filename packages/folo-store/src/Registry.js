@@ -10,7 +10,7 @@ class Registry {
    *
    * This function will be called when cells mount
    * after componentDidMount, the data in dataObj will be moved to state
-   * dataObj is a temp object holds value to avoid update state while rendeing
+   * dataObj is a temp object holds value to avoid update state while rendering
    * in this case will init all cells in dataObj until rendering happens
    * then update the state so all the values update happen in state
    *
@@ -30,7 +30,7 @@ class Registry {
        */
 
       if (!this.btnGroup.has(groupName)) {
-        // add it because it is new groupء
+        // add it because it is new group
         this.btnGroup.add(groupName);
 
         // create new set for the group
