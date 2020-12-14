@@ -33,9 +33,7 @@
     "form-builder-api",
     "dynamic-forms"
   ],
-  "dependencies": {
-    "@folo/withcontext": "^0.1.5"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.8.0"

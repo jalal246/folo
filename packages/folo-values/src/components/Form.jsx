@@ -1,24 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import withcontext from "@folo/withcontext";
-
-import { ValuesConsumer } from "./context";
-
 const propTypes = {
   component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   onSubmit: PropTypes.func,
-  getContextValues: PropTypes.func
+  getContextValues: PropTypes.func,
 };
 
 const defaultProps = {
   component: "form",
   onSubmit() {},
-  getContextValues() {}
+  getContextValues() {},
 };
 
 class Form extends React.PureComponent {
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     const { getContextValues, onSubmit } = this.props;
 
@@ -45,9 +41,3 @@ Form.propTypes = propTypes;
 Form.defaultProps = defaultProps;
 
 export { Form as PureForm };
-
-export default withcontext({
-  Component: Form,
-  Consumer: ValuesConsumer,
-  contextProps: ["getContextValues"]
-});

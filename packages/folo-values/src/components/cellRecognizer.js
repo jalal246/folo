@@ -5,12 +5,12 @@ import {
   LIST,
   CHECKBOX,
   RADIO,
-  INPUT
+  INPUT,
 } from "../constants";
 
 /**
  * Gets the cell type
- * returns booleans type flage.
+ * returns booleans type flag.
  *
  * @param {string} type
  * @param {boolean} checked
@@ -43,7 +43,7 @@ function cellRecognizer({ type, checked, value }) {
     isInput,
     valueRef,
     initValue,
-    RecommendedComponent
+    RecommendedComponent,
   };
 }
 

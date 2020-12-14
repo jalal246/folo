@@ -1,3 +1,5 @@
+# THIS PACKAGE IS DEPRECATED SINCE USING REACT HOOKS
+
 # @folo/withcontext
 
 > micro HOC compose component accepts custom context values as props
@@ -28,7 +30,7 @@ import withcontext from "@folo/withcontext";
 const ComponentWithContext = withcontext({
   Component: MyComponent,
   Consumer,
-  contextProps: ["prop1", "prop4"] // with no contextProps provided, it accepts all context props
+  contextProps: ["prop1", "prop4"], // with no contextProps provided, it accepts all context props
 });
 ```
 
@@ -37,7 +39,7 @@ You can compose all context props by not passing `contextProps`
 ```js
 const ComponentWithAllContextProps = withcontext({
   Component: MyComponent,
-  Consumer
+  Consumer,
 });
 ```
 

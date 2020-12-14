@@ -1,12 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-import withcontext from "@folo/withcontext";
-
 import CellEngine from "./CellEngine";
 import cellRecognizer from "./cellRecognizer";
-
-import { ValuesConsumer } from "./context";
 
 import { TEXT } from "../constants";
 
@@ -49,7 +45,7 @@ const propTypes = {
   registerCellInfo: PropTypes.func,
 
   onChange: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
 };
 
 const defaultProps = {
@@ -62,11 +58,11 @@ const defaultProps = {
   groupName: null,
   registerCellInfo() {},
   onChange() {},
-  onBlur() {}
+  onBlur() {},
 };
 // `unknown_valueKey_created_at_${new Date().getTime()}`;
 /**
- * mainly reposible for user props
+ * mainly responsible for user props
  * handling cell type, init value and pass it to CellEngine
  * update when cell basic change
  * like attr
@@ -78,8 +74,6 @@ class Cell extends PureComponent {
   }
 
   render() {
-    // console.log("Cell update");
-
     const {
       component: UserComponent,
       valueKey,
@@ -99,7 +93,7 @@ class Cell extends PureComponent {
       valueRef,
       isInput,
       initValue,
-      RecommendedComponent
+      RecommendedComponent,
     } = cellRecognizer({ type, checked, value });
 
     const nameRef =
@@ -112,7 +106,7 @@ class Cell extends PureComponent {
     registerCellInfo({
       nameRef,
       initValue,
-      groupName
+      groupName,
     });
 
     this.isCellUpdated = !this.isCellUpdated;
@@ -140,9 +134,3 @@ Cell.propTypes = propTypes;
 Cell.defaultProps = defaultProps;
 
 export { Cell as PureCell };
-
-export default withcontext({
-  Component: Cell,
-  Consumer: ValuesConsumer,
-  contextProps: ["registerCellInfo"]
-});

@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import withcontext from "@folo/withcontext";
-
-import { ValuesConsumer } from "./context";
-
 const BLUR = "blur";
 
 const propTypes = {
@@ -59,7 +55,7 @@ const propTypes = {
     PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
-      PropTypes.objectOf(PropTypes.string)
+      PropTypes.objectOf(PropTypes.string),
     ])
   ).isRequired,
 
@@ -74,12 +70,12 @@ const propTypes = {
    */
   values: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-  )
+  ),
 };
 
 const defaultProps = {
   groupName: null,
-  values: {}
+  values: {},
 };
 
 /**
@@ -100,12 +96,12 @@ class CellEngine extends Component {
       nameRef,
       groupName,
       isCellUpdated,
-      values: { [nameRef]: contextValue }
+      values: { [nameRef]: contextValue },
     } = this.props;
 
     const {
       values: { [nameRef]: nextContextValue },
-      isCellUpdated: nextCellUpdated
+      isCellUpdated: nextCellUpdated,
     } = nextProps;
 
     const { localValue } = this.state;
@@ -113,7 +109,7 @@ class CellEngine extends Component {
     // if our cell is btn belongs to group the change may come form the store
     if (groupName && contextValue !== nextContextValue) {
       this.setState({
-        localValue: nextContextValue
+        localValue: nextContextValue,
       });
     }
 
@@ -124,7 +120,7 @@ class CellEngine extends Component {
     );
   }
 
-  handleEvent = e => {
+  handleEvent = (e) => {
     const {
       nameRef,
       valueRef,
@@ -132,11 +128,11 @@ class CellEngine extends Component {
       groupName,
       updateCellValue,
       onBlur,
-      onChange
+      onChange,
     } = this.props;
     const {
       target: { [valueRef]: newValue },
-      type
+      type,
     } = e;
 
     if (type === BLUR) {
@@ -146,7 +142,7 @@ class CellEngine extends Component {
       // update local value while the change is happining
       // dont notify the global store yet
       this.setState({
-        localValue: newValue
+        localValue: newValue,
       });
       // trigger onChange coming form props
       onChange(e);
@@ -158,7 +154,7 @@ class CellEngine extends Component {
       updateCellValue({
         nameRef,
         newValue,
-        groupName
+        groupName,
       });
     }
   };
@@ -188,9 +184,3 @@ CellEngine.propTypes = propTypes;
 CellEngine.defaultProps = defaultProps;
 
 export { CellEngine as PureCellEngine };
-
-export default withcontext({
-  Component: CellEngine,
-  Consumer: ValuesConsumer,
-  contextProps: ["updateCellValue", "values"]
-});
