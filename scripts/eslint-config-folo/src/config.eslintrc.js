@@ -1,58 +1,30 @@
 module.exports = {
   parser: "babel-eslint",
-  extends: [
-    "airbnb",
-    "prettier",
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
-  plugins: [
-    // ...
-    "react-hooks"
-  ],
   env: {
     browser: true,
-    node: true,
-    es6: true
+    es6: true,
   },
-  rules: {
-    "react/jsx-one-expression-per-line": "off",
-    "linebreak-style": 0,
-    "react/prop-types": [
-      "error",
-      {
-        ignore: ["children"]
-      }
-    ],
-    "react-hooks/rules-of-hooks": "error"
+  extends: ["airbnb-base", "prettier"],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+    page: true,
+    browser: true,
+    context: true,
+    jestPuppeteer: true,
   },
+  parserOptions: {
+    ecmaVersion: 11,
+    sourceType: "module",
+  },
+  rules: {},
+  plugins: ["tree-shaking"],
   overrides: [
     {
-      files: ["packages/**/stories/*.stories.js"],
-      rules: {
-        "import/no-extraneous-dependencies": "off",
-        "react/jsx-filename-extension": "off",
-        "jsx-a11y/label-has-associated-control": "off",
-        "jsx-a11y/label-has-for": "off"
-      }
+      files: ["*.test.js"],
+      env: {
+        jest: true,
+      },
     },
-    {
-      files: ["packages/**/test/*.test.jsx"],
-      rules: {
-        "react/prop-types": "off",
-        "import/no-extraneous-dependencies": "off"
-      }
-    }
   ],
-  globals: {
-    jest: true,
-    describe: true,
-    it: true,
-    before: true,
-    after: true,
-    beforeEach: true,
-    afterEach: true,
-    expect: true,
-    render: true
-  }
 };
