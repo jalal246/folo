@@ -1,6 +1,4 @@
-<!-- forked form: emotion: https://github.com/emotion-js/emotion/blob/master/CONTRIBUTING.md -->
-
-## Prerequisites
+# Prerequisites
 
 - [Node.js](http://nodejs.org/) >= v8 must be installed.
 - [Yarn](https://yarnpkg.com/en/docs/install)
