@@ -5,8 +5,6 @@ import Core from "./Core";
 import cellRecognizer from "../utils/cellRecognizer";
 import { TEXT } from "../constants";
 
-import registry from "../valuesStore";
-
 const Field = ({
   component,
   valueKey,
@@ -25,10 +23,7 @@ const Field = ({
     RecommendedComponent,
   } = cellRecognizer({ type, checked, value });
 
-  const nameRef =
-    valueKey || id
-      ? `${id}${groupName ? `_${groupName}` : ""}`
-      : `${new Date().getTime()}`;
+  const nameRef = valueKey || id ? id : `${new Date().getTime()}`;
 
   return (
     <Core

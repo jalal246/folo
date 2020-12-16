@@ -22,6 +22,7 @@ class Registry {
    */
   subscribe = ({ nameRef, initValue, groupName }, updater) => {
     this.dataObj[nameRef] = initValue;
+    console.log("file: Registry.js ~ line 25 ~ this.dataObj", this.dataObj);
 
     // if it has group, handle it
     if (groupName) {
@@ -49,9 +50,7 @@ class Registry {
   };
 
   updater({ nameRef, newValue, groupName }) {
-    const newValuesHolder = {};
-
-    newValuesHolder[nameRef] = newValue;
+    this.dataObj[nameRef] = newValue;
 
     if (groupName) {
       if (newValue !== false) {
@@ -62,14 +61,12 @@ class Registry {
           // toggle all except the targeted key name which called nameRef
           // since we already changed its value above
           if (FieldNameRef !== nameRef) {
-            newValuesHolder[FieldNameRef] = !newValue;
+            this.dataObj[FieldNameRef] = !newValue;
             this.triggers[FieldNameRef](!newValue);
           }
         });
       }
     }
-
-    this.dataObj = newValuesHolder;
   }
 
   getAll() {
