@@ -1,7 +1,7 @@
 import React from "react";
 import { ValuesProvider } from "./context/ValuesContext";
 
-const Form = ({
+const PureForm = ({
   component: FormComponent = "form",
   onSubmit: onSubmitProps,
   children,
@@ -23,12 +23,12 @@ const Form = ({
   );
 };
 
-const FoloForm = (props) => {
+const Form = (props) => {
   return (
     <ValuesProvider>
-      <Form props={props} />
+      <PureForm props={props} />
     </ValuesProvider>
   );
 };
 
-export default FoloForm;
+export default Form;

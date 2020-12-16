@@ -1,23 +1,38 @@
 {
   "name": "@folo/values",
   "version": "0.1.4",
-  "description": "micro form components return input values with zero config",
-  "main": "dist/foloValues.cjs.js",
-  "umd:main": "dist/foloValues.min.umd.js",
-  "module": "dist/foloValues.esm.js",
-  "scripts": {},
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
   "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jalal246/folo/issues"
-  },
-  "homepage": "https://github.com/jalal246/folo",
   "files": [
     "src",
     "dist",
     "README.md"
   ],
+  "dependencies": {
+    "@folo/store": "^0.1.0",
+    "react-dom": "^17.0.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@material-ui/core": "^3.6.2",
+    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-links": "^6.1.11",
+    "@storybook/react": "^6.1.11",
+    "babel-loader": "^8.2.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
   "keywords": [
     "@folo",
     "@folo/forms",
@@ -33,17 +48,7 @@
     "form-builder-api",
     "dynamic-forms"
   ],
-  "dependencies": {
-    "@folo/store": "^0.1.0"
-  },
-  "peerDependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.8.0"
-  },
   "publishConfig": {
     "access": "public"
-  },
-  "devDependencies": {
-    "@material-ui/core": "^3.6.2"
   }
 }

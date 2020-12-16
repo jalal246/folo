@@ -19,7 +19,7 @@ class Registry {
    * @param {string||boolean} cell.initValue value
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
-  registerCellInfo = ({ nameRef, initValue, groupName }) => {
+  subscribe = ({ nameRef, initValue, groupName }) => {
     this.dataObj[nameRef] = initValue;
 
     // if it has group, handle it
@@ -44,6 +44,29 @@ class Registry {
       }
     }
   };
+
+  update({ nameRef, newValue, groupName }) {
+    const newValuesHolder = {};
+
+    newValuesHolder[nameRef] = newValue;
+
+    if (groupName) {
+      if (newValue !== false) {
+        // update group of values
+
+        // toggle group values
+        this.btnGroup[groupName].forEach((cellNameRef) => {
+          // toggle all except the targeted key name which called nameRef
+          // since we already changed its value above
+          if (cellNameRef !== nameRef) {
+            newValuesHolder[cellNameRef] = !newValue;
+          }
+        });
+      }
+    }
+
+    this.dataObj = newValuesHolder;
+  }
 }
 
 export default Registry;

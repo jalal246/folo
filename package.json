@@ -1,28 +1,16 @@
 {
+  "name": "folo",
   "private": true,
-  "name": "folo-monorepo",
-  "version": "0.1.1",
   "workspaces": [
     "packages/**",
     "scripts/**"
   ],
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jalal246/folo.git"
-  },
+  "repository": "https://github.com/jalal246/folo",
   "author": "Jalal Maskoun jimmy002020@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jalal246/folo/issues"
+  "scripts": {
+    "storybook": "yarn workspace @folo/storybook storybook"
   },
-  "homepage": "https://github.com/jalal246/folo#readme",
-  "keywords": [
-    "@folo",
-    "form-builder-api",
-    "dynamic-forms"
-  ],
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {}
 }
