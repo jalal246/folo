@@ -25,7 +25,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@material-ui/core": "^3.6.2",
-    "@storybook/addon-actions": "^6.1.11",
     "@storybook/addon-essentials": "^6.1.11",
     "@storybook/addon-links": "^6.1.11",
     "@storybook/react": "^6.1.11",

@@ -22,6 +22,17 @@ const Core = ({
 }) => {
   const [localValue, setValue] = React.useState(initValue);
 
+  React.useEffect(() => {
+    registry.subscribe(
+      {
+        nameRef,
+        initValue,
+        groupName,
+      },
+      setValue
+    );
+  }, []);
+
   function eventHandler(e) {
     const {
       target: { [valueRef]: newValue },
@@ -44,7 +55,7 @@ const Core = ({
     if (!isInput || type === BLUR) {
       // inform the store with the new changes we have here
       // only when bur or change happens in non-input element
-      registry.update({
+      registry.updater({
         nameRef,
         newValue,
         groupName,

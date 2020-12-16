@@ -24,18 +24,11 @@ const Field = ({
     initValue,
     RecommendedComponent,
   } = cellRecognizer({ type, checked, value });
-  console.log("file: Field.js ~ line 27 ~ type", type);
 
   const nameRef =
     valueKey || id
       ? `${id}${groupName ? `_${groupName}` : ""}`
       : `${new Date().getTime()}`;
-
-  registry.subscribe({
-    nameRef,
-    initValue,
-    groupName,
-  });
 
   return (
     <Core

@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Field from "../components/Field";
 
 export default {
-  title: "Form Values/Available Field",
+  title: "Forms/Available Field",
   component: Field,
   argTypes: {
     onChange: {

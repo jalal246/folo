@@ -2,6 +2,7 @@ class Registry {
   constructor() {
     this.btnGroup = new Set();
     this.dataObj = {};
+    this.triggers = {};
   }
 
   /**
@@ -19,11 +20,13 @@ class Registry {
    * @param {string||boolean} cell.initValue value
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
-  subscribe = ({ nameRef, initValue, groupName }) => {
+  subscribe = ({ nameRef, initValue, groupName }, updater) => {
     this.dataObj[nameRef] = initValue;
 
     // if it has group, handle it
     if (groupName) {
+      this.triggers[nameRef] = updater;
+
       /*
        * check if group name not exist then add it and create its own set
        * then add the cell to its group
@@ -45,7 +48,7 @@ class Registry {
     }
   };
 
-  update({ nameRef, newValue, groupName }) {
+  updater({ nameRef, newValue, groupName }) {
     const newValuesHolder = {};
 
     newValuesHolder[nameRef] = newValue;
@@ -55,17 +58,22 @@ class Registry {
         // update group of values
 
         // toggle group values
-        this.btnGroup[groupName].forEach((cellNameRef) => {
+        this.btnGroup[groupName].forEach((FieldNameRef) => {
           // toggle all except the targeted key name which called nameRef
           // since we already changed its value above
-          if (cellNameRef !== nameRef) {
-            newValuesHolder[cellNameRef] = !newValue;
+          if (FieldNameRef !== nameRef) {
+            newValuesHolder[FieldNameRef] = !newValue;
+            this.triggers[FieldNameRef](!newValue);
           }
         });
       }
     }
 
     this.dataObj = newValuesHolder;
+  }
+
+  getAll() {
+    return this.dataObj;
   }
 }
 

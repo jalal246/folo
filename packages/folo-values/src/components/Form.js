@@ -1,7 +1,8 @@
 import React from "react";
-import { ValuesProvider } from "./context/ValuesContext";
 
-const PureForm = ({
+import registry from "../valuesStore";
+
+const Form = ({
   component: FormComponent = "form",
   onSubmit: onSubmitProps,
   children,
@@ -11,8 +12,7 @@ const PureForm = ({
     e.preventDefault();
 
     if (typeof onSubmitProps === "function") {
-      const { getContextValues } = React.useContext();
-      onSubmitProps(e, getContextValues());
+      onSubmitProps(e, registry.getAll());
     }
   }
 
@@ -20,14 +20,6 @@ const PureForm = ({
     <FormComponent onSubmit={onSubmit} {...rest}>
       {children}
     </FormComponent>
-  );
-};
-
-const Form = (props) => {
-  return (
-    <ValuesProvider>
-      <PureForm props={props} />
-    </ValuesProvider>
   );
 };
 
