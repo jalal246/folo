@@ -1,4 +1,4 @@
-import { Registry } from "@folo/store/src";
+import Registry from "@folo/store/src";
 
 export default (function init() {
   const registry = new Registry();
