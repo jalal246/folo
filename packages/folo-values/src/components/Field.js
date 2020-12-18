@@ -23,7 +23,7 @@ const Field = ({
     RecommendedComponent,
   } = cellRecognizer({ type, checked, value });
 
-  const nameRef = valueKey || id ? id : `${new Date().getTime()}`;
+  const nameRef = valueKey || id || `${new Date().getTime()}`;
 
   return (
     <Core

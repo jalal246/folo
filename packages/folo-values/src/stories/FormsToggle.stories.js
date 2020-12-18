@@ -6,6 +6,9 @@ import Form from "../components/Form";
 export default {
   title: "Forms/Toggle",
   component: Form,
+  onSubmit: {
+    action: "onSubmit",
+  },
 };
 
 export const GroupToggleNoInitValue = () => (

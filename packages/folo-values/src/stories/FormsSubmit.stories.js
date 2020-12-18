@@ -20,14 +20,19 @@ const styleLabel = {
 const BasicForm = ({ onSubmit }) => (
   <Form style={styleForm} onSubmit={onSubmit}>
     type a text:
-    <Field id="id1" type="text" placeholder="start typing..." />
+    <Field valueKey="textInput" type="text" placeholder="start typing..." />
     choose this checkbox:
-    <Field id="id2" type="checkbox" groupName="test" initValue={false} />
+    <Field
+      valueKey="checkbox1"
+      type="checkbox"
+      groupName="test"
+      initValue={false}
+    />
     or this checkbox:
-    <Field id="id3" type="checkbox" groupName="test" />
+    <Field valueKey="checkbox2" type="checkbox" groupName="test" />
     <label style={styleLabel}>
       items
-      <Field id="id4" type="select">
+      <Field valueKey="options" type="select">
         <option>A</option>
         <option>B</option>
         <option>C</option>
