@@ -13,6 +13,7 @@ const Field = ({
   checked = false,
   type = TEXT,
   groupName = null,
+  storeID,
   children,
   ...rest
 }) => {
@@ -35,6 +36,7 @@ const Field = ({
       coreComponent={component || RecommendedComponent}
       type={type}
       id={id}
+      storeID={storeID}
       {...rest}
     >
       {children}

@@ -11,13 +11,26 @@ export default {
   },
 };
 
-export const GroupToggleNoInitValue = () => (
-  <Form>
-    <Field type="radio" id="1" groupName="test" />
-    <Field type="radio" id="2" groupName="test" />
-    <Field type="radio" id="3" groupName="test" />
+const Template = ({ storeID, groupName1, groupName2, initValue }) => (
+  <Form storeID={storeID}>
+    <Field
+      storeID={storeID}
+      type="radio"
+      id="1"
+      groupName={groupName1}
+      initValue={initValue}
+    />
+    <Field storeID={storeID} type="radio" id="2" groupName={groupName1} />
+    <Field storeID={storeID} type="radio" id="3" groupName={groupName2} />
+    <Field storeID={storeID} type="radio" id="3" groupName={groupName2} />
   </Form>
 );
+
+export const GroupToggleNoInitValue = Template.bind({});
+GroupToggleNoInitValue.args = {
+  storeID: "GroupToggleNoInitValue",
+  groupName: "test",
+};
 
 export const GroupToggleWithInitValue = () => (
   <Form>

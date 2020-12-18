@@ -5,6 +5,16 @@ class Registry {
     this.triggers = {};
   }
 
+  getStorRef(storeID = "unrecognized", isCheck = false) {
+    const $ = this.dataObj;
+
+    if (isCheck && !$[storeID]) {
+      $[storeID] = {};
+    }
+
+    return $[storeID];
+  }
+
   /**
    * Add cell to dataObj
    * Add groupName to btnGroup
@@ -20,9 +30,10 @@ class Registry {
    * @param {string||boolean} cell.initValue value
    * @param {string} cell.groupName group name in case the cell is group-toggle
    */
-  subscribe = ({ nameRef, initValue, groupName }, updater) => {
-    this.dataObj[nameRef] = initValue;
-    console.log("file: Registry.js ~ line 25 ~ this.dataObj", this.dataObj);
+  subscribe({ nameRef, initValue, groupName, storeID }, updater) {
+    const storeRef = this.getStorRef(storeID, true);
+
+    storeRef[nameRef] = initValue;
 
     // if it has group, handle it
     if (groupName) {
@@ -47,10 +58,12 @@ class Registry {
         this.btnGroup[groupName].add(nameRef);
       }
     }
-  };
+  }
 
-  updater({ nameRef, newValue, groupName }) {
-    this.dataObj[nameRef] = newValue;
+  updater({ nameRef, newValue, groupName, storeID }) {
+    const storeRef = this.getStorRef(storeID);
+
+    storeRef[nameRef] = newValue;
 
     if (groupName) {
       if (newValue !== false) {
@@ -61,7 +74,7 @@ class Registry {
           // toggle all except the targeted key name which called nameRef
           // since we already changed its value above
           if (FieldNameRef !== nameRef) {
-            this.dataObj[FieldNameRef] = !newValue;
+            storeRef[FieldNameRef] = !newValue;
             this.triggers[FieldNameRef](!newValue);
           }
         });
@@ -69,8 +82,22 @@ class Registry {
     }
   }
 
-  getAll() {
-    return this.dataObj;
+  getAll(storeID) {
+    const storeRef = this.getStorRef(storeID);
+
+    return storeRef;
+  }
+
+  clear(storeID) {
+    if (!storeID) {
+      this.dataObj = {};
+    } else {
+      this.dataObj[storeID] = {};
+    }
+  }
+
+  destroy() {
+    this.dataObj = undefined;
   }
 }
 

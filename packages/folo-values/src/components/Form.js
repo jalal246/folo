@@ -5,6 +5,7 @@ import registry from "../valuesStore";
 const Form = ({
   component: FormComponent = "form",
   onSubmit: onSubmitProps,
+  storeID,
   children,
   ...rest
 }) => {
@@ -12,7 +13,7 @@ const Form = ({
     e.preventDefault();
 
     if (typeof onSubmitProps === "function") {
-      onSubmitProps(e, registry.getAll());
+      onSubmitProps(e, registry.getAll(storeID));
     }
   }
 

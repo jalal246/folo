@@ -14,6 +14,7 @@ import Form from "../components/Form";
 
 const FormAcceptComponent = ({ onSubmit }) => (
   <Form
+    storeID="FormAcceptComponent"
     style={{
       width: "60%",
     }}
@@ -21,6 +22,7 @@ const FormAcceptComponent = ({ onSubmit }) => (
   >
     <Field
       component={TextField}
+      storeID="FormAcceptComponent"
       label="username"
       valueKey="username"
       type="text"
@@ -31,17 +33,21 @@ const FormAcceptComponent = ({ onSubmit }) => (
       <ListItem key={0} dense button>
         <Field
           component={Checkbox}
+          storeID="FormAcceptComponent"
           disableRipple
           valueKey="NYC"
           type="checkbox"
+          groupName="city"
         />
         <ListItemText primary="NYC" />
         <ListItem key={1} dense button>
           <Field
             component={Checkbox}
+            storeID="FormAcceptComponent"
             disableRipple
             valueKey="LA"
             type="checkbox"
+            groupName="city"
           />
           <ListItemText primary="LA" />
         </ListItem>

@@ -15,6 +15,7 @@ const Core = ({
   groupName,
   valueRef,
   isInput,
+  storeID,
   onBlur: onBlurProps,
   onChange: onChangeProps,
   children,
@@ -28,6 +29,7 @@ const Core = ({
         nameRef,
         initValue,
         groupName,
+        storeID,
       },
       setValue
     );
@@ -59,6 +61,7 @@ const Core = ({
         nameRef,
         newValue,
         groupName,
+        storeID,
       });
     }
   }
