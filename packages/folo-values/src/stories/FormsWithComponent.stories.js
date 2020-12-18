@@ -6,19 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
 
 import Field from "../components/Field";
 import Form from "../components/Form";
 
-export default {
-  title: "Forms/Custom components",
-  component: Form,
-  onSubmit: {
-    action: "onSubmit",
-  },
-};
-
-export function AddressForm() {
+export function AddressForm({ onSubmit }) {
   return (
     <div
       style={{
@@ -39,13 +32,12 @@ export function AddressForm() {
         <Typography variant="h6" gutterBottom>
           Shipping address
         </Typography>
-        <Form>
+        <Form onSubmit={onSubmit} storeID="customComponent">
           <Grid container spacing={8}>
             <Grid item xs={12} sm={6}>
               <Field
                 component={TextField}
                 storeID="customComponent"
-                required
                 id="firstName"
                 name="firstName"
                 label="First name"
@@ -57,7 +49,6 @@ export function AddressForm() {
               <Field
                 component={TextField}
                 storeID="customComponent"
-                required
                 id="lastName"
                 name="lastName"
                 label="Last name"
@@ -69,7 +60,6 @@ export function AddressForm() {
               <Field
                 component={TextField}
                 storeID="customComponent"
-                required
                 id="address1"
                 name="address1"
                 label="Address line 1"
@@ -92,7 +82,6 @@ export function AddressForm() {
               <Field
                 component={TextField}
                 storeID="customComponent"
-                required
                 id="city"
                 name="city"
                 label="City"
@@ -114,7 +103,6 @@ export function AddressForm() {
               <Field
                 component={TextField}
                 storeID="customComponent"
-                required
                 id="zip"
                 name="zip"
                 label="Zip / Postal code"
@@ -126,7 +114,6 @@ export function AddressForm() {
               <Field
                 component={TextField}
                 storeID="customComponent"
-                required
                 id="country"
                 name="country"
                 label="Country"
@@ -139,6 +126,7 @@ export function AddressForm() {
                 control={
                   <Field
                     component={Checkbox}
+                    storeID="customComponent"
                     type="checkbox"
                     color="secondary"
                     name="saveAddress"
@@ -150,8 +138,23 @@ export function AddressForm() {
               />
             </Grid>
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button variant="contained" color="primary" type="submit">
+              submit
+            </Button>
+          </Grid>
         </Form>
       </div>
     </div>
   );
 }
+
+export default {
+  title: "Forms/Custom components",
+  component: AddressForm,
+  argTypes: {
+    onSubmit: {
+      action: "onSubmit",
+    },
+  },
+};

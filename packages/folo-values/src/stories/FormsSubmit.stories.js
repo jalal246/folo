@@ -43,13 +43,12 @@ const BasicForm = ({ onSubmit }) => (
 );
 
 export default {
-  title: "Forms/Submit",
+  title: "Forms/Basic Submit",
   component: BasicForm,
   argTypes: {
     onSubmit: {
       action: "onSubmit",
     },
-    onClick: { action: "clicked" },
   },
 };
 

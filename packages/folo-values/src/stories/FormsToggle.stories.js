@@ -4,7 +4,7 @@ import Field from "../components/Field";
 import Form from "../components/Form";
 
 export default {
-  title: "Forms/Toggle",
+  title: "Forms/Toggle group",
   component: Form,
   onSubmit: {
     action: "onSubmit",
