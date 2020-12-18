@@ -9,6 +9,12 @@ const Form = ({
   children,
   ...rest
 }) => {
+  React.useEffect(() => {
+    return function cleanup() {
+      registry.clear(storeID);
+    };
+  });
+
   function onSubmit(e) {
     e.preventDefault();
 

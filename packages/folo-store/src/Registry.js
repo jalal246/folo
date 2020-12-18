@@ -90,14 +90,10 @@ class Registry {
 
   clear(storeID) {
     if (!storeID) {
-      this.dataObj = {};
+      this.dataObj.unrecognized = {};
     } else {
       this.dataObj[storeID] = {};
     }
-  }
-
-  destroy() {
-    this.dataObj = undefined;
   }
 }
 
