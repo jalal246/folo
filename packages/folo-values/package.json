@@ -2,6 +2,7 @@
   "name": "@folo/values",
   "version": "0.1.4",
   "scripts": {
+    "test": "react-scripts test",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -15,10 +16,11 @@
   ],
   "dependencies": {
     "@folo/store": "^0.1.0",
-    "react-dom": "^17.0.1"
+    "babel-loader": "^8.2.2",
+    "react-dom": "^17.0.1",
+    "remove": "^0.1.5"
   },
   "peerDependencies": {
-    "prop-types": "^15.6.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -28,9 +30,13 @@
     "@storybook/addon-essentials": "^6.1.11",
     "@storybook/addon-links": "^6.1.11",
     "@storybook/react": "^6.1.11",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
     "babel-loader": "^8.2.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.1"
   },
   "keywords": [
     "@folo",

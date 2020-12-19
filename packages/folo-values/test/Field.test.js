@@ -1,11 +1,11 @@
 import React from "react";
-import { render, fireEvent, cleanup } from "react-testing-library";
+import { fireEvent, cleanup } from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 
-import { ValuesProvider } from "../src/components/context";
-import Cell from "../src/components/Cell";
+import Field from "../src/components/Field";
 import Form from "../src/components/Form";
 
-const TEST_DEFAULT = "defalut";
+const TEST_DEFAULT = "default";
 const TEST_BTN_1 = "btn1";
 const TEST_BTN_2 = "btn2";
 const TEST_FORM = "form";
@@ -21,42 +21,41 @@ const NEW_VAL = "hello!";
 const onSubmitMock = jest.fn((e, value) => value);
 
 const App = () => (
-  <ValuesProvider>
-    <Form data-testid={TEST_FORM} onSubmit={onSubmitMock}>
-      <Cell id={ID_2} data-testid={TEST_DEFAULT} />
-      <Cell />
-      <Cell
-        type="checkbox"
-        groupName={GROUP_NAME}
-        id={ID_1}
-        data-testid={TEST_BTN_1}
-      />
-      <Cell
-        type="checkbox"
-        checked
-        groupName={GROUP_NAME}
-        valueKey={VAL_KEY}
-        data-testid={TEST_BTN_2}
-      />
-    </Form>
-  </ValuesProvider>
+  <Form data-testid={TEST_FORM} onSubmit={onSubmitMock}>
+    <Field id={ID_2} data-testid={TEST_DEFAULT} />
+    <Field />
+    <Field
+      type="checkbox"
+      groupName={GROUP_NAME}
+      id={ID_1}
+      data-testid={TEST_BTN_1}
+    />
+    <Field
+      type="checkbox"
+      checked
+      groupName={GROUP_NAME}
+      valueKey={VAL_KEY}
+      data-testid={TEST_BTN_2}
+    />
+  </Form>
 );
 
-const { baseElement, getByTestId } = render(<App />);
+const txt = screen.getByTestId(TEST_DEFAULT);
 
-const txt = getByTestId(TEST_DEFAULT);
+const btn1 = screen.getByTestId(TEST_BTN_1);
+const btn2 = screen.getByTestId(TEST_BTN_2);
 
-const btn1 = getByTestId(TEST_BTN_1);
-const btn2 = getByTestId(TEST_BTN_2);
+const form = screen.getByTestId(TEST_FORM);
 
-const form = getByTestId(TEST_FORM);
-
-describe("Cell#CellEngine & Form", () => {
-  it("returns expected values and name attr", () => {
-    expect(baseElement).toMatchSnapshot();
+describe("Field#CellEngine & Form", () => {
+  beforeAll(() => {
+    render(<App />);
   });
+  // it("returns expected values and name attr", () => {
+  //   expect(baseElement).toMatchSnapshot();
+  // });
 
-  it("sets one btn to false deesnt toggle the other one which is false", () => {
+  it("sets one btn to false doesn't toggle the other one which is false", () => {
     // from
     expect(btn1.checked).toBe(false);
     expect(btn2.checked).toBe(true);
@@ -133,7 +132,7 @@ describe("Cell#CellEngine & Form", () => {
         text_unique2: "",
         // unknown_valueKey_created_at_1547750212936: "",
         checkbox_unique_gr: true,
-        myRefName: false
+        myRefName: false,
       })
     );
 
