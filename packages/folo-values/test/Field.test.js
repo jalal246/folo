@@ -40,20 +40,22 @@ const App = () => (
   </Form>
 );
 
-const txt = screen.getByTestId(TEST_DEFAULT);
-
-const btn1 = screen.getByTestId(TEST_BTN_1);
-const btn2 = screen.getByTestId(TEST_BTN_2);
-
-const form = screen.getByTestId(TEST_FORM);
+let txt;
+let btn1;
+let btn2;
+let form;
 
 describe("Field#CellEngine & Form", () => {
   beforeAll(() => {
     render(<App />);
+
+    txt = screen.getByTestId(TEST_DEFAULT);
+
+    btn1 = screen.getByTestId(TEST_BTN_1);
+    btn2 = screen.getByTestId(TEST_BTN_2);
+
+    form = screen.getByTestId(TEST_FORM);
   });
-  // it("returns expected values and name attr", () => {
-  //   expect(baseElement).toMatchSnapshot();
-  // });
 
   it("sets one btn to false doesn't toggle the other one which is false", () => {
     // from
