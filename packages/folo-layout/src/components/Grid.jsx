@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import {
   GRID,
@@ -9,37 +8,8 @@ import {
   AUTO,
   FR,
   AUTO_FIT,
-  DEFAULT_GAP
+  DEFAULT_GAP,
 } from "../constants";
-
-const propTypes = {
-  /**
-   * custom render-component
-   */
-  component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-  /**
-   * number of columns in grid
-   */
-  col: PropTypes.number,
-  colWidth: PropTypes.string,
-  colMinWidth: PropTypes.string,
-  colMaxWidth: PropTypes.string,
-
-  /**
-   * number of rows in grid
-   */
-  row: PropTypes.number,
-  rowWidth: PropTypes.string,
-  rowMinWidth: PropTypes.string,
-  rowMaxWidth: PropTypes.string,
-
-  isCenter: PropTypes.bool,
-
-  style: PropTypes.objectOf(PropTypes.string),
-
-  children: PropTypes.node.isRequired
-};
 
 const defaultProps = {
   component: "div",
@@ -56,7 +26,7 @@ const defaultProps = {
 
   isCenter: false,
 
-  style: {}
+  style: {},
 };
 
 /**
@@ -91,7 +61,6 @@ class Grid extends React.PureComponent {
 
       isCenter,
 
-      // TODO: add style and shape to propTypes
       style: {
         display = GRID,
 
@@ -129,13 +98,13 @@ class Grid extends React.PureComponent {
               colWidth,
               colMinWidth,
               colMaxWidth
-            )
+            ),
           }),
 
       alignItems,
       justifyContent,
       gap,
-      ...otherStyles
+      ...otherStyles,
     };
 
     return (
@@ -145,8 +114,5 @@ class Grid extends React.PureComponent {
     );
   }
 }
-
-Grid.propTypes = propTypes;
-Grid.defaultProps = defaultProps;
 
 export default Grid;

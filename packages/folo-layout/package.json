@@ -1,18 +1,21 @@
 {
   "name": "@folo/layout",
   "version": "0.1.4",
-  "description": "micro css grid react-components",
-  "main": "dist/foloLayout.cjs.js",
-  "umd:main": "dist/foloLayout.min.umd.js",
-  "module": "dist/foloLayout.esm.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-layout",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jalal246/folo/issues"
+  "dependencies": {
+    "@folo/auto-position": "^0.0.0"
   },
-  "homepage": "https://github.com/jalal246/folo",
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "react": "^17.0.1"
+  },
   "files": [
     "src",
     "dist",
@@ -33,13 +36,6 @@
     "form-builder-api",
     "dynamic-forms"
   ],
-  "dependencies": {
-    "@folo/withcontext": "^0.1.5"
-  },
-  "peerDependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.8.0"
-  },
   "publishConfig": {
     "access": "public"
   }

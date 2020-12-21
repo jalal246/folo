@@ -1,5 +1,3 @@
-# THIS PACKAGE IS DEPRECATED SINCE USING REACT HOOKS
-
 # @folo/withcontext
 
 > micro HOC compose component accepts custom context values as props

@@ -13,7 +13,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@folo/store": "^0.1.0"
+    "@folo/store": "^0.0.0"
   },
   "peerDependencies": {
     "react": ">=16"

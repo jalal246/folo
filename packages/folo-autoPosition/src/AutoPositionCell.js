@@ -1,6 +1,6 @@
 class AutoPositionCell {
   constructor() {
-    // store cells number accourding to its name
+    // store cells number according to its name
     this.cellPositions = {};
 
     this.biggestRowItem = 0;
@@ -8,7 +8,7 @@ class AutoPositionCell {
 
   /**
    * Auto set the row number
-   * If we dont have row then take the highest value
+   * If we don't have row then take the highest value
    * depending on biggestRowItem which updated with each grid item
    * Otherwise set the row do you have and update biggestRowItem
    *
@@ -21,7 +21,7 @@ class AutoPositionCell {
    * @param {number} GridItem.toRow
    * @return {number} row position
    */
-  autoPosition = ({ key, row, toRow }) => {
+  autoPosition({ key, row, toRow }) {
     const parseRow = parseInt(row, 10);
     const parseToRow = parseInt(toRow, 10);
 
@@ -48,7 +48,7 @@ class AutoPositionCell {
     }
 
     return this.cellPositions[key];
-  };
+  }
 }
 
 export default AutoPositionCell;
