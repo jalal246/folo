@@ -11,24 +11,6 @@ import {
   DEFAULT_GAP,
 } from "../constants";
 
-const defaultProps = {
-  component: "div",
-
-  col: null,
-  colWidth: undefined,
-  colMinWidth: AUTO,
-  colMaxWidth: FR,
-
-  row: null,
-  rowWidth: undefined,
-  rowMinWidth: AUTO,
-  rowMaxWidth: FR,
-
-  isCenter: false,
-
-  style: {},
-};
-
 /**
  * call repeat() CSS function
  * depending on length, min,max
@@ -44,75 +26,73 @@ function repeat(length, fixed, min, max) {
   return `repeat(${length}, ${fixed || `minmax(${min}, ${max})`})`;
 }
 
-class Grid extends React.PureComponent {
-  render() {
-    const {
-      component: CellComponent,
+const Grid = (props) => {
+  const {
+    component: CellComponent = "div",
 
-      col,
-      colWidth,
-      colMinWidth,
-      colMaxWidth,
+    col,
+    colWidth,
+    colMinWidth = AUTO,
+    colMaxWidth = FR,
 
-      row,
-      rowWidth,
-      rowMinWidth,
-      rowMaxWidth,
+    row,
+    rowWidth,
+    rowMinWidth,
+    rowMaxWidth,
 
-      isCenter,
+    isCenter = false,
 
-      style: {
-        display = GRID,
+    style: {
+      display = GRID,
 
-        alignItems = isCenter ? CENTER : STRETCH,
+      alignItems = isCenter ? CENTER : STRETCH,
 
-        // eslint-disable-next-line
-        justifyContent = col || colWidth
-          ? SPACE_BETWEEN
-          : isCenter
-          ? CENTER
-          : STRETCH,
+      // eslint-disable-next-line
+      justifyContent = col || colWidth
+        ? SPACE_BETWEEN
+        : isCenter
+        ? CENTER
+        : STRETCH,
 
-        gap = DEFAULT_GAP,
+      gap = DEFAULT_GAP,
 
-        ...otherStyles
-      },
-      children,
+      ...otherStyles
+    } = {},
+    children,
 
-      //
-      ...otherProps
-    } = this.props;
+    //
+    ...rest
+  } = props;
 
-    const style = {
-      display,
+  const style = {
+    display,
 
-      ...(row
-        ? { gridTemplateRows: repeat(row, rowWidth, rowMinWidth, rowMaxWidth) }
-        : rowWidth && { gridAutoRows: rowWidth }),
+    ...(row
+      ? { gridTemplateRows: repeat(row, rowWidth, rowMinWidth, rowMaxWidth) }
+      : rowWidth && { gridAutoRows: rowWidth }),
 
-      ...(colWidth && !col
-        ? { gridAutoColumns: colWidth }
-        : {
-            gridTemplateColumns: repeat(
-              col || AUTO_FIT,
-              colWidth,
-              colMinWidth,
-              colMaxWidth
-            ),
-          }),
+    ...(colWidth && !col
+      ? { gridAutoColumns: colWidth }
+      : {
+          gridTemplateColumns: repeat(
+            col || AUTO_FIT,
+            colWidth,
+            colMinWidth,
+            colMaxWidth
+          ),
+        }),
 
-      alignItems,
-      justifyContent,
-      gap,
-      ...otherStyles,
-    };
+    alignItems,
+    justifyContent,
+    gap,
+    ...otherStyles,
+  };
 
-    return (
-      <CellComponent style={style} {...otherProps}>
-        {children}
-      </CellComponent>
-    );
-  }
-}
+  return (
+    <CellComponent style={style} {...rest}>
+      {children}
+    </CellComponent>
+  );
+};
 
 export default Grid;

@@ -1,9 +1,4 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-
-import withcontext from "@folo/withcontext";
-
-import { GridConsumer } from "./context";
+import React from "react";
 
 import {
   CENTER,
@@ -11,7 +6,7 @@ import {
   ROW,
   COLUMN,
   DISPLAY_FLEX,
-  STRETCH
+  STRETCH,
 } from "../constants";
 
 function location(from, to) {
@@ -21,39 +16,21 @@ function location(from, to) {
   return `${from}`;
 }
 
-const propTypes = {
-  component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+// const defaultProps = {
+//   component: "div",
 
-  row: PropTypes.number,
-  toRow: PropTypes.number,
+//   row: null,
+//   toRow: null,
 
-  col: PropTypes.number,
-  toCol: PropTypes.number,
-  isCenter: PropTypes.bool,
+//   col: 0,
+//   toCol: null,
+//   isCenter: false,
 
-  style: PropTypes.objectOf(PropTypes.string),
+//   style: {},
 
-  autoPosition: PropTypes.func.isRequired,
-
-  isHorizontal: PropTypes.bool,
-  children: PropTypes.node
-};
-
-const defaultProps = {
-  component: "div",
-
-  row: null,
-  toRow: null,
-
-  col: 0,
-  toCol: null,
-  isCenter: false,
-
-  style: {},
-
-  isHorizontal: true,
-  children: null
-};
+//   isHorizontal: true,
+//   children: null,
+// };
 
 /**
  * For implicit grid
@@ -62,80 +39,63 @@ const defaultProps = {
  *
  * It collects numbers report it to Grid
  */
-class GridItem extends PureComponent {
-  state = {
-    key: new Date().getTime()
+const GridItem = (props) => {
+  const {
+    component: CellComponent,
+
+    row,
+    toRow,
+
+    col,
+    toCol,
+
+    isCenter,
+    isHorizontal,
+
+    style: {
+      display = DISPLAY_FLEX,
+
+      flexDirection: fDirection,
+      alignItems: aItems,
+      ...otherStyle
+    },
+
+    autoPosition,
+
+    children,
+
+    ...rest
+  } = props;
+
+  // console.log('GridItem updated');
+  const calculatedPosition = autoPosition({ key, row, toRow });
+
+  const container = {
+    display,
+
+    ...(isHorizontal
+      ? {
+          flexDirection: fDirection || ROW,
+          alignItems: aItems || CENTER,
+        }
+      : {
+          flexDirection: fDirection || COLUMN,
+          alignItems: aItems || STRETCH,
+        }),
+
+    justifyContent: isCenter ? CENTER : SPACE_BETWEEN,
+
+    gridRow: location(calculatedPosition, toRow),
+    gridColumn: location(col, toCol),
+
+    ...otherStyle,
   };
 
-  render() {
-    const {
-      component: CellComponent,
+  return (
+    <CellComponent style={container} {...rest}>
+      {children}
+    </CellComponent>
+  );
+};
 
-      row,
-      toRow,
-
-      col,
-      toCol,
-
-      isCenter,
-      isHorizontal,
-
-      style: {
-        display = DISPLAY_FLEX,
-
-        flexDirection: fDirection,
-        alignItems: aItems,
-        ...otherStyle
-      },
-
-      autoPosition,
-
-      children,
-
-      ...rest
-    } = this.props;
-
-    const { key } = this.state;
-
-    // console.log('GridItem updated');
-    const calculatedPosition = autoPosition({ key, row, toRow });
-
-    const container = {
-      display,
-
-      ...(isHorizontal
-        ? {
-            flexDirection: fDirection || ROW,
-            alignItems: aItems || CENTER
-          }
-        : {
-            flexDirection: fDirection || COLUMN,
-            alignItems: aItems || STRETCH
-          }),
-
-      justifyContent: isCenter ? CENTER : SPACE_BETWEEN,
-
-      gridRow: location(calculatedPosition, toRow),
-      gridColumn: location(col, toCol),
-
-      ...otherStyle
-    };
-
-    return (
-      <CellComponent style={container} {...rest}>
-        {children}
-      </CellComponent>
-    );
-  }
-}
-
-GridItem.propTypes = propTypes;
-GridItem.defaultProps = defaultProps;
-
-export { GridItem as PureGridItem };
-
-export default withcontext({
-  Component: GridItem,
-  Consumer: GridConsumer,
-  contextProps: ["autoPosition"]
-});
+export default GridItem;
