@@ -3,28 +3,13 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    "jest/globals": true,
   },
   extends: ["airbnb-base", "prettier"],
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-    page: true,
-    browser: true,
-    context: true,
-    jestPuppeteer: true,
-  },
   parserOptions: {
     ecmaVersion: 11,
     sourceType: "module",
   },
   rules: {},
-  plugins: ["tree-shaking"],
-  overrides: [
-    {
-      files: ["*.test.js"],
-      env: {
-        jest: true,
-      },
-    },
-  ],
+  plugins: ["tree-shaking", "jest"],
 };
