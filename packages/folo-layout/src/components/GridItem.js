@@ -1,4 +1,5 @@
 import React from "react";
+import positionStore from "../positionStore";
 
 import {
   CENTER,
@@ -16,22 +17,6 @@ function location(from, to) {
   return `${from}`;
 }
 
-// const defaultProps = {
-//   component: "div",
-
-//   row: null,
-//   toRow: null,
-
-//   col: 0,
-//   toCol: null,
-//   isCenter: false,
-
-//   style: {},
-
-//   isHorizontal: true,
-//   children: null,
-// };
-
 /**
  * For implicit grid
  * Takes column and row number
@@ -41,16 +26,16 @@ function location(from, to) {
  */
 const GridItem = (props) => {
   const {
-    component: CellComponent,
+    component: CellComponent = "div",
 
-    row,
-    toRow,
+    row = null,
+    toRow = null,
 
-    col,
-    toCol,
+    col = 0,
+    toCol = null,
 
-    isCenter,
-    isHorizontal,
+    isCenter = false,
+    isHorizontal = true,
 
     style: {
       display = DISPLAY_FLEX,
@@ -58,17 +43,19 @@ const GridItem = (props) => {
       flexDirection: fDirection,
       alignItems: aItems,
       ...otherStyle
-    },
+    } = {},
 
-    autoPosition,
-
+    id,
     children,
 
     ...rest
   } = props;
 
-  // console.log('GridItem updated');
-  const calculatedPosition = autoPosition({ key, row, toRow });
+  const calculatedPosition = positionStore.autoPosition({
+    key: id || `${new Date().getTime()}`,
+    row,
+    toRow,
+  });
 
   const container = {
     display,
