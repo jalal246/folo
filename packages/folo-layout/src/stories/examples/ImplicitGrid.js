@@ -35,7 +35,7 @@ export const FriendlyLadder = () => (
   </Grid>
 );
 
-export const ArtCollection = () => (
+export const ArtCollectionProps = () => (
   <Grid
     rowWidth="90px"
     colWidth="320px"

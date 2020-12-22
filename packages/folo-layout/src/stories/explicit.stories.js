@@ -15,14 +15,14 @@ export default {
 };
 
 export const FourColumns = (args) => <FourColumnsProps {...args} />;
-FourColumns.arg = {
+FourColumns.args = {
   col: 4,
 };
 
 export const ThreeColumnsThreeRows = (args) => (
   <ThreeColumnsThreeRowsProps {...args} />
 );
-ThreeColumnsThreeRows.arg = {
+ThreeColumnsThreeRows.args = {
   col: 3,
   row: 4,
 };
