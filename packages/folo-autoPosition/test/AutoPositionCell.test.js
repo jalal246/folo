@@ -1,8 +1,7 @@
-import AutoPositionCell from "../src/components/context/AutoPositionCell";
+/* eslint-disable operator-assignment */
+import AutoPositionCell from "../src";
 
-const AutoPositionTest = new AutoPositionCell();
-
-const { autoPosition } = AutoPositionTest;
+const autoPositionTest = new AutoPositionCell();
 
 const key = () => new Date().getTime();
 
@@ -40,182 +39,182 @@ let EXPECTED_ROW_9;
 let CELL_10;
 let EXPECTED_ROW_10;
 
-describe("AutoPositionCell", () => {
-  it("works for know row", () => {
+describe("Testing AutoPositionCell Algorithm", () => {
+  it("Works for known row", () => {
     CELL_1 = {
       key,
       row: 10,
-      toRow: 0
+      toRow: 0,
     };
     EXPECTED_ROW_1 = 10;
     EXPECTED_BIGGEST_ROW = 10;
 
-    POSITION = autoPosition(CELL_1);
+    POSITION = autoPositionTest.autoPosition(CELL_1);
 
     expect(EXPECTED_ROW_1).toBe(10);
     expect(EXPECTED_BIGGEST_ROW).toBe(10);
 
     expect(POSITION).toBe(EXPECTED_ROW_1); // 10
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW); // 10
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW); // 10
   });
 
-  it("calculates row number prev_row + 1", () => {
+  it("Calculates row number prev_row + 1", () => {
     CELL_2 = {
       key,
       row: null,
-      toRow: 0
+      toRow: 0,
     };
     EXPECTED_ROW_2 = CELL_1.row + 1;
     EXPECTED_BIGGEST_ROW = EXPECTED_ROW_2;
 
-    POSITION = autoPosition(CELL_2);
+    POSITION = autoPositionTest.autoPosition(CELL_2);
 
     expect(EXPECTED_ROW_2).toBe(11);
     expect(EXPECTED_BIGGEST_ROW).toBe(11);
 
     expect(POSITION).toBe(EXPECTED_ROW_2);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("no change when passing the same value", () => {
+  it("No change when passing the same value", () => {
     // same value in cell 2
     CELL_3 = {
       key,
       row: EXPECTED_ROW_2, // 11
-      toRow: 0
+      toRow: 0,
     };
     EXPECTED_ROW_3 = CELL_3.row; // no change for the same value: 11
     // no change for EXPECTED_BIGGEST_ROW
 
-    POSITION = autoPosition(CELL_3);
+    POSITION = autoPositionTest.autoPosition(CELL_3);
 
     expect(EXPECTED_ROW_3).toBe(11);
 
     expect(POSITION).toBe(EXPECTED_ROW_3);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("assgins lower row value, to test biggest value", () => {
+  it("Assigns lower row value, to test biggest value", () => {
     CELL_4 = {
       key,
       row: 2,
-      toRow: 0
+      toRow: 0,
     };
     EXPECTED_ROW_4 = CELL_4.row;
     // no change for EXPECTED_BIGGEST_ROW
 
-    POSITION = autoPosition(CELL_4);
+    POSITION = autoPositionTest.autoPosition(CELL_4);
 
     expect(EXPECTED_ROW_4).toBe(2);
 
     expect(POSITION).toBe(EXPECTED_ROW_4);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("no row, the expexted is not prev + 1, must be biggest +1", () => {
+  it("No row, the expected is not prev + 1, must be biggest +1", () => {
     CELL_5 = {
       key,
       row: null,
-      toRow: 0
+      toRow: 0,
     };
     EXPECTED_ROW_5 = EXPECTED_BIGGEST_ROW + 1;
     EXPECTED_BIGGEST_ROW = EXPECTED_ROW_5;
 
-    POSITION = autoPosition(CELL_5);
+    POSITION = autoPositionTest.autoPosition(CELL_5);
 
     expect(EXPECTED_ROW_5).toBe(12);
     expect(EXPECTED_BIGGEST_ROW).toBe(12);
 
     expect(POSITION).toBe(EXPECTED_ROW_5);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("no row, but toRow, the expexted is prev + 1", () => {
+  it("No row, but toRow, the expected is prev + 1", () => {
     CELL_6 = {
       key,
       row: null,
-      toRow: 200
+      toRow: 200,
     };
     EXPECTED_ROW_6 = EXPECTED_ROW_5 + 1;
     EXPECTED_BIGGEST_ROW = CELL_6.toRow;
 
-    POSITION = autoPosition(CELL_6);
+    POSITION = autoPositionTest.autoPosition(CELL_6);
 
     expect(EXPECTED_ROW_6).toBe(13);
     expect(EXPECTED_BIGGEST_ROW).toBe(200);
 
     expect(POSITION).toBe(EXPECTED_ROW_6);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("no row, but lower toRow, biggest + 1", () => {
+  it("No row, but lower toRow, biggest + 1", () => {
     CELL_7 = {
       key,
       row: null,
-      toRow: 3
+      toRow: 3,
     };
     EXPECTED_ROW_7 = EXPECTED_BIGGEST_ROW + 1;
     EXPECTED_BIGGEST_ROW = EXPECTED_BIGGEST_ROW + 1;
 
-    POSITION = autoPosition(CELL_7);
+    POSITION = autoPositionTest.autoPosition(CELL_7);
 
     expect(EXPECTED_ROW_7).toBe(201);
     expect(EXPECTED_BIGGEST_ROW).toBe(201);
 
     expect(POSITION).toBe(EXPECTED_ROW_7);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("psses toRow & row both smaller than prev biggest", () => {
+  it("Passes toRow & row both smaller than prev biggest", () => {
     CELL_8 = {
       key,
       row: 100,
-      toRow: 3
+      toRow: 3,
     };
     EXPECTED_ROW_8 = CELL_8.row;
     // no change for EXPECTED_BIGGEST_ROW
 
-    POSITION = autoPosition(CELL_8);
+    POSITION = autoPositionTest.autoPosition(CELL_8);
 
     expect(EXPECTED_ROW_8).toBe(100);
 
     expect(POSITION).toBe(EXPECTED_ROW_8);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("psses toRow & row both but row bigger than biggest", () => {
+  it("Passes toRow & row both but row bigger than biggest", () => {
     CELL_9 = {
       key,
       row: 205,
-      toRow: 3
+      toRow: 3,
     };
     EXPECTED_ROW_9 = CELL_9.row;
     EXPECTED_BIGGEST_ROW = EXPECTED_ROW_9;
 
-    POSITION = autoPosition(CELL_9);
+    POSITION = autoPositionTest.autoPosition(CELL_9);
 
     expect(EXPECTED_ROW_9).toBe(205);
     expect(EXPECTED_BIGGEST_ROW).toBe(205);
 
     expect(POSITION).toBe(EXPECTED_ROW_9);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 
-  it("psses toRow & row both but toRow bigger than biggest", () => {
+  it("Passes toRow & row both but toRow bigger than biggest", () => {
     CELL_10 = {
       key,
       row: 88,
-      toRow: 210
+      toRow: 210,
     };
     EXPECTED_ROW_10 = CELL_10.row;
     EXPECTED_BIGGEST_ROW = CELL_10.toRow;
 
-    POSITION = autoPosition(CELL_10);
+    POSITION = autoPositionTest.autoPosition(CELL_10);
 
     expect(EXPECTED_ROW_10).toBe(88);
     expect(EXPECTED_BIGGEST_ROW).toBe(210);
 
     expect(POSITION).toBe(EXPECTED_ROW_10);
-    expect(AutoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
+    expect(autoPositionTest.biggestRowItem).toBe(EXPECTED_BIGGEST_ROW);
   });
 });
