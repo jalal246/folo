@@ -12,9 +12,6 @@ import {
 export default {
   title: "Grid Layout/Explicit Layout",
   component: Grid,
-  onSubmit: {
-    action: "onSubmit",
-  },
 };
 
 export const FourColumns = (args) => <FourColumnsProps {...args} />;
