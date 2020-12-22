@@ -1,11 +1,9 @@
 import React from "react";
-import { render, cleanup } from "react-testing-library";
+import { render, screen, cleanup } from "@testing-library/react";
 
-import { PureGridItem } from "../src/components/GridItem";
+import GridItem from "../src/components/GridItem";
 
-const autoPosition = jest.fn(() => 0);
-
-const TESTID = "testidforGridItem";
+const TEST_ID = "testForGrid";
 
 const CENTER = "center";
 const ROW = "row";
@@ -15,137 +13,84 @@ const SPACE_BETWEEN = "space-between";
 const STRETCH = "stretch";
 
 const MyGridItem = (props = {}) => (
-  <PureGridItem data-testid={TESTID} autoPosition={autoPosition} {...props} />
+  <GridItem data-testid={TEST_ID} {...props} />
 );
 
-afterEach(cleanup);
+describe("GridItem - Implicit Layout", () => {
+  afterEach(() => {
+    cleanup();
+  });
 
-describe("GridItem", () => {
-  describe("style", () => {
-    it("returns default style", () => {
-      const { baseElement, getByTestId } = render(<MyGridItem />);
-      const { style } = getByTestId(TESTID);
+  describe("Testing Style", () => {
+    it("Returns default style", () => {
+      render(<MyGridItem />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DISPLAY_FLEX,
         alignItems: CENTER,
         flexDirection: ROW,
-        gridRow: "0",
+        // gridRow: "0",
         gridColumn: "0",
-        justifyContent: SPACE_BETWEEN
+        justifyContent: SPACE_BETWEEN,
       };
 
       expect(baseElement).toMatchSnapshot();
       expect(style).toMatchObject(expected);
     });
 
-    it("returns flexDirection column when it is isHorizontal = false", () => {
-      const { baseElement, getByTestId } = render(
-        <MyGridItem isHorizontal={false} />
-      );
-      const { style } = getByTestId(TESTID);
+    it("Returns flexDirection column when it is isHorizontal = false", () => {
+      render(<MyGridItem isHorizontal={false} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DISPLAY_FLEX,
         alignItems: STRETCH,
         flexDirection: COLUMN,
-        gridRow: "0",
+        // gridRow: "0",
         gridColumn: "0",
-        justifyContent: SPACE_BETWEEN
+        justifyContent: SPACE_BETWEEN,
       };
 
       expect(baseElement).toMatchSnapshot();
       expect(style).toMatchObject(expected);
     });
 
-    it("overrides styles", () => {
-      const { baseElement, getByTestId } = render(
+    it("Overrides styles", () => {
+      render(
         <MyGridItem
           style={{
             flexDirection: COLUMN,
-            alignItems: STRETCH
+            alignItems: STRETCH,
           }}
         />
       );
-      const { style } = getByTestId(TESTID);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DISPLAY_FLEX,
         alignItems: STRETCH,
         flexDirection: COLUMN,
-        gridRow: "0",
+        // gridRow: "0",
         gridColumn: "0",
-        justifyContent: SPACE_BETWEEN
+        justifyContent: SPACE_BETWEEN,
       };
 
       expect(baseElement).toMatchSnapshot();
       expect(style).toMatchObject(expected);
     });
 
-    it("returns center", () => {
-      const { baseElement, getByTestId } = render(<MyGridItem isCenter />);
-      const { style } = getByTestId(TESTID);
+    it("Returns center", () => {
+      render(<MyGridItem isCenter />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DISPLAY_FLEX,
         alignItems: CENTER,
         flexDirection: ROW,
-        gridRow: "0",
+        // gridRow: "0",
         gridColumn: "0",
-        justifyContent: CENTER
-      };
-
-      expect(baseElement).toMatchSnapshot();
-      expect(style).toMatchObject(expected);
-    });
-  });
-
-  describe("gridRow", () => {
-    it("returns gridRow with toRow and alignItems center", () => {
-      const { baseElement, getByTestId } = render(<MyGridItem toRow={6} />);
-      const { style } = getByTestId(TESTID);
-
-      const expected = {
-        display: DISPLAY_FLEX,
-        alignItems: CENTER,
-        flexDirection: ROW,
-        gridRow: "0 / 6",
-        gridColumn: "0",
-        justifyContent: SPACE_BETWEEN
-      };
-
-      expect(baseElement).toMatchSnapshot();
-      expect(style).toMatchObject(expected);
-    });
-
-    it("returns gridRow with toRow =0", () => {
-      const { baseElement, getByTestId } = render(<MyGridItem toRow={0} />);
-      const { style } = getByTestId(TESTID);
-
-      const expected = {
-        display: DISPLAY_FLEX,
-        alignItems: CENTER,
-        flexDirection: ROW,
-        gridRow: "0 / 0",
-        gridColumn: "0",
-        justifyContent: SPACE_BETWEEN
-      };
-
-      expect(baseElement).toMatchSnapshot();
-      expect(style).toMatchObject(expected);
-    });
-
-    it("returns gridRow with toRow =0", () => {
-      const { baseElement, getByTestId } = render(<MyGridItem toRow={0} />);
-      const { style } = getByTestId(TESTID);
-
-      const expected = {
-        display: DISPLAY_FLEX,
-        alignItems: CENTER,
-        flexDirection: ROW,
-        gridRow: "0 / 0",
-        gridColumn: "0",
-        justifyContent: SPACE_BETWEEN
+        justifyContent: CENTER,
       };
 
       expect(baseElement).toMatchSnapshot();
@@ -153,35 +98,88 @@ describe("GridItem", () => {
     });
   });
 
-  describe("gridColumn", () => {
-    it("returns column position with when col is provided", () => {
-      const { baseElement, getByTestId } = render(<MyGridItem col={10} />);
-      const { style } = getByTestId(TESTID);
+  describe("Testing gridRow", () => {
+    it("Returns gridRow with toRow and alignItems center", () => {
+      render(<MyGridItem toRow={6} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DISPLAY_FLEX,
         alignItems: CENTER,
         flexDirection: ROW,
-        gridRow: "0",
+        // gridRow: "0 / 6",
+        gridColumn: "0",
+        justifyContent: SPACE_BETWEEN,
+      };
+
+      expect(baseElement).toMatchSnapshot();
+      expect(style).toMatchObject(expected);
+    });
+
+    it("Returns gridRow with toRow =0", () => {
+      render(<MyGridItem toRow={0} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
+
+      const expected = {
+        display: DISPLAY_FLEX,
+        alignItems: CENTER,
+        flexDirection: ROW,
+        // gridRow: "0 / 0",
+        gridColumn: "0",
+        justifyContent: SPACE_BETWEEN,
+      };
+
+      expect(baseElement).toMatchSnapshot();
+      expect(style).toMatchObject(expected);
+    });
+
+    it("Returns gridRow with toRow =0", () => {
+      render(<MyGridItem toRow={0} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
+
+      const expected = {
+        display: DISPLAY_FLEX,
+        alignItems: CENTER,
+        flexDirection: ROW,
+        // gridRow: "0 / 0",
+        gridColumn: "0",
+        justifyContent: SPACE_BETWEEN,
+      };
+
+      expect(baseElement).toMatchSnapshot();
+      expect(style).toMatchObject(expected);
+    });
+  });
+
+  describe("Testing gridColumn", () => {
+    it("Returns column position with when col is provided", () => {
+      render(<MyGridItem col={10} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
+
+      const expected = {
+        display: DISPLAY_FLEX,
+        alignItems: CENTER,
+        flexDirection: ROW,
+        // gridRow: "0",
         gridColumn: "10",
-        justifyContent: SPACE_BETWEEN
+        justifyContent: SPACE_BETWEEN,
       };
 
       expect(baseElement).toMatchSnapshot();
       expect(style).toMatchObject(expected);
     });
 
-    it("returns column position with justifyContent, when toCol is provided", () => {
-      const { baseElement, getByTestId } = render(<MyGridItem toCol={10} />);
-      const { style } = getByTestId(TESTID);
+    it("Returns column position with justifyContent, when toCol is provided", () => {
+      render(<MyGridItem toCol={10} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DISPLAY_FLEX,
         alignItems: CENTER,
         flexDirection: ROW,
-        gridRow: "0",
+        // gridRow: "0",
         gridColumn: "0 / 10",
-        justifyContent: SPACE_BETWEEN
+        justifyContent: SPACE_BETWEEN,
       };
 
       expect(baseElement).toMatchSnapshot();

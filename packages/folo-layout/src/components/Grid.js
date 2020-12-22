@@ -30,7 +30,7 @@ const Grid = (props) => {
   const {
     component: CellComponent = "div",
 
-    col,
+    col = null,
     colWidth,
     colMinWidth = AUTO,
     colMaxWidth = FR,

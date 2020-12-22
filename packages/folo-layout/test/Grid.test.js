@@ -42,14 +42,13 @@ describe("Grid - Explicit Layout", () => {
     });
 
     it("Returns default style", () => {
-      const DISPLAY_ENLINE = "inline-grid";
-      const { baseElement, getByTestId } = render(
-        <MyGrid style={{ display: DISPLAY_ENLINE }} />
-      );
-      const { style } = getByTestId(TEST_ID);
+      const DISPLAY_INLINE = "inline-grid";
+      render(<MyGrid style={{ display: DISPLAY_INLINE }} />);
+
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
-        display: DISPLAY_ENLINE,
+        display: DISPLAY_INLINE,
         gridTemplateColumns: `repeat(${AUTO_FIT}, minmax(auto, 1fr))`,
         alignItems: STRETCH,
         justifyContent: STRETCH,
@@ -63,8 +62,8 @@ describe("Grid - Explicit Layout", () => {
 
   describe("Testing alignItems", () => {
     it("Returns alignItems justifyContent center when no columns passed", () => {
-      const { baseElement, getByTestId } = render(<MyGrid isCenter />);
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid isCenter />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
@@ -79,8 +78,8 @@ describe("Grid - Explicit Layout", () => {
     });
 
     it("Returns alignItems center and justifyContent when columns passed", () => {
-      const { baseElement, getByTestId } = render(<MyGrid isCenter col={1} />);
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid isCenter col={1} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
@@ -97,8 +96,8 @@ describe("Grid - Explicit Layout", () => {
 
   describe("Testing rows", () => {
     it("Returns gridTemplateRows when passing row with minmax", () => {
-      const { baseElement, getByTestId } = render(<MyGrid row={1} />);
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid row={1} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
@@ -114,10 +113,8 @@ describe("Grid - Explicit Layout", () => {
     });
 
     it("Returns gridTemplateRows when passing row with width", () => {
-      const { baseElement, getByTestId } = render(
-        <MyGrid row={1} rowWidth="20px" />
-      );
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid row={1} rowWidth="20px" />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
@@ -133,8 +130,8 @@ describe("Grid - Explicit Layout", () => {
     });
 
     it("Returns gridAutoRows when passing rowWidth only", () => {
-      const { baseElement, getByTestId } = render(<MyGrid rowWidth="20px" />);
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid rowWidth="20px" />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
@@ -152,8 +149,8 @@ describe("Grid - Explicit Layout", () => {
 
   describe("Testing columns", () => {
     it("Returns gridAutoColumns when passing colWidth only", () => {
-      const { baseElement, getByTestId } = render(<MyGrid colWidth="20px" />);
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid colWidth="20px" />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
@@ -168,8 +165,8 @@ describe("Grid - Explicit Layout", () => {
     });
 
     it("Returns gridTemplateColumns when passing col", () => {
-      const { baseElement, getByTestId } = render(<MyGrid col={4} />);
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid col={4} />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
@@ -184,10 +181,8 @@ describe("Grid - Explicit Layout", () => {
     });
 
     it("Returns gridTemplateColumns when passing colWidth and col", () => {
-      const { baseElement, getByTestId } = render(
-        <MyGrid col={4} colWidth="20px" />
-      );
-      const { style } = getByTestId(TEST_ID);
+      render(<MyGrid col={4} colWidth="20px" />);
+      const { baseElement, style } = screen.getByTestId(TEST_ID);
 
       const expected = {
         display: DEFAULT_DISPLAY,
