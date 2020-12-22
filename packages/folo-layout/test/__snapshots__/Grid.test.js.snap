@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grid - Explicit Layout Testing Style Returns default style 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing Style Returns default style 2`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: inline-grid; grid-template-columns: repeat(auto-fit, minmax(auto, 1fr)); align-items: stretch; justify-content: stretch; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing alignItems Returns alignItems center and justifyContent when columns passed 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-template-columns: repeat(1, minmax(auto, 1fr)); align-items: center; justify-content: space-between; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing alignItems Returns alignItems justifyContent center when no columns passed 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(auto, 1fr)); align-items: center; justify-content: center; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing columns Returns gridAutoColumns when passing colWidth only 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-auto-columns: 20px; align-items: stretch; justify-content: space-between; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing columns Returns gridTemplateColumns when passing col 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-template-columns: repeat(4, minmax(auto, 1fr)); align-items: stretch; justify-content: space-between; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing columns Returns gridTemplateColumns when passing colWidth and col 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-template-columns: repeat(4, 20px); align-items: stretch; justify-content: space-between; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing rows Returns gridAutoRows when passing rowWidth only 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-auto-rows: 20px; grid-template-columns: repeat(auto-fit, minmax(auto, 1fr)); align-items: stretch; justify-content: stretch; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing rows Returns gridTemplateRows when passing row with minmax 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-template-rows: repeat(1, minmax(auto, 1fr)); grid-template-columns: repeat(auto-fit, minmax(auto, 1fr)); align-items: stretch; justify-content: stretch; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Grid - Explicit Layout Testing rows Returns gridTemplateRows when passing row with width 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="testForGrid"
+      style="display: grid; grid-template-rows: repeat(1, 20px); grid-template-columns: repeat(auto-fit, minmax(auto, 1fr)); align-items: stretch; justify-content: stretch; gap: 1em;"
+    >
+      <div />
+    </div>
+  </div>
+</body>
+`;

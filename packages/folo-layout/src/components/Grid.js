@@ -35,10 +35,10 @@ const Grid = (props) => {
     colMinWidth = AUTO,
     colMaxWidth = FR,
 
-    row,
+    row = null,
     rowWidth,
-    rowMinWidth,
-    rowMaxWidth,
+    rowMinWidth = AUTO,
+    rowMaxWidth = FR,
 
     isCenter = false,
 
