@@ -87,7 +87,7 @@ jobs:
           key: yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Run Test
-        run: CI=true yarn jest --coverage
+        run: CI=true yarn test --coverage
 
       - name: Upload coverage to Codecov
         run: bash <(curl -s https://codecov.io/bash) -C $GITHUB_SHA -B ${GITHUB_REF#refs/heads/} -Z
