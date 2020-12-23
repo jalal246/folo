@@ -5,7 +5,10 @@
   "main": "dist/foloForms.cjs.js",
   "umd:main": "dist/foloForms.min.umd.js",
   "module": "dist/foloForms.esm.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jest",
+    "build": "builderz"
+  },
   "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-forms",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",

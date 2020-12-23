@@ -2,7 +2,8 @@
   "name": "@folo/values",
   "version": "0.1.4",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "builderz"
   },
   "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",

@@ -5,7 +5,8 @@
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "builderz"
   },
   "dependencies": {},
   "devDependencies": {}

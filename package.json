@@ -10,6 +10,9 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
+    "build": "lerna run build",
+    "prepublish": "yarn build",
+    "publish": "lerna publish",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -26,6 +29,7 @@
     "@testing-library/user-event": "^12.6.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
+    "builderz": "^0.11.0",
     "jest": "^26.6.3",
     "lerna": "^3.22.1",
     "react": "^17.0.1",
