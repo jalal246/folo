@@ -22,14 +22,9 @@ const BasicForm = ({ onSubmit }) => (
     type a text:
     <Field valueKey="textInput" type="text" placeholder="start typing..." />
     choose this checkbox:
-    <Field
-      valueKey="checkbox1"
-      type="checkbox"
-      groupName="test"
-      initValue={false}
-    />
+    <Field valueKey="checkbox1" type="checkbox" groupName="test" />
     or this checkbox:
-    <Field valueKey="checkbox2" type="checkbox" groupName="test" />
+    <Field valueKey="checkbox2" type="checkbox" groupName="test" checked />
     <label style={styleLabel}>
       items
       <Field valueKey="options" type="select">
