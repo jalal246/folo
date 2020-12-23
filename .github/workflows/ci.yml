@@ -40,20 +40,12 @@ jobs:
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' ||
           steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: yarn
+        run: yarn install --frozen-lockfile
 
   lint:
     name: Lint
     needs: prepare-yarn-cache
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@master
-
-      - name: Use latest version of Node.j
-        uses: actions/setup-node@master
-        with:
-          node-version: "*"
-
       - name: Run lint
         run: yarn eslint .
