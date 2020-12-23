@@ -13,7 +13,7 @@
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/layout)
 [![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/layout)
 [![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/LICENSE)
-[![CircleCI](https://circleci.com/gh/jalal246/folo/tree/master.svg?style=svg)](https://circleci.com/gh/jalal246/folo/tree/master)
+[![CI](https://img.shields.io/github/workflow/status/jalal246/folo/CI)](https://github.com/jalal246/folo/tree/master))
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
 <!-- prettier-ignore-end -->
 
@@ -26,40 +26,38 @@ npm install @folo/layout
 ## Usage
 
 ```js
-import { FoloLayout, Grid, GridItem } from "@folo/layout";
+import { Grid, GridItem } from "@folo/layout";
 
 const MyGrid = () => (
-  <FoloLayout>
-    <Grid>
-      <GridItem col={4} row={1}>
-        item
-      </GridItem>
-      <GridItem col={3} row={2}>
-        item
-      </GridItem>
-      <GridItem col={2} row={3}>
-        item
-      </GridItem>
-      <GridItem col={1} row={5}>
-        item
-      </GridItem>
-      <GridItem col={4} row={10}>
-        item
-      </GridItem>
-    </Grid>
-  </FoloLayout>
+  <Grid>
+    <GridItem col={4} row={1}>
+      item
+    </GridItem>
+    <GridItem col={3} row={2}>
+      item
+    </GridItem>
+    <GridItem col={2} row={3}>
+      item
+    </GridItem>
+    <GridItem col={1} row={5}>
+      item
+    </GridItem>
+    <GridItem col={4} row={10}>
+      item
+    </GridItem>
+  </Grid>
 );
 ```
 
 ### Components
 
 ```js
-import { FoloLayout, Grid, GridItem } from "@folo/layout";
+import { Grid, GridItem } from "@folo/layout";
 ```
 
 ### Components Props
 
-All components accept custom props + children which is required in all.
+All components accept custom props.
 
 <!-- all tables were generated via http://www.tablesgenerator.com/markdown_tables -->
 
