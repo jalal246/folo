@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Registry updater Toggles boolean value in a group button 1`] = `
+Object {
+  "unrecognized": Object {
+    "input1": "some value",
+    "input2": true,
+    "input3": false,
+  },
+}
+`;
+
+exports[`Registry updater Updates string value 1`] = `
+Object {
+  "unrecognized": Object {
+    "input1": "some value",
+    "input2": false,
+    "input3": false,
+  },
+}
+`;

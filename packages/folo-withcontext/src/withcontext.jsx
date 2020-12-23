@@ -9,18 +9,18 @@ import React from "react";
  * @param {Array} contextProps contains props required from consumer
  * @return {Component} - new component connected to context props
  */
-export default function({ Component, Consumer, contextProps = [] }) {
+export default function ({ Component, Consumer, contextProps = [] }) {
   return function ComponentWithContext(props) {
     return (
       <Consumer>
-        {context => {
+        {(context) => {
           let cn = contextProps.length > 0 ? {} : context;
           /**
            * if contextProps length is zero, pass all context props
            * otherwise extract the required props
            */
           if (contextProps.length > 0) {
-            contextProps.forEach(prop => {
+            contextProps.forEach((prop) => {
               cn[prop] = context[prop];
             });
           }

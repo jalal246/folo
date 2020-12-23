@@ -1,4 +1,4 @@
-import cellRecognizer from "../src/components/cellRecognizer";
+import cellRecognizer from "../src/utils/cellRecognizer";
 
 import {
   VALUE,
@@ -7,66 +7,68 @@ import {
   LIST,
   CHECKBOX,
   RADIO,
-  INPUT
+  INPUT,
 } from "../src/constants";
 
 const MY_VAL = "HELLO WORLD!";
 
-describe("cellRecognizer", () => {
-  it("test type=INPUT", () => {
+describe("cellRecognizer function", () => {
+  it("Testing type=INPUT", () => {
     expect(
       cellRecognizer({ type: INPUT, checked: false, value: MY_VAL })
     ).toMatchObject({
       valueRef: VALUE,
       isInput: true,
       initValue: MY_VAL,
-      RecommendedComponent: INPUT
+      RecommendedComponent: INPUT,
     });
   });
-  it("test type=CHECKBOX or RADIO", () => {
-    const result_CHECKBOX = cellRecognizer({
+
+  it("Testing type=CHECKBOX or RADIO", () => {
+    const RESULT_CHECKBOX = cellRecognizer({
       type: CHECKBOX,
       checked: true,
-      value: MY_VAL
+      value: MY_VAL,
     });
 
-    const result_RADIO = cellRecognizer({
+    const RESULT_RADIO = cellRecognizer({
       type: RADIO,
       checked: true,
-      value: MY_VAL
+      value: MY_VAL,
     });
 
     const expected = {
       valueRef: CHECKED,
       isInput: false,
       initValue: true,
-      RecommendedComponent: INPUT
+      RecommendedComponent: INPUT,
     };
 
-    expect(result_CHECKBOX).toMatchObject(expected);
-    expect(result_RADIO).toMatchObject(expected);
+    expect(RESULT_CHECKBOX).toMatchObject(expected);
+    expect(RESULT_RADIO).toMatchObject(expected);
   });
-  it("test type=SELECT or LIST", () => {
-    const result_SELECT = cellRecognizer({
+
+  it("Testing type=SELECT or LIST", () => {
+    const RESULT_SELECT = cellRecognizer({
       type: SELECT,
       checked: true,
-      value: MY_VAL
+      value: MY_VAL,
     });
 
-    const result_LIST = cellRecognizer({
+    const RESULT_LIST = cellRecognizer({
       type: LIST,
       checked: true,
-      value: MY_VAL
+      value: MY_VAL,
     });
 
     const expected = {
       valueRef: VALUE,
       isInput: false,
       initValue: MY_VAL,
-      RecommendedComponent: SELECT
+      RecommendedComponent: SELECT,
     };
 
-    expect(result_SELECT).toMatchObject(expected);
-    expect(result_LIST).toMatchObject(expected);
+    expect(RESULT_SELECT).toMatchObject(expected);
+    expect(RESULT_LIST).toMatchObject(expected);
   });
 });

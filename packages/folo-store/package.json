@@ -1,0 +1,42 @@
+{
+  "name": "@folo/store",
+  "version": "0.0.0",
+  "source": "src/index.js",
+  "main": "dist/foloStore.min.cjs.js",
+  "umd:main": "dist/foloStore.min.umd.js",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "build": "builderz --output=foloStore"
+  },
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-store",
+  "dependencies": {},
+  "devDependencies": {},
+  "files": [
+    "src",
+    "dist",
+    "LICENSE"
+  ],
+  "keywords": [
+    "@folo",
+    "@folo/auto-position",
+    "@folo/forms",
+    "@folo/layout",
+    "@folo/store",
+    "@folo/utils",
+    "@folo/values",
+    "@folo/withcontext",
+    "dflex",
+    "react",
+    "react-component",
+    "css-grid",
+    "css-layout",
+    "form-builder-api",
+    "dynamic-forms"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
