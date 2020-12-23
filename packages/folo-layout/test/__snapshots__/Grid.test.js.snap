@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grid - Explicit Layout Testing Style Returns default style 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing Style Returns default style 2`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing alignItems Returns alignItems center and justifyContent when columns passed 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing alignItems Returns alignItems justifyContent center when no columns passed 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing columns Returns gridAutoColumns when passing colWidth only 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing columns Returns gridTemplateColumns when passing col 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing columns Returns gridTemplateColumns when passing colWidth and col 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing rows Returns gridAutoRows when passing rowWidth only 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing rows Returns gridTemplateRows when passing row with minmax 1`] = `undefined`;
+
+exports[`Grid - Explicit Layout Testing rows Returns gridTemplateRows when passing row with width 1`] = `undefined`;

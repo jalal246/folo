@@ -27,11 +27,7 @@
     "@folo/utils",
     "react",
     "react-component",
-    "context",
-    "HOC",
-    "utility",
-    "higher-order",
-    "toolkit"
+    "utility"
   ],
   "peerDependencies": {
     "react": "^16.4.1"

@@ -1,47 +1,47 @@
 {
   "name": "@folo/forms",
   "version": "0.1.4",
-  "description": "Full package combined of @folo/layout & @folo/values",
-  "main": "dist/foloForms.cjs.js",
+  "source": "src/index.js",
+  "main": "dist/foloForms.min.cjs.js",
   "umd:main": "dist/foloForms.min.umd.js",
-  "module": "dist/foloForms.esm.js",
-  "scripts": {},
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-forms",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jalal246/folo/issues"
+  "scripts": {
+    "test": "jest",
+    "build": "builderz --output=foloForms"
   },
-  "homepage": "https://github.com/jalal246/folo",
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-forms",
+  "bundledDependencies": [
+    "@folo/layout",
+    "@folo/values"
+  ],
+  "peerDependencies": {
+    "react": ">=16"
+  },
   "files": [
     "src",
     "dist",
-    "README.md"
+    "LICENSE"
   ],
   "keywords": [
     "@folo",
+    "@folo/auto-position",
     "@folo/forms",
-    "@folo/withcontext",
-    "@folo/values",
     "@folo/layout",
+    "@folo/store",
     "@folo/utils",
+    "@folo/values",
+    "@folo/withcontext",
+    "dflex",
     "react",
     "react-component",
-    "context",
     "css-grid",
     "css-layout",
     "form-builder-api",
     "dynamic-forms"
   ],
-  "dependencies": {
-    "@folo/layout": "^0.1.4",
-    "@folo/values": "^0.1.4"
-  },
-  "peerDependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.8.0"
-  },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   }
 }

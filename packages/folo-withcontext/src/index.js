@@ -1,1 +1,1 @@
-export default from "./withcontext";
+export { default } from "./withcontext";

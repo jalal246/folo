@@ -1,54 +1,26 @@
-<!-- forked form: emotion: https://github.com/emotion-js/emotion/blob/master/CONTRIBUTING.md -->
+# Prerequisites
 
-## Prerequisites
-
-- [Node.js](http://nodejs.org/) >= v8 must be installed.
-- [Yarn](https://yarnpkg.com/en/docs/install)
+- [Node.js](https://nodejs.org/en/) >= v10 must be installed.
+- [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
 ## Installation
 
-In the repository's root directory:
-
-- Run `yarn` to install everything you need for development.
-- Run `yarn build` to build the modules.
-
-> NOTE:
->
-> lerna is **NOT** used for installing packages. Only yarn is used. lerna is only used for publishing
-
-## Tests
-
-- `yarn test` will run the tests once.
-- `yarn test:watch` will run the tests on every change.
-- `yarn cover` will run the tests and produce a coverage report in `coverage/`.
-- `yarn check-cover` to check coverage percentage.
-
-## Building
-
+- Run `yarn` in the repository's root directory to install everything you need
+  for development.
 - Run `yarn build` in the root directory to build the modules.
-  build accepts flags:
 
-  `-s, --silent` silent mode, mutes build massages
+## Running Tests
 
-  `-w, --watch` watch mode
+- `yarn test` to run the tests in each package available in workspace.
 
-  `-m, --minify` minify bundle works only if format is provided
+## Dealing with packages
 
-  `--format` [format] specific build format
+- Use `yarn workspace` followed by Folo package name in `package.json`.
+  So, If you deal with `folo-layout` for example you can use:
 
-  `PACKAGE_NAME` for building specific package[s]
+  `yarn workspace @folo/layout add -D dotenv`
 
-  `-h, --help` output usage information
-
-_Example:_
-
-```js
-  build-custom: "node scripts/folo-build  @folo/forms -s --watch",
-```
-
-- Run `yarn build-storybook` to build the static version of modules.
-
-## Documentation and Development
+## Documentation
 
 - Run above installation steps and then
 - Run `yarn storybook` runs story for each modules.
