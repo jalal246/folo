@@ -6,3 +6,4 @@ pubic/
 coverage/
 packages/*/dist
 stories-legacy
+folo-withcontext
