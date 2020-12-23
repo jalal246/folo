@@ -1,21 +1,19 @@
 {
   "name": "@folo/values",
   "version": "0.1.4",
-  "scripts": {
-    "test": "jest",
-    "build": "builderz"
-  },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
+  "source": "src/index.js",
+  "main": "dist/foloValues.min.cjs.js",
+  "umd:main": "dist/foloValues.min.umd.js",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
-  "files": [
-    "src",
-    "dist",
-    "README.md"
-  ],
-  "dependencies": {
-    "@folo/store": "^0.0.0"
+  "scripts": {
+    "test": "jest",
+    "build": "builderz --output=foloValues"
   },
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
+  "bundledDependencies": [
+    "@folo/store"
+  ],
   "peerDependencies": {
     "react": ">=16"
   },
@@ -23,22 +21,30 @@
     "react": "^17.0.1",
     "@material-ui/core": "^4.11.2"
   },
+  "files": [
+    "src",
+    "dist",
+    "LICENSE"
+  ],
   "keywords": [
     "@folo",
+    "@folo/auto-position",
     "@folo/forms",
-    "@folo/withcontext",
-    "@folo/values",
     "@folo/layout",
+    "@folo/store",
     "@folo/utils",
+    "@folo/values",
+    "@folo/withcontext",
+    "dflex",
     "react",
     "react-component",
-    "context",
     "css-grid",
     "css-layout",
     "form-builder-api",
     "dynamic-forms"
   ],
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   }
 }

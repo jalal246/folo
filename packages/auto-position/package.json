@@ -1,16 +1,16 @@
 {
-  "name": "@folo/store",
+  "name": "@folo/auto-position",
   "version": "0.0.0",
   "source": "src/index.js",
-  "main": "dist/foloStore.min.cjs.js",
-  "umd:main": "dist/foloStore.min.umd.js",
+  "main": "dist/autoPosition.min.cjs.js",
+  "umd:main": "dist/autoPosition.min.umd.js",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build": "builderz --output=foloStore"
+    "build": "builderz --output=autoPosition"
   },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-store",
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/auto-position",
   "dependencies": {},
   "devDependencies": {},
   "files": [

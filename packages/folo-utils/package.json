@@ -1,35 +1,42 @@
 {
   "name": "@folo/utils",
   "version": "0.1.3",
-  "description": "utils used in folo packages",
-  "main": "dist/foloUtils.cjs.js",
+  "source": "src/index.js",
+  "main": "dist/foloUtils.min.cjs.js",
   "umd:main": "dist/foloUtils.min.umd.js",
-  "module": "dist/foloUtils.esm.js",
-  "scripts": {},
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-utils",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jalal246/folo/issues"
+  "scripts": {
+    "test": "jest",
+    "build": "builderz --output=foloUtils"
   },
-  "homepage": "https://github.com/jalal246/folo",
+  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-utils",
+  "dependencies": {},
+  "devDependencies": {},
   "files": [
     "src",
     "dist",
-    "README.md"
+    "LICENSE"
   ],
   "keywords": [
     "@folo",
-    "@folo/layout",
-    "@folo/values",
+    "@folo/auto-position",
     "@folo/forms",
+    "@folo/layout",
+    "@folo/store",
+    "@folo/utils",
+    "@folo/values",
     "@folo/withcontext",
+    "dflex",
     "react",
     "react-component",
-    "utility",
-    "toolkit"
+    "css-grid",
+    "css-layout",
+    "form-builder-api",
+    "dynamic-forms"
   ],
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   }
 }
