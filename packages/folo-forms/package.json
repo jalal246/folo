@@ -1,6 +1,6 @@
 {
   "name": "@folo/forms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "source": "src/index.js",
   "main": "dist/foloForms.min.cjs.js",
   "umd:main": "dist/foloForms.min.umd.js",
