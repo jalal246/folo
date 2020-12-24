@@ -30,7 +30,7 @@ npm install @folo/values
   to re-render.
 
 - ☑️ Doesn't require using Redux/Mobx/Context. While these technologies are
-  amazing it always comes with a cost. That's why every update that happens in Folo
+  amazing it always comes with a cost. That's why every update that happens in `Folo`
   happens locally. The store is just the Maestro.
 
 - ☑️ You can add multiple forms connect them to the store or create branches
