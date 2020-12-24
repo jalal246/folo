@@ -30,7 +30,7 @@ npm install @folo/values
   to re-render.
 
 - ☑️ Doesn't require using Redux/Mobx/Context. While these technologies are
-  amazing it always come with a cost. That's why every update happens in folo
+  amazing it always comes with a cost. That's why every update that happens in Folo
   happens locally. The store is just the Maestro.
 
 - ☑️ You can add multiple forms connect them to the store or create branches
@@ -81,30 +81,30 @@ All components accept custom props + children which is required in all except `F
 
 ### Form
 
-| property    | type                 | description                                                      | default        |
-| ----------- | -------------------- | ---------------------------------------------------------------- | -------------- |
-| `component` | node/function/string | custom render-component                                          | `form`         |
-| `onSubmit`  | function             | submit function returns values in all cells (event, {...values}) | `() {}`        |
-| `storeID`   | string               | unique id shared with form and fields                            | `unrecognized` |
+| property    | type               | description                                                      | default        |
+| ----------- | ------------------ | ---------------------------------------------------------------- | -------------- |
+| `component` | HTMLElement/string | custom render-component                                          | `form`         |
+| `onSubmit`  | function           | submit function returns values in all cells (event, {...values}) | `() {}`        |
+| `storeID`   | string             | unique id shared with form and fields                            | `unrecognized` |
 
 ### Field
 
 Essential to register values in the store, returns its value when submit.
 Accepts all events handlers.
 
-| property    | type                 | description                              | default             |
-| ----------- | -------------------- | ---------------------------------------- | ------------------- |
-| `component` | node/function/string | custom render-component                  | `div`               |
-| `storeID`   | string               | unique id shared with form and fields    | `unrecognized`      |
-| `valueKey`  | string               | key used to store value in values object | `id` or `timestamp` |
-| `value`     | string               | Initial value if type is not a button    | `""`                |
-| `checked`   | Boolean              | Initial value if type is a button        | `false`             |
-| `type`      | string               | Input type                               | `text`              |
-| `groupName` | string               | only for button toggle group             | `null`              |
+| property    | type               | description                              | default             |
+| ----------- | ------------------ | ---------------------------------------- | ------------------- |
+| `component` | HTMLElement/string | custom render-component                  | `div`               |
+| `storeID`   | string             | unique id shared with form and fields    | `unrecognized`      |
+| `valueKey`  | string             | key used to store value in values object | `id` or `timestamp` |
+| `value`     | string             | Initial value if type is not a button    | `""`                |
+| `checked`   | Boolean            | Initial value if type is a button        | `false`             |
+| `type`      | string             | Input type                               | `text`              |
+| `groupName` | string             | only for button toggle group             | `null`              |
 
 ## Examples
 
-You can clone all the examples used in this packages
+You can clone all the examples used in these packages
 [here](https://github.com/jalal246/folo/tree/master/packages/folo-values/src/stories/examples).
 With an example for [Simple
 Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--simple-form)
@@ -112,7 +112,7 @@ Or a [Custom
 Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--custom-components)
 built with custom components. It includes All [Available
 fields](https://jalal246.github.io/folo/?path=/story/forms-available-fields--default-input)
-and examples show you how to [handle toggle button groups](https://jalal246.github.io/folo/?path=/story/forms-toggle-groups--group-toggle-no-init-value).
+and examples that show you how to [handle toggle button groups](https://jalal246.github.io/folo/?path=/story/forms-toggle-groups--group-toggle-no-init-value).
 
 ## Test
 
