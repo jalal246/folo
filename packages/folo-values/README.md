@@ -91,6 +91,7 @@ All components accept custom props + children which is required in all except `F
 #### Field
 
 Essential to register values in the store, returns its value when submit.
+Accepts all events handlers.
 
 | property  | type          | description                              | default         |
 | --------- | ------------- | ---------------------------------------- | --------------- |
@@ -100,6 +101,12 @@ Essential to register values in the store, returns its value when submit.
 | checked   | Boolean       | if type button                           | false           |
 | type      | Boolean       |                                          | text            |
 | groupName | string        | only for button toggle group             |                 |
+
+## Test
+
+```sh
+yarn test folo-values
+```
 
 ## License
 
