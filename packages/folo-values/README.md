@@ -71,7 +71,7 @@ const MyComponent = ({ onSubmit }) => (
 // submit function will return: (event, {myName: "" myPass: "", alphabet:""})
 ```
 
-### Available Components
+## Available Components
 
 ```js
 import { Form, Field } from "@folo/values";
@@ -81,14 +81,14 @@ All components accept custom props + children which is required in all except `F
 
 <!-- all tables were generated via http://www.tablesgenerator.com/markdown_tables -->
 
-#### Form
+### Form
 
 | property  | type          | description                                                      | default |
 | --------- | ------------- | ---------------------------------------------------------------- | ------- |
 | component | node/function | custom render-component                                          | form    |
 | onSubmit  | function      | submit function returns values in all cells (event, {...values}) | () {}   |
 
-#### Field
+### Field
 
 Essential to register values in the store, returns its value when submit.
 Accepts all events handlers.
@@ -102,7 +102,7 @@ Accepts all events handlers.
 | type      | Boolean       |                                          | text            |
 | groupName | string        | only for button toggle group             |                 |
 
-#### Examples
+## Examples
 
 You can clone all the examples used in this packages
 [here](https://github.com/jalal246/folo/tree/master/packages/folo-values/src/stories/examples).
@@ -119,6 +119,10 @@ and examples show you how to [handle toggle button groups](https://jalal246.gith
 ```sh
 yarn test folo-values
 ```
+
+## Contributing 😇
+
+If you have ideas or issues don't hesitate. You are always welcome.
 
 ## License
 
