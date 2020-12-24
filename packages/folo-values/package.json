@@ -1,6 +1,6 @@
 {
   "name": "@folo/values",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "source": "src/index.js",
   "main": "dist/foloValues.min.cjs.js",
   "umd:main": "dist/foloValues.min.umd.js",
@@ -18,8 +18,8 @@
     "react": ">=16"
   },
   "devDependencies": {
-    "react": "^17.0.1",
-    "@material-ui/core": "^4.11.2"
+    "@material-ui/core": "^4.11.2",
+    "react": "^17.0.1"
   },
   "files": [
     "src",
