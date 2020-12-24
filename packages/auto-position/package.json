@@ -1,6 +1,6 @@
 {
   "name": "@folo/auto-position",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "source": "src/index.js",
   "main": "dist/autoPosition.min.cjs.js",
   "umd:main": "dist/autoPosition.min.umd.js",
@@ -11,8 +11,6 @@
     "build": "builderz --output=autoPosition"
   },
   "repository": "https://github.com/jalal246/folo/tree/master/packages/auto-position",
-  "dependencies": {},
-  "devDependencies": {},
   "files": [
     "src",
     "dist",

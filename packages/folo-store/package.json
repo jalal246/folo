@@ -1,6 +1,6 @@
 {
   "name": "@folo/store",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "source": "src/index.js",
   "main": "dist/foloStore.min.cjs.js",
   "umd:main": "dist/foloStore.min.umd.js",
@@ -11,8 +11,6 @@
     "build": "builderz --output=foloStore"
   },
   "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-store",
-  "dependencies": {},
-  "devDependencies": {},
   "files": [
     "src",
     "dist",
