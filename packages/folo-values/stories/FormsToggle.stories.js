@@ -1,10 +1,10 @@
-import Form from "../components/Form";
+import Form from "../src/components/Form";
 
 import {
   GroupToggleNoInitValue,
   GroupToggleWithInitValue,
   GroupToggleDifferentGroupName,
-} from "./examples/GroupToggle";
+} from "../examples/GroupToggle";
 
 export default {
   title: "Forms/Toggle groups",

@@ -34,6 +34,7 @@ class Registry {
     const storeRef = this.getStorRef(storeID, true);
 
     storeRef[nameRef] = initValue;
+    console.log("file: Registry.js ~ line 37 ~ storeRef", storeRef);
 
     // if it has group, handle it
     if (groupName) {

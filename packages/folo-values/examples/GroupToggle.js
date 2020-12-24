@@ -1,7 +1,7 @@
 import React from "react";
 
-import Field from "../../components/Field";
-import Form from "../../components/Form";
+import Field from "../src/components/Field";
+import Form from "../src/components/Form";
 
 export const GroupToggleNoInitValue = () => (
   <Form storeID="GroupToggleNoInitValue">

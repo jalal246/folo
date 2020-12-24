@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 
-import Field from "../../components/Field";
-import Form from "../../components/Form";
+import Field from "../src/components/Field";
+import Form from "../src/components/Form";
 
 const styleForm = {
   display: "flex",
