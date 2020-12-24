@@ -81,26 +81,26 @@ All components accept custom props + children which is required in all except `F
 
 ### Form
 
-| property  | type          | description                                                      | default        |
-| --------- | ------------- | ---------------------------------------------------------------- | -------------- |
-| component | node/function | custom render-component                                          | `form`         |
-| onSubmit  | function      | submit function returns values in all cells (event, {...values}) | () {}          |
-| storeID   | string        | unique id shared with form and fields                            | `unrecognized` |
+| property    | type                 | description                                                      | default        |
+| ----------- | -------------------- | ---------------------------------------------------------------- | -------------- |
+| `component` | node/function/string | custom render-component                                          | `form`         |
+| `onSubmit`  | function             | submit function returns values in all cells (event, {...values}) | `() {}`        |
+| `storeID`   | string               | unique id shared with form and fields                            | `unrecognized` |
 
 ### Field
 
 Essential to register values in the store, returns its value when submit.
 Accepts all events handlers.
 
-| property    | type          | description                              | default             |
-| ----------- | ------------- | ---------------------------------------- | ------------------- |
-| `component` | node/function | custom render-component                  | `div`               |
-| `storeID`   | string        | unique id shared with form and fields    | `unrecognized`      |
-| `valueKey`  | string        | key used to store value in values object | `id` or `timestamp` |
-| `value`     | string        | Initial value if type is not a button    | `""`                |
-| `checked`   | Boolean       | Initial value if type is a button        | `false`             |
-| `type`      | string        | Input type                               | `text`              |
-| `groupName` | string        | only for button toggle group             | `null`              |
+| property    | type                 | description                              | default             |
+| ----------- | -------------------- | ---------------------------------------- | ------------------- |
+| `component` | node/function/string | custom render-component                  | `div`               |
+| `storeID`   | string               | unique id shared with form and fields    | `unrecognized`      |
+| `valueKey`  | string               | key used to store value in values object | `id` or `timestamp` |
+| `value`     | string               | Initial value if type is not a button    | `""`                |
+| `checked`   | Boolean              | Initial value if type is a button        | `false`             |
+| `type`      | string               | Input type                               | `text`              |
+| `groupName` | string               | only for button toggle group             | `null`              |
 
 ## Examples
 
