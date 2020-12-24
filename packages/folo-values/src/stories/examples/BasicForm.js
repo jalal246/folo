@@ -7,49 +7,62 @@ import Form from "../../components/Form";
 const styleForm = {
   display: "flex",
   flexDirection: "column",
-  background: "beige",
+  background: "#d4e2d4",
   width: "40%",
   margin: "10px",
   padding: "17px",
 };
 
 const styleLabel = {
-  padding: "17px",
+  marginTop: "20px",
+  fontSize: "18px",
+};
+
+const styleText = {
+  paddingRight: "10px",
 };
 
 const BasicForm = ({ onSubmit }) => (
   <Form style={styleForm} onSubmit={onSubmit} storeID="BasicForm">
-    type a text:
-    <Field
-      storeID="BasicForm"
-      valueKey="textInput"
-      type="text"
-      placeholder="start typing..."
-    />
-    choose this checkbox:
-    <Field
-      storeID="BasicForm"
-      valueKey="checkbox1"
-      type="checkbox"
-      groupName="test"
-    />
-    or this checkbox:
-    <Field
-      storeID="BasicForm"
-      valueKey="checkbox2"
-      type="checkbox"
-      groupName="test"
-      checked
-    />
     <label style={styleLabel}>
-      items
+      <span style={styleText}>Type a text:</span>
+      <Field
+        storeID="BasicForm"
+        valueKey="textInput"
+        type="text"
+        placeholder="start typing..."
+      />
+    </label>
+    <label style={styleLabel}>
+      <span style={styleText}>Choose this checkbox:</span>
+      <Field
+        storeID="BasicForm"
+        valueKey="checkbox1"
+        type="checkbox"
+        groupName="test"
+      />
+    </label>
+    <label style={styleLabel}>
+      <span style={styleText}>Or this one:</span>
+      <Field
+        storeID="BasicForm"
+        valueKey="checkbox2"
+        type="checkbox"
+        groupName="test"
+        checked
+      />
+    </label>
+    <label style={styleLabel}>
+      <span style={styleText}>Choose your items</span>
       <Field storeID="BasicForm" valueKey="options" type="select">
         <option>A</option>
         <option>B</option>
         <option>C</option>
       </Field>
     </label>
-    <button type="submit">submit</button>
+    <button style={styleLabel} type="submit">
+      submit
+    </button>
   </Form>
 );
 
