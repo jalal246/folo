@@ -102,6 +102,18 @@ Accepts all events handlers.
 | type      | Boolean       |                                          | text            |
 | groupName | string        | only for button toggle group             |                 |
 
+#### Examples
+
+You can clone all the examples used in this packages
+[here](https://github.com/jalal246/folo/tree/master/packages/folo-values/src/stories/examples).
+With an example for [Simple
+Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--simple-form)
+Or a [Custom
+Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--custom-components)
+built with custom components. It includes All [Available
+fields](https://jalal246.github.io/folo/?path=/story/forms-available-fields--default-input)
+and examples show you how to [handle toggle button groups](https://jalal246.github.io/folo/?path=/story/forms-toggle-groups--group-toggle-no-init-value).
+
 ## Test
 
 ```sh
