@@ -18,16 +18,32 @@ const styleLabel = {
 };
 
 const BasicForm = ({ onSubmit }) => (
-  <Form style={styleForm} onSubmit={onSubmit}>
+  <Form style={styleForm} onSubmit={onSubmit} storeID="BasicForm">
     type a text:
-    <Field valueKey="textInput" type="text" placeholder="start typing..." />
+    <Field
+      storeID="BasicForm"
+      valueKey="textInput"
+      type="text"
+      placeholder="start typing..."
+    />
     choose this checkbox:
-    <Field valueKey="checkbox1" type="checkbox" groupName="test" />
+    <Field
+      storeID="BasicForm"
+      valueKey="checkbox1"
+      type="checkbox"
+      groupName="test"
+    />
     or this checkbox:
-    <Field valueKey="checkbox2" type="checkbox" groupName="test" checked />
+    <Field
+      storeID="BasicForm"
+      valueKey="checkbox2"
+      type="checkbox"
+      groupName="test"
+      checked
+    />
     <label style={styleLabel}>
       items
-      <Field valueKey="options" type="select">
+      <Field storeID="BasicForm" valueKey="options" type="select">
         <option>A</option>
         <option>B</option>
         <option>C</option>
