@@ -1,8 +1,6 @@
-# @folo/values
+# 📋 @folo/values
 
-> micro form components return input values with zero config
-
-<hr />
+> A from store returns input values with zero config
 
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
@@ -13,16 +11,36 @@
 [![NPM Download](https://img.shields.io/npm/dt/@folo/values.svg)](https://www.npmjs.com/package/@folo/values)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/values)
 [![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/values)
-[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/folo-values/LICENSE)
 [![CI](https://img.shields.io/github/workflow/status/jalal246/folo/CI)](https://github.com/jalal246/folo/tree/master)
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
 <!-- prettier-ignore-end -->
 
 ## Installation
 
-```
+```sh
 npm install @folo/values
 ```
+
+- ☑️ A simple, lightweight package, comes with two components connected to global
+  JavaScript store. That's it. No complexity, no unnecessary code.
+
+- ☑️ Instead of implementing your own store, `@folo/values` can do it for you with a
+  store that holds inputs and knows exactly when to trigger connected components
+  to re-render.
+
+- ☑️ Doesn't require using Redux/Mobx/Context. While these technologies are
+  amazing it always come with a cost. That's why every update happens in folo
+  happens locally. The store is just the Maestro.
+
+- ☑️ You can add multiple forms connect them to the store or create branches
+  yourself. It's all about `StoreID` my friends.
+
+- ☑️ Friendly code. What you do for a form written in JS, Can do it here. No
+  external API. No external functionality. `onSubmit`, `onChange` are still here and
+  not going anywhere.
+
+- ☑️ It's well tested code, with nearly 100% of code coverage 🥳
 
 ## Usage
 
@@ -53,13 +71,11 @@ const MyComponent = ({ onSubmit }) => (
 // submit function will return: (event, {myName: "" myPass: "", alphabet:""})
 ```
 
-### Components
+### Available Components
 
 ```js
 import { Form, Field } from "@folo/values";
 ```
-
-### Components Props
 
 All components accept custom props + children which is required in all except `Field`
 
@@ -72,7 +88,7 @@ All components accept custom props + children which is required in all except `F
 | component | node/function | custom render-component                                          | form    |
 | onSubmit  | function      | submit function returns values in all cells (event, {...values}) | () {}   |
 
-#### Cell
+#### Field
 
 Essential to register values in the store, returns its value when submit.
 
@@ -87,4 +103,4 @@ Essential to register values in the store, returns its value when submit.
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/LICENSE)
+This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/folo-values/LICENSE)
