@@ -48,18 +48,18 @@ npm install @folo/values
 import { Form, Field } from "@folo/values";
 
 const MyComponent = ({ onSubmit }) => (
-  <Form onSubmit={onSubmit}>
+  <Form onSubmit={onSubmit} storeID="example1">
     <label>
       username:
-      <Field valueKey="myName" type="text" />
+      <Field valueKey="myName" type="text" storeID="example1" />
     </label>
     <label>
       password:
-      <Field valueKey="myPass" type="password" />
+      <Field valueKey="myPass" type="password" storeID="example1" />
     </label>
     <label>
       choose:
-      <Field valueKey="alphabet" type="select">
+      <Field valueKey="alphabet" type="select" storeID="example1">
         <option valueKey="a">A</option>
         <option valueKey="b">B</option>
         <option valueKey="c">C</option>
@@ -79,14 +79,13 @@ import { Form, Field } from "@folo/values";
 
 All components accept custom props + children which is required in all except `Field`
 
-<!-- all tables were generated via http://www.tablesgenerator.com/markdown_tables -->
-
 ### Form
 
-| property  | type          | description                                                      | default |
-| --------- | ------------- | ---------------------------------------------------------------- | ------- |
-| component | node/function | custom render-component                                          | form    |
-| onSubmit  | function      | submit function returns values in all cells (event, {...values}) | () {}   |
+| property  | type          | description                                                      | default        |
+| --------- | ------------- | ---------------------------------------------------------------- | -------------- |
+| component | node/function | custom render-component                                          | form           |
+| onSubmit  | function      | submit function returns values in all cells (event, {...values}) | () {}          |
+| storeID   | string        | unique id share with form and fields                             | `unrecognized` |
 
 ### Field
 
@@ -96,6 +95,7 @@ Accepts all events handlers.
 | property  | type          | description                              | default         |
 | --------- | ------------- | ---------------------------------------- | --------------- |
 | component | node/function | custom render-component                  | div             |
+| storeID   | string        | unique id share with form and fields     | `unrecognized`  |
 | valueKey  | string        | key used to store value in values object | id or timestamp |
 | value     | string        | if type not button                       | ""              |
 | checked   | Boolean       | if type button                           | false           |
