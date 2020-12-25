@@ -20,7 +20,7 @@ const Form = ({
     e.preventDefault();
 
     if (typeof onSubmitProps === "function") {
-      onSubmitProps(e, registry.getAll(storeID));
+      onSubmitProps(e, registry.getDataByStoreID(storeID));
     }
   }
 
