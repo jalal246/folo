@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jalal246/folo/dev/FOLO-sm.png" alt="folo live example" />
+  <img src="https://raw.githubusercontent.com/jalal246/folo/master/FOLO-sm.png" alt="folo live example" />
 </p>
 
 <h6 align="center">

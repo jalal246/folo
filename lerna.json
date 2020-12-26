@@ -3,10 +3,10 @@
   "npmClient": "yarn",
   "packages": [
     "packages/auto-position",
-    "packages/folo-forms",
-    "packages/folo-layout",
     "packages/folo-store",
-    "packages/folo-utils",
-    "packages/folo-values"
+    "packages/folo-values",
+    "packages/folo-layout",
+    "packages/folo-forms",
+    "packages/folo-utils"
   ]
 }
