@@ -42,8 +42,8 @@ class Registry {
   constructor() {
     this.dataHolder = {};
     this.triggers = {};
-
     this.btnGroup = {};
+
     this.activeStore = "";
     this.activeField = "";
   }
@@ -53,10 +53,15 @@ class Registry {
     if (nameRef) this.activeField = nameRef;
   }
 
+  initNewStore() {
+    this.dataHolder[this.activeStore] = {};
+    this.btnGroup[this.activeStore] = {};
+    this.triggers[this.activeStore] = {};
+  }
+
   assignValueToStore(storeValue: StoreValue) {
     if (!this.dataHolder[this.activeStore]) {
-      this.dataHolder[this.activeStore] = {};
-      this.btnGroup[this.activeStore] = {};
+      this.initNewStore();
     }
 
     this.dataHolder[this.activeStore][this.activeField] = storeValue;
