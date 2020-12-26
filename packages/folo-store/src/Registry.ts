@@ -7,7 +7,7 @@ interface SubscribeInfo {
   storeID?: string;
 }
 
-interface Updater {
+interface UpdaterInfo {
   nameRef: string;
   newValue: StoreValue;
   groupName?: string;
@@ -120,7 +120,7 @@ class Registry {
     }
   }
 
-  updater({ nameRef, newValue, groupName, storeID }: Updater) {
+  updater({ nameRef, newValue, groupName, storeID }: UpdaterInfo) {
     this.setActive(nameRef, storeID);
     this.assignValueToStore(newValue);
 
