@@ -10,7 +10,7 @@ Project designed and being developed to deal with with forms
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jalal246/folo/master/folo-demo.gif" alt="folo live example" />
+  <img src="https://raw.githubusercontent.com/jalal246/folo/dev/FOLO.png" alt="folo live example" />
 </p>
 
 <p align="center">
