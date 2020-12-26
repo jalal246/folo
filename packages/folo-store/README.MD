@@ -2,6 +2,16 @@
 
 > A JavaScript vanilla store holds and helps controlling data in forms
 
+<!-- prettier-ignore-start -->
+[![NPM Version](https://img.shields.io/npm/v/@folo/store.svg)](https://www.npmjs.com/package/@folo/store)
+[![NPM Download](https://img.shields.io/npm/dt/@folo/store.svg)](https://www.npmjs.com/package/@folo/store)
+[![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/store)
+[![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/store)
+[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/folo-store/LICENSE)
+[![CI](https://img.shields.io/github/workflow/status/jalal246/folo/CI)](https://github.com/jalal246/folo/tree/master)
+[![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
+<!-- prettier-ignore-end -->
+
 ## Installation
 
 ```sh
@@ -117,3 +127,41 @@ and `btn2` values, UI should be informed to re-render.
 
 This is the only case when functions triggered. Otherwise. data flow will be
 from UI to the store until submit is asking for all elements values.
+
+### getDataByStoreID
+
+- Gets store data
+
+```ts
+registry.getDataByStoreID(storeID?: string): Object<StoreInfo>
+```
+
+### clear
+
+- Clear store data
+
+```ts
+registry.clear(storeID?: string)
+```
+
+### destroy
+
+- Reset the whole registry
+
+```ts
+registry.destroy();
+```
+
+## Test
+
+```sh
+yarn test folo-store
+```
+
+## Contributing 😇
+
+If you have ideas or issues don't hesitate. You are always welcome.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/folo-store/LICENSE)
