@@ -1,6 +1,6 @@
 # 📋 @folo/store
 
-> A JavaScript vanilla store holds and helps controlling data in forms
+> A Plain JavaScript Store Holds & Helps Controlling Data In Forms
 
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folo/store.svg)](https://www.npmjs.com/package/@folo/store)
