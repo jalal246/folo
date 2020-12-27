@@ -18,20 +18,20 @@
 npm install @folo/store
 ```
 
-Store holds data and trigger connected component to update their values when
-necessary. Designed to deal optimally with forms.
+A store that holds data and triggers the connected components to update their
+values when necessary. Designed to deal optimally with forms.
 
 **How this is going to affect your UI performance?**
 
-Instead of re-mount all elements exist in form component. This approach
-guarantees that only controlled element in the UI will be triggered. This is
-important because usually global store in most cases means update all associated
-elements.
+Instead of re-mount, all elements exist in the form. This approach
+guarantees that only controlled elements in the UI will be triggered. This is
+important because usually global store and in most cases means to update all
+associated elements.
 
 ## Getting started
 
-Create shared registry for your app. No matter how many forms you have, You need
-one registry instance.
+Create a shared registry for your app. No matter how many forms you have, You
+need one registry instance.
 
 ```js
 import Registry from "@folo/store";
@@ -107,7 +107,7 @@ Where `updaterInfo: Object` an object contains:
 - `groupName?: string` - Only for button group.
 - `storeID?: string` - In case the element is registered under store id.
 
-What's going to happen to update store values and triggers handlers for all
+What's going to happen is updating store values and trigger handlers for all
 buttons boolean values under the same group name toggling their values.
 
 #### Example for updater
@@ -132,12 +132,12 @@ registry.updater(text2NewInfo);
 So, `btn1Handler` will be triggered with `false`. Why? Since we updated `btn1`
 and `btn2` values, UI should be informed to re-render.
 
-This is the only case when functions triggered. Otherwise. data flow will be
+This is the only case when functions are triggered. Otherwise. data flow will be
 from UI to the store until submit is asking for all elements values.
 
 ### getDataByStoreID
 
-- Gets store data
+- Get store data
 
 ```ts
 registry.getDataByStoreID(storeID?: string): Object<StoreInfo>
