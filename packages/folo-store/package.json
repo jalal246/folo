@@ -30,13 +30,11 @@
     "@folo/utils",
     "@folo/values",
     "@folo/withcontext",
-    "dflex",
-    "react",
-    "react-component",
-    "css-grid",
-    "css-layout",
-    "form-builder-api",
-    "dynamic-forms"
+    "@dflex",
+    "store",
+    "json",
+    "forms",
+    "storage"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

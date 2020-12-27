@@ -10,7 +10,8 @@
     "test": "jest",
     "build": "builderz --output=foloValues"
   },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
+  "repository": "https://github.com/jalal246/folo",
   "bundledDependencies": [
     "@folo/store"
   ],
@@ -35,13 +36,15 @@
     "@folo/utils",
     "@folo/values",
     "@folo/withcontext",
-    "dflex",
+    "@dflex",
     "react",
     "react-component",
-    "css-grid",
-    "css-layout",
     "form-builder-api",
-    "dynamic-forms"
+    "dynamic-forms",
+    "store",
+    "json",
+    "forms",
+    "storage"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
