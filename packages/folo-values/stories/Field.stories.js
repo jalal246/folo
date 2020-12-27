@@ -2,7 +2,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 
-import Field from "../components/Field";
+import Field from "../src/components/Field";
 
 export default {
   title: "Forms/Available Fields",

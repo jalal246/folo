@@ -105,7 +105,7 @@ Accepts all events handlers.
 ## Examples
 
 You can clone all the examples used in these packages
-[here](https://github.com/jalal246/folo/tree/master/packages/folo-values/src/stories/examples).
+[here](https://github.com/jalal246/folo/tree/master/packages/folo-values/examples/examples).
 With an example for [Simple
 Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--simple-form)
 Or a [Custom

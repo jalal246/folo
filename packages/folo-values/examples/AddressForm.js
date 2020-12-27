@@ -10,8 +10,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 
-import Field from "../../components/Field";
-import Form from "../../components/Form";
+import Field from "../src/components/Field";
+import Form from "../src/components/Form";
 
 const AddressForm = ({ onSubmit }) => (
   <div

@@ -17,6 +17,13 @@ module.exports = {
     "import/no-unresolved": ["error", { ignore: ["^react$"] }],
     "import/no-extraneous-dependencies": "off",
   },
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    },
+  },
   overrides: [
     {
       files: ["packages/**/stories/*.stories.js"],

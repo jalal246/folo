@@ -2,4 +2,5 @@
 node_modules
 coverage
 dist
+lib
 _gh-pages

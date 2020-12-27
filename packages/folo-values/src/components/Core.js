@@ -33,7 +33,7 @@ const Core = ({
       },
       setValue
     );
-  }, []);
+  }, [initValue]);
 
   function eventHandler(e) {
     const {

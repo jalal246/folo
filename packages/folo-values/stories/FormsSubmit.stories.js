@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 
-import Form from "../components/Form";
+import Form from "../src/components/Form";
 
-import BasicForm from "./examples/BasicForm";
-import AddressForm from "./examples/AddressForm";
+import BasicForm from "../examples/BasicForm";
+import AddressForm from "../examples/AddressForm";
 
 export default {
   title: "Forms/Forms with Submit",

@@ -1,17 +1,10 @@
-<h1 align="center">
-  Folo
-</h1>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/jalal246/folo/master/FOLO-sm.png" alt="folo live example" />
+</p>
 
 <h6 align="center">
 Project designed and being developed to deal with with forms
 </h6>
-<hr />
-
-<!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/jalal246/folo/master/folo-demo.gif" alt="folo live example" />
-</p>
 
 <p align="center">
 <a href="https://github.com/jalal246/folo">

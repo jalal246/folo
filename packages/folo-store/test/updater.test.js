@@ -55,7 +55,7 @@ describe("Registry updater", () => {
       newValue: TEXT_NEW_VALUE,
     });
 
-    expect(registry.dataObj).toStrictEqual({
+    expect(registry.dataHolder).toStrictEqual({
       [GENERAL_STORE_ID]: {
         [NAME_REF_1]: TEXT_NEW_VALUE,
         [NAME_REF_2]: false,
@@ -63,7 +63,7 @@ describe("Registry updater", () => {
       },
     });
 
-    expect(registry.dataObj).toMatchSnapshot();
+    expect(registry.dataHolder).toMatchSnapshot();
   });
 
   it("Toggles boolean value in a group button", () => {
@@ -73,7 +73,7 @@ describe("Registry updater", () => {
       groupName: BTN_GROUP,
     });
 
-    expect(registry.dataObj).toStrictEqual({
+    expect(registry.dataHolder).toStrictEqual({
       [GENERAL_STORE_ID]: {
         [NAME_REF_1]: TEXT_NEW_VALUE,
         [NAME_REF_2]: true,
@@ -84,6 +84,6 @@ describe("Registry updater", () => {
     expect(updater1).toHaveBeenCalledTimes(0);
     expect(updater2).toHaveBeenCalledWith(false);
 
-    expect(registry.dataObj).toMatchSnapshot();
+    expect(registry.dataHolder).toMatchSnapshot();
   });
 });

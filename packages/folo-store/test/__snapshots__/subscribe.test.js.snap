@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Initializes data Obj holder with first register Checks button group 1`] = `
+Object {
+  "unrecognized": Object {
+    "gr1": Set {
+      "nameTest1",
+    },
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Pushing a second obj with same group name Checks button group 1`] = `
+Object {
+  "unrecognized": Object {
+    "gr1": Set {
+      "nameTest1",
+      "nameTest2",
+    },
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Pushing a second obj with same group name Checks trigger handlers 1`] = `
+Object {
+  "unrecognized": Object {
+    "nameTest1": [MockFunction],
+    "nameTest2": [MockFunction],
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing 2 branches of button group Checks button group 1`] = `
+Object {
+  "unrecognized": Object {
+    "gr1": Set {
+      "nameTest1",
+      "nameTest2",
+    },
+    "gr2": Set {
+      "nameTest3",
+    },
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing 2 branches of button group Checks trigger handlers 1`] = `
+Object {
+  "unrecognized": Object {
+    "nameTest1": [MockFunction],
+    "nameTest2": [MockFunction],
+    "nameTest3": [MockFunction],
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing registry.subscribe with non-grouped obj Checks button group 1`] = `
+Object {
+  "unrecognized": Object {
+    "gr1": Set {
+      "nameTest1",
+      "nameTest2",
+    },
+    "gr2": Set {
+      "nameTest3",
+    },
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing registry.subscribe with non-grouped obj Checks button group 2`] = `
+Object {
+  "unrecognized": Object {
+    "gr1": Set {
+      "nameTest1",
+      "nameTest2",
+    },
+    "gr2": Set {
+      "nameTest3",
+    },
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing registry.subscribe with non-grouped obj Checks trigger handlers 1`] = `
+Object {
+  "unrecognized": Object {
+    "nameTest1": [MockFunction],
+    "nameTest2": [MockFunction],
+    "nameTest3": [MockFunction],
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing registry.subscribe with non-grouped obj Checks trigger handlers 2`] = `
+Object {
+  "unrecognized": Object {
+    "nameTest1": [MockFunction],
+    "nameTest2": [MockFunction],
+    "nameTest3": [MockFunction],
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing registry.subscribe with same ref and group name obj and new value Checks button group 1`] = `
+Object {
+  "unrecognized": Object {
+    "gr1": Set {
+      "nameTest1",
+      "nameTest2",
+    },
+    "gr2": Set {
+      "nameTest3",
+    },
+  },
+}
+`;
+
+exports[`Testing subscribe effects on dataHolder/btnGroup Testing registry.subscribe with same ref and group name obj and new value Checks trigger handlers 1`] = `
+Object {
+  "unrecognized": Object {
+    "nameTest1": [MockFunction],
+    "nameTest2": [MockFunction],
+    "nameTest3": [MockFunction],
+  },
+}
+`;

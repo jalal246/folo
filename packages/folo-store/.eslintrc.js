@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["eslint-config-folo"],
+  extends: ["eslint-config-folo-ts"],
 };

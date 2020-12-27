@@ -8,12 +8,17 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build": "builderz --output=foloStore"
+    "compile": "tsc",
+    "prebuild": "yarn compile",
+    "build": "builderz --entires=./lib/index.js --output=foloStore"
   },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-store",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/folo-store",
+  "repository": "https://github.com/jalal246/folo",
   "files": [
     "src",
     "dist",
+    "types",
+    "README.md",
     "LICENSE"
   ],
   "keywords": [
