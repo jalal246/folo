@@ -21,7 +21,7 @@ npm install @folo/store
 Store holds data and trigger connected component to update their values when
 necessary. Designed to deal optimally with forms.
 
-> How this is going to affect your UI performance?
+**How this is going to affect your UI performance?**
 
 Instead of re-mount all elements exist in form component. This approach
 guarantees that only controlled element in the UI will be triggered. This is
