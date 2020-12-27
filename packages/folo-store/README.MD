@@ -21,6 +21,13 @@ npm install @folo/store
 Store holds data and trigger connected component to update their values when
 necessary. Designed to deal optimally with forms.
 
+> How this is going to affect your UI performance?
+
+Instead of re-mount all elements exist in form component. This approach
+guarantees that only controlled element in the UI will be triggered. This is
+important because usually global store in most cases means update all associated
+elements.
+
 ## Getting started
 
 Create shared registry for your app. No matter how many forms you have, You need
@@ -157,6 +164,11 @@ registry.destroy();
 ```sh
 yarn test folo-store
 ```
+
+## Implementation
+
+- With react:
+  [folo-values](https://github.com/jalal246/folo/tree/master/packages/folo-values)
 
 ## Contributing 😇
 
