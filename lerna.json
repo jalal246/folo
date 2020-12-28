@@ -2,11 +2,12 @@
   "version": "independent",
   "npmClient": "yarn",
   "packages": [
-    "packages/auto-position",
-    "packages/folo-store",
-    "packages/folo-values",
-    "packages/folo-layout",
-    "packages/folo-forms",
-    "packages/folo-utils"
+    "packages/root/auto-position",
+    "packages/root/folo-store",
+    "packages/root/folo-utils",
+    "packages/react/folo-values",
+    "packages/react/folo-layout",
+    "packages/react/folo-forms",
+    "packages/vue/folo-vue-values"
   ]
 }
