@@ -1,6 +1,6 @@
 {
   "name": "@folo/values",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "source": "src/index.js",
   "main": "dist/foloValues.min.cjs.js",
   "umd:main": "dist/foloValues.min.umd.js",
