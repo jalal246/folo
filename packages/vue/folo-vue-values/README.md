@@ -1,17 +1,17 @@
-# 📋 @folo/values
+# 📋 @folo/vue-values
 
-> React Data Form components
+> Vue Data Form components
 
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
 ![live example](https://raw.githubusercontent.com/jalal246/folo/master/packages/react/folo-values/foloValues-demo.gif)
 
 <!-- prettier-ignore-start -->
-[![NPM Version](https://img.shields.io/npm/v/@folo/values.svg)](https://www.npmjs.com/package/@folo/values)
-[![NPM Download](https://img.shields.io/npm/dt/@folo/values.svg)](https://www.npmjs.com/package/@folo/values)
-[![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/values)
-[![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/values)
-[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/react/folo-values/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/@folo/values.svg)](https://www.npmjs.com/package/@folo/vue-values)
+[![NPM Download](https://img.shields.io/npm/dt/@folo/values.svg)](https://www.npmjs.com/package/@folo/vue-values)
+[![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/vue-values)
+[![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/vue-values)
+[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/vue/folo-vue-values/LICENSE)
 [![CI](https://img.shields.io/github/workflow/status/jalal246/folo/CI)](https://github.com/jalal246/folo/tree/master)
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
 <!-- prettier-ignore-end -->
@@ -45,7 +45,7 @@ npm install @folo/values
 ## Usage
 
 ```js
-import { Form, Field } from "@folo/values";
+import { Form, Field } from "@folo/vue-values";
 
 const MyComponent = ({ onSubmit }) => (
   <Form onSubmit={onSubmit} storeID="example1">
@@ -74,12 +74,12 @@ const MyComponent = ({ onSubmit }) => (
 ## Available Components
 
 ```js
-import { Form, Field } from "@folo/values";
+import { Form, Field } from "@folo/vue-values";
 ```
 
 All components accept custom props + children which is required in all except `Field`
 
-### Form
+### Form TODO
 
 | property    | type               | description                                                      | default        |
 | ----------- | ------------------ | ---------------------------------------------------------------- | -------------- |
@@ -87,7 +87,7 @@ All components accept custom props + children which is required in all except `F
 | `onSubmit`  | function           | submit function returns values in all cells (event, {...values}) | `() {}`        |
 | `storeID`   | string             | unique id shared with form and fields                            | `unrecognized` |
 
-### Field
+### Field TODO
 
 Essential to register values in the store, returns its value when submit.
 Accepts all events handlers.
@@ -104,20 +104,12 @@ Accepts all events handlers.
 
 ## Examples
 
-You can clone all the examples used in these packages
-[here](https://github.com/jalal246/folo/tree/master/packages/react/folo-values/examples).
-With an example for [Simple
-Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--simple-form)
-Or a [Custom
-Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--custom-components)
-built with custom components. It includes All [Available
-fields](https://jalal246.github.io/folo/?path=/story/forms-available-fields--default-input)
-and examples that show you how to [handle toggle button groups](https://jalal246.github.io/folo/?path=/story/forms-toggle-groups--group-toggle-no-init-value).
+// TODO
 
 ## Test
 
 ```sh
-yarn test folo-values
+yarn test folo-vue-values
 ```
 
 ## Contribution 😇
@@ -126,4 +118,4 @@ If you have ideas or issues don't hesitate. You are always welcome.
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/react/folo-values/LICENSE)
+This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/vue/folo-vue-values/LICENSE)
