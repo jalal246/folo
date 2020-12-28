@@ -1,0 +1,52 @@
+{
+  "name": "@folo/vue-values",
+  "version": "0.0.0",
+  "source": "src/index.js",
+  "main": "dist/foloVueValues.min.cjs.js",
+  "umd:main": "dist/foloVueValues.min.umd.js",
+  "author": "Jalal Maskoun <jimmy002020@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "build": "builderz --output=foloVueValues"
+  },
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/vue/folo-vue-values",
+  "repository": "https://github.com/jalal246/folo",
+  "bundledDependencies": [
+    "@folo/store"
+  ],
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "devDependencies": {
+    "vue": "^3.0.4"
+  },
+  "files": [
+    "src",
+    "dist",
+    "LICENSE"
+  ],
+  "keywords": [
+    "@folo",
+    "@folo/auto-position",
+    "@folo/forms",
+    "@folo/layout",
+    "@folo/store",
+    "@folo/utils",
+    "@folo/values",
+    "@folo/withcontext",
+    "@dflex",
+    "vue",
+    "vue-component",
+    "form-builder-api",
+    "dynamic-forms",
+    "store",
+    "json",
+    "forms",
+    "storage"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
