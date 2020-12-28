@@ -2,14 +2,14 @@
 
 > React CSS Grid Components
 
-![live example](https://raw.githubusercontent.com/jalal246/folo/master/packages/folo-layout/foloLayout-demo.gif)
+![live example](https://raw.githubusercontent.com/jalal246/folo/master/packages/react/folo-layout/foloLayout-demo.gif)
 
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folo/layout.svg)](https://www.npmjs.com/package/@folo/layout)
 [![NPM Download](https://img.shields.io/npm/dt/@folo/layout.svg)](https://www.npmjs.com/package/@folo/layout)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/layout)
 [![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/layout)
-[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/folo-layout/LICENSE)
+[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/react/folo-layout/LICENSE)
 [![CI](https://img.shields.io/github/workflow/status/jalal246/folo/CI)](https://github.com/jalal246/folo/tree/master)
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
 <!-- prettier-ignore-end -->
@@ -90,4 +90,4 @@ If you have ideas to improve this package or issues don't hesitate. You are alwa
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/folo-layout/LICENSE)
+This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/react/folo-layout/LICENSE)

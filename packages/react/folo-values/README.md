@@ -4,14 +4,14 @@
 
 <!-- gif made by: https://github.com/NickeManarin/ScreenToGif/wiki/help  -->
 
-![live example](https://raw.githubusercontent.com/jalal246/folo/master/packages/folo-values/foloValues-demo.gif)
+![live example](https://raw.githubusercontent.com/jalal246/folo/master/packages/react/folo-values/foloValues-demo.gif)
 
 <!-- prettier-ignore-start -->
 [![NPM Version](https://img.shields.io/npm/v/@folo/values.svg)](https://www.npmjs.com/package/@folo/values)
 [![NPM Download](https://img.shields.io/npm/dt/@folo/values.svg)](https://www.npmjs.com/package/@folo/values)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/values)
 [![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/values)
-[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/folo-values/LICENSE)
+[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/react/folo-values/LICENSE)
 [![CI](https://img.shields.io/github/workflow/status/jalal246/folo/CI)](https://github.com/jalal246/folo/tree/master)
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
 <!-- prettier-ignore-end -->
@@ -105,7 +105,7 @@ Accepts all events handlers.
 ## Examples
 
 You can clone all the examples used in these packages
-[here](https://github.com/jalal246/folo/tree/master/packages/folo-values/examples).
+[here](https://github.com/jalal246/folo/tree/master/packages/react/folo-values/examples).
 With an example for [Simple
 Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--simple-form)
 Or a [Custom
@@ -126,4 +126,4 @@ If you have ideas or issues don't hesitate. You are always welcome.
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/folo-values/LICENSE)
+This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/react/folo-values/LICENSE)

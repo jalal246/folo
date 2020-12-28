@@ -7,7 +7,7 @@
 [![NPM Download](https://img.shields.io/npm/dt/@folo/store.svg)](https://www.npmjs.com/package/@folo/store)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/react.svg)](https://www.npmjs.com/package/@folo/store)
 [![npm bundle size (gzip)](https://img.shields.io/bundlephobia/minzip/react.svg)](https://www.npmjs.com/package/@folo/store)
-[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/folo-store/LICENSE)
+[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/jalal246/folo/blob/master/packages/root/folo-store/LICENSE)
 [![CI](https://img.shields.io/github/workflow/status/jalal246/folo/CI)](https://github.com/jalal246/folo/tree/master)
 [![Codecov](https://img.shields.io/codecov/c/github/jalal246/folo.svg)](https://codecov.io/gh/jalal246/folo)
 <!-- prettier-ignore-end -->
@@ -168,7 +168,7 @@ yarn test folo-store
 ## Implementation
 
 - With react:
-  [folo-values](https://github.com/jalal246/folo/tree/master/packages/folo-values)
+  [folo-values](https://github.com/jalal246/folo/tree/master/packages/react/folo-values)
 
 ## Contribution 😇
 
@@ -176,4 +176,4 @@ If you have ideas or issues don't hesitate. You are always welcome.
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/folo-store/LICENSE)
+This project is licensed under the [MIT License](https://github.com/jalal246/folo/blob/master/packages/root/folo-store/LICENSE)
