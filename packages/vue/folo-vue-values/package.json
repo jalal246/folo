@@ -7,6 +7,7 @@
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "playground": "vite serve examples",
     "test": "jest",
     "build": "builderz --output=foloVueValues"
   },
@@ -19,6 +20,8 @@
     "vue": ">=3.0.0"
   },
   "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.4",
+    "vite": "^1.0.0-rc.13",
     "vue": "^3.0.4"
   },
   "files": [
