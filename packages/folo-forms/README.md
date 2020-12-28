@@ -20,13 +20,13 @@ npm install @folo/forms
 
 ## Overview
 
-`@folo/forms` has two major concepts defined
+`@folo/forms` has two major concepts defined in
 [Field](https://github.com/jalal246/folo/tree/master/packages/folo-values)
 to deal with data. And
 [Grid](https://github.com/jalal246/folo/tree/master/packages/folo-layout) for
 designing layout.
 
-## Components
+### Components
 
 ```js
 import { Form, Field, Grid, GridItem } from "@folo/forms";
