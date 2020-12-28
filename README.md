@@ -23,7 +23,7 @@ Project designed and being developed to deal with with forms
 
 ## Packages Overview
 
-- [**@folo/store** ](https://github.com/jalal246/folo/tree/master/packages/folo-values) JS Store Holds & Helps Controlling Data In Forms.
+- [**@folo/store** ](https://github.com/jalal246/folo/tree/master/packages/folo-store) JS Store Holds & Helps Controlling Data In Forms.
 - [**@folo/values**](https://github.com/jalal246/folo/tree/master/packages/folo-values)
   React Data Form components
 - [**@folo/layout**](https://github.com/jalal246/folo/tree/master/packages/folo-layout)
