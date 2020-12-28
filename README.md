@@ -41,9 +41,9 @@ Run locally:
 - `yarn storybook`
 - Go to http://localhost:6006/
 
-## Contributing
+## Contribution
 
-Need some company in this repo. PRs welcome! :point_right: [Contribute](CONTRIBUTING.md) :blue_heart:
+Need some company in this repo. PRs welcome! :point_right: [Contribute](Contribution.md) :blue_heart:
 
 ## License
 

@@ -32,7 +32,7 @@ designing layout.
 import { Form, Field, Grid, GridItem } from "@folo/forms";
 ```
 
-## Contributing 😇
+## Contribution 😇
 
 If you have ideas or issues don't hesitate. You are always welcome.
 

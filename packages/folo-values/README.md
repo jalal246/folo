@@ -105,7 +105,7 @@ Accepts all events handlers.
 ## Examples
 
 You can clone all the examples used in these packages
-[here](https://github.com/jalal246/folo/tree/master/packages/folo-values/examples/examples).
+[here](https://github.com/jalal246/folo/tree/master/packages/folo-values/examples).
 With an example for [Simple
 Form](https://jalal246.github.io/folo/?path=/story/forms-forms-with-submit--simple-form)
 Or a [Custom
@@ -120,7 +120,7 @@ and examples that show you how to [handle toggle button groups](https://jalal246
 yarn test folo-values
 ```
 
-## Contributing 😇
+## Contribution 😇
 
 If you have ideas or issues don't hesitate. You are always welcome.
 

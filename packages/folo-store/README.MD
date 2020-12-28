@@ -170,7 +170,7 @@ yarn test folo-store
 - With react:
   [folo-values](https://github.com/jalal246/folo/tree/master/packages/folo-values)
 
-## Contributing 😇
+## Contribution 😇
 
 If you have ideas or issues don't hesitate. You are always welcome.
 

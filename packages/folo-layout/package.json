@@ -10,7 +10,8 @@
     "test": "jest",
     "build": "builderz --output=foloLayout"
   },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-layout",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/folo-layout",
+  "repository": "https://github.com/jalal246/folo",
   "bundledDependencies": [
     "@folo/auto-position",
     "@folo/values"
