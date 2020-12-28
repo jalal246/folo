@@ -12,7 +12,7 @@
     "prebuild": "yarn compile",
     "build": "builderz --entires=./lib/index.js --output=foloStore"
   },
-  "homepage": "https://github.com/jalal246/folo/tree/master/packages/folo-store",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/root/folo-store",
   "repository": "https://github.com/jalal246/folo",
   "files": [
     "src",

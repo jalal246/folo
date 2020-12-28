@@ -6,13 +6,10 @@
   "umd:main": "dist/foloWithcontext.min.umd.js",
   "module": "dist/foloWithcontext.esm.js",
   "scripts": {},
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-withcontext",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/react/folo-withcontext",
+  "repository": "https://github.com/jalal246/folo",
   "author": "Jalal Maskoun <jimmy002020@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jalal246/folo/issues"
-  },
-  "homepage": "https://github.com/jalal246/folo",
   "files": [
     "src",
     "dist",

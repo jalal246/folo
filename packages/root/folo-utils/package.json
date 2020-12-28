@@ -10,7 +10,8 @@
     "test": "jest",
     "build": "builderz --output=foloUtils"
   },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-utils",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/root/folo-utils",
+  "repository": "https://github.com/jalal246/folo",
   "files": [
     "src",
     "dist",

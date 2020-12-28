@@ -10,7 +10,7 @@
     "test": "jest",
     "build": "builderz --output=foloValues"
   },
-  "homepage": "https://github.com/jalal246/folo/tree/master/packages/folo-values",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/react/folo-values",
   "repository": "https://github.com/jalal246/folo",
   "bundledDependencies": [
     "@folo/store"
