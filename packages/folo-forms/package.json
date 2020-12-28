@@ -10,7 +10,8 @@
     "test": "jest",
     "build": "builderz --output=foloForms"
   },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/folo-forms",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/folo-forms",
+  "repository": "https://github.com/jalal246/folo",
   "bundledDependencies": [
     "@folo/layout",
     "@folo/values"

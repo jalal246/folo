@@ -10,7 +10,8 @@
     "test": "jest",
     "build": "builderz --output=autoPosition"
   },
-  "repository": "https://github.com/jalal246/folo/tree/master/packages/auto-position",
+  "homepage": "https://github.com/jalal246/folo/tree/master/packages/auto-position",
+  "repository": "https://github.com/jalal246/folo",
   "files": [
     "src",
     "dist",

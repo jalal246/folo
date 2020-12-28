@@ -23,9 +23,13 @@ Project designed and being developed to deal with with forms
 
 ## Packages Overview
 
-- [**@folo/values** ](https://github.com/jalal246/folo/tree/master/packages/folo-values) returns input values with zero config.
-- [**@folo/layout**](https://github.com/jalal246/folo/tree/master/packages/folo-layout) CSS grid react-components.
-- [**@folo/forms**](https://github.com/jalal246/folo/tree/master/packages/folo-forms) Full package combined of `@folo/layout` & `@folo/values`.
+- [**@folo/store** ](https://github.com/jalal246/folo/tree/master/packages/folo-store) JS Store Holds & Helps Controlling Data In Forms.
+- [**@folo/values**](https://github.com/jalal246/folo/tree/master/packages/folo-values)
+  React Data Form components
+- [**@folo/layout**](https://github.com/jalal246/folo/tree/master/packages/folo-layout)
+  CSS Grid React components
+- [**@folo/forms**](https://github.com/jalal246/folo/tree/master/packages/folo-forms)
+  Full package combined of `@folo/layout` & `@folo/values` for React
 
 ## Installation
 
@@ -37,9 +41,9 @@ Run locally:
 - `yarn storybook`
 - Go to http://localhost:6006/
 
-## Contributing
+## Contribution
 
-Need some company in this repo. PRs welcome! :point_right: [Contribute](CONTRIBUTING.md) :blue_heart:
+Need some company in this repo. PRs welcome! :point_right: [Contribute](Contribution.md) :blue_heart:
 
 ## License
 
