@@ -3,7 +3,7 @@
 </p>
 
 <h6 align="center">
-Project designed and being developed to deal with with forms
+Project designed and being developed to deal with forms
 </h6>
 
 <p align="center">
